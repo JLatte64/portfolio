@@ -27,6 +27,7 @@ const HashLUT = new Map(
   ["0921713ba6996dadca09bd0e13d01fd517f010fa0685b9663f9dc926397aa15b", [4, 5]]],
 )
 
+/*
 function ProjectDialog({index} : {index:number})
 {
   const Project = Projects[index];
@@ -34,6 +35,7 @@ function ProjectDialog({index} : {index:number})
     <Project.content/>
   </>);
 }
+*/
 
 //Component to render a Project
 function ProjectWidget({projectName, thumbnail} : {projectName:string, thumbnail:string}) {
@@ -42,6 +44,7 @@ function ProjectWidget({projectName, thumbnail} : {projectName:string, thumbnail
   return (
   <>
   <button onClick={() => {dialogRef.current?.showModal()}}>Open dialog</button>
+  <a href={thumbnail}></a>
   <dialog ref={dialogRef}>
     <p>{projectName}</p>
     <button onClick={() => {dialogRef.current?.close()}}>Close</button>
@@ -69,7 +72,7 @@ function App() {
         <section>
             <h1>My Work</h1>
             {/* Maps contents of Projects array as ProjectWidgets + Displays */}
-            {Projects.filter((Project, index) => (HashLUT.get(PortfolioType)?.includes(index))).map(Project => (<ProjectWidget {...Project}/>))}
+            {Projects.filter((_, index) => (HashLUT.get(PortfolioType)?.includes(index))).map(Project => (<ProjectWidget {...Project}/>))}
         </section>
         <section >
 
