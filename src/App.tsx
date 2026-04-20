@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import landingphoto from 'assets/landingphoto.jpg'
 import './App.css'
 
 function GameProjectContent ()
@@ -9,12 +10,12 @@ function GameProjectContent ()
 }
 
 //Array containing ProjectWidgets for each project
-const Projects = [{projectName:"GameProject",  thumbnail:"content/img/landingphoto.jpg", content:GameProjectContent},
-                  {projectName:"VFXProject",   thumbnail:"content/img/landingphoto.jpg", content:GameProjectContent},
-                  {projectName:"ShaderProject",thumbnail:"content/img/landingphoto.jpg", content:GameProjectContent},
-                  {projectName:"ToolProject",  thumbnail:"content/img/landingphoto.jpg", content:GameProjectContent},
-                  {projectName:"ModelProject", thumbnail:"content/img/landingphoto.jpg", content:GameProjectContent},
-                  {projectName:"AnimProject",  thumbnail:"content/img/landingphoto.jpg", content:GameProjectContent}
+const Projects = [{projectName:"GameProject",  thumbnail:landingphoto, content:GameProjectContent},
+                  {projectName:"VFXProject",   thumbnail:landingphoto, content:GameProjectContent},
+                  {projectName:"ShaderProject",thumbnail:landingphoto, content:GameProjectContent},
+                  {projectName:"ToolProject",  thumbnail:landingphoto, content:GameProjectContent},
+                  {projectName:"ModelProject", thumbnail:landingphoto, content:GameProjectContent},
+                  {projectName:"AnimProject",  thumbnail:landingphoto, content:GameProjectContent}
                  ];
 
 //An array of Maps associating SHA256 hashes with different portfolio types + Projects indices.
@@ -61,7 +62,7 @@ function App() {
   return (
     <>
       <section>
-            <img src="content/img/landingphoto.jpg" alt="A photo of me."/>
+            <img src={landingphoto} alt="A photo of me."/>
             <p>Jordan Latta</p>
             <p>Technical Artist</p>
             <p>
