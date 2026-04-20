@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import landingphoto from 'assets/landingphoto.jpg'
+import landingphoto from './assets/landingphoto.jpg'
 import './App.css'
 
 function GameProjectContent ()
