@@ -32,15 +32,26 @@ const HashLUT = new Map(
 function ProjectWidget({widgetName, widgetThumbnail, content} : {widgetName:string, widgetThumbnail:string, content:any}) {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
+  function toggleDialog()
+  {
+    if (!dialogRef.current)
+    {
+      return;
+    }
+    dialogRef.current.hasAttribute("open")
+      ? dialogRef.current.close()
+      : dialogRef.current.showModal;
+  }
+
   return (<>
-  <button onClick={() => {dialogRef.current?.showModal()}}>
     <p>{widgetName}</p>
     <a href={widgetThumbnail}></a>
-    <dialog ref={dialogRef}>
-      {content}
-      <button onClick={() => {dialogRef.current?.close()}}>Close</button>
-    </dialog>
-  </button>
+    <button onClick={toggleDialog}> </button>
+    
+      <dialog ref={dialogRef}>
+        {content}
+        <button onClick={toggleDialog}>Close</button>
+      </dialog>
   </>);
 }
 
