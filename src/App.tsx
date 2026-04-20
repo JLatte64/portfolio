@@ -46,12 +46,12 @@ function ProjectWidget({widgetName, widgetThumbnail, content} : {widgetName:stri
   return (<>
     <p>{widgetName}</p>
     <a href={widgetThumbnail}></a>
-    <button onClick={toggleDialog}> </button>
-    
+    <button onClick={toggleDialog}>
       <dialog ref={dialogRef}>
         {content}
         <button onClick={toggleDialog}>Close</button>
       </dialog>
+    </button>
   </>);
 }
 
