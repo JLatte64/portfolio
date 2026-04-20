@@ -5,51 +5,43 @@ import './App.css'
 function GameProjectContent ()
 {
   return (<>
-
+  <p>This is a game project. Congrats!</p>
   </>);
 }
 
 //Array containing ProjectWidgets for each project
-const Projects = [{projectName:"GameProject",  thumbnail:landingphoto, content:GameProjectContent},
-                  {projectName:"VFXProject",   thumbnail:landingphoto, content:GameProjectContent},
-                  {projectName:"ShaderProject",thumbnail:landingphoto, content:GameProjectContent},
-                  {projectName:"ToolProject",  thumbnail:landingphoto, content:GameProjectContent},
-                  {projectName:"ModelProject", thumbnail:landingphoto, content:GameProjectContent},
-                  {projectName:"AnimProject",  thumbnail:landingphoto, content:GameProjectContent}
+const Projects = [{widgetName:"GameProject",  widgetThumbnail:landingphoto, content:GameProjectContent},
+                  {widgetName:"VFXProject",   widgetThumbnail:landingphoto, content:GameProjectContent},
+                  {widgetName:"ShaderProject",widgetThumbnail:landingphoto, content:GameProjectContent},
+                  {widgetName:"ToolProject",  widgetThumbnail:landingphoto, content:GameProjectContent},
+                  {widgetName:"ModelProject", widgetThumbnail:landingphoto, content:GameProjectContent},
+                  {widgetName:"AnimProject",  widgetThumbnail:landingphoto, content:GameProjectContent}
                  ];
 
 //An array of Maps associating SHA256 hashes with different portfolio types + Projects indices.
 const HashLUT = new Map(
-  //Format: "hash", [Projects indices]
+  //Format: ["hash", [Projects indices]]
 
   //Tech Artist
-  [["fde00dd35376ac0e648ad4c5c3964c4c6ddb0bcf03d4067b6c09a74286051c23", [0, 1]],
+  [["TA", [0, 1]],
   //3D Generalist
-  ["0921713ba6996dadca09bd0e13d01fd517f010fa0685b9663f9dc926397aa15b", [4, 5]]],
+  ["3DG", [4, 5]]],
 )
 
-/*
-function ProjectDialog({index} : {index:number})
-{
-  const Project = Projects[index];
-  return (<>
-    <Project.content/>
-  </>);
-}
-*/
-
 //Component to render a Project
-function ProjectWidget({projectName, thumbnail} : {projectName:string, thumbnail:string}) {
+function ProjectWidget({widgetName, widgetThumbnail, content} : {widgetName:string, widgetThumbnail:string, content:any}) {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   return (
   <>
-  <button onClick={() => {dialogRef.current?.showModal()}}>Open dialog</button>
-  <a href={thumbnail}></a>
-  <dialog ref={dialogRef}>
-    <p>{projectName}</p>
-    <button onClick={() => {dialogRef.current?.close()}}>Close</button>
-  </dialog>
+  <button onClick={() => {dialogRef.current?.showModal()}}>
+    <p>{widgetName}</p>
+    <a href={widgetThumbnail}></a>
+    <dialog ref={dialogRef}>
+      {content}
+      <button onClick={() => {dialogRef.current?.close()}}>Close</button>
+    </dialog>
+  </button>
   </>
   )
 }
