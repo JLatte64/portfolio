@@ -32,8 +32,7 @@ const HashLUT = new Map(
 function ProjectWidget({widgetName, widgetThumbnail, content} : {widgetName:string, widgetThumbnail:string, content:any}) {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
-  return (
-  <>
+  return (<>
   <button onClick={() => {dialogRef.current?.showModal()}}>
     <p>{widgetName}</p>
     <a href={widgetThumbnail}></a>
@@ -42,8 +41,7 @@ function ProjectWidget({widgetName, widgetThumbnail, content} : {widgetName:stri
       <button onClick={() => {dialogRef.current?.close()}}>Close</button>
     </dialog>
   </button>
-  </>
-  )
+  </>);
 }
 
 //Main function
@@ -51,8 +49,7 @@ function App() {
   //location.hash.slice(1) Gets rid of the '#' character of the hash
   const PortfolioType = location.hash.slice(1);
 
-  return (
-    <>
+  return (<>
       <section>
             <img src={landingphoto} alt="A photo of me."/>
             <p>Jordan Latta</p>
@@ -70,8 +67,7 @@ function App() {
         <section >
 
         </section>
-    </>
-  )
+    </>);
 }
 
 export default App
