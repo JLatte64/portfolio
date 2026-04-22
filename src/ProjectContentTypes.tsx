@@ -1,18 +1,17 @@
-export type ProjectsContainer = {
-  projects: ProjectData[];
-};
-
-export type ProjectData = {
-  name: string;
-  thumbnail: string;
-  content: ProjectContent[];
-};
-
 export type ProjectContent =
   | CarouselContent
   | VideoContent
   | GalleryContent
   | TextContent;
+
+export type ProjectData = {
+  name: string;
+  subheading:string;
+  thumbnail: string;
+  alt:string;
+  tags:string[];
+  content: ProjectContent[];
+};
 
 export type CarouselContent = {
   type: "carousel";

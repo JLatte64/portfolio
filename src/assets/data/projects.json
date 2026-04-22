@@ -1,0 +1,56 @@
+{
+  "projects": [
+    {
+      "name": "God of War: Sons of Sparta",
+      "subheading" : "Stencil-Layered 2D Lighting System",
+      "thumbnail": "",
+      "alt": "God of War: Sons of Sparta Thumbnail",
+      "tags" : 
+      [
+        "selected"
+      ],
+      "content": 
+      [
+        {
+          "type": "text",
+          "data": "This is some text about God of War: Sons of Sparta."
+        },
+        {
+          "type": "carousel",
+          "data": 
+          [
+            {
+              "src": "https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyZDk3YmlqdTJjcWg4a2wza3JpcDU5eG43aDk1YXI1eDJ3M3g2cXV4NiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/VlVQNSH3edLa0/200.gif",
+              "alt": "Project 1, Image 1"
+            },
+            {
+              "src": "https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyZDk3YmlqdTJjcWg4a2wza3JpcDU5eG43aDk1YXI1eDJ3M3g2cXV4NiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/VlVQNSH3edLa0/200.gif",
+              "alt": "Project 1, Image 2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Unicycle Samurai",
+      "subheading" : "Selected for alt.ctrl.GDC 2023",
+      "thumbnail": "",
+      "alt": "Unicycle Samurai",
+      "tags" : 
+      [
+        "snapshot"
+      ],
+      "content": 
+      [
+        {
+          "type": "video",
+          "data": ""
+        },
+        {
+          "type": "text",
+          "data": "Created at Michigan State University"
+        }
+      ]
+    }
+  ]
+}

@@ -3,7 +3,7 @@ import type {
   GalleryContent,
   TextContent,
   VideoContent,
-} from "../ProjectTypes";
+} from "./ProjectContentTypes";
 
 export const Carousel = ({
   carouselData,
@@ -46,7 +46,7 @@ export const Video = ({ videoData }: { videoData: VideoContent }) => {
 
   return (
     <div>
-      <video src={videoData.data}></video>
+      <video src={videoData.data}>Your browser does not support the video tag.</video>
     </div>
   );
   {

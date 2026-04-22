@@ -1,0 +1,22 @@
+{
+    "myinfo" : 
+    {
+        "about": 
+        {
+            "name" : "Jordan Latta",
+            "photo" : "src/assets/landingphoto.jpg",
+            "jobTitle" : "Technical Artist",
+            "loc" : "Pittsburgh, PA",
+            "text" : "Here's some text about me."
+        },
+        "contact": 
+        {
+            "email" : "jordanlatta128@gmail.com",
+            "phone" : "724-719-5101",
+            "linkedin" : "",
+            "github" : "",
+            "artstation" : ""
+        },
+        "resume" : "https://docs.google.com/document/d/1m-T95yTyylLtRwNUv194FX-8C4tpRx5YPNbda45Bjso/edit?usp=sharing"
+    }
+}
