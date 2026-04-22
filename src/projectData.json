@@ -1,0 +1,56 @@
+{
+  "projects": [
+    {
+      "name": "Project 1",
+      "thumbnail": "",
+      "alt": "Project 1 Thumbnail",
+      "content": [
+        {
+          "type": "text",
+          "data": "assssssssssssssssssssss"
+        },
+        {
+          "type": "carousel",
+          "data": [
+            {
+              "src": "https://www.froyok.fr/portfolio/portals/resources/portal_v2-1.gif",
+              "alt": "Project 1, Image 1"
+            },
+            {
+              "src": "https://www.froyok.fr/portfolio/portals/resources/portal_v2-1.gif",
+              "alt": "Project 1, Image 2"
+            }
+          ]
+        },
+        {
+          "type": "video",
+          "data": ""
+        }
+      ]
+    },
+    {
+      "name": "Project 2",
+      "thumbnail": "",
+      "alt": "Project 2 Thumbnail",
+      "content": [
+        {
+          "type": "text",
+          "data": "Project 2"
+        },
+        {
+          "type": "carousel",
+          "data": [
+            {
+              "src": "https://www.froyok.fr/portfolio/portals/resources/portal_v2-1.gif",
+              "alt": "Project 1, Image 1"
+            }
+          ]
+        },
+        {
+          "type": "video",
+          "data": ""
+        }
+      ]
+    }
+  ]
+}
