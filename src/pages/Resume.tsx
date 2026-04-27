@@ -1,4 +1,4 @@
-import { myinfo } from "../assets/data/myinfo.json";
+import { myinfo } from "../data/myinfo.json";
 
 export const Resume = () => {
     return (<>

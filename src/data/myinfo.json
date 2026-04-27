@@ -5,9 +5,11 @@
         {
             "name" : "Jordan Latta",
             "photo" : "src/assets/landingphoto.jpg",
+            "photo2" : "src/assets/landingphoto.jpg",
             "jobTitle" : "Technical Artist",
             "loc" : "Pittsburgh, PA",
-            "text" : "Here's some text about me."
+            "text" : "Games are a big part of my story - With over a decade of self-directed experience in Unity, I've been pursuing game development since the age of 7. I taught myself Unity and C# scripting in the summer of 2015 and fell in love.",
+            "hobbies" : "I'm always creating or tinkering with something, be it digital art, computer hardware, or pastry. I also love nature."
         },
         "contact": 
         {

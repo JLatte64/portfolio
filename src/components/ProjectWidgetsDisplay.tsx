@@ -1,5 +1,5 @@
 import ProjectWidget from "./ProjectWidget";
-import { projects } from "../assets/data/projects.json";
+import { projects } from "../data/projects.json";
 
 const ProjectWidgetsDisplay = ({ tag }: { tag: string }) => {
   return projects.map((_, index) =>

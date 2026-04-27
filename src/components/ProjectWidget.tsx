@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { forwardRef } from "react";
 import ProjectDialogContent from "./ProjectDialogContent";
-import { projects } from "../assets/data/projects.json";
+import { projects } from "../data/projects.json";
 
 const ProjectDialog = forwardRef<
   HTMLDialogElement,

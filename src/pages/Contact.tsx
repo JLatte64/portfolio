@@ -1,4 +1,4 @@
-import { myinfo } from "../assets/data/myinfo.json";
+import { myinfo } from "../data/myinfo.json";
 import LILogo from "../assets/LI-In-Bug.png"
 import GHLogo from "../assets/GitHub_Invertocat_Black.svg"
 

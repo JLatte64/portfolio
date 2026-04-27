@@ -1,0 +1,12 @@
+.hobbies {
+    position:relative;
+    display:flex;
+}
+
+.hobbies-img {
+    width:50%;
+}
+
+.hobbies-p {
+    width:50%;
+}

@@ -1,5 +1,5 @@
 import ProjectWidgetsDisplay from "../components/ProjectWidgetsDisplay";
-import { myinfo } from "../assets/data/myinfo.json";
+import { myinfo } from "../data/myinfo.json";
 
 export function Home() {
     return (<>

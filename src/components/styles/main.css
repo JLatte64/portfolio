@@ -1,0 +1,55 @@
+.main {
+    background-color: rgb(112, 128, 202);
+}
+
+.hero-container {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color:white;
+}
+
+.hero-container img {
+    position:relative;
+    border:2px solid red;
+    max-width: 25%;
+    height:fit-content;
+    margin:1rem;
+}
+
+.nav-buttons button {
+    min-width: 30%;
+    padding:10px;
+    margin:0 1rem;
+    height: fit-content;
+    align-content: center;
+}
+
+.nav-buttons {
+    width:100%;
+    height: fit-content;
+    padding:0;
+    margin:0.5rem 0;
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+}
+
+.spacer {
+    height:10px;
+    width:100%;
+    border: 2px solid black;
+    color:black;
+    display:block;
+}
+
+.banner {
+    display:block;
+    padding:0.5rem;
+    min-width: 50%;
+    align-items: stretch;
+    height:fit-content;
+}

@@ -1,18 +1,19 @@
+import { Link } from 'react-router';
 import '../components/styles/NavBar.css'
-import { myinfo } from "../assets/data/myinfo.json";
+import { myinfo } from "../data/myinfo.json";
 
 export default function NavBar() {
     return (<nav className="nav">
         <a href="/" className="site-title">{myinfo.about.name}</a>
         <ul>
             <li>
-                <a href="/resume">Resume</a>
+                <Link to='/portfolio'>Home</Link>
             </li>
             <li>
-                <a href="/about">About</a>
+                <Link to='/about'>About</Link>
             </li>
             <li>
-                <a href="/contact">Contact</a>
+                <Link to='/contact'>Contact</Link>
             </li>
         </ul>
     </nav>);

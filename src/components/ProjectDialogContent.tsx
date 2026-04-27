@@ -1,5 +1,7 @@
-import { Carousel, Gallery, Video, Text } from "../WidgetTypes";
-import { projects } from "../assets/data/projects.json";
+import { Carousel } from "./Carousel";
+import { Gallery } from "./Gallery";
+import { Video, Text } from "./WidgetTypes";
+import { projects } from "../data/projects.json";
 import type { ProjectData } from "../ProjectContentTypes";
 
 const ProjectDialogContent = ({ index }: { index: number }) => {
