@@ -5,7 +5,7 @@ import { projects } from "../data/projects.json";
 import type { ProjectData } from "./ProjectContentTypes";
 
 export const CardDialogContent = ({ index }: { index: number }) => {
-  const Projects = (projects[index] as ProjectData).media.map((contentData) => {
+  const Projects = (projects[index] as ProjectData).mediaContainer.map((contentData) => {
     switch (contentData.type) {
       case "carousel":
         return <Carousel carouselData={contentData} />;

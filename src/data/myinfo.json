@@ -47,6 +47,11 @@
                     "timeframe" : "2024-Present"
                 }
             ],
+            "skills":
+            [
+                "3D Modeling",
+                "Aaaa"
+            ],
             "media": 
             {
                 "type" : "pdf-url",
@@ -68,13 +73,13 @@
         "software":
         [
             {
-                "type" : "image",
-                "src": "",
+                "src" : "",
+                "url": "",
                 "alt": "Blender"
             },
             {
-                "type" : "icon",
-                "src": "",
+                "src" : "",
+                "url": "",
                 "alt": "Unity"
             }
         ]

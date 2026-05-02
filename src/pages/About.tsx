@@ -3,11 +3,9 @@ import '../components/styles/About.css'
 import landingphoto from "../assets/landingphoto.jpg"
 import { Experience } from './Experience';
 import { NavBar } from '../components/NavBar';
+import { IconsList, type JSONIcon } from '../components/IconList';
 
 export function About() {
-
-    const languagesText = myinfo.languages.map((language) => <li>{language}</li>);
-
     return (
     <>
         <NavBar />
@@ -24,15 +22,11 @@ export function About() {
         <Experience />
         <div className="skills">
             <h3>Skills</h3>
-            <ul>
-                a
-            </ul>
+            {myinfo.resume.skills.map(skill => <p>{skill}</p>)}
         </div>
         <div className="software">
             <h3>Software</h3>
-            <ul>
-                a
-            </ul>
+            <IconsList clickable={false} list={myinfo.software} />
         </div>
         <div className="education">
             <h3>Education</h3>
@@ -42,7 +36,7 @@ export function About() {
         <div className="languages">
             <h3>Languages</h3>
             <ul>
-                {languagesText}
+                {myinfo.languages.map(language => <li>{language}</li>)}
             </ul>
         </div>
     </>
