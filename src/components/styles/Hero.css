@@ -1,0 +1,49 @@
+.hero-actions button {
+    min-width: 6rem;
+}
+
+.hero-actions {
+    border:2px solid yellow;
+    width:100%;
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.hero-loc {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    color:black;
+}
+
+.hero-info {
+    max-width: 600px;
+    flex: 1 1 auto;
+    width:90%;
+    margin: 0 0.5rem 0 0.5rem;
+    align-content: center;
+    justify-content: center;
+    line-height: 2rem;
+}
+
+.hero img {
+    max-width: 12rem;
+    flex:1;
+}
+
+.hero-content {
+    border: 2px solid black;
+    box-sizing: border-box;
+    width:100%;
+    padding:1rem;
+    height:fit-content;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+}
+
+.hero {
+    background-color:rgb(209, 209, 209);
+    z-index: 1;
+}

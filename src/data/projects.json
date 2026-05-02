@@ -1,66 +1,83 @@
 {
   "projects": [
     {
-      "name": "God of War: Sons of Sparta",
-      "subheading" : "Stencil-Layered 2D Lighting System",
-      "thumbnail": "",
-      "alt": "God of War: Sons of Sparta Thumbnail",
-      "tags" : 
+      "title": "God of War: Sons of Sparta",
+      "thumbnail":
+      {
+        "type" : "image",
+        "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOUMMcIXYQC7pZzQnAExOYXfYYG0gZD8UA3NiCUJGDgDSPp8S2VHav2x22tZK-iDhU2iKu6dzizUBFezmReNNKRiIdAQ4ZY6l7pZQ0MX3HyZPqhx31teTIGdmXslVAGoI&s=10&ec=121644719",
+        "alt": "God of War: Sons of Sparta Thumbnail"
+      },
+      "tags" :
       [
-        "selected"
+        "tech art"
       ],
-      "content": 
-      [
-        {
-          "type": "text",
-          "data": "This is some text about God of War: Sons of Sparta."
-        },
-        {
-          "type": "carousel",
-          "data": 
-          [
-            {
-              "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOUMMcIXYQC7pZzQnAExOYXfYYG0gZD8UA3NiCUJGDgDSPp8S2VHav2x22tZK-iDhU2iKu6dzizUBFezmReNNKRiIdAQ4ZY6l7pZQ0MX3HyZPqhx31teTIGdmXslVAGoI&s=10&ec=121644719",
-              "alt": "Project 1, Image 1"
-            },
-            {
-              "src": "https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyZDk3YmlqdTJjcWg4a2wza3JpcDU5eG43aDk1YXI1eDJ3M3g2cXV4NiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/VlVQNSH3edLa0/200.gif",
-              "alt": "Project 1, Image 2"
-            },
-            {
-              "src": "https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyZDk3YmlqdTJjcWg4a2wza3JpcDU5eG43aDk1YXI1eDJ3M3g2cXV4NiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/VlVQNSH3edLa0/200.gif",
-              "alt": "Project 1, Image 2"
-            },
-            {
-              "src": "https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyZDk3YmlqdTJjcWg4a2wza3JpcDU5eG43aDk1YXI1eDJ3M3g2cXV4NiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/VlVQNSH3edLa0/200.gif",
-              "alt": "Project 1, Image 2"
-            },
-            {
-              "src": "https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyZDk3YmlqdTJjcWg4a2wza3JpcDU5eG43aDk1YXI1eDJ3M3g2cXV4NiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/VlVQNSH3edLa0/200.gif",
-              "alt": "Project 1, Image 2"
-            }
-          ]
-        }
-      ]
+      "content" :
+      {
+        "text":
+        [
+          {
+            "heading":"",
+            "subheading":"Stencil-Buffer Layered 2D Lighting System",
+            "text":"We needed a solution more robust than the simple one-sprite-layer-per-tag approach of Unity's default."
+          },
+          {
+            "heading":"",
+            "subheading":"Going Beyond Unity's Limits",
+            "text":"We needed a solution more robust than the simple one-sprite-layer-per-tag approach of Unity's default."
+          }
+        ],
+        "media":
+        [
+          {
+            "type" : "image",
+            "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOUMMcIXYQC7pZzQnAExOYXfYYG0gZD8UA3NiCUJGDgDSPp8S2VHav2x22tZK-iDhU2iKu6dzizUBFezmReNNKRiIdAQ4ZY6l7pZQ0MX3HyZPqhx31teTIGdmXslVAGoI&s=10&ec=121644719",
+            "alt": "Project 1, Image 1"
+          },
+          {
+            "type" : "image-url",
+            "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOUMMcIXYQC7pZzQnAExOYXfYYG0gZD8UA3NiCUJGDgDSPp8S2VHav2x22tZK-iDhU2iKu6dzizUBFezmReNNKRiIdAQ4ZY6l7pZQ0MX3HyZPqhx31teTIGdmXslVAGoI&s=10&ec=121644719",
+            "alt": "Project 1, Image 2"
+          },
+          {
+            "type" : "video",
+            "src": "https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyZDk3YmlqdTJjcWg4a2wza3JpcDU5eG43aDk1YXI1eDJ3M3g2cXV4NiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/VlVQNSH3edLa0/200.gif",
+            "alt": "Project 1, Video 1"
+          },
+          {
+            "type" : "video-url",
+            "src": "https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyZDk3YmlqdTJjcWg4a2wza3JpcDU5eG43aDk1YXI1eDJ3M3g2cXV4NiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/VlVQNSH3edLa0/200.gif",
+            "alt": "Project 1, Video 2"
+          }
+        ]
+      }
     },
     {
-      "name": "Unicycle Samurai",
-      "subheading" : "Selected for alt.ctrl.GDC 2023",
-      "thumbnail": "",
-      "alt": "Unicycle Samurai",
-      "tags" : 
+      "title": "Unicycle Samurai",
+      "thumbnail":
+      {
+        "type" : "image",
+        "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOUMMcIXYQC7pZzQnAExOYXfYYG0gZD8UA3NiCUJGDgDSPp8S2VHav2x22tZK-iDhU2iKu6dzizUBFezmReNNKRiIdAQ4ZY6l7pZQ0MX3HyZPqhx31teTIGdmXslVAGoI&s=10&ec=121644719",
+        "alt": "Unicycle Samurai Thumbnail"
+      },
+      "tags" :
       [
-        "snapshot"
+        "tech art"
       ],
-      "content": 
+      "textContainer":
       [
         {
-          "type": "video",
-          "data": ""
-        },
+          "heading":"",
+          "subheading":"Developed by a team of graduate and undergraduate students in MSU's Game Design program",
+          "text":"Preproduction was done by a team of four over two 4-week projects in MI 455 Game Design & Development II, then a team of seven in MI 497 Game Design Studio produced the game over the course of a 15-week semester, with help from three other individuals outside the class team."
+        }
+      ],
+      "mediaContainer":
+      [
         {
-          "type": "text",
-          "data": "Created at Michigan State University"
+          "type" : "image",
+          "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOUMMcIXYQC7pZzQnAExOYXfYYG0gZD8UA3NiCUJGDgDSPp8S2VHav2x22tZK-iDhU2iKu6dzizUBFezmReNNKRiIdAQ4ZY6l7pZQ0MX3HyZPqhx31teTIGdmXslVAGoI&s=10&ec=121644719",
+          "alt": "Unicycle Samurai Image 1"
         }
       ]
     }

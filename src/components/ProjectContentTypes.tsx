@@ -1,7 +1,43 @@
-import type {
-  TextContent,
-  VideoContent,
-} from "../ProjectContentTypes";
+export type ProjectContent =
+  | CarouselContent
+  | VideoContent
+  | GalleryContent
+  | TextContent;
+
+export type ProjectData = {
+  title: string;
+  thumbnail: string;
+  alt:string;
+  tags:string[];
+  textContainer: ProjectContent[];
+  mediaContainer: ProjectContent;
+};
+
+export type CarouselContent = {
+  type: "carousel";
+  data: {
+    src: string;
+    alt: string;
+  }[];
+};
+
+export type VideoContent = {
+  type: "video";
+  data: string;
+};
+
+export type GalleryContent = {
+  type: "gallery";
+  data: {
+    src: string;
+    alt: string;
+  }[];
+};
+
+export type TextContent = {
+  type: "text";
+  data: string;
+};
 
 export const Text = ({ textData }: { textData: TextContent }) => {
   return (

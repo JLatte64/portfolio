@@ -1,0 +1,14 @@
+header img {
+    
+}
+
+header {
+    display:flex;
+    flex-wrap: wrap;
+}
+
+header > * {
+    flex:1;
+    flex-basis: clamp(25vw, 45vw, 80vw);
+}
+

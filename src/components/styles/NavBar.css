@@ -1,9 +1,5 @@
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin:0;
+:root {
+  --navbar-height: 2rem;
 }
 
 .nav {
@@ -14,6 +10,13 @@ body {
     align-items: stretch;
     gap: 2rem;
     padding: 0 1rem;
+    position:fixed;
+    height: var(--navbar-height);
+    top:0;
+    left:0;
+    right:0;
+    z-index: 2;
+    width:100%;
 
 }
 

@@ -5,20 +5,78 @@
         {
             "name" : "Jordan Latta",
             "photo" : "src/assets/landingphoto.jpg",
-            "photo2" : "src/assets/landingphoto.jpg",
             "jobTitle" : "Technical Artist",
             "loc" : "Pittsburgh, PA",
             "text" : "Games are a big part of my story - With over a decade of self-directed experience in Unity, I've been pursuing game development since the age of 7. I taught myself Unity and C# scripting in the summer of 2015 and fell in love.",
             "hobbies" : "I'm always creating or tinkering with something, be it digital art, computer hardware, or pastry. I also love nature."
         },
-        "contact": 
+        "contacts":
+        [
+            {
+                "src" : "",
+                "url": "mailto:jordanlatta128@gmail.com",
+                "alt": "Email"
+            },
+            {
+                "src" : "",
+                "url": "tel:+17247195101",
+                "alt": "Phone Number"
+            },
+            {
+                "src" : "/images/GitHub_Invertocat_Black.SVG",
+                "url": "https://github.com/JLatte64",
+                "alt": "Github"
+            },
+            {
+                "src" : "/images/InBug-Black.PNG",
+                "url": "https://www.linkedin.com/in/jordan-latta",
+                "alt": "LinkedIn"
+            }
+        ],
+        "resume":
         {
-            "email" : "jordanlatta128@gmail.com",
-            "phone" : "724-719-5101",
-            "linkedin" : "",
-            "github" : "",
-            "artstation" : ""
+            "tags":
+            [
+                "tech art"
+            ],
+            "roles":
+            [
+                {
+                    "role":"Technical Artist | Mega Cat Studios (2024-Present)",
+                    "desc":"This is what I did at Mega Cat!",
+                    "timeframe" : "2024-Present"
+                }
+            ],
+            "media": 
+            {
+                "type" : "pdf-url",
+                "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOUMMcIXYQC7pZzQnAExOYXfYYG0gZD8UA3NiCUJGDgDSPp8S2VHav2x22tZK-iDhU2iKu6dzizUBFezmReNNKRiIdAQ4ZY6l7pZQ0MX3HyZPqhx31teTIGdmXslVAGoI&s=10&ec=121644719",
+                "alt": "Web Resume PDF"
+            }
         },
-        "resume" : "https://docs.google.com/document/d/1m-T95yTyylLtRwNUv194FX-8C4tpRx5YPNbda45Bjso/edit?usp=sharing"
+        "education":
+        {
+            "school" : "Michigan State University",
+            "degree" : "B.A. in Games & Interactive Media | Minor in Game Design & Development",
+            "timeframe" : "2019-2023"
+        },
+        "languages":
+        [
+            "English",
+            "German"
+        ],
+        "software":
+        [
+            {
+                "type" : "image",
+                "src": "",
+                "alt": "Blender"
+            },
+            {
+                "type" : "icon",
+                "src": "",
+                "alt": "Unity"
+            }
+        ]
     }
 }

@@ -2,12 +2,11 @@ import { myinfo } from "../data/myinfo.json";
 import LILogo from "../assets/LI-In-Bug.png"
 import GHLogo from "../assets/GitHub_Invertocat_Black.svg"
 
-export const Contact = () => {
+export function ContactForm() {
     return (
     <>
     <h1>Get in Touch</h1>
     <p>
-        
         <a href={"tel:+"+myinfo.contact.phone}>
             <span className="material-icons">call</span>
             {myinfo.contact.phone}

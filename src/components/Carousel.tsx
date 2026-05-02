@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { CarouselContent } from "../ProjectContentTypes";
+import type { CarouselContent } from "./ProjectContentTypes";
 import './styles/Carousel.css'
 
 export const Carousel = ({carouselData}:{carouselData:CarouselContent}) => {
