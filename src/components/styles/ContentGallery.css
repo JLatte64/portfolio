@@ -1,41 +1,94 @@
-.gallery-items {
-    max-inline-size: 100%;
-    block-size: auto;
-    display:flex;
-    width:100%;
+.lightbox {
+  height:95%;
+  inset: 0;
+  overflow:hidden;
 }
 
-.row {
+.lightbox-container {
+  width:90vw;
+  height:90vh;
+  padding:0;
+  margin:auto auto;
+}
+
+.embla__close {
+  height:fit-content;
+  width: fit-content;
+  position:relative;
+  bottom:0;
+  left:0;
+  right:0;
+  margin: 0 auto;
+}
+
+.embla__sideArrow {
+  position:absolute;
+  height:100%;
+  top:0;
+}
+
+.embla__prev {
+  left:0;
+}
+
+.embla__next {
+  right:0;
+}
+
+.inactive
+{
+  filter:brightness(50%);
+}
+
+.gallery-button
+{
+  border-radius: 1rem;
+  background-color:white;
+  flex:0 0 1rem;
+  width:1rem;
+  height:1rem;
+  border:none;
+}
+
+.gallery-buttons {
+  width:100%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  height:2rem;
+  gap:1rem;
+}
+
+.embla__viewport {
+  overflow: hidden;
+  max-width:95%;
+  max-height:400px;
+  background-color:red;
+  border-radius: 1rem;
+}
+
+.embla__container {
   display: flex;
-  flex-wrap: wrap;
-  padding: 0 4px;
+  touch-action: pan-y pinch-zoom;
+  align-content: space-between;
+  gap:1rem;
+  height:100%;
 }
 
-/* Create four equal columns that sits next to each other */
-.column {
-  flex: 25%;
-  max-width: 25%;
-  padding: 0 4px;
+.embla__slide > * {
+  height:100%;
 }
 
-.column img {
-  margin-top: 8px;
-  vertical-align: middle;
-  width: 100%;
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  block-size: auto;
+  border-radius: 0.5rem;
+  filter:drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.5));
+  height:100%;
 }
 
-/* Responsive layout - makes a two column-layout instead of four columns */
-@media screen and (max-width: 800px) {
-  .column {
-    flex: 50%;
-    max-width: 50%;
-  }
-}
-
-/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
-  .column {
-    flex: 100%;
-    max-width: 100%;
-  }
+.embla {
+  display:flex;
 }

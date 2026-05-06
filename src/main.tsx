@@ -6,11 +6,13 @@ import App from "./App";
 import { Home } from "./pages/Home";
 import { About } from "./pages/About";
 import { Experience } from "./pages/Experience";
+import { WorkSamples } from "./pages/WorkSamples";
 
 const customRouter = createBrowserRouter([
     { path:"/portfolio", element: <><Home /></>},
-    { path:"/about", element:<><About /></>},
-    { path:"/resume", element:<><Experience /></>},
+    { path:"/portfolio/work", element: <><WorkSamples /></>},
+    { path:"/portfolio/about", element:<><About /></>},
+    { path:"/portfolio/resume", element:<><Experience /></>},
     { path:"/", element:<><App /></>}
 ]);
 

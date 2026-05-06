@@ -1,3 +1,7 @@
+body:has(dialog[open]) {
+  overflow: hidden;
+}
+
 :root {
   --text: #6b6375;
   --text-h: #08060d;
@@ -51,7 +55,6 @@
 }
 
 #root {
-  width: 1126px;
   max-width: 100%;
   margin: 0 auto;
   text-align: center;
@@ -64,6 +67,7 @@
 
 body {
   margin: 0;
+  scrollbar-gutter: stable;
 }
 
 h1,

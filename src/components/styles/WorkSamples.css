@@ -1,0 +1,7 @@
+.work.flex-container:nth-child(odd) {
+  align-items: flex-start;
+}
+
+.work.flex-container:nth-child(even) {
+  align-items: flex-end;
+}

@@ -2,6 +2,8 @@
 
 import { ProjectCards } from "../components/ProjectCards";
 import "../components/styles/Home.css"
+import "../components/styles/Hero.css"
+import "../components/styles/Main.css"
 import landingphoto from "../assets/landingphoto.jpg"
 import { ContactFooter } from "../components/ContactFooter";
 import { NavBar } from "../components/NavBar";
@@ -22,19 +24,19 @@ export function Home() {
       </section>
     </header>
     
-    <main className="main-content">
-      <div className="container-strip">
-        <section id="showcase" className="container">
-        <h3>Work Samples</h3>
-          <div className="content">
-            <ProjectCards tag="selected"/>
+    <main>
+      <div className="content">
+        <section id="showcase">
+          <h3>Work Samples</h3>
+          <div className="container">
+            <ProjectCards tag="tech art"/>
             <h4>Snapshots</h4>
-            <ProjectCards tag="snapshot"/>
+            <ProjectCards tag="tech art"/>
           </div>
         </section>
-        <section id="about" className="container">
-        <h3>More About Me</h3>
-          <div className="content">
+        <section id="about">
+          <h3>More About Me</h3>
+          <div className="container">
             <p>sdkjhsdkfhsdjfjksdfjksdfhsdjkfk</p>
             <img src={landingphoto} alt="Jordan Latta photo" />
             <button>Click to view more about me</button>

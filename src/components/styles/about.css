@@ -19,25 +19,7 @@
     max-width: 40%;
 }
 
-
-.flex-col-container {
-    display:flex;
-    flex-direction: column;
-    width:100%;
-    box-sizing: border-box;
-}
-
 .about.flex-container {
     gap:1rem;
     justify-content: center;
-}
-
-.flex-container {
-    display:flex;
-    padding:1rem;
-    margin:1rem;
-}
-
-section.top {
-    margin-top: var(--navbar-height);
 }
