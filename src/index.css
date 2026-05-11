@@ -1,3 +1,17 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+*.shown {
+  display:contents;
+}
+
+*.hidden {
+  display:none;
+}
+
 body:has(dialog[open]) {
   overflow: hidden;
 }

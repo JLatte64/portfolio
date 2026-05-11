@@ -1,26 +1,39 @@
-import { Link } from 'react-router';
-import '../components/styles/NavBar.css'
+import { Link } from "react-router";
+import "../components/styles/NavBar.css";
+import { useEffect, useRef, useState } from "react";
+import useWindowWidth from "./useWindowWidth";
+//import NavButton from "./NavButton";
 
 export function NavBar() {
-    return (
+  const [mobileMenuOpen, toggleMobileMenu] = useState(false);
+  const width = useWindowWidth();
+
+  function handleMobileMenuClick() {
+    toggleMobileMenu(!mobileMenuOpen);
+  }
+
+  return (
     <>
-        <nav className="nav">
-            <Link to='/portfolio'>Jordan Latta</Link>
-            <ul>
-                <li>
-                    <Link to='/portfolio/work'>Portfolio</Link>
-                </li>
-                <li>
-                    <Link to='/portfolio/resume'>Resume</Link>
-                </li>
-                <li>
-                    <Link to='/portfolio/about'>About</Link>
-                </li>
-                <li>
-                    <Link to='/portfolio/contact'>Contact</Link>
-                </li>
-            </ul>
-        </nav>
-        <div className="nav-spacer"></div>
-    </>);
+      <nav className="nav">
+        <Link to="/portfolio">
+          <button className="navbar_button site-title">
+            <span className="material-icons">home</span>
+          </button>
+        </Link>
+
+        <Link to="/portfolio/work">
+          <button className="navbar_button">Portfolio</button>
+        </Link>
+        <Link to="/portfolio/experience">
+          <button className="navbar_button">Resume</button>
+        </Link>
+        <Link to="/portfolio/about">
+          <button className="navbar_button">About</button>
+        </Link>
+        <Link to="/portfolio/about">
+          <button className="navbar_button">Contact</button>
+        </Link>
+      </nav>
+    </>
+  );
 }

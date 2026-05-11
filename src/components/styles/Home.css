@@ -1,3 +1,14 @@
-* {
-    box-sizing: border-box;
+.home_content {
+    position:relative;
+    background-color: white;
+    padding:0;
+    margin: 0;
+}
+
+main {
+    inset:0;
+    margin:0;
+    padding:0;
+    background-image: url(https://cdn.pixabay.com/photo/2022/04/26/13/04/sky-7158340_1280.jpg);
+    background-attachment: fixed;
 }

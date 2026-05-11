@@ -2,7 +2,6 @@
 //content carousels & lightboxes.
 import ContentGallery from "../components/ContentGallery";
 import { projects } from "../data/projects.json";
-import "../components/styles/Main.css";
 import "../components/styles/WorkSamples.css";
 import { NavBar } from "../components/NavBar";
 
