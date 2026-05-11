@@ -1,16 +1,16 @@
 import { Link } from "react-router";
 import "../components/styles/NavBar.css";
-import { useEffect, useRef, useState } from "react";
-import useWindowWidth from "./useWindowWidth";
+//import { useEffect, useRef, useState } from "react";
+//import useWindowWidth from "./useWindowWidth";
 //import NavButton from "./NavButton";
 
 export function NavBar() {
-  const [mobileMenuOpen, toggleMobileMenu] = useState(false);
-  const width = useWindowWidth();
+  //const [mobileMenuOpen, toggleMobileMenu] = useState(false);
+  //const width = useWindowWidth();
 
-  function handleMobileMenuClick() {
-    toggleMobileMenu(!mobileMenuOpen);
-  }
+  //function handleMobileMenuClick() {
+  //  toggleMobileMenu(!mobileMenuOpen);
+  //}
 
   return (
     <>
