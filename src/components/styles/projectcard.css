@@ -1,0 +1,37 @@
+.projectcard-container img {
+    height:100%;
+    width:auto;
+    background-color:gray;
+}
+
+.projectcard-container p {
+    position:relative;
+    color:white;
+}
+
+.projectcard > .thumbnail-container {
+    width:100%;
+    height: auto;
+    overflow:hidden;
+}
+
+.projectcard {
+    flex: 1 1 45%;
+    background-color: black;
+    border-radius: 0.25rem;
+    border:2px solid white;
+    max-width: 45%;
+    max-height:25vh;
+}
+
+.projectcard-container:hover {
+    transform: scale(1.1);
+}
+
+.projectcard-container {
+    transition:transform 0.1s linear;
+    
+    
+    overflow:hidden;
+    
+}

@@ -27,7 +27,7 @@ function Hero() {
         ))}
         <div className="hero_content">
           <img src={landingphoto} alt="" className="hero_photo" />
-          <section className="hero_text">
+          <div className="hero_text">
             <h1>Jordan Latta</h1>
             <h2>Technical Artist</h2>
             <p>
@@ -40,7 +40,7 @@ function Hero() {
               optimization with over a decade of self-directed experience in
               Unity.
             </p>
-          </section>
+          </div>
         </div>
       </header>
     </>

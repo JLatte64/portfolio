@@ -1,27 +1,30 @@
 //This is where the project widgets are displayed, along with links to the contact, resume, and About pages.
-
-import { ProjectCards } from "../components/ProjectCards";
+import { ProjectCard } from "../components/ProjectCard";
+import { projects } from "../data/projects.json";
 import "../components/styles/Home.css";
 import { ContactFooter } from "../components/ContactFooter";
 import Hero from "../components/Hero";
+//import doublerainbow from "../assets/doublerainbow.jpg";
 
 export function Home() {
   return (
     <>
       <Hero />
       <main>
-        <div className="home_container">
-          <section id="showcase" className="home_content">
+        <div className="content">
+          <section id="showcase" className="section-container">
             <h3>Work Samples</h3>
-            <div className="content_container">
-              <ProjectCards tag="tech art" />
-              <h4>Snapshots</h4>
-              <ProjectCards tag="tech art" />
+            <div className="work_container">
+              {projects.map((_, index) =>
+                projects[index].tags?.includes("tech art") ? (
+                  <ProjectCard index={index} key={index} />
+                ) : null,
+              )}
             </div>
           </section>
-          <section id="about" className="home_content">
+          <section id="about" className="section-container">
             <h3>More About Me</h3>
-            <div className="content_container">
+            <div className="about_container">
               <p>sdkjhsdkfhsdjfjksdfjksdfhsdjkfk</p>
               <img src="" alt="Jordan Latta photo" />
               <button>Click to view more about me</button>

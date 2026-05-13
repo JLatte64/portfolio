@@ -1,14 +1,39 @@
-.home_content {
-    position:relative;
-    background-color: white;
+.section-container h3 {
+    font-size: 1.5rem;
     padding:0;
-    margin: 0;
+    margin:0 0 2rem 0;
+}
+
+.work_container {
+    background-color: rgba(105, 105, 105, 0.315);
+    margin: 0 auto;
+    padding:1rem;
+    border-radius: 1rem;
+    display:flex;
+    justify-content: space-evenly;
+}
+
+.section-container {
+    border-bottom:2px solid black;
+    padding:2rem 2rem 2rem 2rem;
+}
+
+.content-container {
+    margin:0 auto;
+    padding:1rem;
+    border-bottom: 1rem solid gray;
+}
+
+.content {
+    background-color: rgb(41, 41, 41);
+    margin: 0 auto;
+    width:95%;
 }
 
 main {
-    inset:0;
-    margin:0;
-    padding:0;
-    background-image: url(https://cdn.pixabay.com/photo/2022/04/26/13/04/sky-7158340_1280.jpg);
+    backdrop-filter: blur(10px);
+    background-image: url(https://cdn.pixabay.com/photo/2022/04/26/13/04/sky-7158340_1280.jpg) ;
     background-attachment: fixed;
 }
+
+
