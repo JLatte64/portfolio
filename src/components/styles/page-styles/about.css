@@ -1,19 +1,19 @@
 /* Desktop Query */
 
 @media screen and (min-width: 768px) {
-  .about-content {
+  .about-full-content {
     width: 90%;
   }
 }
 
 /* Mobile Query */
 @media screen and (max-width: 768px) {
-  .about-content {
+  .about-full-content {
     width: 100%;
   }
 }
 
-.about-content > section > h2 {
+.about-full-content > section > h2 {
   color: var(--text-h);
   font-size: 2rem;
   font-weight: bold;
@@ -21,14 +21,14 @@
   margin: 1rem auto 2rem auto;
 }
 
-.about-content > section {
+.about-full-content > section {
   margin: 0 auto;
   width: 95%;
   border-bottom: 2px solid var(--accent);
   padding: 2rem 2rem 2rem 2rem;
 }
 
-.about-content {
+.about-full-content {
   background-color: var(--bg);
   margin: 0 auto;
 }
