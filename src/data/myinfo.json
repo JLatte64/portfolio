@@ -1,117 +1,100 @@
 {
-    "myinfo" : 
-    {
-        "about": 
+  "myinfo": {
+    "about": {
+      "name": "Jordan Latta",
+      "photo": "src/assets/landingphoto.jpg",
+      "jobTitle": "Technical Artist",
+      "loc": "Pittsburgh, PA",
+      "brief": "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque.",
+      "full": "Lorem ipsum dolor sit amet consectetur adipiscing elit quisque faucibus ex sapien vitae pellentesque sem placerat in id cursus mi pretium tellus duis convallis tempus leo eu aenean sed diam urna tempor pulvinar vivamus fringilla lacus nec metus bibendum egestas iaculis massa nisl malesuada lacinia integer nunc posuere ut hendrerit semper vel class aptent taciti sociosqu ad litora torquent per conubia nostra inceptos himenaeos orci varius natoque penatibus et magnis dis parturient montes nascetur ridiculus mus donec rhoncus eros lobortis nulla molestie mattis scelerisque maximus eget fermentum odio phasellus non purus est efficitur laoreet mauris pharetra vestibulum fusce dictum risus blandit quis suspendisse aliquet nisi sodales consequat magna ante condimentum neque at luctus nibh finibus facilisis dapibus etiam interdum tortor ligula congue sollicitudin erat viverra ac tincidunt nam porta elementum a enim euismod quam justo lectus commodo augue arcu dignissim velit aliquam imperdiet mollis nullam volutpat porttitor ullamcorper rutrum gravida.",
+      "hobbies": "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque."
+    },
+    "heroSlides": [
+      "https://cdn.pixabay.com/photo/2022/08/08/13/59/cloud-of-bunch-of-7372799_1280.jpg",
+      "https://cdn.pixabay.com/photo/2024/03/14/17/54/ai-generated-8633521_1280.png",
+      "https://cdn.pixabay.com/photo/2016/10/20/18/35/earth-1756274_1280.jpg",
+      "https://cdn.pixabay.com/photo/2020/07/11/06/36/poppies-5392907_1280.jpg"
+    ],
+    "contacts": [
+      {
+        "src": "",
+        "url": "mailto:jordanlatta128@gmail.com",
+        "alt": "Email"
+      },
+      {
+        "src": "",
+        "url": "tel:+17247195101",
+        "alt": "Phone Number"
+      },
+      {
+        "src": "/images/GitHub_Invertocat_Black.SVG",
+        "url": "https://github.com/JLatte64",
+        "alt": "Github"
+      },
+      {
+        "src": "/images/InBug-Black.PNG",
+        "url": "https://www.linkedin.com/in/jordan-latta",
+        "alt": "LinkedIn"
+      }
+    ],
+    "resume": {
+      "tags": ["tech art"],
+      "roles": [
         {
-            "name" : "Jordan Latta",
-            "photo" : "src/assets/landingphoto.jpg",
-            "jobTitle" : "Technical Artist",
-            "loc" : "Pittsburgh, PA",
-            "brief" : "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque.",
-            "full" : "Lorem ipsum dolor sit amet consectetur adipiscing elit quisque faucibus ex sapien vitae pellentesque sem placerat in id cursus mi pretium tellus duis convallis tempus leo eu aenean sed diam urna tempor pulvinar vivamus fringilla lacus nec metus bibendum egestas iaculis massa nisl malesuada lacinia integer nunc posuere ut hendrerit semper vel class aptent taciti sociosqu ad litora torquent per conubia nostra inceptos himenaeos orci varius natoque penatibus et magnis dis parturient montes nascetur ridiculus mus donec rhoncus eros lobortis nulla molestie mattis scelerisque maximus eget fermentum odio phasellus non purus est efficitur laoreet mauris pharetra vestibulum fusce dictum risus blandit quis suspendisse aliquet nisi sodales consequat magna ante condimentum neque at luctus nibh finibus facilisis dapibus etiam interdum tortor ligula congue sollicitudin erat viverra ac tincidunt nam porta elementum a enim euismod quam justo lectus commodo augue arcu dignissim velit aliquam imperdiet mollis nullam volutpat porttitor ullamcorper rutrum gravida.",
-            "hobbies" : "Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque."
-        },
-        "heroSlides":
-        [
-            "https://cdn.pixabay.com/photo/2022/08/08/13/59/cloud-of-bunch-of-7372799_1280.jpg",
-            "https://cdn.pixabay.com/photo/2024/03/14/17/54/ai-generated-8633521_1280.png",
-            "https://cdn.pixabay.com/photo/2016/10/20/18/35/earth-1756274_1280.jpg",
-            "https://cdn.pixabay.com/photo/2020/07/11/06/36/poppies-5392907_1280.jpg"
-        ],
-        "contacts":
-        [
-            {
-                "src" : "",
-                "url": "mailto:jordanlatta128@gmail.com",
-                "alt": "Email"
-            },
-            {
-                "src" : "",
-                "url": "tel:+17247195101",
-                "alt": "Phone Number"
-            },
-            {
-                "src" : "/images/GitHub_Invertocat_Black.SVG",
-                "url": "https://github.com/JLatte64",
-                "alt": "Github"
-            },
-            {
-                "src" : "/images/InBug-Black.PNG",
-                "url": "https://www.linkedin.com/in/jordan-latta",
-                "alt": "LinkedIn"
-            }
-        ],
-        "resume":
-        {
-            "tags":
-            [
-                "tech art"
-            ],
-            "roles":
-            [
-                {
-                    "role":"Technical Artist | Mega Cat Studios (2024-Present)",
-                    "desc":"Lorem ipsum dolor sit amet consectetur adipiscing elit. Adipiscing elit quisque faucibus ex sapien vitae pellentesque. Vitae pellentesque sem placerat in id cursus mi. Cursus mi pretium tellus duis convallis tempus leo. Tempus leo eu aenean sed diam urna tempor. Urna tempor pulvinar vivamus fringilla lacus nec metus.",
-                    "timeframe" : "2024-Present"
-                }
-            ],
-            "skills":
-            [
-                "Procedural Content Generation",
-                "Compute Shaders",
-                "Materials & Shaders",
-                "Scene Lighting / Realtime Global Illumination",
-                "Performance Optimization",
-                "VFX & GPU Particle Systems"
-            ],
-            "media": 
-            {
-                "type" : "pdf-url",
-                "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOUMMcIXYQC7pZzQnAExOYXfYYG0gZD8UA3NiCUJGDgDSPp8S2VHav2x22tZK-iDhU2iKu6dzizUBFezmReNNKRiIdAQ4ZY6l7pZQ0MX3HyZPqhx31teTIGdmXslVAGoI&s=10&ec=121644719",
-                "alt": "Web Resume PDF"
-            }
-        },
-        "education":
-        {
-            "school" : "Michigan State University",
-            "degree" : "B.A. in Games & Interactive Media | Minor in Game Design & Development",
-            "timeframe" : "2019-2023"
-        },
-        "languages":
-        [
-            "English",
-            "German"
-        ],
-        "software":
-        [
-            {
-                "src" : "",
-                "alt": "Blender"
-            },
-            {
-                "src" : "",
-                "alt": "Unity"
-            },
-            {
-                "src" : "",
-                "alt": "HLSL"
-            },
-            {
-                "src" : "",
-                "alt": "Unreal Engine"
-            },
-            {
-                "src" : "",
-                "alt": "Photoshop"
-            },
-            {
-                "src" : "",
-                "alt": "Maya"
-            },
-            {
-                "src" : "",
-                "alt": "C#"
-            }
-        ]
-    }
+          "role": "Technical Artist | Mega Cat Studios (2024-Present)",
+          "desc": "Lorem ipsum dolor sit amet consectetur adipiscing elit. Adipiscing elit quisque faucibus ex sapien vitae pellentesque. Vitae pellentesque sem placerat in id cursus mi. Cursus mi pretium tellus duis convallis tempus leo. Tempus leo eu aenean sed diam urna tempor. Urna tempor pulvinar vivamus fringilla lacus nec metus.",
+          "timeframe": "2024-Present"
+        }
+      ],
+      "skills": [
+        "Procedural Content Generation",
+        "Compute Shaders",
+        "Materials & Shaders",
+        "Scene Lighting / Realtime Global Illumination",
+        "Performance Optimization",
+        "VFX & GPU Particle Systems"
+      ],
+      "media": {
+        "type": "pdf-url",
+        "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOUMMcIXYQC7pZzQnAExOYXfYYG0gZD8UA3NiCUJGDgDSPp8S2VHav2x22tZK-iDhU2iKu6dzizUBFezmReNNKRiIdAQ4ZY6l7pZQ0MX3HyZPqhx31teTIGdmXslVAGoI&s=10&ec=121644719",
+        "alt": "Web Resume PDF"
+      }
+    },
+    "education": {
+      "school": "Michigan State University",
+      "degree": "B.A. in Games & Interactive Media | Minor in Game Design & Development",
+      "timeframe": "2019-2023"
+    },
+    "languages": ["English", "German"],
+    "software": [
+      {
+        "src": "",
+        "alt": "Blender"
+      },
+      {
+        "src": "",
+        "alt": "Unity"
+      },
+      {
+        "src": "",
+        "alt": "HLSL"
+      },
+      {
+        "src": "",
+        "alt": "Unreal Engine"
+      },
+      {
+        "src": "",
+        "alt": "Photoshop"
+      },
+      {
+        "src": "",
+        "alt": "Maya"
+      },
+      {
+        "src": "",
+        "alt": "C#"
+      }
+    ]
+  }
 }

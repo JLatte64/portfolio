@@ -1,20 +1,18 @@
-import { myinfo } from "../data/myinfo.json";
+import {myinfo} from "../data/myinfo.json";
 import "../components/styles/About.css";
 import landingphoto from "../assets/landingphoto.jpg";
-import { Experience } from "./Experience";
-import { NavBar } from "../components/NavBar";
+import {Experience} from "./Experience";
 //import { IconsList } from "../components/IconList";
 
 export function About() {
   return (
     <>
-      <NavBar />
       <section className="about flex-container">
         <div className="about flex-col-container">
           <h2 className="about">My Story</h2>
           <p className="about">
             I'm {myinfo.about.name}, a {myinfo.about.jobTitle} from{" "}
-            {myinfo.about.loc}. {myinfo.about.text}
+            {myinfo.about.loc}. {myinfo.about.full}
           </p>
         </div>
         <div className="about flex-col-container">

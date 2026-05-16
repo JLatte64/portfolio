@@ -1,9 +1,11 @@
 //This is where the project widgets are displayed, along with links to the contact, resume, and About pages.
-import { ProjectCard } from "../components/ProjectCard";
-import { projects } from "../data/projects.json";
+import {ProjectCard} from "../components/ProjectCard";
+import {projects} from "../data/projects.json";
 import "../components/styles/Home.css";
-import { ContactFooter } from "../components/ContactFooter";
+import {ContactFooter} from "../components/ContactFooter";
 import Hero from "../components/Hero";
+import landingphoto from "../assets/landingphoto.jpg";
+import {myinfo} from "../data/myinfo.json";
 //import doublerainbow from "../assets/doublerainbow.jpg";
 
 export function Home() {
@@ -24,10 +26,18 @@ export function Home() {
           </section>
           <section id="about" className="section-container">
             <h3>More About Me</h3>
-            <div className="about_container">
-              <p>sdkjhsdkfhsdjfjksdfjksdfhsdjkfk</p>
-              <img src="" alt="Jordan Latta photo" />
-              <button>Click to view more about me</button>
+            <div className="about-container">
+              <div className="about-column">
+                <p>{myinfo.about.brief}</p>
+              </div>
+              <div className="about-column">
+                <img
+                  src={landingphoto}
+                  alt="Jordan Latta photo"
+                  className="about-photo"
+                />
+                <button>Click to view Resume</button>
+              </div>
             </div>
           </section>
         </div>

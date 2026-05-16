@@ -1,9 +1,9 @@
-import { projects } from "../data/projects.json";
+import {projects} from "../data/projects.json";
 import "./styles/projectcard.css";
-import { Link } from "react-router";
+import {Link} from "react-router";
 import landingphoto from "../assets/landingphoto.jpg";
 
-export function ProjectCard({ index }: { index: number }) {
+export function ProjectCard({index}: {index: number}) {
   return (
     <Link
       to={
@@ -11,12 +11,12 @@ export function ProjectCard({ index }: { index: number }) {
       }
       className="projectcard"
     >
-      <p>{projects[index].title}</p>
-      <div className="thumbnail-container">
+      <span className="card-title">{projects[index].title}</span>
+      <div className="card-thumbnail-container">
         <img
           src={landingphoto}
           alt={projects[index].title + " photo"}
-          className="thumbnail"
+          className="card-thumbnail"
         ></img>
       </div>
     </Link>

@@ -3,60 +3,69 @@
 }
 
 .nav-spacer {
-    top:0;
-    left:0;
-    right:0;
-    height: var(--navbar-height);
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--navbar-height);
+}
+
+.nav-link {
+  color: white;
+}
+
+.nav-button {
+  display: flex;
+  align-items: center;
+  border: 1px solid red;
+  height: 100%;
+  padding: 0.5rem;
+  color: white;
+  background-color: gray;
+}
+
+.hamburger-icon {
+  display: none;
+}
+
+.nav-links-container {
+  display: flex;
+  justify-content: flex-end;
+  height: var(--navbar-height);
+  flex: 1 1 auto;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid blue;
+}
+
+@media (max-width: 768px) {
+  .hamburger-icon {
+    display: flex; /* Show the hamburger on smaller screens */
+  }
+
+  .nav-links-container {
+    position: relative;
+    top: var(--navbar-height);
+    flex: 1 1 auto;
+  }
+
+  .nav-links-container.inactive {
+    display: none; /* Show menu when active class is added */
+  }
+
+  .nav-links-container.active {
+    display: flex; /* Show menu when active class is added */
+  }
 }
 
 .nav {
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    background-color: red;
-    height: var(--navbar-height);
-    display:flex;
-    flex-wrap:wrap;
-    flex-direction: row;
-}
-
-
-
-.navbar_button {
-    background-color: rgb(80, 80, 80);
-    color:white;
-    text-align: center;
-    height: var(--navbar-height);
-    justify-self: right;
-}
-
-.navbar_button.mobile {
-    display:none;
-}
-
-.mobile_menu {
-    display:flex;
-    flex-direction: row;
-    justify-content: right;
-    flex:1;
-}
-
-@media (width < 768px) {
-
-    .mobile_menu {
-        flex-direction: column;
-    }
-
-    .mobile_menu.closed {
-        display:none;
-    }
-
-    .mobile_menu.open {
-        display:flex;
-    }
-
-    .navbar_button.mobile {
-        display:flex;
-    }
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: black;
+  height: var(--navbar-height);
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
 }
