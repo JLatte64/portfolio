@@ -1,13 +1,13 @@
 import {Link} from "react-router";
 import "../components/styles/NavBar.css";
 import {useState} from "react";
+import {HashLink} from "react-router-hash-link";
 //import { useEffect, useRef, useState } from "react";
 //import useWindowWidth from "./useWindowWidth";
 //import NavButton from "./NavButton";
 
 export function NavBar() {
   const [mobileMenuOpen, toggleMobileMenu] = useState(false);
-  //const width = useWindowWidth();
 
   function handleMobileMenuClick() {
     toggleMobileMenu(!mobileMenuOpen);
@@ -36,18 +36,18 @@ export function NavBar() {
           </li>
           <li className="nav-button">
             <Link to="/portfolio/experience" className="nav-link">
-              Resume
+              Experience
             </Link>
           </li>
           <li className="nav-button">
             <Link to="/portfolio/about" className="nav-link">
-              About
+              My Story
             </Link>
           </li>
           <li className="nav-button">
-            <Link to="/portfolio/about" className="nav-link">
-              Contact
-            </Link>
+            <HashLink smooth to="#contact" className="nav-link">
+              Get in Touch
+            </HashLink>
           </li>
         </ul>
 

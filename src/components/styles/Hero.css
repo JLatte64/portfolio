@@ -1,17 +1,27 @@
 .hero_text > h1 {
-  color: white;
+  color: var(--text-h);
+  padding: 0;
+}
+
+.hero_text > .loc {
+  color: var(--text-h);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .hero_text > h2 {
-  color: white;
+  color: var(--accent);
+  letter-spacing: 0.25rem;
 }
 
 .hero_text {
   display: flex;
+  gap: 1rem;
   flex-direction: column;
   justify-content: flex-end;
   flex: 1 1 45%;
-  color: rgb(184, 184, 184);
+  color: var(--text);
 }
 
 .hero_photo {
@@ -19,6 +29,8 @@
   max-height: fit-content;
   align-self: flex-end;
   max-width: 20%;
+  border-radius: 0.25rem;
+  border: 3px solid var(--border);
 }
 
 .hero_content {
@@ -34,7 +46,6 @@
     align-self: flex-start;
     max-width: 35%;
     margin: auto 0;
-    padding: 5vh 0 0 0;
   }
 
   .hero_content {
@@ -52,19 +63,19 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
+  block-size: auto;
+  height: 100%;
   opacity: 0;
   transition: opacity 1.6s ease-in-out; /* Fade duration */
   filter: blur(8px) brightness(50%);
-  transform: scale(1.2);
+  transform: scale(2);
 }
 
 .hero {
   width: 100%;
   overflow: hidden;
   position: relative;
-  background-color: black;
-  padding: 20vh 10vw 20vh 10vw;
+  background-color: var(--accent-bg);
+  padding: 20vh 8vw 20vh 8vw;
+  border-bottom: var(--navbar-height) solid var(--accent-border);
 }

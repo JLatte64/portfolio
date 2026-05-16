@@ -1,0 +1,12 @@
+.overlay-button.top:hover {
+  transform: translateY(-0.5rem);
+}
+
+.overlay-button.top {
+  bottom: 2rem;
+  right: 2rem;
+  font-size: 4rem;
+  user-select: none;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}

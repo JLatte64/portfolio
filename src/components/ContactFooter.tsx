@@ -1,10 +1,10 @@
 import "../components/styles/ContactFooter.css";
-import {myinfo} from "../data/myinfo.json";
-import {IconsList} from "./IconList";
+//import {myinfo} from "../data/myinfo.json";
+//import {IconsList} from "./IconList";
 
 export const ContactFooter = () => {
   return (
-    <div className="contact-footer">
+    <section className="contact-content" id="contact">
       <h2>Contact Me</h2>
       <form target="_blank" action={"https://formsubmit.co/"} method="POST">
         <div className="form-buttons">
@@ -43,6 +43,6 @@ export const ContactFooter = () => {
           Submit Form
         </button>
       </form>
-    </div>
+    </section>
   );
 };

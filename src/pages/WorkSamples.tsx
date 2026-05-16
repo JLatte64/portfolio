@@ -2,7 +2,7 @@
 //content carousels & lightboxes.
 import Carousel from "../components/Carousel";
 import {projects} from "../data/projects.json";
-import "../components/styles/WorkSamples.css";
+import "../components/styles/page-styles/WorkSamples.css";
 
 export function WorkSamples() {
   return (

@@ -1,11 +1,12 @@
 //This is where the project widgets are displayed, along with links to the contact, resume, and About pages.
 import {ProjectCard} from "../components/ProjectCard";
 import {projects} from "../data/projects.json";
-import "../components/styles/Home.css";
-import {ContactFooter} from "../components/ContactFooter";
+import "../components/styles/page-styles/Home.css";
 import Hero from "../components/Hero";
 import landingphoto from "../assets/landingphoto.jpg";
 import {myinfo} from "../data/myinfo.json";
+import {Link} from "react-router";
+import {Experience} from "./Experience";
 //import doublerainbow from "../assets/doublerainbow.jpg";
 
 export function Home() {
@@ -13,10 +14,10 @@ export function Home() {
     <>
       <Hero />
       <main>
-        <div className="content">
-          <section id="showcase" className="section-container">
-            <h3>Work Samples</h3>
-            <div className="work_container">
+        <div className="home-content">
+          <section id="project-links">
+            <h2>Work Samples</h2>
+            <div className="project-links">
               {projects.map((_, index) =>
                 projects[index].tags?.includes("tech art") ? (
                   <ProjectCard index={index} key={index} />
@@ -24,58 +25,25 @@ export function Home() {
               )}
             </div>
           </section>
-          <section id="about" className="section-container">
-            <h3>More About Me</h3>
-            <div className="about-container">
-              <div className="about-column">
-                <p>{myinfo.about.brief}</p>
-              </div>
-              <div className="about-column">
+          <section id="about-teaser" className="about-teaser-content">
+            <h2>About Me</h2>
+            <div className="about-teaser">
+              <p className="bio">{myinfo.about.teaser}</p>
+              <div className="about-link-wrapper">
                 <img
                   src={landingphoto}
                   alt="Jordan Latta photo"
-                  className="about-photo"
+                  className="about-thumbnail"
                 />
-                <button>Click to view Resume</button>
+                <Link to="/portfolio/about" className="about-full-link">
+                  Learn More
+                </Link>
               </div>
             </div>
           </section>
+          <Experience />
         </div>
       </main>
-      <footer>
-        <ContactFooter />
-      </footer>
-
-      {/* <header className="hero">
-        
-      </header>
-      <main>
-        <section className="main-content">
-          <div className="container">
-            <h3>Selected Work</h3>
-            <ProjectWidgetsDisplay tag="selected"/>
-          </div>
-          <div className="spacer"></div>
-          <div className="container">
-            <h3>Work Snippets</h3>
-            <ProjectWidgetsDisplay tag="snapshot"/>
-          </div>
-          <div className="spacer"></div>
-          <div className="container">
-            <h3>Resume</h3>
-            <button>Download Resume (PDF)</button>
-          </div>
-        </section>
-      </main>
-      <footer className="contact">
-        <h3>Get in Touch</h3>
-        <div className="contact-content">
-          <button>LinkedIn</button>
-          <button>GitHub</button>
-          <button>Artstation</button>
-        </div>
-        
-      </footer> */}
     </>
   );
 }

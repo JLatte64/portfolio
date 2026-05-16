@@ -55,23 +55,22 @@ function Hero() {
           ))}
         </div>
 
-        <div className="hero_content">
+        <section className="hero_content">
           <img src={landingphoto} alt="" className="hero_photo" />
           <div className="hero_text">
             <h1>Jordan Latta</h1>
             <h2>Technical Artist</h2>
-            <p>
+            <p className="loc">
               <span className="material-icons">place</span>
               Pittsburgh, PA
             </p>
-            <br />
             <p>
               Specializes in real-time rendering, shader development, and
               optimization with over a decade of self-directed experience in
               Unity.
             </p>
           </div>
-        </div>
+        </section>
       </header>
     </>
   );

@@ -1,3 +1,4 @@
+import {Link} from "react-router";
 import {myinfo} from "../data/myinfo.json";
 
 export function Experience() {
@@ -11,19 +12,11 @@ export function Experience() {
 
   return (
     <>
-      <button>Click to view Resume PDF</button>
-      <div className="web-resume">
-        <h3>Experience</h3>
+      <section id="experience">
+        <h2>Experience</h2>
+        <Link to="">Resume (PDF)</Link>
         {webResumeText}
-      </div>
-      <div className="resumePreview">
-        <button>Download Resume (PDF)</button>
-        <iframe
-          src={myinfo.resume.media.src}
-          width="250px"
-          height="353px"
-        ></iframe>
-      </div>
+      </section>
     </>
   );
 }
