@@ -75,7 +75,7 @@
   width: 100%;
   overflow: hidden;
   position: relative;
-  background-color: var(--accent-bg);
+  background-color: black;
   padding: 20vh 8vw 20vh 8vw;
-  border-bottom: var(--navbar-height) solid var(--accent-border);
+  border-bottom: var(--navbar-height) solid var(--border);
 }
