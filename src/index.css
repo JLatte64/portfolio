@@ -15,7 +15,7 @@ body:has(dialog[open]) {
   --border: #757575;
   --code-bg: #838383;
   --accent: #bebebe;
-  --accent-bg: rgb(68, 189, 214);
+  --accent-bg: rgb(54, 200, 229);
   --accent-border: rgb(255, 255, 255);
   --social-bg: rgba(244, 243, 236, 0.5);
   --shadow:

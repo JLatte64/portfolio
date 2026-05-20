@@ -11,13 +11,13 @@ export function ProjectCard({index}: {index: number}) {
       }
       className="projectcard"
     >
-      <span className="card-title">{projects[index].title}</span>
       <div className="card-thumbnail-container">
         <img
           src={landingphoto}
           alt={projects[index].title + " photo"}
           className="card-thumbnail"
         ></img>
+        <span className="card-title">{projects[index].title}</span>
       </div>
     </Link>
   );

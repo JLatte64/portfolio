@@ -3,10 +3,12 @@
 }
 
 .overlay-button.top {
-  bottom: 2rem;
-  right: 2rem;
-  font-size: 4rem;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  font-size: 3rem;
   user-select: none;
   cursor: pointer;
   transition: transform 0.15s ease;
+  filter: drop-shadow(2px 2px 2px black);
+  color: var(--accent-bg);
 }

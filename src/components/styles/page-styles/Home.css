@@ -18,6 +18,10 @@
     flex: 1 1 50%;
   }
 
+  .home-content > section {
+    padding: 2rem 2rem 2rem 2rem;
+  }
+
   .home-content {
     width: 90%;
   }
@@ -28,6 +32,7 @@
   .project-links {
     flex-direction: column;
     overflow: scroll;
+    align-items: center;
   }
 
   .about-link-wrapper {
@@ -91,9 +96,7 @@
 
 .home-content > section {
   margin: 0 auto;
-  width: 95%;
   border-bottom: 2px solid var(--accent);
-  padding: 2rem 2rem 2rem 2rem;
 }
 
 .home-content {
