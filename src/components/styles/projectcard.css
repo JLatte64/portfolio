@@ -1,33 +1,31 @@
-.card-thumbnail-container {
-  overflow: hidden;
-}
-
 .card-title {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   color: white;
+  padding: 2rem;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
 .projectcard {
   display: flex;
   position: relative;
-  height: 200px;
-  width: 200px;
+  flex: 1 1 auto;
+  max-width: 95%;
   overflow: hidden;
   background-color: rgb(84, 84, 84);
 }
 
-@media screen and (max-width: 768px) {
-  .card-thumbnail {
-    height: 100%;
-    margin: 0 auto;
-  }
+.card-thumbnail-container {
+  position: relative;
+  overflow: hidden;
+}
 
-  .projectcard {
-    display: flex;
-    background-color: rgb(84, 84, 84);
-  }
+.card-thumbnail {
+  position: relative;
+  box-sizing: auto;
+  max-width: 100%;
+  margin: auto auto;
+  transform: scale(1.5);
 }

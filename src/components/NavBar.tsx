@@ -9,55 +9,76 @@ import {HashLink} from "react-router-hash-link";
 export function NavBar() {
   const [mobileMenuOpen, toggleMobileMenu] = useState(false);
 
-  function handleMobileMenuClick() {
-    toggleMobileMenu(!mobileMenuOpen);
-  }
-
   return (
     <>
+      {mobileMenuOpen ? <span className="mobile-background" /> : null}
+
       <nav className="nav">
         <Link
           to="/portfolio"
-          className="nav-button site-title"
+          className="material-icons nav-button home"
           aria-label="Home button"
         >
-          Jordan Latta
+          home
         </Link>
 
-        <ul
-          className={
-            "nav-links-container" + (mobileMenuOpen ? " active" : " inactive")
-          }
-        >
-          <li className="nav-button">
-            <Link to="/portfolio/work" className="nav-link">
-              Portfolio
-            </Link>
-          </li>
-          <li className="nav-button">
-            <Link to="/portfolio/experience" className="nav-link">
-              Experience
-            </Link>
-          </li>
-          <li className="nav-button">
-            <Link to="/portfolio/about" className="nav-link">
-              My Story
-            </Link>
-          </li>
-          <li className="nav-button">
-            <HashLink smooth to="#contact" className="nav-link">
-              Get in Touch
-            </HashLink>
-          </li>
-        </ul>
+        <span className="site-title">
+          <h3>Jordan Latta</h3>
+        </span>
 
         <button
-          className="material-icons nav-button hamburger-icon"
-          aria-label="Toggle navigation menu"
-          onClick={handleMobileMenuClick}
+          className="material-icons nav-button menu"
+          aria-hidden="true"
+          onClick={() => {
+            toggleMobileMenu(!mobileMenuOpen);
+          }}
         >
-          {"menu" + (mobileMenuOpen ? "_close" : "_open")}
+          {mobileMenuOpen ? "close" : " menu"}
         </button>
+
+        <div
+          className={
+            "nav-links-container" + (mobileMenuOpen ? " show" : " hide")
+          }
+        >
+          <Link
+            to="/portfolio/work"
+            className="nav-button"
+            onClick={() => {
+              toggleMobileMenu(false);
+            }}
+          >
+            Portfolio
+          </Link>
+          <Link
+            to="/portfolio/experience"
+            className="nav-button"
+            onClick={() => {
+              toggleMobileMenu(false);
+            }}
+          >
+            Experience
+          </Link>
+          <Link
+            to="/portfolio/about"
+            className="nav-button"
+            onClick={() => {
+              toggleMobileMenu(false);
+            }}
+          >
+            My Story
+          </Link>
+          <HashLink
+            smooth
+            to="#contact"
+            className="nav-button"
+            onClick={() => {
+              toggleMobileMenu(false);
+            }}
+          >
+            Get in Touch
+          </HashLink>
+        </div>
       </nav>
     </>
   );
