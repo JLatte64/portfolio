@@ -59,8 +59,8 @@ function Hero() {
           <img src={landingphoto} alt="" className="hero_photo" />
           <div className="hero_text">
             <h1>Jordan Latta</h1>
-            <h2>Technical Artist</h2>
-            <p className="loc">
+            <h2 className="job-title">Technical Artist</h2>
+            <p>
               <span className="material-icons">place</span>
               Pittsburgh, PA
             </p>
