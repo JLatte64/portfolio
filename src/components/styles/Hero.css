@@ -88,5 +88,4 @@
   overflow: hidden;
   position: relative;
   background-color: black;
-  border-bottom: var(--navbar-height) solid var(--border);
 }

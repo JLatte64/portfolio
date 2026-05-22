@@ -7,7 +7,14 @@ import {About} from "../pages/About";
 import {WorkSamples} from "../pages/WorkSamples";
 import TopNavButton from "./TopNavButton";
 
-export const pagePaths = [
+export const navPaths = [
+  "/portfolio",
+  "/portfolio/work",
+  "/portfolio/about",
+  "/portfolio/resume",
+];
+
+export const pageElements = [
   {path: "/portfolio", element: <Home />},
   {path: "/portfolio/work", element: <WorkSamples />},
   {path: "/portfolio/about", element: <About />},
@@ -28,6 +35,6 @@ export const router = createBrowserRouter([
         <NavBar />
       </>
     ),
-    children: pagePaths,
+    children: pageElements,
   },
 ]);

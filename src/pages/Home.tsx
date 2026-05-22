@@ -16,11 +16,13 @@ export function Home() {
       <main>
         <div className="home-content">
           <section id="project-links">
-            <h2>Work Samples</h2>
-            <div className="project-links">
+            <h2>Portfolio</h2>
+            <div className="projectcards-container">
               {projects.map((_, index) =>
                 projects[index].tags?.includes("tech art") ? (
-                  <ProjectCard index={index} key={index} />
+                  <div className="projectcard-container">
+                    <ProjectCard index={index} key={index} />
+                  </div>
                 ) : null,
               )}
             </div>

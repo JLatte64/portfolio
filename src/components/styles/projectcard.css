@@ -4,17 +4,18 @@
   left: 0;
   right: 0;
   color: white;
-  padding: 2rem;
-  background-color: rgba(0, 0, 0, 0.5);
+  margin: auto auto;
+  padding: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .projectcard {
   display: flex;
   position: relative;
   flex: 1 1 auto;
-  max-width: 95%;
   overflow: hidden;
-  background-color: rgb(84, 84, 84);
+  border: 2px solid white;
+  border-radius: 0.5rem;
 }
 
 .card-thumbnail-container {
