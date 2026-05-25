@@ -1,6 +1,6 @@
 import "../components/styles/ContactFooter.css";
-//import {myinfo} from "../data/myinfo.json";
-//import {IconsList} from "./IconList";
+import {myinfo} from "../data/myinfo.json";
+import {IconsList} from "./IconList";
 
 export function ContactFooter() {
   return (
@@ -8,7 +8,7 @@ export function ContactFooter() {
       <h2>Contact Me</h2>
       <form target="_blank" action={"https://formsubmit.co/"} method="POST">
         <div className="form-buttons">
-          {/* <IconsList clickable={true} list={myinfo.contacts} /> */}
+          <IconsList clickable={true} list={myinfo.contacts} />
         </div>
         <div className="form-inputs">
           <input

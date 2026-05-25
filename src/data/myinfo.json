@@ -16,22 +16,22 @@
     ],
     "contacts": [
       {
-        "src": "",
+        "src": "/favicon.SVG",
         "url": "mailto:jordanlatta128@gmail.com",
         "alt": "Email"
       },
       {
-        "src": "",
+        "src": "/favicon.SVG",
         "url": "tel:+17247195101",
         "alt": "Phone Number"
       },
       {
-        "src": "/images/GitHub_Invertocat_Black.SVG",
+        "src": "/favicon.SVG",
         "url": "https://github.com/JLatte64",
         "alt": "Github"
       },
       {
-        "src": "/images/InBug-Black.PNG",
+        "src": "/favicon.SVG",
         "url": "https://www.linkedin.com/in/jordan-latta",
         "alt": "LinkedIn"
       }

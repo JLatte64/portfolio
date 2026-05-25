@@ -1,8 +1,10 @@
 import {useEffect, useState} from "react";
-import "./styles/Carousel.css";
+import "./styles/MediaCarousel.css";
 import useEmblaCarousel from "embla-carousel-react";
+import type {Media} from "./ProjectContentTypes";
+import {showProjectMedia} from "./showProjectMedia";
 
-export function Carousel({srcArray}: {srcArray: Array<string>}) {
+export function MediaCarousel({srcArray}: {srcArray: Array<Media>}) {
   const [emblaRef, emblaApi] = useEmblaCarousel({loop: true});
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -16,23 +18,14 @@ export function Carousel({srcArray}: {srcArray: Array<string>}) {
     });
   });
 
-  //
-
   return (
     <div className="carousel-container">
       <div className="carousel">
         <div className="carousel-viewport" ref={emblaRef}>
           <div className="slide-container">
-            {srcArray.map((srcElement, index) => (
+            {srcArray.map((media, index) => (
               <div className="slide" key={index}>
-                <img
-                  src={srcElement}
-                  alt="Carousel Slide"
-                  onClick={() => {
-                    //setLightboxContents(srcElement);
-                    //modalRef.current?.showModal();
-                  }}
-                />
+                {showProjectMedia(media)}
               </div>
             ))}
           </div>
@@ -72,4 +65,4 @@ export function Carousel({srcArray}: {srcArray: Array<string>}) {
   );
 }
 
-export default Carousel;
+export default MediaCarousel;
