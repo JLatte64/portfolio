@@ -1,14 +1,17 @@
 import "./styles/Hero.css";
 import landingphoto from "../assets/landingphoto.jpg";
+import {heroSlides} from "../data/projects.json";
 import {myinfo} from "../data/myinfo.json";
 import {useEffect, useRef, useState} from "react";
+import type {Media} from "./ProjectContentTypes";
+import showMedia from "./showProjectMedia";
 
 function Hero() {
   const [slide, setSlide] = useState(0);
   const sliderRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const totalSlides = myinfo?.heroSlides?.length;
+    const totalSlides = heroSlides.length;
     const element = sliderRef.current;
 
     // 1. Exit early if there are no slides or no element to watch
@@ -39,36 +42,31 @@ function Hero() {
       observer.disconnect();
       clearInterval(timer);
     };
-  }, [myinfo?.heroSlides?.length]);
+  }, [heroSlides?.length]);
+
+  const heroMedia = heroSlides as Media[];
 
   return (
     <>
       <header className="hero">
         <div ref={sliderRef} className="hero-slider-container">
-          {myinfo.heroSlides.map((srcElement, index) => (
-            <img
-              key={index}
-              src={srcElement}
-              alt="Gallery Slide"
-              className={"fade-image " + (index === slide ? "active" : "")}
-            />
-          ))}
+          {heroMedia?.map((media, mediaIndex) =>
+            showMedia(
+              media,
+              "fade-image " + (mediaIndex === slide ? "active" : ""),
+            ),
+          )}
         </div>
-
         <section className="hero_content">
           <img src={landingphoto} alt="" className="hero_photo" />
           <div className="hero_text">
-            <h1>Jordan Latta</h1>
-            <h2 className="job-title">Technical Artist</h2>
+            <h1>{myinfo.name}</h1>
+            <h2 className="job-title">{myinfo.jobTitle}</h2>
             <p>
               <span className="material-icons">place</span>
-              Pittsburgh, PA
+              {myinfo.location}
             </p>
-            <p>
-              Specializes in real-time rendering, shader development, and
-              optimization with over a decade of self-directed experience in
-              Unity.
-            </p>
+            <p>{myinfo.tagline}</p>
           </div>
         </section>
       </header>

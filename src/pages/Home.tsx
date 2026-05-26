@@ -30,7 +30,7 @@ export function Home() {
           <section id="about-teaser" className="about-teaser-content">
             <h2>About Me</h2>
             <div className="about-teaser">
-              <p className="bio">{myinfo.about.teaser}</p>
+              <p className="bio">{myinfo.about.brief}</p>
               <div className="about-link-wrapper">
                 <img
                   src={landingphoto}

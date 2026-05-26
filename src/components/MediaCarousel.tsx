@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import "./styles/MediaCarousel.css";
 import useEmblaCarousel from "embla-carousel-react";
 import type {Media} from "./ProjectContentTypes";
-import {showProjectMedia} from "./showProjectMedia";
+import showMedia from "./showProjectMedia";
 
 export function MediaCarousel({srcArray}: {srcArray: Array<Media>}) {
   const [emblaRef, emblaApi] = useEmblaCarousel({loop: true});
@@ -25,7 +25,7 @@ export function MediaCarousel({srcArray}: {srcArray: Array<Media>}) {
           <div className="slide-container">
             {srcArray.map((media, index) => (
               <div className="slide" key={index}>
-                {showProjectMedia(media)}
+                {showMedia(media)}
               </div>
             ))}
           </div>

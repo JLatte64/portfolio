@@ -1,6 +1,6 @@
+import {Link} from "react-router";
 import "../components/styles/ContactFooter.css";
 import {myinfo} from "../data/myinfo.json";
-import {IconsList} from "./IconList";
 
 export function ContactFooter() {
   return (
@@ -8,7 +8,15 @@ export function ContactFooter() {
       <h2>Contact Me</h2>
       <form target="_blank" action={"https://formsubmit.co/"} method="POST">
         <div className="form-buttons">
-          <IconsList clickable={true} list={myinfo.contacts} />
+          {myinfo.contactMethods.map((contactMethod, contactIndex) => (
+            <Link to={contactMethod.url}>
+              <img
+                src={`${import.meta.env.BASE_URL}/icons/${contactMethod.iconFilename}`}
+                aria-label={contactMethod.ariaLabel}
+                key={contactIndex}
+              />
+            </Link>
+          ))}
         </div>
         <div className="form-inputs">
           <input

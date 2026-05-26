@@ -4,10 +4,13 @@ export function ProficienciesSection() {
   return (
     <section className="about-proficiencies">
       <h2>Software</h2>
-      {/* <IconsList
-          clickable={false}
-          list={myinfo.software ? myinfo.software : null}
-        /> */}
+      {/* {myinfo.software.map((icon, iconIndex) => (
+        <img
+          src={`${import.meta.env.BASE_URL}/icons/${icon.iconFilename}`}
+          aria-label={contactMethod.ariaLabel}
+          key={contactIndex}
+        />
+      ))} */}
       <h2>Skills</h2>
       {myinfo.resume.skills.map((skill) => (
         <p>{skill}</p>

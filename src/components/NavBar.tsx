@@ -16,15 +16,12 @@ export function NavBar() {
       <nav className="nav">
         <Link
           to="/portfolio"
-          className="material-icons nav-button home"
           aria-label="Home button"
+          className="nav-button home"
         >
-          home
+          <span className="material-icons">home</span>
+          <h3 className="site-title">Jordan Latta</h3>
         </Link>
-
-        <span className="site-title">
-          <h3>Jordan Latta</h3>
-        </span>
 
         <button
           className="material-icons nav-button menu"

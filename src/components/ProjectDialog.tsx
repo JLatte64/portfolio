@@ -2,9 +2,7 @@ import MediaCarousel from "./MediaCarousel";
 import type {Project} from "./ProjectContentTypes";
 import {projects} from "../data/projects.json";
 import "../components/styles/page-styles/WorkSamples.css";
-import showProjectMedia from "./showProjectMedia";
-//import {useState} from "react";
-//import showProjectMedia from "./showProjectMedia";
+import showMedia from "./showProjectMedia";
 
 export function ProjectDialog({index}: {index: number}) {
   const project = projects[index] as unknown as Project;
@@ -20,7 +18,7 @@ export function ProjectDialog({index}: {index: number}) {
           <div key={secIndex}>
             <h4>{bodySection.sectionHeading}</h4>
             {bodySection.sectionMedia.map((media, mediaIndex) => (
-              <div key={mediaIndex}>{showProjectMedia(media)}</div>
+              <div key={mediaIndex}>{showMedia(media)}</div>
             ))}
           </div>
         ))}

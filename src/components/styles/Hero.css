@@ -77,8 +77,7 @@
 
 .fade-image {
   position: absolute;
-  top: 0;
-  left: 0;
+  margin: auto auto;
   block-size: auto;
   height: 100%;
   opacity: 0;

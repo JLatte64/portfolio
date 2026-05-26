@@ -1,20 +1,33 @@
 import type {ImageContent, Media} from "./ProjectContentTypes";
 
-export function showProjectMedia(media: Media) {
+export default function showMedia(media: Media, className?: string | null) {
   switch (media?.mediaType) {
     case "image":
       const image = media?.content as ImageContent;
-      return <img src={image?.src} alt={image?.alt} />;
+      return (
+        <img
+          src={image?.src}
+          alt={image?.alt}
+          className={`base-style ${className || ""}`}
+        />
+      );
     case "imageGallery":
       const imageGallery = media?.content as ImageContent[];
       return imageGallery.map((galleryItem, galleryIndex) => (
-        <img src={galleryItem.src} alt={galleryItem.alt} key={galleryIndex} />
+        <img
+          src={galleryItem.src}
+          alt={galleryItem.alt}
+          key={galleryIndex}
+          className={`base-style ${className || ""}`}
+        />
       ));
     case "list":
       return (
         <ul>
           {(media?.content as string[]).map((listItem, listIndex) => (
-            <li key={listIndex}>{listItem}</li>
+            <li key={listIndex} className={`base-style ${className || ""}`}>
+              {listItem}
+            </li>
           ))}
         </ul>
       );
@@ -22,6 +35,7 @@ export function showProjectMedia(media: Media) {
       return (
         <iframe
           src={media?.content as string}
+          className={`base-style ${className || ""}`}
           title="YouTube video player"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -32,10 +46,16 @@ export function showProjectMedia(media: Media) {
         />
       );
     case "paragraph":
-      return <p>{media?.content as string}</p>;
+      return (
+        <p className={`base-style ${className || ""}`}>
+          {media?.content as string}
+        </p>
+      );
     default:
-      return <p>Error: Unrecognized project type.</p>;
+      return (
+        <p className={`base-style ${className || ""}`}>
+          Error: Unrecognized project type.
+        </p>
+      );
   }
 }
-
-export default showProjectMedia;
