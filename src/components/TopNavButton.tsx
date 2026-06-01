@@ -23,8 +23,8 @@ export function TopNavButton() {
 
   return (
     <HashLink
-      smooth
       to="#top"
+      smooth
       className={`material-icons overlay-button top ${isAtTop ? "hidden" : "visible"}`}
       aria-label="Back to top"
     >

@@ -4,7 +4,6 @@ import {NavBar} from "./NavBar";
 import {ContactFooter} from "./ContactFooter";
 import {Experience} from "../pages/Experience";
 import {About} from "../pages/About";
-import {WorkSamples} from "../pages/WorkSamples";
 import TopNavButton from "./TopNavButton";
 
 export const navPaths = [
@@ -16,9 +15,9 @@ export const navPaths = [
 
 export const pageElements = [
   {path: "/portfolio", element: <Home />},
-  {path: "/portfolio/work", element: <WorkSamples />},
   {path: "/portfolio/about", element: <About />},
   {path: "/portfolio/resume", element: <Experience />},
+  { path: "/portfolio/:projectName", element: <></> }
 ];
 
 export const router = createBrowserRouter([
