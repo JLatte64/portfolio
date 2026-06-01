@@ -7,6 +7,7 @@ import landingphoto from "../assets/landingphoto.jpg";
 import {myinfo} from "../data/myinfo.json";
 import {Link} from "react-router";
 import {Experience} from "./Experience";
+import ProjectDialog from "../components/ProjectDialog";
 //import doublerainbow from "../assets/doublerainbow.jpg";
 
 export function Home() {
@@ -21,7 +22,10 @@ export function Home() {
               {projects.map((_, index) =>
                 projects[index].tags?.includes("tech art") ? (
                   <div className="projectcard-container">
-                    <ProjectCard index={index} key={index} />
+                    <button className="projectcard">
+                      <ProjectCard index={index} key={index} />
+                    </button>
+                    <ProjectDialog index={index} key={index * 2 + 1} />
                   </div>
                 ) : null,
               )}

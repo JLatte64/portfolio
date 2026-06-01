@@ -13,21 +13,25 @@
 
     "contactMethods": [
       {
-        "iconFilename": "",
+        "iconType": "symbol",
+        "iconSymbolName": "email",
         "url": "mailto:jordanlatta128@gmail.com",
         "ariaLabel": "Email"
       },
       {
-        "iconFilename": "",
+        "iconType": "symbol",
+        "iconSymbolName": "phone",
         "url": "tel:+17247195101",
         "ariaLabel": "Phone Number"
       },
       {
+        "iconType": "image",
         "iconFilename": "GitHub_Invertocat_Black.svg",
         "url": "https://github.com/JLatte64",
         "ariaLabel": "Github"
       },
       {
+        "iconType": "image",
         "iconFilename": "InBug-Black.png",
         "url": "https://www.linkedin.com/in/jordan-latta",
         "ariaLabel": "LinkedIn"

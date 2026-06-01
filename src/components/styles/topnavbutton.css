@@ -2,13 +2,26 @@
   transform: translateY(-0.5rem);
 }
 
+.overlay-button.top.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.overlay-button.top.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
 .overlay-button.top {
   bottom: 1.5rem;
   right: 1.5rem;
   font-size: 3rem;
   user-select: none;
   cursor: pointer;
-  transition: transform 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease,
+    visibility 0.15s ease;
   filter: drop-shadow(2px 2px 2px black);
   color: var(--accent-bg);
 }
