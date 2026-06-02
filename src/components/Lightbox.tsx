@@ -4,7 +4,7 @@ import "../components/styles/Main.css";
 
 export function Lightbox({srcArray}: {srcArray: Array<string>}) {
   const [lightboxContents, setLightboxContents] = useState("");
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentSlide] = useState(0);
   const modalRef = useRef<HTMLDialogElement>(null);
 
   return (

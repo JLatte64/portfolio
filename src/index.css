@@ -4,10 +4,6 @@
   box-sizing: border-box;
 }
 
-body:has(dialog[open]) {
-  overflow: hidden;
-}
-
 :root {
   --text: #e2e2e2;
   --text-h: #ffffff;
@@ -53,7 +49,6 @@ body:has(dialog[open]) {
 
 body {
   margin: 0;
-  scrollbar-gutter: stable;
 }
 
 h1,

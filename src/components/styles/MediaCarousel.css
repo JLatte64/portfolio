@@ -3,6 +3,11 @@
   --carousel-indicator-size: 1rem;
 }
 
+.carousel {
+  max-width: 100%;
+  max-height: 100%;
+}
+
 .carousel-button.right {
   right: 0;
 }
@@ -68,22 +73,24 @@
   margin-left: calc(var(--slide-spacing) * -1);
 }
 
-.slide img {
+.slide > * {
   height: 100%;
-  width: auto;
   margin: auto auto;
 }
 
 .slide {
+  width: 100%;
   flex: 0 0 auto;
   min-width: 0;
   padding-left: var(--slide-spacing);
   height: var(--carousel-height);
 }
 
-.carousel {
+.carousel-viewport-container {
   position: relative;
   display: flex;
+  background-color: black;
+  height: 100%;
   --slide-spacing: 0;
   --slide-spacing-md-up: 5%;
 }

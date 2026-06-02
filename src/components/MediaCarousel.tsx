@@ -1,11 +1,11 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import "./styles/MediaCarousel.css";
 import useEmblaCarousel from "embla-carousel-react";
-import type {Media} from "./ProjectContentTypes";
+import type { Media } from "./ProjectContentTypes";
 import showMedia from "./showProjectMedia";
 
-export function MediaCarousel({srcArray}: {srcArray: Array<Media>}) {
-  const [emblaRef, emblaApi] = useEmblaCarousel({loop: true});
+export function MediaCarousel({ srcArray }: { srcArray: Array<Media> }) {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const scrollTo = (index: number) => emblaApi?.scrollTo(index);
@@ -19,8 +19,8 @@ export function MediaCarousel({srcArray}: {srcArray: Array<Media>}) {
   });
 
   return (
-    <div className="carousel-container">
-      <div className="carousel">
+    <div className="carousel">
+      <div className="carousel-viewport-container">
         <div className="carousel-viewport" ref={emblaRef}>
           <div className="slide-container">
             {srcArray.map((media, index) => (
