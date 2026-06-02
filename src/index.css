@@ -5,18 +5,13 @@
 }
 
 :root {
-  --text: #e2e2e2;
+  --text: #d3d3d3;
   --text-h: #ffffff;
-  --bg: #474747;
-  --border: #757575;
-  --code-bg: #838383;
-  --accent: #bebebe;
-  --accent-bg: rgb(54, 200, 229);
-  --accent-border: rgb(255, 255, 255);
-  --social-bg: rgba(244, 243, 236, 0.5);
+  --bg: #313131;
+  --accent: rgb(32, 185, 216);
+  --accent-bg: #5c5c5c;
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
   --sans: system-ui, "Segoe UI", Roboto, sans-serif;
   --heading: system-ui, "Segoe UI", Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
@@ -93,4 +88,11 @@ code {
   line-height: 135%;
   padding: 4px 8px;
   background: var(--code-bg);
+}
+
+@media screen and (max-width: 600px) {
+  a,
+  button {
+    border: 2px solid var(--border);
+  }
 }

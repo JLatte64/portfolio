@@ -1,12 +1,12 @@
 //This is where the project widgets are displayed, along with links to the contact, resume, and About pages.
-import {ProjectCard} from "../components/ProjectCard";
-import {projects} from "../data/projects.json";
+import { ProjectCard } from "../components/ProjectCard";
+import { projects } from "../data/projects.json";
 import "../components/styles/page-styles/Home.css";
 import Hero from "../components/Hero";
 import landingphoto from "../assets/landingphoto.jpg";
-import {myinfo} from "../data/myinfo.json";
-import {Link} from "react-router";
-import {Experience} from "./Experience";
+import { myinfo } from "../data/myinfo.json";
+import { Link } from "react-router";
+import { Experience } from "./Experience";
 import ProjectDialog from "../components/ProjectDialog";
 //import doublerainbow from "../assets/doublerainbow.jpg";
 
@@ -47,7 +47,6 @@ export function Home() {
               </div>
             </div>
           </section>
-          <Experience />
         </div>
       </main>
     </>

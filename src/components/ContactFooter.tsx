@@ -1,6 +1,6 @@
-import {Link} from "react-router";
+import { Link } from "react-router";
 import "../components/styles/ContactFooter.css";
-import {myinfo} from "../data/myinfo.json";
+import { myinfo } from "../data/myinfo.json";
 import "../components/styles/widgets.css";
 
 type ImageIcon = {
@@ -40,19 +40,19 @@ export function ContactFooter() {
   return (
     <section className="contact-content" id="contact">
       <h2>Contact Me</h2>
+      <div className="widgets-container">
+        {myinfo.contactMethods.map((contactMethod, contactIndex) => (
+          <Link
+            to={contactMethod.url}
+            className="widget-container"
+            aria-label={contactMethod.ariaLabel}
+            key={contactIndex}
+          >
+            {iconDisplay(contactMethod as unknown as Icon)}
+          </Link>
+        ))}
+      </div>
       <form target="_blank" action={"https://formsubmit.co/"} method="POST">
-        <div className="widgets-container">
-          {myinfo.contactMethods.map((contactMethod, contactIndex) => (
-            <Link
-              to={contactMethod.url}
-              className="widget-container"
-              aria-label={contactMethod.ariaLabel}
-              key={contactIndex}
-            >
-              {iconDisplay(contactMethod as unknown as Icon)}
-            </Link>
-          ))}
-        </div>
         <div className="form-inputs">
           <input
             type="text"

@@ -5,13 +5,6 @@
   }
 }
 
-/* Mobile Media Query */
-@media screen and (max-width: 600px) {
-  .widget-container {
-    border: 2px solid white;
-  }
-}
-
 .widgets-container {
   overflow: hidden;
   display: flex;

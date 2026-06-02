@@ -1,6 +1,7 @@
 @media screen and (min-width: 1200px) {
   .carousel-container {
     flex: 0 0 65%;
+    margin: auto;
   }
 
   .project-body {
@@ -22,7 +23,7 @@
   }
 }
 
-@media screen and (max-width: 1220px) {
+@media screen and (max-width: 1200px) {
   .project-body {
     width: 100%;
   }
@@ -48,6 +49,6 @@
 
 .project-body {
   background-color: var(--accent-bg);
-  color: black;
+  color: var(--text);
   padding: 1rem;
 }

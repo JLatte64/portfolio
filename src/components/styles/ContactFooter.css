@@ -2,13 +2,21 @@
   position: relative;
   display: block;
   bottom: 0;
-  margin: 0.5em;
+  background-color: var(--accent-bg);
+}
+
+.contact-content form {
+  padding: 1rem;
+}
+
+.contact-content h2 {
+  padding: 1rem 0 1rem 0;
+  margin: 0;
 }
 
 .form-button:hover {
   transform: scale(1.1);
-  filter: drop-shadow(0px 5px 3px rgba(0, 0, 0, 0.5)) brightness(110%)
-    contrast(70%);
+  filter: drop-shadow(0px 5px 3px var(--shadow)) brightness(110%) contrast(70%);
 }
 
 .form-button {
@@ -16,9 +24,9 @@
   flex: 1;
   max-width: 5rem;
   max-height: 5rem;
-  filter: drop-shadow(0px 5px 3px rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(0px 5px 3px var(--shadow));
   padding: 0.5rem;
-  border: 2px solid gray;
+  border: 2px solid var(--border);
   border-radius: 0.5rem;
 }
 
@@ -54,10 +62,9 @@
 .form-control {
   width: 100%;
   padding: 0.5rem 0.75rem;
-  border: 1px solid #ccc;
+  border: none;
   border-radius: 4px;
   font-size: 1rem;
-  box-sizing: border-box;
 }
 
 textarea.form-control {
@@ -72,9 +79,6 @@ textarea.form-control {
   cursor: pointer;
   border: none;
   border-radius: 4px;
-}
-
-.btn-dark {
-  background-color: #212529;
-  color: #fff;
+  background-color: var(--accent);
+  color: var(--text-h);
 }
