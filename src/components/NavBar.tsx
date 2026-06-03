@@ -1,7 +1,7 @@
-import {Link} from "react-router";
+import { Link } from "react-router";
 import "../components/styles/NavBar.css";
-import {useState} from "react";
-import {HashLink} from "react-router-hash-link";
+import { useState } from "react";
+import { HashLink } from "react-router-hash-link";
 //import { useEffect, useRef, useState } from "react";
 //import useWindowWidth from "./useWindowWidth";
 //import NavButton from "./NavButton";
@@ -20,7 +20,7 @@ export function NavBar() {
           className="nav-button home"
         >
           <span className="material-icons">home</span>
-          <h3 className="site-title">Jordan Latta</h3>
+          <h2 className="site-title">Jordan Latta</h2>
         </Link>
 
         <button
@@ -45,17 +45,9 @@ export function NavBar() {
               toggleMobileMenu(false);
             }}
           >
-            Portfolio
+            <h2>Portfolio</h2>
           </Link>
-          <Link
-            to="/portfolio/experience"
-            className="nav-button"
-            onClick={() => {
-              toggleMobileMenu(false);
-            }}
-          >
-            Experience
-          </Link>
+
           <Link
             to="/portfolio/about"
             className="nav-button"
@@ -63,7 +55,7 @@ export function NavBar() {
               toggleMobileMenu(false);
             }}
           >
-            My Story
+            <h2>About/Resume</h2>
           </Link>
           <HashLink
             smooth
@@ -73,7 +65,7 @@ export function NavBar() {
               toggleMobileMenu(false);
             }}
           >
-            Get in Touch
+            <h2>Contact</h2>
           </HashLink>
         </div>
       </nav>

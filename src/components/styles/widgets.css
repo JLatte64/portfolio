@@ -38,4 +38,5 @@
   max-width: 100%;
   box-sizing: auto;
   transition: filter 0.05s linear;
+  color: var(--text);
 }

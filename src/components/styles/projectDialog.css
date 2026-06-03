@@ -28,6 +28,10 @@
     width: 100%;
   }
 
+  .carousel-container {
+    margin: auto;
+  }
+
   .project-container {
     height: fit-content;
   }

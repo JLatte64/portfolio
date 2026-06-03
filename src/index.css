@@ -12,6 +12,7 @@
   --accent-bg: #5c5c5c;
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --border: #d3d3d3;
   --sans: system-ui, "Segoe UI", Roboto, sans-serif;
   --heading: system-ui, "Segoe UI", Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
@@ -91,8 +92,14 @@ code {
 }
 
 @media screen and (max-width: 600px) {
-  a,
+  a:link,
   button {
     border: 2px solid var(--border);
+    border-radius: 0.25rem;
   }
+}
+
+a:link,
+a:visited {
+  text-decoration: none;
 }

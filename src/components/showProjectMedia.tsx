@@ -1,4 +1,4 @@
-import type {ImageContent, Media} from "./ProjectContentTypes";
+import type { ImageContent, Media } from "./ProjectContentTypes";
 
 export default function showMedia(media: Media, className?: string | null) {
   switch (media?.mediaType) {
@@ -9,6 +9,7 @@ export default function showMedia(media: Media, className?: string | null) {
           src={image?.src}
           alt={image?.alt}
           className={`base-style ${className || ""}`}
+          key={image?.src}
         />
       );
     case "imageGallery":
@@ -43,11 +44,15 @@ export default function showMedia(media: Media, className?: string | null) {
           allowFullScreen
           width="100%"
           height="100%"
+          key={media?.content as string}
         />
       );
     case "paragraph":
       return (
-        <p className={`base-style ${className || ""}`}>
+        <p
+          className={`base-style ${className || ""}`}
+          key={media?.content as string}
+        >
           {media?.content as string}
         </p>
       );
