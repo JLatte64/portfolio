@@ -2,41 +2,9 @@ import { Link } from "react-router";
 import "../components/styles/ContactFooter.css";
 import { myinfo } from "../data/myinfo.json";
 import "../components/styles/widgets.css";
-
-type ImageIcon = {
-  iconType: string;
-  iconFilename?: string;
-  iconSymbolName?: never;
-  url?: string;
-  ariaLabel: string;
-};
-type SymbolIcon = {
-  iconType: string;
-  iconSymbolName?: string;
-  iconFilename?: never;
-  url?: string;
-  ariaLabel: string;
-};
-
-type Icon = ImageIcon | SymbolIcon;
+import { handleIconDisplay, type Widget } from "./Widget";
 
 export function ContactFooter() {
-  function handleIconDisplay(icon: Icon) {
-    switch (icon.iconType) {
-      case "image":
-        return (
-          <img
-            src={`${import.meta.env.BASE_URL}/icons/${icon.iconFilename}`}
-            className="widget"
-          />
-        );
-      case "symbol":
-        return (
-          <span className="material-icons widget">{icon.iconSymbolName}</span>
-        );
-    }
-  }
-
   return (
     <section className="contact-content" id="contact">
       <h2>Contact Me</h2>
@@ -48,7 +16,7 @@ export function ContactFooter() {
             aria-label={contactMethod.ariaLabel}
             key={contactIndex}
           >
-            {handleIconDisplay(contactMethod as Icon)}
+            {handleIconDisplay(contactMethod as Widget)}
           </Link>
         ))}
       </div>

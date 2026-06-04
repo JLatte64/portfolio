@@ -1,13 +1,12 @@
 @media screen and (min-width: 600px) {
   .hero-photo {
-    max-height: fit-content;
     align-self: flex-end;
-    max-width: 20%;
+    max-width: 17vw;
   }
 
   .hero-photo-text {
     flex-direction: row-reverse;
-    gap: 5rem;
+    gap: 30%;
   }
 
   .hero-text {
@@ -17,7 +16,7 @@
   }
 
   .hero {
-    padding: 20vh 8vw 20vh 8vw;
+    padding: 10vh 8vw 10vh 8vw;
   }
 }
 

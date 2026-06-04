@@ -13,25 +13,25 @@
 
     "contactMethods": [
       {
-        "iconType": "symbol",
+        "type": "symbol",
         "iconSymbolName": "email",
         "url": "mailto:jordanlatta128@gmail.com",
         "ariaLabel": "Email"
       },
       {
-        "iconType": "symbol",
+        "type": "symbol",
         "iconSymbolName": "phone",
         "url": "tel:+17247195101",
         "ariaLabel": "Phone Number"
       },
       {
-        "iconType": "image",
+        "type": "image",
         "iconFilename": "GitHub_Invertocat_Black.svg",
         "url": "https://github.com/JLatte64",
         "ariaLabel": "Github"
       },
       {
-        "iconType": "image",
+        "type": "image",
         "iconFilename": "InBug-Black.png",
         "url": "https://www.linkedin.com/in/jordan-latta",
         "ariaLabel": "LinkedIn"
@@ -69,32 +69,14 @@
     "languages": ["English", "German"],
     "software": [
       {
-        "src": "",
-        "alt": "Blender"
+        "type": "image",
+        "iconFilename": "GitHub_Invertocat_Black.svg",
+        "ariaLabel": "Blender"
       },
       {
-        "src": "",
-        "alt": "Unity"
-      },
-      {
-        "src": "",
-        "alt": "HLSL"
-      },
-      {
-        "src": "",
-        "alt": "Unreal Engine"
-      },
-      {
-        "src": "",
-        "alt": "Photoshop"
-      },
-      {
-        "src": "",
-        "alt": "Maya"
-      },
-      {
-        "src": "",
-        "alt": "C#"
+        "type": "image",
+        "iconFilename": "GitHub_Invertocat_Black.svg",
+        "ariaLabel": "Unity"
       }
     ]
   }
