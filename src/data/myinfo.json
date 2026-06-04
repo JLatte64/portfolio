@@ -1,7 +1,7 @@
 {
   "myinfo": {
     "name": "Jordan Latta",
-    "photo": "src/assets/landingphoto.jpg",
+    "photo": "herophoto.png",
     "jobTitle": "Technical Artist",
     "location": "Pittsburgh, PA",
     "tagline": "Specializes in real-time rendering, shader development, and optimization with over a decade of self-directed experience in Unity. Check out my work here!",
@@ -39,9 +39,10 @@
     ],
     "resume": {
       "tags": ["tech art"],
-      "roles": [
+      "experience": [
         {
-          "role": "Technical Artist | Mega Cat Studios (2024-Present)",
+          "companyName": "Mega Cat Studios",
+          "jobTitle": "Technical Artist",
           "desc": "Lorem ipsum dolor sit amet consectetur adipiscing elit. Adipiscing elit quisque faucibus ex sapien vitae pellentesque. Vitae pellentesque sem placerat in id cursus mi. Cursus mi pretium tellus duis convallis tempus leo. Tempus leo eu aenean sed diam urna tempor. Urna tempor pulvinar vivamus fringilla lacus nec metus.",
           "timeframe": "2024-Present"
         }

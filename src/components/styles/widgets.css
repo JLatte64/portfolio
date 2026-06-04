@@ -19,7 +19,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 10%;
+  max-width: 4rem;
   margin: 0.5rem;
   transition: transform 0.05s linear;
   border-radius: 0.25rem;
@@ -38,5 +38,4 @@
   max-width: 100%;
   box-sizing: auto;
   transition: filter 0.05s linear;
-  color: var(--text);
 }

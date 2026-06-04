@@ -21,7 +21,7 @@ type SymbolIcon = {
 type Icon = ImageIcon | SymbolIcon;
 
 export function ContactFooter() {
-  function iconDisplay(icon: Icon) {
+  function handleIconDisplay(icon: Icon) {
     switch (icon.iconType) {
       case "image":
         return (
@@ -48,7 +48,7 @@ export function ContactFooter() {
             aria-label={contactMethod.ariaLabel}
             key={contactIndex}
           >
-            {iconDisplay(contactMethod as unknown as Icon)}
+            {handleIconDisplay(contactMethod as Icon)}
           </Link>
         ))}
       </div>

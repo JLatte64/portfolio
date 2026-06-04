@@ -1,10 +1,11 @@
 import "./styles/Hero.css";
 import landingphoto from "../assets/landingphoto.jpg";
-import {heroSlides} from "../data/projects.json";
-import {myinfo} from "../data/myinfo.json";
-import {useEffect, useRef, useState} from "react";
-import type {Media} from "./ProjectContentTypes";
+import { heroSlides } from "../data/projects.json";
+import { myinfo } from "../data/myinfo.json";
+import { useEffect, useRef, useState } from "react";
+import type { Media } from "./ProjectContentTypes";
 import showMedia from "./showProjectMedia";
+import { Link } from "react-router";
 
 function Hero() {
   const [slide, setSlide] = useState(0);
@@ -32,7 +33,7 @@ function Hero() {
           }, 3000);
         }
       },
-      {threshold: 0.1}, // Triggers when at least 10% of the slider is visible
+      { threshold: 0.1 }, // Triggers when at least 10% of the slider is visible
     );
 
     observer.observe(element);
@@ -57,18 +58,27 @@ function Hero() {
             ),
           )}
         </div>
-        <section className="hero_content">
-          <img src={landingphoto} alt="" className="hero_photo" />
-          <div className="hero_text">
-            <h1>{myinfo.name}</h1>
-            <h2 className="job-title">{myinfo.jobTitle}</h2>
-            <p>
-              <span className="material-icons">place</span>
-              {myinfo.location}
-            </p>
-            <p>{myinfo.tagline}</p>
+        <div className="hero-content-container">
+          <div className="hero-photo-text">
+            <img
+              src={`${import.meta.env.BASE_URL}/photos/${myinfo.photo}`}
+              alt={`${myinfo.name} photo`}
+              className="hero-photo"
+            />
+            <div className="hero-text">
+              <h1>{myinfo.name}</h1>
+              <h2 className="job-title">{myinfo.jobTitle}</h2>
+              <p>
+                <span className="material-icons">place</span>
+                {myinfo.location}
+              </p>
+              <p>{myinfo.tagline}</p>
+            </div>
           </div>
-        </section>
+          <Link to="/portfolio/about" className="hero-about-link">
+            Learn About Me
+          </Link>
+        </div>
       </header>
     </>
   );

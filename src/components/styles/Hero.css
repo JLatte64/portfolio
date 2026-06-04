@@ -1,16 +1,16 @@
 @media screen and (min-width: 600px) {
-  .hero_photo {
+  .hero-photo {
     max-height: fit-content;
     align-self: flex-end;
     max-width: 20%;
   }
 
-  .hero_content {
+  .hero-photo-text {
     flex-direction: row-reverse;
     gap: 5rem;
   }
 
-  .hero_text {
+  .hero-text {
     gap: 1rem;
     flex-direction: column;
     flex: 1 1 45%;
@@ -22,21 +22,26 @@
 }
 
 @media screen and (max-width: 600px) {
-  .hero_photo {
+  .hero-about-link {
+    max-width: 30%;
+  }
+
+  .hero-photo {
     align-self: flex-start;
     max-width: 35%;
     margin: auto 0;
   }
 
-  .hero_content {
+  .hero-photo-text {
     flex-direction: column;
     padding: 0;
     gap: 1rem;
   }
 
-  .hero_text {
+  .hero-text {
     gap: 1rem;
     flex-direction: column;
+    padding-bottom: 0.5rem;
   }
 
   .hero {
@@ -44,30 +49,48 @@
   }
 }
 
-.hero_photo {
+.hero-about-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  color: var(--text-h);
+  border-radius: var(--border-radius);
+  text-align: center;
+  background-color: var(--accent);
+  max-width: 30%;
+}
+
+.hero-photo {
   display: flex;
   border-radius: 0.25rem;
   border: 3px solid var(--border);
 }
 
-.hero_text > * {
+.hero-text > * {
   display: flex;
   align-items: center;
+}
+
+.hero-text {
+  display: flex;
+  color: var(--text);
 }
 
 .job-title {
   color: var(--accent);
 }
 
-.hero_text {
-  display: flex;
-  color: var(--text);
-}
-
-.hero_content {
-  position: relative;
+.hero-photo-text {
   display: flex;
   text-align: start;
+}
+
+.hero-content-container {
+  position: relative;
+  display: flex;
+  gap: 1.5rem;
+  flex-direction: column;
 }
 
 .fade-image.active {

@@ -1,7 +1,7 @@
-import {HashLink} from "react-router-hash-link";
+import { HashLink } from "react-router-hash-link";
 import "./styles/overlaybutton.css";
 import "./styles/topnavbutton.css";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
 export function TopNavButton() {
   const [isAtTop, setIsAtTop] = useState<boolean>(true);
@@ -13,7 +13,7 @@ export function TopNavButton() {
     };
 
     // Listen to window scroll events
-    window.addEventListener("scroll", handleScroll, {passive: true});
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     // Clean up event listener on component unmount
     return () => {
