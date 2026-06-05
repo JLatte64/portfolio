@@ -1,5 +1,4 @@
 import "./styles/Hero.css";
-import landingphoto from "../assets/landingphoto.jpg";
 import { heroSlides } from "../data/projects.json";
 import { myinfo } from "../data/myinfo.json";
 import { useEffect, useRef, useState } from "react";
@@ -16,7 +15,7 @@ function Hero() {
     const element = sliderRef.current;
 
     // 1. Exit early if there are no slides or no element to watch
-    if (!totalSlides || !element) return;
+    if (!totalSlides || !element || !heroSlides) return;
 
     let timer: ReturnType<typeof setInterval>;
 
@@ -46,6 +45,7 @@ function Hero() {
   }, [heroSlides?.length]);
 
   const heroMedia = heroSlides as Media[];
+  const heroPhoto = myinfo?.heroPhoto as Media;
 
   return (
     <>
@@ -55,16 +55,13 @@ function Hero() {
             showMedia(
               media,
               "fade-image " + (mediaIndex === slide ? "active" : ""),
+              false,
             ),
           )}
         </div>
         <div className="hero-content-container">
           <div className="hero-photo-text">
-            <img
-              src={`${import.meta.env.BASE_URL}/photos/${myinfo.photo}`}
-              alt={`${myinfo.name} photo`}
-              className="hero-photo"
-            />
+            {showMedia(heroPhoto, "hero-photo", false)}
             <div className="hero-text">
               <h1>{myinfo.name}</h1>
               <h2 className="job-title">{myinfo.jobTitle}</h2>

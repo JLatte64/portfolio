@@ -1,4 +1,4 @@
-import ProjectDialog from "../components/ProjectDialog";
+import ProjectDialog from "../components/ProjectCard";
 import { projects } from "../data/projects.json";
 
 export function ProjectDemo() {

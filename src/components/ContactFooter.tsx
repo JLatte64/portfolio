@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import "../components/styles/ContactFooter.css";
 import { myinfo } from "../data/myinfo.json";
 import "../components/styles/widgets.css";
-import { handleIconDisplay, type Widget } from "./Widget";
+import { handleWidgetDisplay, type Widget } from "./Widget";
 
 export function ContactFooter() {
   return (
@@ -16,7 +16,7 @@ export function ContactFooter() {
             aria-label={contactMethod.ariaLabel}
             key={contactIndex}
           >
-            {handleIconDisplay(contactMethod as Widget)}
+            {handleWidgetDisplay(contactMethod as Widget)}
           </Link>
         ))}
       </div>

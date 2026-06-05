@@ -1,7 +1,20 @@
 {
   "myinfo": {
     "name": "Jordan Latta",
-    "photo": "herophoto.png",
+    "heroPhoto": {
+      "mediaType": "image",
+      "content": {
+        "src": "herophoto.png",
+        "alt": ""
+      }
+    },
+    "aboutPhoto": {
+      "mediaType": "image",
+      "content": {
+        "src": "herophoto.png",
+        "alt": ""
+      }
+    },
     "jobTitle": "Technical Artist",
     "location": "Pittsburgh, PA",
     "tagline": "Specializes in real-time rendering, shader development, and optimization with over a decade of self-directed experience in Unity. Check out my work here!",
@@ -55,10 +68,9 @@
         "Performance Optimization",
         "VFX & GPU Particle Systems"
       ],
-      "media": {
-        "type": "pdf-url",
-        "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOUMMcIXYQC7pZzQnAExOYXfYYG0gZD8UA3NiCUJGDgDSPp8S2VHav2x22tZK-iDhU2iKu6dzizUBFezmReNNKRiIdAQ4ZY6l7pZQ0MX3HyZPqhx31teTIGdmXslVAGoI&s=10&ec=121644719",
-        "alt": "Web Resume PDF"
+      "pdf": {
+        "mediaType": "pdf",
+        "content": "JordanLatta_Resume_2026.pdf"
       }
     },
     "education": {

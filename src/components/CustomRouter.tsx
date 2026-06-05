@@ -5,6 +5,7 @@ import { ContactFooter } from "./ContactFooter";
 import { About } from "../pages/About";
 import { ProjectDemo } from "../pages/ProjectDemo";
 import TopNavButton from "./TopNavButton";
+import { ResumePage } from "../pages/Resume";
 
 export const navPaths = [
   "/portfolio",
@@ -17,6 +18,7 @@ export const pageElements = [
   { path: "/portfolio", element: <Home /> },
   { path: "/portfolio/work", element: <ProjectDemo /> },
   { path: "/portfolio/about", element: <About /> },
+  { path: "/portfolio/resume", element: <ResumePage /> },
 ];
 
 export const router = createBrowserRouter([

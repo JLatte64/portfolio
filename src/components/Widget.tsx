@@ -13,7 +13,7 @@ type SymbolWidget = {
 
 export type Widget = ImageWidget | SymbolWidget;
 
-export function handleIconDisplay(widget: Widget) {
+export function handleWidgetDisplay(widget: Widget) {
   switch (widget.type) {
     case "image":
       return (

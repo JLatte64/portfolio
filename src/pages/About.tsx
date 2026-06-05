@@ -1,9 +1,13 @@
 import { Link } from "react-router";
 import "../components/styles/page-styles/about.css";
 import { myinfo } from "../data/myinfo.json";
-import { handleIconDisplay, type Widget } from "../components/Widget";
+import { handleWidgetDisplay, type Widget } from "../components/Widget";
+import showMedia from "../components/showProjectMedia";
+import type { Media } from "../components/ProjectContentTypes";
 
 export function About() {
+  const aboutPhoto = myinfo?.aboutPhoto as Media;
+
   return (
     <main>
       <div className="about-content">
@@ -12,11 +16,7 @@ export function About() {
             I'm {myinfo.name}. {myinfo.about.full}
           </p>
           <div className="about-photo-link">
-            <img
-              src={`${import.meta.env.BASE_URL}/photos/${myinfo.photo}`}
-              alt={`${myinfo.name} photo`}
-              className="about-photo"
-            />
+            {showMedia(aboutPhoto, "about-photo", false)}
             <Link to="/portfolio/resume">Download/View Resume (PDF)</Link>
           </div>
         </section>
@@ -53,7 +53,7 @@ export function About() {
             <div className="widgets-container">
               {myinfo.software.map((software, swIndex) => (
                 <div className="widget-container" key={swIndex}>
-                  {handleIconDisplay(software as Widget)}
+                  {handleWidgetDisplay(software as Widget)}
                 </div>
               ))}
             </div>
