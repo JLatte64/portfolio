@@ -1,87 +1,97 @@
-import { Link } from "react-router";
 import "../components/styles/page-styles/about.css";
 import { myinfo } from "../data/myinfo.json";
 import { handleWidgetDisplay, type Widget } from "../components/Widget";
-import showMedia from "../components/showProjectMedia";
+import showMedia, { resolveMediaSrc } from "../components/showProjectMedia";
 import type { Media } from "../components/ProjectContentTypes";
 
 export function About() {
-  const aboutPhoto = myinfo?.aboutPhoto as Media;
+  const experienceCards = myinfo.resume.roles.map((role, expIndex) => (
+    <div className="experience-card" key={expIndex}>
+      <div className="experience-card-header">
+        <h3>
+          {role.companyName === "" ? null : role.companyName} |{" "}
+          {role.jobTitle === "" ? null : role.jobTitle}
+        </h3>
+        <h3>[{role.timeframe === "" ? null : role.timeframe}]</h3>
+      </div>
+      <div className="experience-card-body">
+        <ul>
+          {role.responsibilities.map((responsibility, respIndex) => (
+            <li key={respIndex}>{responsibility}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  ));
+
+  const softwareWidgets = myinfo.software.map((software, swIndex) => (
+    <div className="widget-container" key={swIndex}>
+      {handleWidgetDisplay(software as Widget)}
+    </div>
+  ));
+
+  const educationCards = (
+    <div className="experience-card">
+      <div className="experience-card-header">
+        <h3>{myinfo.education.school}</h3>
+        <h3>[{myinfo.education.timeframe}]</h3>
+      </div>
+      <div className="experience-card-body">{myinfo.education.degree}</div>
+    </div>
+  );
+
+  if (!myinfo) {
+    return (
+      <main>
+        <p>Loading profile information...</p>
+      </main>
+    );
+  }
 
   return (
     <main>
       <div className="about-content">
         <section className="about-intro">
-          <p className="about-story">
-            I'm {myinfo.name}. {myinfo.about.full}
-          </p>
+          <p className="about-story">{myinfo.aboutDescription}</p>
           <div className="about-photo-link">
-            {showMedia(aboutPhoto, "about-photo", false)}
-            <Link to="/portfolio/resume">Download/View Resume (PDF)</Link>
+            {showMedia(myinfo.aboutPhoto as Media, "about-photo", false)}
+            <a
+              href={resolveMediaSrc(myinfo.resume.pdf.content)}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Download/View Resume (PDF)
+            </a>
           </div>
         </section>
 
         <section className="about-experience">
           <h2>Professional Experience</h2>
-          {myinfo.resume.experience.map((experience, index) => (
-            <div className="experience-card" key={index}>
-              <div className="experience-card-header">
-                <h3>
-                  {experience.companyName === ""
-                    ? null
-                    : experience.companyName}{" "}
-                  | {experience.jobTitle === "" ? null : experience.jobTitle}
-                </h3>
-                <h3>
-                  [{experience.timeframe === "" ? null : experience.timeframe}]
-                </h3>
-              </div>
-              <div className="experience-card-body">
-                <ul>
-                  <li>Job Responsibility 1</li>
-                  <li>Job Responsibility 2</li>
-                  <li>Job Responsibility 3</li>
-                  <li>Job Responsibility 4</li>
-                </ul>
-              </div>
-            </div>
-          ))}
+          {experienceCards}
         </section>
         <section className="about-skills-software">
           <div className="about-software">
             <h2>Software</h2>
-            <div className="widgets-container">
-              {myinfo.software.map((software, swIndex) => (
-                <div className="widget-container" key={swIndex}>
-                  {handleWidgetDisplay(software as Widget)}
-                </div>
-              ))}
-            </div>
+            <div className="widgets-container">{softwareWidgets}</div>
           </div>
           <div className="about-skills">
             <h2>Skills</h2>
-            {myinfo.resume.skills.map((skill) => (
-              <p>{skill}</p>
-            ))}
+            <ul>
+              {myinfo.resume.skills.map((skill, skillIndex) => (
+                <li key={skillIndex}>{skill}</li>
+              ))}
+            </ul>
           </div>
         </section>
         <section className="about-education">
           <h2>Education</h2>
-          <div className="experience-card">
-            <div className="experience-card-header">
-              <h3>{myinfo.education.school}</h3>
-              <h3>[{myinfo.education.timeframe}]</h3>
-            </div>
-            <div className="experience-card-body">
-              {myinfo.education.degree}
-            </div>
-          </div>
+          {educationCards}
         </section>
         <section className="about-languages">
           <h2>Languages</h2>
           <ul>
-            {myinfo.languages.map((language) => (
-              <li>{language}</li>
+            {myinfo.languages.map((language, langIndex) => (
+              <li key={langIndex}>{language}</li>
             ))}
           </ul>
         </section>

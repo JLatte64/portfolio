@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import type { Media } from "./ProjectContentTypes";
 import showMedia from "./showProjectMedia";
 import { Link } from "react-router";
+import { getPagePath } from "./PageRoutes";
 
 function Hero() {
   const [slide, setSlide] = useState(0);
@@ -72,7 +73,7 @@ function Hero() {
               <p>{myinfo.tagline}</p>
             </div>
           </div>
-          <Link to="/portfolio/about" className="hero-about-link">
+          <Link to={getPagePath("about")} className="hero-about-link">
             Learn About Me
           </Link>
         </div>

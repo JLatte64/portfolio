@@ -1,10 +1,10 @@
 // This is where the project widgets are displayed, along with links to the contact, resume, and About pages.
 import { ProjectCard } from "../components/ProjectCard";
 import { projects } from "../data/projects.json";
-import "../components/styles/page-styles/Home.css";
+import "../components/styles/page-styles/dashboard.css";
 import Hero from "../components/Hero";
 
-export function Home() {
+export function Dashboard() {
   return (
     <>
       <Hero />

@@ -1,9 +1,8 @@
 import type { ImageContent, Media } from "./ProjectContentTypes";
 
-function resolveMediaSrc(src: string): string {
+export function resolveMediaSrc(src: string): string {
   if (!src) return "";
 
-  // 1. If it's already a full remote link, leave it completely unchanged
   if (
     src.startsWith("http://") ||
     src.startsWith("https://") ||
@@ -11,17 +10,12 @@ function resolveMediaSrc(src: string): string {
   ) {
     return src;
   }
-
-  // 2. Remove any accidental leading slash from the dataset string
-  // (e.g., converts "/resume.pdf" or "resume.pdf" both down to "resume.pdf")
   const cleanSrc = src.startsWith("/") ? src.slice(1) : src;
 
-  // 3. Ensure the Vite BASE_URL always ends with exactly one slash
   const baseUrl = import.meta.env.BASE_URL.endsWith("/")
     ? import.meta.env.BASE_URL
     : `${import.meta.env.BASE_URL}/`;
 
-  // 4. Combine the Base URL, your target public subfolder, and the filename
   return `${baseUrl}files/${cleanSrc}`;
 }
 
@@ -32,7 +26,6 @@ export default function showMedia(
 ) {
   const mediaClass = `base-style ${className || "project-media"}`;
 
-  // Conditionally assign "lazy" or "eager" based on the boolean prop
   const loadingStrategy = shouldLazyLoad ? "lazy" : "eager";
 
   switch (media?.mediaType) {
@@ -61,7 +54,7 @@ export default function showMedia(
           alt={image?.alt || ""}
           className={mediaClass}
           key={src}
-          loading={loadingStrategy} // Dynamic strategy
+          loading={loadingStrategy}
           decoding="async"
         />
       );
@@ -76,7 +69,7 @@ export default function showMedia(
             alt={galleryItem.alt || ""}
             key={src || galleryIndex}
             className={mediaClass}
-            loading={loadingStrategy} // Dynamic strategy
+            loading={loadingStrategy}
             decoding="async"
           />
         );
@@ -85,14 +78,11 @@ export default function showMedia(
     case "video": {
       const rawUrl = media?.content as string;
 
-      // 1. Target checks for the two cloud platforms
       const isYouTube =
         rawUrl.includes("youtube.com") || rawUrl.includes("youtu.be");
       const isGoogleDrive = rawUrl.includes("://google.com");
 
-      // 2. If it matches either platform, use the iframe player
       if (isYouTube || isGoogleDrive) {
-        // Automatically swap out /view for /preview on Google Drive links
         const embedUrl =
           isGoogleDrive && rawUrl.endsWith("/view")
             ? rawUrl.replace(/\/view.*/, "/preview")
@@ -115,7 +105,6 @@ export default function showMedia(
         );
       }
 
-      // 3. Otherwise, safely fall back to a local asset or direct file URL
       const videoSrc = resolveMediaSrc(rawUrl);
       return (
         <video
@@ -134,55 +123,28 @@ export default function showMedia(
       const pdfUrl = media?.content as string;
       const src = resolveMediaSrc(pdfUrl);
 
-      // VS Code's internal browser view runs on localhost.
-      // If we are developing locally, we use object/iframe embedding.
-      // If deployed live, we use Google Viewer to avoid browser download triggers.
-      const isLocalhost =
-        window.location.hostname === "localhost" ||
-        window.location.hostname === "127.0.0.1";
-
-      if (isLocalhost) {
-        return (
-          <object
-            data={`${src}#toolbar=1`}
-            type="application/pdf"
-            className={mediaClass}
-            width="100%"
-            height="100%"
-            key={src}
-          >
-            {/* Safe internal element fallback to prevent React Router interception */}
-            <div style={{ padding: "20px", textAlign: "center" }}>
-              <p>PDF Preview paused in editor container.</p>
-              <br />
-              <a href={src} target="_blank" rel="noopener noreferrer">
-                Open Document Directly
-              </a>
-            </div>
-          </object>
-        );
-      }
-
-      const absolutePdfUrl = src.startsWith("http")
-        ? src
-        : `${window.location.origin}${src}`;
-      const googleViewerSrc = `https://google.com{encodeURIComponent(${absolutePdfUrl})}&embedded=true`;
-
       return (
-        <iframe
-          src={googleViewerSrc}
+        <object
+          data={`${src}#toolbar=1`}
+          type="application/pdf"
           className={mediaClass}
           width="100%"
           height="100%"
-          style={{ border: "none" }}
-          title="Interactive PDF Viewer"
           key={src}
-          loading={loadingStrategy}
-        />
+        >
+          {/* Safe internal element fallback to prevent React Router interception */}
+          <div style={{ padding: "20px", textAlign: "center" }}>
+            <p>PDF Preview encountered an error.</p>
+            <br />
+            <a href={src} target="_blank" rel="noopener noreferrer">
+              Open PDF Directly
+            </a>
+          </div>
+        </object>
       );
     }
 
     default:
-      return <p className={mediaClass}>Error: Unrecognized project type.</p>;
+      return <p className={mediaClass}>Error: Unrecognized content type.</p>;
   }
 }
