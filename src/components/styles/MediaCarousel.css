@@ -1,7 +1,11 @@
 :root {
-  --carousel-indicator-size: 1.5rem;
-  --carousel-height-m: calc (300px + var(--carousel-indicator-size));
-  --carousel-height: calc(500px + var(--carousel-indicator-size));
+  --carousel-indicator-size: 1.25rem;
+  --carousel-indicator-margin: 1rem;
+  --carousel-height-m: calc
+    (300px + var(--carousel-indicator-size) + var(--carousel-indicator-margin));
+  --carousel-height: calc(
+    500px + var(--carousel-indicator-size) + var(--carousel-indicator-margin)
+  );
 }
 
 @media screen and (min-width: 900px) {
@@ -54,7 +58,7 @@
   background-color: var(--text-h);
   cursor: pointer;
   transition: transform 0.15s ease;
-  padding: 0;
+  margin: var(--carousel-indicator-margin) 0 var(--carousel-indicator-margin) 0;
 }
 
 .carousel-indicator:active {
@@ -67,8 +71,6 @@
   align-items: center;
   gap: 1rem;
   width: 100%;
-  padding: 1.5rem;
-  height: calc(var(--carousel-indicator-size));
 }
 
 .carousel-button.right {

@@ -26,6 +26,10 @@
     list-style-position: outside;
     text-align: left;
   }
+
+  .project-dialog {
+    overflow: hidden;
+  }
 }
 
 @media screen and (max-width: 900px) {
@@ -46,6 +50,10 @@
   .project-container {
     height: fit-content;
   }
+
+  .project-dialog {
+    overflow-y: scroll;
+  }
 }
 
 .project-body-section {
@@ -63,11 +71,13 @@
   flex-direction: column;
   justify-content: center;
   overflow: hidden;
+  margin: auto;
 }
 
 .project-dialog {
   position: fixed;
   border: none;
+  padding: 0;
   border-radius: 0.25rem;
   color: var(--text-h);
   background-color: var(--bg);
