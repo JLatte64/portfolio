@@ -67,7 +67,7 @@
   overflow: hidden;
 }
 
-.slide-container {
+.slides-container {
   display: flex;
   touch-action: pan-y pinch-zoom;
   margin-left: calc(var(--slide-spacing) * -1);
@@ -86,7 +86,7 @@
   height: var(--carousel-height);
 }
 
-.carousel-viewport-container {
+.carousel-viewport-buttons-container {
   position: relative;
   display: flex;
   background-color: black;

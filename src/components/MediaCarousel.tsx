@@ -23,9 +23,9 @@ export function MediaCarousel({ srcArray }: { srcArray: Array<Media> }) {
 
   return (
     <div className="carousel">
-      <div className="carousel-viewport-container">
+      <div className="carousel-viewport-buttons-container">
         <div className="carousel-viewport" ref={emblaRef}>
-          <div className="slide-container">
+          <div className="slides-container">
             {srcArray.map((media, index) => (
               <div className="slide" key={index}>
                 {showMedia(media)}
