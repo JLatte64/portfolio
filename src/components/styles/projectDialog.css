@@ -1,0 +1,94 @@
+@media screen and (min-width: 1000px) {
+  .project-body {
+    flex: 1;
+    height: 100%;
+    overflow-y: scroll;
+  }
+
+  .carousel-container {
+    width: 100%;
+  }
+
+  .carousel-title-container {
+    width: 65%;
+    height: 100%;
+  }
+
+  .project-container {
+    height: calc(100vh - var(--navbar-height));
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .project-media {
+    list-style-position: outside;
+    text-align: left;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .project-body {
+    width: 100%;
+  }
+
+  .carousel-container {
+    width: 100%;
+  }
+
+  .carousel-title-container {
+    height: fit-content;
+    width: 100%;
+  }
+
+  .project-container {
+    height: fit-content;
+  }
+}
+
+.project-body-section {
+  width: 100%;
+  padding: 1rem;
+}
+
+.project-body {
+  background-color: var(--accent-bg);
+  color: var(--text);
+}
+
+.carousel-title-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.project-dialog {
+  position: fixed;
+  border: none;
+  border-radius: 0.25rem;
+  color: var(--text-h);
+  background-color: var(--bg);
+}
+
+.project-container {
+  width: 100%;
+}
+
+.project-close-button > * {
+  font-weight: bold;
+  font-size: 2rem;
+  color: var(--text-h);
+}
+
+.project-close-button {
+  position: fixed;
+  background-color: var(--accent);
+  padding: 0;
+  border: none;
+  border-radius: 1rem;
+  display: flex;
+  bottom: 1rem;
+  right: 1rem;
+  margin: 1rem;
+  padding: 0.25rem;
+}

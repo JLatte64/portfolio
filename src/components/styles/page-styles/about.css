@@ -1,44 +1,54 @@
 /* Desktop Query */
 
 @media screen and (min-width: 600px) {
-  .about-full-content {
-    width: 90%;
-  }
-
-  .about-software {
+  .about-skills-software > * {
     flex: 1;
   }
 
-  .about-skills {
-    flex: 1;
+  .about-intro > * {
+    flex: 1 1 50%;
+  }
+
+  .about-intro {
+    flex-direction: row;
+  }
+
+  .role-responsibility {
+    font-weight: bold;
   }
 }
 
 /* Mobile Query */
 @media screen and (max-width: 600px) {
-  .about-full-content {
-    width: 100%;
-  }
-
-  .about-software {
+  .about-skills-software > * {
     flex: 1 1 100%;
   }
 
-  .about-skills {
+  .about-intro > * {
     flex: 1 1 100%;
+  }
+
+  .about-intro {
+    flex-direction: column-reverse;
+  }
+
+  .role-responsibility {
+    font-weight: normal;
   }
 }
 
-.about-languages {
-  text-align: center;
-  list-style-position: inside;
+.role-responsibility {
+  font-size: 1rem;
+  padding: 0;
+  margin: 0;
 }
 
-.about-software {
-  max-width: 100%;
+.role-title {
+  padding: 0;
+  margin: 0;
 }
 
-.about-skills {
+.about-skills-software > * {
   max-width: 100%;
 }
 
@@ -47,64 +57,25 @@
   flex-wrap: wrap;
 }
 
-.experience-card:hover {
-  transform: scale(1.005);
-}
-
-.experience-card > * {
-  padding: 0.25rem;
-}
-
-.experience-card {
-  background-color: var(--accent-bg);
-  margin: auto;
-  padding: 0.5rem;
-  max-width: 100%;
-  border-radius: 0.25rem;
-  transition: transform 0.08s linear;
-}
-
-.experience-card-header > * {
-  margin: 0.5rem;
-}
-
-.experience-card-header {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  color: var(--text-h);
-  line-height: 1rem;
-}
-
-.experience-card-body {
-  display: flex;
-  border-left: 1vw solid var(--accent);
-  border-radius: 0.25rem;
-  color: var(--text);
-  text-indent: 1rem;
-}
-
 .about-photo {
-  max-width: 35%;
+  max-width: 35vw;
   margin: auto;
-}
-
-.about-story {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1 1 50%;
 }
 
 .about-photo-link {
-  flex: 1 1 50%;
-  display: flex;
   flex-direction: column;
+}
+
+.about-intro > * {
+  justify-content: center;
+  align-items: center;
+  display: flex;
   gap: 1rem;
 }
 
 .about-intro {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .about-content {

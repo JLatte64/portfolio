@@ -91,24 +91,3 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
-
-a:link:hover,
-button:hover,
-a:hover {
-  filter: brightness(110%);
-}
-
-a:link,
-button,
-a:visited {
-  border-radius: var(--border-radius);
-  color: var(--text-h);
-  background-color: var(--accent);
-  text-decoration: none;
-  padding: 0.5rem;
-  filter: brightness(100%);
-  transition: filter 0.07s linear;
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10+ and Edge */
-  user-select: none;
-}

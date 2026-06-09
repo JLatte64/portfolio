@@ -84,6 +84,11 @@
   align-items: center;
   justify-content: center;
   border: none;
+  filter: brightness(100%);
+}
+
+.nav-button:hover {
+  filter: brightness(110%);
 }
 
 .nav-button.home,

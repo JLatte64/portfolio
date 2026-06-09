@@ -1,7 +1,8 @@
 import MediaCarousel from "./MediaCarousel";
 import showMedia from "./showProjectMedia";
-import "../components/styles/projectcard.css";
-import "../components/styles/projectmedia.css";
+import "../components/styles/projectCard.css";
+import "../components/styles/projectDialog.css";
+import "../components/styles/projectMedia.css";
 import { useState, useRef } from "react";
 import { projects } from "../data/projects.json";
 
@@ -33,17 +34,16 @@ export function ProjectCard({ index }: { index: number }) {
   return (
     <div className="projectcard-container">
       <button className="projectcard" onClick={handleOpen}>
-        <div className="card-thumbnail-container">
-          <img
-            src={projects[index].thumbnail.src}
-            alt={projects[index].thumbnail.alt}
-            className="card-thumbnail"
-          ></img>
-          <span className="card-title">{projects[index].title}</span>
-        </div>
+        <img
+          src={projects[index].thumbnail.src}
+          alt={projects[index].thumbnail.alt}
+          className="projectcard-thumbnail"
+        ></img>
+        <span className="projectcard-title">{projects[index].title}</span>
       </button>
 
       <dialog
+        className="project-dialog"
         ref={dialogRef}
         onClose={handleNativeClose} // Fires automatically on ESC key or browser-driven close
         onClick={handleBackdropClick} // Fires when clicking the outer empty space
@@ -51,9 +51,11 @@ export function ProjectCard({ index }: { index: number }) {
         {/* Only mount deep sub-trees when isOpen is true */}
         {isOpen && project && (
           <div className="project-container">
-            <div className="carousel-container">
+            <div className="carousel-title-container">
               <h3 className="project-title">{project.title}</h3>
-              <MediaCarousel srcArray={project.showcaseMedia} />
+              <div className="carousel-container">
+                <MediaCarousel srcArray={project.showcaseMedia} />
+              </div>
             </div>
             <div className="project-body">
               {project.bodySections.map((bodySection, secIndex) => (
@@ -67,8 +69,8 @@ export function ProjectCard({ index }: { index: number }) {
                 </div>
               ))}
             </div>
-            <button className="close-btn" onClick={handleClose}>
-              Close
+            <button className="project-close-button" onClick={handleClose}>
+              <span className="material-icons">close</span>
             </button>
           </div>
         )}

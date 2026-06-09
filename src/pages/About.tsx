@@ -1,4 +1,5 @@
 import "../components/styles/page-styles/about.css";
+import "../components/styles/aboutCard.css";
 import { myinfo } from "../data/myinfo.json";
 import { handleWidgetDisplay, type Widget } from "../components/Widget";
 import showMedia, { resolveMediaSrc } from "../components/showProjectMedia";
@@ -6,15 +7,17 @@ import type { Media } from "../components/ProjectContentTypes";
 
 export function About() {
   const experienceCards = myinfo.resume.roles.map((role, expIndex) => (
-    <div className="experience-card" key={expIndex}>
-      <div className="experience-card-header">
-        <h3>
+    <div className="about-card" key={expIndex}>
+      <div className="about-card-header">
+        <h3 className="role-title">
           {role.companyName === "" ? null : role.companyName} |{" "}
           {role.jobTitle === "" ? null : role.jobTitle}
         </h3>
-        <h3>[{role.timeframe === "" ? null : role.timeframe}]</h3>
+        <h3 className="role-responsibility">
+          [{role.timeframe === "" ? null : role.timeframe}]
+        </h3>
       </div>
-      <div className="experience-card-body">
+      <div className="about-card-body">
         <ul>
           {role.responsibilities.map((responsibility, respIndex) => (
             <li key={respIndex}>{responsibility}</li>
@@ -31,12 +34,16 @@ export function About() {
   ));
 
   const educationCards = (
-    <div className="experience-card">
-      <div className="experience-card-header">
+    <div className="about-card">
+      <div className="about-card-header">
         <h3>{myinfo.education.school}</h3>
         <h3>[{myinfo.education.timeframe}]</h3>
       </div>
-      <div className="experience-card-body">{myinfo.education.degree}</div>
+      <div className="about-card-body">
+        <ul>
+          <li>{myinfo.education.degree}</li>
+        </ul>
+      </div>
     </div>
   );
 

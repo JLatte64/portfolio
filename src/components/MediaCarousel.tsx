@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import "./styles/MediaCarousel.css";
+import "./styles/mediaCarousel.css";
 import useEmblaCarousel from "embla-carousel-react";
 import type { Media } from "./ProjectContentTypes";
 import showMedia from "./showProjectMedia";
 
 export function MediaCarousel({ srcArray }: { srcArray: Array<Media> }) {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    align: "center",
+  });
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const scrollTo = (index: number) => emblaApi?.scrollTo(index);
