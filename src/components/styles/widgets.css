@@ -26,6 +26,8 @@
   border-radius: 0.25rem;
   aspect-ratio: 1 / 1;
   container-type: inline-size;
+  overflow: hidden;
+  background-color: var(--accent);
 }
 
 .widget-container:hover {
@@ -39,4 +41,6 @@
   max-width: 100%;
   box-sizing: auto;
   transition: filter 0.05s linear;
+  text-decoration: none;
+  color: var(--text-h);
 }
