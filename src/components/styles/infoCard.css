@@ -7,6 +7,7 @@
 }
 
 .about-card-header > * > h3 {
+  color: var(--text-h);
   margin: 0;
   padding: 0;
 }
