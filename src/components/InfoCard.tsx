@@ -16,7 +16,7 @@ export function InfoCard({
   return (
     <Card className={className} {...props}>
       <div className={`${className}-card-header`}>
-        <h3 className={`${className}-card-title`}>{headerContent}</h3>
+        <div className={`${className}-card-title`}>{headerContent}</div>
       </div>
       <div className={`${className}-card-body`}>{bodyContent}</div>
     </Card>

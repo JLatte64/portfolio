@@ -5,8 +5,8 @@ export const ExperienceCardContent: Array<InfoCardProps> =
   myinfo.resume.roles.map((role, index) => ({
     headerContent: (
       <>
-        {`${role.companyName} | ${role.jobTitle}`}
-        {`[${role.timeframe}]`}
+        <h3>{`${role.companyName} | ${role.jobTitle}`}</h3>
+        <h3>{`[${role.timeframe}]`}</h3>
       </>
     ),
     bodyContent: (

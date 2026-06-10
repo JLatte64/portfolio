@@ -5,8 +5,8 @@ export const EducationCardContent: Array<InfoCardProps> = [
   {
     headerContent: (
       <>
-        {myinfo.education.school}
-        {`[${myinfo.education.timeframe}]`}
+        <h3>{myinfo.education.school}</h3>
+        <h3>{`[${myinfo.education.timeframe}]`}</h3>
       </>
     ),
     bodyContent: (
