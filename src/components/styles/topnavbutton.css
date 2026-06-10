@@ -3,7 +3,5 @@
   bottom: 0.5rem;
   right: 0.5rem;
   background-color: transparent;
-  transition:
-    visibility 0.15s ease,
-    opacity 0.15s ease;
+  transition: opacity 0.15s ease;
 }
