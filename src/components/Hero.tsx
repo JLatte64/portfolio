@@ -5,45 +5,33 @@ import { useEffect, useRef, useState } from "react";
 import type { Media } from "./ProjectContentTypes";
 import showMedia from "./ShowProjectMedia";
 import { Link } from "react-router";
-import { getPagePath } from "./PageRoutes";
+import { getPagePath } from "./GetPagePath";
+import "./styles/buttons.css";
 
 function Hero() {
   const [slide, setSlide] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
   const sliderRef = useRef<HTMLDivElement>(null);
+  const totalSlides = heroSlides?.length || 0;
 
   useEffect(() => {
-    const totalSlides = heroSlides.length;
-    const element = sliderRef.current;
-
-    // 1. Exit early if there are no slides or no element to watch
-    if (!totalSlides || !element || !heroSlides) return;
-
-    let timer: ReturnType<typeof setInterval>;
-
-    // 2. Setup observer to detect if slider is on screen
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // Clear any existing timer first
-        clearInterval(timer);
-
-        // 3. Only start the interval if the slider is visible
-        if (entry.isIntersecting) {
-          timer = setInterval(() => {
-            setSlide((prev) => (prev + 1) % totalSlides);
-          }, 3000);
-        }
-      },
-      { threshold: 0.1 }, // Triggers when at least 10% of the slider is visible
+    if (!sliderRef.current) return;
+    const obs = new IntersectionObserver(
+      ([el]) => setIsVisible(el.isIntersecting),
+      { threshold: 0.1 },
     );
+    obs.observe(sliderRef.current);
+    return () => obs.disconnect();
+  }, []);
 
-    observer.observe(element);
-
-    // 4. Cleanup both the observer and the timer on unmount/change
-    return () => {
-      observer.disconnect();
-      clearInterval(timer);
-    };
-  }, [heroSlides?.length]);
+  useEffect(() => {
+    if (!isVisible || totalSlides <= 1) return;
+    const timer = setInterval(
+      () => setSlide((p) => (p + 1) % totalSlides),
+      3000,
+    );
+    return () => clearInterval(timer);
+  }, [isVisible, totalSlides]);
 
   const heroMedia = heroSlides as Media[];
   const heroPhoto = myinfo?.heroPhoto as Media;
@@ -73,7 +61,7 @@ function Hero() {
               <p>{myinfo.tagline}</p>
             </div>
           </div>
-          <Link to={getPagePath("about")} className="hero-about-link">
+          <Link to={getPagePath("about")} className="hero-about-link button">
             Learn About Me
           </Link>
         </div>

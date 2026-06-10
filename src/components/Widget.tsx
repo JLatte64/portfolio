@@ -18,7 +18,7 @@ export function handleWidgetDisplay(widget: Widget) {
     case "image":
       return (
         <img
-          src={`${import.meta.env.BASE_URL}/icons/${widget.iconFilename}`}
+          src={`${import.meta.env.BASE_URL}icons/${widget.iconFilename}`}
           aria-label={widget.ariaLabel}
           className="widget"
         />

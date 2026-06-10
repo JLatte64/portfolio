@@ -23,6 +23,7 @@ export default function showMedia(
   media: Media,
   className?: string | null,
   shouldLazyLoad: boolean = true,
+  mediaIndex?: number,
 ) {
   const mediaClass = `base-style ${className || "project-media"}`;
 
@@ -32,7 +33,10 @@ export default function showMedia(
     case "paragraph": {
       const text = media?.content as string;
       return (
-        <p className={mediaClass} key={text}>
+        <p
+          className={mediaClass}
+          key={`${media.mediaType}-${mediaIndex}-${text}`}
+        >
           {text}
         </p>
       );
@@ -41,7 +45,11 @@ export default function showMedia(
       return (
         <ul className={mediaClass}>
           {(media?.content as string[]).map((listItem, listIndex) => (
-            <li key={listIndex}>{listItem}</li>
+            <li
+              key={`${media.mediaType}-${mediaIndex}-${listIndex}-${listItem}`}
+            >
+              {listItem}
+            </li>
           ))}
         </ul>
       );
@@ -53,7 +61,7 @@ export default function showMedia(
           src={src}
           alt={image?.alt || ""}
           className={mediaClass}
-          key={src}
+          key={`${media.mediaType}-${mediaIndex}-${src}`}
           loading={loadingStrategy}
           decoding="async"
         />
@@ -67,7 +75,7 @@ export default function showMedia(
           <img
             src={src}
             alt={galleryItem.alt || ""}
-            key={src || galleryIndex}
+            key={`${media.mediaType}-${mediaIndex}-${galleryIndex}-${src}`}
             className={mediaClass}
             loading={loadingStrategy}
             decoding="async"
@@ -99,7 +107,7 @@ export default function showMedia(
             allowFullScreen
             width="100%"
             height="100%"
-            key={embedUrl}
+            key={`${media.mediaType}-${mediaIndex}-${embedUrl}`}
             loading={loadingStrategy}
           />
         );
@@ -130,7 +138,7 @@ export default function showMedia(
           className={mediaClass}
           width="100%"
           height="100%"
-          key={src}
+          key={`${media.mediaType}-${mediaIndex}-${src}`}
         >
           {/* Safe internal element fallback to prevent React Router interception */}
           <div style={{ padding: "20px", textAlign: "center" }}>

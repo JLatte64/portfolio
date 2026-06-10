@@ -1,8 +1,9 @@
 import "../components/styles/page-styles/about.css";
 import "../components/styles/aboutCard.css";
+import "../components/styles/buttons.css";
 import { myinfo } from "../data/myinfo.json";
 import { handleWidgetDisplay, type Widget } from "../components/Widget";
-import showMedia, { resolveMediaSrc } from "../components/showProjectMedia";
+import showMedia, { resolveMediaSrc } from "../components/ShowProjectMedia";
 import type { Media } from "../components/ProjectContentTypes";
 
 export function About() {
@@ -66,6 +67,7 @@ export function About() {
               href={resolveMediaSrc(myinfo.resume.pdf.content)}
               target="_blank"
               rel="noopener noreferrer"
+              className="button"
             >
               Download/View Resume (PDF)
             </a>

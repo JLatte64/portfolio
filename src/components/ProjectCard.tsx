@@ -1,5 +1,5 @@
 import MediaCarousel from "./MediaCarousel";
-import showMedia from "./showProjectMedia";
+import showMedia from "./ShowProjectMedia";
 import "../components/styles/projectCard.css";
 import "../components/styles/projectDialog.css";
 import "../components/styles/projectMedia.css";
@@ -63,7 +63,13 @@ export function ProjectCard({ index }: { index: number }) {
                   <h4>{bodySection.sectionHeading}</h4>
                   <div className="media-container">
                     {bodySection.sectionMedia.map((media, mediaIndex) => (
-                      <div key={mediaIndex}>{showMedia(media)}</div>
+                      <div
+                        key={
+                          secIndex * project.bodySections.length + mediaIndex
+                        }
+                      >
+                        {showMedia(media)}
+                      </div>
                     ))}
                   </div>
                 </div>

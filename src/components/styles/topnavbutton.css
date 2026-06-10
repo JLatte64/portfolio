@@ -1,29 +1,9 @@
-.overlay-button.top:hover {
-  transform: translateY(-0.5rem);
-}
-
-.overlay-button.top.visible {
-  opacity: 1;
-  visibility: visible;
-}
-
-.overlay-button.top.hidden {
-  opacity: 0;
-  visibility: hidden;
-}
-
-.overlay-button.top {
-  bottom: 1.5rem;
-  right: 1.5rem;
-  font-size: 3.5rem;
-  user-select: none;
-  cursor: pointer;
-  text-decoration: none;
-  padding: 0;
-  margin: 0;
+.top-nav-button {
+  font-size: 3rem;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  background-color: transparent;
   transition:
-    transform 0.15s ease,
-    opacity 0.15s ease,
-    visibility 0.15s ease;
-  filter: drop-shadow(2px 2px 2px var(--shadow));
+    visibility 0.15s ease,
+    opacity 0.15s ease;
 }

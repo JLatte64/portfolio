@@ -1,22 +1,12 @@
-:root {
-  --carousel-indicator-size: 1.25rem;
-  --carousel-indicator-margin: 1rem;
-  --carousel-height-m: calc
-    (300px + var(--carousel-indicator-size) + var(--carousel-indicator-margin));
-  --carousel-height: calc(
-    500px + var(--carousel-indicator-size) + var(--carousel-indicator-margin)
-  );
-}
-
 @media screen and (min-width: 900px) {
   .carousel-viewport {
-    height: calc(var(--carousel-height) - 1rem);
+    max-height: 100%;
   }
 }
 
 @media screen and (max-width: 900px) {
   .carousel-viewport {
-    height: calc(var(--carousel-height-m) - 1rem);
+    max-height: 350px;
   }
 }
 
@@ -50,15 +40,15 @@
 }
 
 .carousel-indicator {
-  border-radius: var(--carousel-indicator-size);
-  flex: 0 0 var(--carousel-indicator-size);
-  width: var(--carousel-indicator-size);
-  height: var(--carousel-indicator-size);
+  border-radius: 1.25rem;
+  flex: 0 0 1.25rem;
+  width: 1.25rem;
+  height: 1.25rem;
   border: none;
   background-color: var(--text-h);
   cursor: pointer;
   transition: transform 0.15s ease;
-  margin: var(--carousel-indicator-margin) 0 var(--carousel-indicator-margin) 0;
+  margin: 1rem 0 1rem 0;
 }
 
 .carousel-indicator:active {
@@ -87,7 +77,7 @@
   border: none;
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: bold;
   height: 100%;
   width: auto;
@@ -126,5 +116,5 @@
 
 .carousel {
   width: 100%;
-  height: auto;
+  height: 100%;
 }

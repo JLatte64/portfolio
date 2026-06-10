@@ -7,12 +7,11 @@
 
   .carousel-container {
     width: 100%;
-    height: var(--carousel-height);
+    height: 100%;
   }
 
   .carousel-title-container {
     width: 65%;
-    height: 100%;
   }
 
   .project-container {
@@ -39,11 +38,10 @@
 
   .carousel-container {
     width: 100%;
-    height: var(--carousel-height-m);
+    height: 100%;
   }
 
   .carousel-title-container {
-    height: fit-content;
     width: 100%;
   }
 
@@ -67,11 +65,12 @@
 }
 
 .carousel-title-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
-  margin: auto;
+  margin: auto auto;
+  height: fit-content;
+}
+
+.project-dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .project-dialog {
@@ -100,8 +99,8 @@
   border: none;
   border-radius: 1rem;
   display: flex;
-  bottom: 1rem;
-  right: 1rem;
+  top: 1rem;
+  left: 1rem;
   margin: 1rem;
   padding: 0.25rem;
 }

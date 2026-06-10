@@ -1,8 +1,7 @@
 import { Link } from "react-router";
 import "../components/styles/NavBar.css";
 import { useState } from "react";
-import { HashLink } from "react-router-hash-link";
-import { getPagePath } from "./PageRoutes";
+import { getPagePath } from "./GetPagePath";
 
 export function NavBar() {
   const [mobileMenuOpen, toggleMobileMenu] = useState(false);
@@ -15,14 +14,14 @@ export function NavBar() {
         <Link
           to={getPagePath("home")}
           aria-label="Home button"
-          className="nav-button home"
+          className="button nav-button home"
         >
           <span className="material-icons">home</span>
           <h2 className="site-title">Portfolio - Jordan Latta</h2>
         </Link>
 
         <button
-          className="material-icons nav-button menu"
+          className="button material-icons nav-button menu"
           aria-hidden="true"
           onClick={() => {
             toggleMobileMenu(!mobileMenuOpen);
@@ -38,23 +37,22 @@ export function NavBar() {
         >
           <Link
             to={getPagePath("about")}
-            className="nav-button"
+            className="button nav-button"
             onClick={() => {
               toggleMobileMenu(false);
             }}
           >
             <h2>Resume / About</h2>
           </Link>
-          <HashLink
-            smooth
-            to="#contact"
-            className="nav-button"
+          <a
+            href="#contact"
+            className="button nav-button"
             onClick={() => {
               toggleMobileMenu(false);
             }}
           >
             <h2>Contact</h2>
-          </HashLink>
+          </a>
         </div>
       </nav>
     </>

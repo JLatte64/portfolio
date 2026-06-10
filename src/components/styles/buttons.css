@@ -1,0 +1,47 @@
+a:visited {
+  text-decoration: none;
+}
+
+.button > * {
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+}
+
+.button:hover {
+  filter: brightness(1.1);
+}
+
+.overlay-button {
+  position: fixed;
+  filter: drop-shadow(0px 2px 5px var(--shadow));
+}
+
+.icon-button {
+}
+
+.symbol-button {
+}
+
+.button {
+  color: var(--text-h);
+  border: none;
+  border-radius: var(--border-radius);
+  background-color: var(--accent);
+
+  text-align: center;
+  text-justify: auto;
+  text-decoration: none;
+  font-weight: bold;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+
+  user-select: none;
+  -webkit-user-select: none; /* Safari, Chrome, Opera, iOS, Android */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge (Legacy) */
+  cursor: pointer;
+}

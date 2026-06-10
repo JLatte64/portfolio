@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import "../components/styles/ContactFooter.css";
 import { myinfo } from "../data/myinfo.json";
 import "../components/styles/widgets.css";
+import "./styles/buttons.css";
 import { handleWidgetDisplay, type Widget } from "./Widget";
 
 export function ContactFooter() {
@@ -20,32 +21,37 @@ export function ContactFooter() {
           </Link>
         ))}
       </div>
-      <form target="_blank" action={"https://formsubmit.co/"} method="POST">
-        <div className="form-inputs">
+      <form
+        target="_blank"
+        action={"https://formsubmit.co/"}
+        method="POST"
+        className="form"
+      >
+        <div className="form-inputs-container">
           <input
             type="text"
             name="name"
-            className="form-control"
+            className="form-input"
             placeholder="Full Name"
             required
           />
           <input
             type="text"
             name="subject"
-            className="form-control"
+            className="form-input"
             placeholder="Subject Line"
             required
           />
           <textarea
             placeholder="Your Message"
-            className="form-control"
+            className="form-input"
             name="message"
             required
           />
+          <button type="submit" className="button form-button">
+            Send Message
+          </button>
         </div>
-        <button type="submit" className="btn btn-dark btn-block">
-          Send Message
-        </button>
       </form>
     </section>
   );

@@ -1,9 +1,8 @@
-import { HashLink } from "react-router-hash-link";
-import "./styles/overlaybutton.css";
-import "./styles/topnavbutton.css";
 import { useEffect, useState } from "react";
+import "./styles/buttons.css";
+import "./styles/topNavButton.css";
 
-export function TopNavButton() {
+export default function TopNavButton() {
   const [isAtTop, setIsAtTop] = useState<boolean>(true);
 
   useEffect(() => {
@@ -22,15 +21,12 @@ export function TopNavButton() {
   }, []);
 
   return (
-    <HashLink
-      to="#top"
-      smooth
-      className={`material-icons overlay-button top ${isAtTop ? "hidden" : "visible"}`}
+    <a
+      href="#top"
+      className={`material-icons button overlay-button top-nav-button ${isAtTop ? "hidden" : "visible"}`}
       aria-label="Back to top"
     >
       arrow_circle_up
-    </HashLink>
+    </a>
   );
 }
-
-export default TopNavButton;
