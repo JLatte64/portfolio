@@ -1,7 +1,7 @@
 import { Card } from "./Card";
 import { projects } from "../data/projects.json";
 import ProjectModal from "./ProjectModal";
-import "../components/styles/projectCard.css";
+import "./styles/projectCard.css";
 import { useRef, useState } from "react";
 
 export function ProjectCard({ index }: { index: number }) {
