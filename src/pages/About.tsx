@@ -1,53 +1,15 @@
 import "../components/styles/page-styles/about.css";
-import "../components/styles/aboutCard.css";
+
 import "../components/styles/buttons.css";
-import { myinfo } from "../data/myinfo.json";
 import { handleWidgetDisplay, type Widget } from "../components/Widget";
-import showMedia, { resolveMediaSrc } from "../components/ShowProjectMedia";
+import displayMedia, { resolveMediaSrc } from "../components/DisplayMedia";
 import type { Media } from "../components/ProjectContentTypes";
+import InfoCardGrid from "../components/InfoCardGrid";
+import ExperienceCardContent from "../components/ExperienceCardContent";
+import { myinfo } from "../data/myinfo.json";
+import EducationCardContent from "../components/EducationCardContent";
 
 export function About() {
-  const experienceCards = myinfo.resume.roles.map((role, expIndex) => (
-    <div className="about-card" key={expIndex}>
-      <div className="about-card-header">
-        <h3 className="role-title">
-          {role.companyName === "" ? null : role.companyName} |{" "}
-          {role.jobTitle === "" ? null : role.jobTitle}
-        </h3>
-        <h3 className="role-responsibility">
-          [{role.timeframe === "" ? null : role.timeframe}]
-        </h3>
-      </div>
-      <div className="about-card-body">
-        <ul>
-          {role.responsibilities.map((responsibility, respIndex) => (
-            <li key={respIndex}>{responsibility}</li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  ));
-
-  const softwareWidgets = myinfo.software.map((software, swIndex) => (
-    <div className="widget-container" key={swIndex}>
-      {handleWidgetDisplay(software as Widget)}
-    </div>
-  ));
-
-  const educationCards = (
-    <div className="about-card">
-      <div className="about-card-header">
-        <h3>{myinfo.education.school}</h3>
-        <h3>[{myinfo.education.timeframe}]</h3>
-      </div>
-      <div className="about-card-body">
-        <ul>
-          <li>{myinfo.education.degree}</li>
-        </ul>
-      </div>
-    </div>
-  );
-
   if (!myinfo) {
     return (
       <main>
@@ -56,13 +18,26 @@ export function About() {
     );
   }
 
+  const experienceCards = (
+    <InfoCardGrid className="about" cardContent={ExperienceCardContent} />
+  );
+  const softwareWidgets = myinfo.software.map((software, swIndex) => (
+    <div className="widget-container" key={swIndex}>
+      {handleWidgetDisplay(software as Widget)}
+    </div>
+  ));
+
+  const educationCards = (
+    <InfoCardGrid className="about" cardContent={EducationCardContent} />
+  );
+
   return (
     <main>
       <div className="about-content">
         <section className="about-intro">
           <p className="about-story">{myinfo.aboutDescription}</p>
           <div className="about-photo-link">
-            {showMedia(myinfo.aboutPhoto as Media, "about-photo", false)}
+            {displayMedia(myinfo.aboutPhoto as Media, "about-photo", false)}
             <a
               href={resolveMediaSrc(myinfo.resume.pdf.content)}
               target="_blank"

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./styles/mediaCarousel.css";
 import useEmblaCarousel from "embla-carousel-react";
 import type { Media } from "./ProjectContentTypes";
-import showMedia from "./ShowProjectMedia";
+import showMedia from "./DisplayMedia";
 
 export function MediaCarousel({ srcArray }: { srcArray: Array<Media> }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({

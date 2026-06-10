@@ -1,8 +1,6 @@
-// This is where the project widgets are displayed, along with links to the contact, resume, and About pages.
-import { ProjectCard } from "../components/ProjectCard";
-import { projects } from "../data/projects.json";
 import "../components/styles/page-styles/dashboard.css";
 import Hero from "../components/Hero";
+import ProjectCardGrid from "../components/ProjectCardGrid";
 
 export function Dashboard() {
   return (
@@ -12,13 +10,7 @@ export function Dashboard() {
         <div className="home-content">
           <section id="project-links">
             <h2>Portfolio</h2>
-            <div className="projectcards-container">
-              {projects.map((_, index) =>
-                projects[index].tags?.includes("tech art") ? (
-                  <ProjectCard key={index} index={index}></ProjectCard>
-                ) : null,
-              )}
-            </div>
+            <ProjectCardGrid />
           </section>
         </div>
       </main>

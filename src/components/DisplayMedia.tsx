@@ -19,7 +19,7 @@ export function resolveMediaSrc(src: string): string {
   return `${baseUrl}files/${cleanSrc}`;
 }
 
-export default function showMedia(
+export default function displayMedia(
   media: Media,
   className?: string | null,
   shouldLazyLoad: boolean = true,
