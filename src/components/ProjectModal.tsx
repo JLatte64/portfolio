@@ -52,7 +52,10 @@ export function ProjectModal({
               </div>
             ))}
           </div>
-          <button className="button project-close-button" onClick={handleClose}>
+          <button
+            className="button overlay-button project-close-button"
+            onClick={handleClose}
+          >
             <span className="material-icons">close</span>
           </button>
         </div>

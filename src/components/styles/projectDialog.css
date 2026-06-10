@@ -55,13 +55,17 @@
 }
 
 .project-body-section {
-  width: 100%;
-  padding: 1rem;
+  margin: 1rem;
+  border-bottom: 2px solid var(--accent);
 }
 
 .project-body {
   background-color: var(--accent-bg);
   color: var(--text);
+}
+
+.project-title {
+  margin: 0.5rem;
 }
 
 .carousel-title-container {
@@ -100,7 +104,7 @@
   border-radius: 1rem;
   display: flex;
   top: 1rem;
-  left: 1rem;
+  right: 1rem;
   margin: 1rem;
   padding: 0.25rem;
 }
