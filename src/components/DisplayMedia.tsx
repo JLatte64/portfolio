@@ -1,4 +1,5 @@
 import type { ImageContent, Media } from "./ProjectContentTypes";
+import purifyString from "./PurifyString";
 
 export function resolveMediaSrc(src: string): string {
   if (!src) return "";
@@ -31,7 +32,7 @@ export default function displayMedia(
 
   switch (media?.mediaType) {
     case "paragraph": {
-      const text = media?.content as string;
+      const text = purifyString(media?.content as string);
       return (
         <p
           className={mediaClass}
@@ -48,7 +49,7 @@ export default function displayMedia(
             <li
               key={`${media.mediaType}-${mediaIndex}-${listIndex}-${listItem}`}
             >
-              {listItem}
+              {purifyString(listItem)}
             </li>
           ))}
         </ul>

@@ -13,7 +13,7 @@ html:has(dialog[open]) {
   --text: #d3d3d3;
   --text-h: #ffffff;
   --bg: #313131;
-  --accent: rgb(32, 185, 216);
+  --accent: rgb(0, 187, 125);
   --accent-bg: #5c5c5c;
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;

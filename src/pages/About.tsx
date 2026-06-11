@@ -8,6 +8,7 @@ import InfoCardGrid from "../components/InfoCardGrid";
 import ExperienceCardContent from "../components/ExperienceCardContent";
 import { myinfo } from "../data/myinfo.json";
 import EducationCardContent from "../components/EducationCardContent";
+import purifyString from "../components/PurifyString";
 
 export function About() {
   if (!myinfo) {
@@ -35,7 +36,7 @@ export function About() {
     <main>
       <div className="about-content">
         <section className="about-intro">
-          <p className="about-story">{myinfo.aboutDescription}</p>
+          <p className="about-story">{purifyString(myinfo.aboutDescription)}</p>
           <div className="about-photo-link">
             {displayMedia(myinfo.aboutPhoto as Media, "about-photo", false)}
             <a
@@ -62,7 +63,7 @@ export function About() {
             <h2>Skills</h2>
             <ul>
               {myinfo.resume.skills.map((skill, skillIndex) => (
-                <li key={skillIndex}>{skill}</li>
+                <li key={skillIndex}>{purifyString(skill)}</li>
               ))}
             </ul>
           </div>
@@ -75,7 +76,7 @@ export function About() {
           <h2>Languages</h2>
           <ul>
             {myinfo.languages.map((language, langIndex) => (
-              <li key={langIndex}>{language}</li>
+              <li key={langIndex}>{purifyString(language)}</li>
             ))}
           </ul>
         </section>

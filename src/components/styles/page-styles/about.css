@@ -9,6 +9,10 @@
     flex: 1 1 50%;
   }
 
+  .about-photo {
+    max-width: 25vw;
+  }
+
   .about-intro {
     flex-direction: row;
   }
@@ -26,6 +30,10 @@
 
   .about-intro > * {
     flex: 1 1 100%;
+  }
+
+  .about-photo {
+    max-width: 40vw;
   }
 
   .about-intro {
@@ -58,19 +66,21 @@
 }
 
 .about-photo {
-  max-width: 35vw;
   margin: auto;
+  border-radius: var(--border-radius);
+  border: 2px solid var(--border);
 }
 
 .about-photo-link {
   flex-direction: column;
 }
 
+.about-story {
+  padding: 2rem;
+}
+
 .about-intro > * {
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  gap: 1rem;
+  margin: auto;
 }
 
 .about-intro {

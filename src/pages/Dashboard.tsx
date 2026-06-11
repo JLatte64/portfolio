@@ -10,7 +10,7 @@ export function Dashboard() {
         <div className="home-content">
           <section id="project-links">
             <h2>Portfolio</h2>
-            <ProjectCardGrid />
+            <ProjectCardGrid filterTag="tech art" />
           </section>
         </div>
       </main>

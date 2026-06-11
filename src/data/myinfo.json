@@ -19,7 +19,7 @@
     "location": "Pittsburgh, PA",
     "tagline": "Specializes in real-time rendering, shader development, and optimization with over a decade of self-directed experience in Unity. Check out my work here!",
 
-    "aboutDescription": "I'm Jordan Latta.",
+    "aboutDescription": "<b>My life is built from an unshakable obsession with how digital worlds are made.</b> At six, <em>Super Mario 64</em> was the spark. I grew up with its modding scene, teaching myself <em>Game Maker</em> in 2007, spending late nights modeling levels in <em>SketchUp</em> and resolving emulation bugs. In 2015 came <em>Unity3D</em> and finally shaders, which I've spent a decade mastering. Today, my lifelong devotion translates into building ultra-performant rendering systems and effects — all to give players the same spark I first felt.",
 
     "contactMethods": [
       {
@@ -53,9 +53,11 @@
         {
           "companyName": "Mega Cat Studios",
           "jobTitle": "Technical Artist",
-          "desc": "Lorem ipsum dolor sit amet consectetur adipiscing elit. Adipiscing elit quisque faucibus ex sapien vitae pellentesque. Vitae pellentesque sem placerat in id cursus mi. Cursus mi pretium tellus duis convallis tempus leo. Tempus leo eu aenean sed diam urna tempor. Urna tempor pulvinar vivamus fringilla lacus nec metus.",
           "timeframe": "2024-Present",
-          "responsibilities": ["Job Responsibility 1", "Job Responsibility 2"]
+          "responsibilities": [
+            "Developed shaders and rendering systems to go beyond engine limitations and deliver stunning, performant visual effects",
+            "Job Responsibility 2"
+          ]
         }
       ],
       "skills": [
@@ -87,6 +89,26 @@
         "type": "image",
         "iconFilename": "GitHub_Invertocat_Black.svg",
         "ariaLabel": "Unity"
+      },
+      {
+        "type": "image",
+        "iconFilename": "GitHub_Invertocat_Black.svg",
+        "ariaLabel": "C#"
+      },
+      {
+        "type": "image",
+        "iconFilename": "GitHub_Invertocat_Black.svg",
+        "ariaLabel": "HLSL"
+      },
+      {
+        "type": "image",
+        "iconFilename": "GitHub_Invertocat_Black.svg",
+        "ariaLabel": "Photoshop"
+      },
+      {
+        "type": "image",
+        "iconFilename": "GitHub_Invertocat_Black.svg",
+        "ariaLabel": "AutoDesk Maya"
       }
     ]
   }

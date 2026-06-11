@@ -7,14 +7,11 @@ export default function TopNavButton() {
 
   useEffect(() => {
     const handleScroll = (): void => {
-      // Check if user is at the very top of the page
       setIsAtTop(window.scrollY === 0);
     };
 
-    // Listen to window scroll events
     window.addEventListener("scroll", handleScroll, { passive: true });
 
-    // Clean up event listener on component unmount
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };

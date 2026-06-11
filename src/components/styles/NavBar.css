@@ -70,6 +70,7 @@
 .nav-link {
   height: var(--navbar-height);
   line-height: var(--navbar-height);
+  background-color: transparent;
 }
 
 .nav-button.home,
@@ -83,7 +84,7 @@
   top: 0;
   left: 0;
   right: 0;
-  background-color: var(--accent);
+  background-color: var(--accent-bg);
   height: var(--navbar-height);
   justify-content: space-between;
 }

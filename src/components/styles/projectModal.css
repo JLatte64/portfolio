@@ -54,6 +54,14 @@
   }
 }
 
+.pj-body-media-container {
+  margin-bottom: 0.5rem;
+}
+
+.project-body-section-heading {
+  margin: 0.5rem;
+}
+
 .project-body-section {
   margin: 1rem;
   border-bottom: 2px solid var(--accent);

@@ -61,11 +61,9 @@
             {
               "mediaType": "list",
               "content": [
-                "List item",
-                "List item",
-                "List item",
-                "List item",
-                "List item"
+                "Developed a custom lighting system to go beyond engine limitations and give artists 256 individual sprite layers to light",
+                "Developed 13 key environment shaders - running water, swaying foliage, dynamic lights",
+                "Developed the key shader-base underpinning environments and characters"
               ]
             },
             {

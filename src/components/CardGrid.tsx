@@ -9,10 +9,16 @@ export function CardGrid({
   className = "",
   ...props
 }: CardGridProps) {
+  const containerClass = className
+    ? `${className}cards-container`
+    : "cards-container";
+  const itemClass = className ? `${className}card-container` : "card-container";
+
   return (
-    <div className={`${className}cards-container`}>
+    // {...props} belongs on the top layer layout grid element container
+    <div className={containerClass} {...props}>
       {Children.map(children, (child, index) => (
-        <div className={`${className}card-container`} key={index} {...props}>
+        <div className={itemClass} key={index}>
           {child}
         </div>
       ))}

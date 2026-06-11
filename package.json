@@ -11,10 +11,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "dompurify": "^3.4.9",
     "embla-carousel": "^8.6.0",
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-fade": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
+    "html-react-parser": "^6.1.3",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "react-router": "^7.17.0",
@@ -26,6 +28,7 @@
     "@eslint/js": "^9.39.4",
     "@rolldown/plugin-babel": "^0.2.3",
     "@types/babel__core": "^7.20.5",
+    "@types/dompurify": "^3.0.5",
     "@types/node": "^24.12.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
