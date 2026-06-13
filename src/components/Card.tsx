@@ -1,18 +1,13 @@
-import type { ComponentPropsWithoutRef, ReactNode } from "react";
+import type { ComponentPropsWithoutRef } from "react";
 
-export interface CardProps extends ComponentPropsWithoutRef<"div"> {
-  children?: ReactNode;
-}
+interface CardProps extends ComponentPropsWithoutRef<"div"> {}
 
-export function Card({
-  children,
-  content,
-  className = "",
-  ...props
-}: CardProps) {
+export const Card = ({ children, className = "", ...props }: CardProps) => {
   return (
-    <div className={`${className}card`} {...props}>
+    <div className={`${className} card-container`.trim()} {...props}>
       {children}
     </div>
   );
-}
+};
+
+export default Card;

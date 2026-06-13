@@ -2,7 +2,7 @@ import "./styles/Hero.css";
 import { heroSlides } from "../data/projects.json";
 import { myinfo } from "../data/myinfo.json";
 import { useEffect, useRef, useState } from "react";
-import type { Media } from "./ProjectContentTypes";
+import type { Media } from "./types/MediaTypes";
 import showMedia from "./DisplayMedia";
 import { Link } from "react-router";
 import { getPagePath } from "./GetPagePath";

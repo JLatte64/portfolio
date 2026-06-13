@@ -3,7 +3,8 @@ import "../components/styles/ContactFooter.css";
 import { myinfo } from "../data/myinfo.json";
 import "../components/styles/widgets.css";
 import "./styles/buttons.css";
-import { handleWidgetDisplay, type Widget } from "./Widget";
+import { handleIconDisplay } from "./HandleIconDisplay";
+import type { IconData } from "./types/IconTypes";
 
 export function ContactFooter() {
   return (
@@ -17,7 +18,7 @@ export function ContactFooter() {
             aria-label={contactMethod.ariaLabel}
             key={contactIndex}
           >
-            {handleWidgetDisplay(contactMethod as Widget)}
+            {handleIconDisplay(contactMethod as IconData)}
           </Link>
         ))}
       </div>

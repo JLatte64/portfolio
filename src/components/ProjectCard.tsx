@@ -1,70 +1,32 @@
 import { Card } from "./Card";
-import { projects } from "../data/projects.json";
-import ProjectModal from "./ProjectModal";
 import "./styles/projectCard.css";
-import { useRef, useEffect } from "react";
-import { useNavigate, useParams } from "react-router";
-import { getPagePath } from "./GetPagePath";
 import purifyString from "./PurifyString";
+import type { CardData } from "./types/CardTypes";
+import type { ProjectData } from "./types/ProjectTypes";
 
-export function ProjectCard({ index }: { index: number }) {
-  const dialogRef = useRef<HTMLDialogElement>(null);
-  const project = projects && projects[index] ? projects[index] : undefined;
-  const navigate = useNavigate();
+interface ProjectCardProps {
+  cardData: CardData;
+  className?: string;
+  onClick?: (item: CardData) => void;
+}
 
-  const slug =
-    projects[index]?.title
-      .toLowerCase()
-      .replace(/[^a-z0-9\s-]/g, "")
-      .replace(/\s+/g, "-") || "";
-
-  const { projectName } = useParams();
-  const isOpen = projectName === slug;
-
-  useEffect(() => {
-    const dialog = dialogRef.current;
-    if (!dialog) return;
-
-    if (isOpen) {
-      if (!dialog.open) {
-        dialog.showModal();
-      }
-    } else {
-      if (dialog.open) {
-        dialog.close();
-      }
-    }
-  }, [isOpen]);
-
-  const handleOpen = () => {
-    navigate(`${getPagePath("dashboard")}${slug}`, {
-      preventScrollReset: true,
-    });
-  };
-
-  const handleClose = () => {
-    navigate(getPagePath("dashboard"), { preventScrollReset: true });
-  };
+export default function ProjectCard({
+  cardData,
+  className = "",
+  onClick,
+}: ProjectCardProps) {
+  const data = cardData as unknown as ProjectData;
 
   return (
-    <Card className="project" onClick={handleOpen}>
+    <Card onClick={() => onClick?.(cardData)} className="project">
       <img
-        src={projects[index].thumbnail.src}
-        alt={projects[index].thumbnail.alt}
-        className="projectcard-thumbnail"
+        src={data.thumbnail?.src ?? ""}
+        alt={data.thumbnail?.alt ?? ""}
+        className={`${className}card-thumbnail`.trim()}
       />
-      <span className="projectcard-title">
-        {purifyString(projects[index].title)}
+      <span className={`${className}card-title`.trim()}>
+        {purifyString(data.title)}
       </span>
-
-      <div onClick={(e) => e.stopPropagation()}>
-        <ProjectModal
-          project={project}
-          isOpen={isOpen}
-          dialogRef={dialogRef}
-          handleClose={handleClose}
-        />
-      </div>
     </Card>
   );
 }

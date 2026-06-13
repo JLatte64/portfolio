@@ -1,27 +1,35 @@
-import { Children, type ComponentPropsWithoutRef, type ReactNode } from "react";
+import React, { type ComponentPropsWithoutRef } from "react";
+import type { CardData } from "./types/CardTypes";
 
-interface CardGridProps extends ComponentPropsWithoutRef<"div"> {
-  children?: ReactNode;
+interface CardGridProps extends Omit<
+  ComponentPropsWithoutRef<"div">,
+  "onClick"
+> {
+  items?: CardData[];
+  renderComponent: React.ComponentType<{
+    cardData: CardData;
+    className?: string;
+    onClick?: (item: CardData) => void;
+    [key: string]: any;
+  }>;
+  onClick?: (item: CardData) => void;
 }
 
-export function CardGrid({
-  children,
+export const CardGrid = ({
   className = "",
+  items = [],
+  renderComponent: RenderComponent,
+  onClick,
   ...props
-}: CardGridProps) {
-  const containerClass = className
-    ? `${className}cards-container`
-    : "cards-container";
-  const itemClass = className ? `${className}card-container` : "card-container";
-
-  return (
-    // {...props} belongs on the top layer layout grid element container
-    <div className={containerClass} {...props}>
-      {Children.map(children, (child, index) => (
-        <div className={itemClass} key={index}>
-          {child}
-        </div>
-      ))}
-    </div>
-  );
-}
+}: CardGridProps) => (
+  <div className={`${className} cards-container`.trim()} {...props}>
+    {items.map((item, index) => (
+      <RenderComponent
+        key={index}
+        cardData={item}
+        className={className}
+        onClick={onClick}
+      />
+    ))}
+  </div>
+);

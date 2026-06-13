@@ -1,14 +1,14 @@
 import "../components/styles/page-styles/about.css";
-
 import "../components/styles/buttons.css";
-import { handleWidgetDisplay, type Widget } from "../components/Widget";
 import displayMedia, { resolveMediaSrc } from "../components/DisplayMedia";
-import type { Media } from "../components/ProjectContentTypes";
-import InfoCardGrid from "../components/InfoCardGrid";
-import ExperienceCardContent from "../components/ExperienceCardContent";
+import type { Media } from "../components/types/MediaTypes";
 import { myinfo } from "../data/myinfo.json";
-import EducationCardContent from "../components/EducationCardContent";
 import purifyString from "../components/PurifyString";
+import { CardGrid } from "../components/CardGrid";
+import ExperienceCard from "../components/ExperienceCard";
+import type { CardData } from "../components/types/CardTypes";
+import SoftwareCard from "../components/SoftwareCard";
+import EducationCard from "../components/EducationCard";
 
 export function About() {
   if (!myinfo) {
@@ -18,19 +18,6 @@ export function About() {
       </main>
     );
   }
-
-  const experienceCards = (
-    <InfoCardGrid className="about" cardContent={ExperienceCardContent} />
-  );
-  const softwareWidgets = myinfo.software.map((software, swIndex) => (
-    <div className="widget-container" key={swIndex}>
-      {handleWidgetDisplay(software as Widget)}
-    </div>
-  ));
-
-  const educationCards = (
-    <InfoCardGrid className="about" cardContent={EducationCardContent} />
-  );
 
   return (
     <main>
@@ -52,12 +39,20 @@ export function About() {
 
         <section className="about-experience">
           <h2>Professional Experience</h2>
-          {experienceCards}
+          <CardGrid
+            items={(myinfo?.resume.roles ?? []) as CardData[]}
+            renderComponent={ExperienceCard}
+          />
         </section>
         <section className="about-skills-software">
           <div className="about-software">
             <h2>Software</h2>
-            <div className="widgets-container">{softwareWidgets}</div>
+            <div className="widgets-container">
+              <CardGrid
+                items={(myinfo?.software ?? []) as CardData[]}
+                renderComponent={SoftwareCard}
+              />
+            </div>
           </div>
           <div className="about-skills">
             <h2>Skills</h2>
@@ -70,7 +65,10 @@ export function About() {
         </section>
         <section className="about-education">
           <h2>Education</h2>
-          {educationCards}
+          <CardGrid
+            items={[myinfo?.education].filter(Boolean) as CardData[]}
+            renderComponent={EducationCard}
+          />
         </section>
         <section className="about-languages">
           <h2>Languages</h2>

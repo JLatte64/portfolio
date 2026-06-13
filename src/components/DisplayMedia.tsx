@@ -1,4 +1,4 @@
-import type { ImageContent, Media } from "./ProjectContentTypes";
+import type { ImageContent, Media } from "./types/MediaTypes";
 import purifyString from "./PurifyString";
 
 export function resolveMediaSrc(src: string): string {
