@@ -12,7 +12,7 @@ export function ContactFooter() {
       <p>Send me a message!</p>
       <form
         target="_blank"
-        action={"https://formsubmit.co/"}
+        action={`https://formsubmit.co/${myinfo.email}`}
         method="POST"
         className="form"
       >
