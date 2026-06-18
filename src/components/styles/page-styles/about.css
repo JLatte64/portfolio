@@ -103,7 +103,7 @@
 }
 
 .about-roles {
-  border-bottom: 2px solid var(accent);
+  border-bottom: 2px solid var(--accent);
 }
 
 .resume-button {
