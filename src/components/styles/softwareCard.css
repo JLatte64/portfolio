@@ -1,0 +1,30 @@
+.software-card > * {
+  flex: 0 0 auto;
+}
+
+.software-card > img {
+  block-size: auto;
+  height: 2rem;
+}
+
+.software-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem;
+}
+
+.software-card-container {
+  flex: 1 1 auto;
+  transition: filter 0.05s ease;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  background-color: var(--accent);
+  filter: brightness(1);
+  background-color: var(--accent-bg);
+}
+
+.software-card-container:hover {
+  filter: brightness(1.1);
+}

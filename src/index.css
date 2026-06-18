@@ -14,7 +14,7 @@ html:has(dialog[open]) {
   --text-h: #ffffff;
   --bg: #313131;
   --accent: rgb(0, 187, 125);
-  --accent-bg: #5c5c5c;
+  --accent-bg: #585555;
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
   --border: #d3d3d3;
@@ -55,6 +55,15 @@ body {
   margin: 0;
 }
 
+main {
+  background-image: url(https://cdn.pixabay.com/photo/2022/04/26/13/04/sky-7158340_1280.jpg);
+  background-attachment: fixed;
+  backdrop-filter: blur(100px);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 h1,
 h2 {
   font-family: var(--heading);
@@ -83,6 +92,13 @@ h2 {
 }
 p {
   margin: 0;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
 }
 
 .hidden {

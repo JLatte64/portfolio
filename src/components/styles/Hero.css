@@ -1,61 +1,8 @@
-@media screen and (min-width: 600px) {
-  .hero-about-link {
-    max-width: 45%;
-  }
-
-  .hero-photo {
-    align-self: flex-end;
-    max-width: 25vw;
-  }
-
-  .hero-photo-text {
-    flex-direction: row-reverse;
-    gap: 30%;
-  }
-
-  .hero-text {
-    gap: 1rem;
-    flex-direction: column;
-    flex: 1 1 45%;
-  }
-
-  .hero {
-    padding: 10vh 8vw 10vh 8vw;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .hero-about-link {
-    max-width: 90%;
-  }
-
-  .hero-photo {
-    align-self: flex-start;
-    max-width: 35%;
-    margin: auto 0;
-  }
-
-  .hero-photo-text {
-    flex-direction: column;
-    padding: 0;
-    gap: 1rem;
-  }
-
-  .hero-text {
-    gap: 1rem;
-    flex-direction: column;
-    padding-bottom: 0.5rem;
-  }
-
-  .hero {
-    padding: 10vh 8vw 10vh 8vw;
-  }
-}
-
 .hero-photo {
   display: flex;
   border-radius: 0.25rem;
-  border: 2px solid var(--border);
+  border: 2px solid var(--accent);
+  block-size: auto;
 }
 
 .hero-text > * {
@@ -65,23 +12,31 @@
 
 .hero-text {
   display: flex;
-  color: var(--text);
+  color: var(--text-h);
 }
 
 .job-title {
   color: var(--accent);
+  font-weight: bold;
+  margin: 0;
 }
 
-.hero-photo-text {
+.name-title {
+  line-height: 2.5rem;
+}
+
+.hero-text-button {
   display: flex;
+  flex-direction: column;
   text-align: start;
+  justify-content: center;
+  align-items: center;
 }
 
 .hero-content-container {
   position: relative;
   display: flex;
   gap: 1.5rem;
-  flex-direction: column;
 }
 
 .fade-image.active {
@@ -107,4 +62,57 @@
   overflow: hidden;
   position: relative;
   background-color: black;
+}
+
+@media screen and (min-width: 600px) {
+  .hero-photo {
+    align-self: flex-end;
+    width: 20cqw;
+    margin: auto;
+  }
+
+  .hero-text {
+    gap: 1rem;
+    flex-direction: column;
+    flex: 1 1 45%;
+  }
+
+  .hero-text-button {
+    max-width: 50cqw;
+    gap: 1rem;
+  }
+
+  .hero-content-container {
+    flex-direction: row;
+  }
+
+  .hero {
+    padding: 10vh 8vw 10vh 8vw;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .hero-photo {
+    align-self: flex-start;
+    width: 30cqw;
+    margin: auto 0;
+  }
+
+  .hero-text {
+    gap: 1rem;
+    flex-direction: column;
+    padding-bottom: 0.5rem;
+  }
+
+  .hero-text-button {
+    gap: 1rem;
+  }
+
+  .hero-content-container {
+    flex-direction: column-reverse;
+  }
+
+  .hero {
+    padding: 10vh 8vw 10vh 8vw;
+  }
 }

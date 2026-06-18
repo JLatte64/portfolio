@@ -1,9 +1,9 @@
 import MediaCarousel from "./MediaCarousel";
-import displayMedia from "./DisplayMedia";
+import displayMedia from "./functions/DisplayMedia";
 import "../components/styles/projectModal.css";
 import "../components/styles/projectMedia.css";
 import { type RefObject } from "react";
-import purifyString from "./PurifyString";
+import purifyString from "./functions/PurifyString";
 import type { ProjectData } from "./types/ProjectTypes";
 
 interface ProjectModalProps {

@@ -1,5 +1,6 @@
 import Card from "./Card";
-import purifyString from "./PurifyString";
+import "../components/styles/roleCard.css";
+import purifyString from "./functions/PurifyString";
 import type { CardData } from "./types/CardTypes";
 
 export type ExpCardData = {
@@ -9,22 +10,21 @@ export type ExpCardData = {
   timeframe: string;
 };
 
-export const ExperienceCard = ({
-  cardData,
-  className,
-}: {
+interface ExpCardProps {
   cardData: CardData;
   className?: string;
-}) => {
+}
+
+export const ExperienceCard = ({ cardData, className = "" }: ExpCardProps) => {
   const expData = cardData as ExpCardData;
 
   return (
-    <Card className={`${className} card`.trim()}>
-      <div className={`${className} card-header`.trim()}>
+    <Card className={className}>
+      <div className={`role-card-header`}>
         <h3>{`${purifyString(expData.companyName)} | ${purifyString(expData.jobTitle)}`}</h3>
         <h3>{`[${purifyString(expData.timeframe)}]`}</h3>
       </div>
-      <ul className={`${className} card-body`.trim()}>
+      <ul className={`role-card-body`}>
         {expData.responsibilities.map((resp, respIndex) => (
           <li key={respIndex}>{purifyString(resp)}</li>
         ))}

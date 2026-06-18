@@ -1,11 +1,13 @@
 import "../components/styles/page-styles/about.css";
 import "../components/styles/buttons.css";
-import displayMedia, { resolveMediaSrc } from "../components/DisplayMedia";
+import displayMedia, {
+  resolveMediaSrc,
+} from "../components/functions/DisplayMedia";
 import type { Media } from "../components/types/MediaTypes";
 import { myinfo } from "../data/myinfo.json";
-import purifyString from "../components/PurifyString";
+import purifyString from "../components/functions/PurifyString";
 import { CardGrid } from "../components/CardGrid";
-import ExperienceCard from "../components/ExperienceCard";
+import ExperienceCard from "../components/RoleCard";
 import type { CardData } from "../components/types/CardTypes";
 import SoftwareCard from "../components/SoftwareCard";
 import EducationCard from "../components/EducationCard";
@@ -30,16 +32,17 @@ export function About() {
               href={resolveMediaSrc(myinfo.resume.pdf.content)}
               target="_blank"
               rel="noopener noreferrer"
-              className="button"
+              className="resume-button button"
             >
               Download/View Resume (PDF)
             </a>
           </div>
         </section>
 
-        <section className="about-experience">
+        <section className="about-roles">
           <h2>Professional Experience</h2>
           <CardGrid
+            className="role"
             items={(myinfo?.resume.roles ?? []) as CardData[]}
             renderComponent={ExperienceCard}
           />
@@ -47,18 +50,19 @@ export function About() {
         <section className="about-skills-software">
           <div className="about-software">
             <h2>Software</h2>
-            <div className="widgets-container">
-              <CardGrid
-                items={(myinfo?.software ?? []) as CardData[]}
-                renderComponent={SoftwareCard}
-              />
-            </div>
+            <CardGrid
+              className="software"
+              items={(myinfo?.software ?? []) as CardData[]}
+              renderComponent={SoftwareCard}
+            />
           </div>
           <div className="about-skills">
             <h2>Skills</h2>
-            <ul>
+            <ul className="skills-container">
               {myinfo.resume.skills.map((skill, skillIndex) => (
-                <li key={skillIndex}>{purifyString(skill)}</li>
+                <li className="skill" key={skillIndex}>
+                  {purifyString(skill)}
+                </li>
               ))}
             </ul>
           </div>
@@ -66,15 +70,18 @@ export function About() {
         <section className="about-education">
           <h2>Education</h2>
           <CardGrid
+            className="education"
             items={[myinfo?.education].filter(Boolean) as CardData[]}
             renderComponent={EducationCard}
           />
         </section>
         <section className="about-languages">
           <h2>Languages</h2>
-          <ul>
+          <ul className="about-lang-container">
             {myinfo.languages.map((language, langIndex) => (
-              <li key={langIndex}>{purifyString(language)}</li>
+              <li key={langIndex + language} className="about-lang">
+                {purifyString(language)}
+              </li>
             ))}
           </ul>
         </section>

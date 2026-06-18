@@ -2,7 +2,7 @@ import type {
   IconData,
   ImageIconData,
   SymbolIconData,
-} from "./types/IconTypes";
+} from "../types/IconTypes";
 
 export function handleIconDisplay(iconData: IconData) {
   let data: ImageIconData | SymbolIconData;
@@ -10,9 +10,10 @@ export function handleIconDisplay(iconData: IconData) {
   switch (iconData.type) {
     case "image":
       data = iconData as ImageIconData;
+      const iconSrc = `${import.meta.env.BASE_URL}icons/${data.iconFilename}`;
       return (
         <img
-          src={`${import.meta.env.BASE_URL}icons/${data.imgSrc}`}
+          src={iconSrc}
           aria-label={iconData.ariaLabel}
           aria-hidden={!iconData.ariaLabel}
         />

@@ -1,11 +1,11 @@
-import "./styles/Hero.css";
+import "./styles/hero.css";
 import { heroSlides } from "../data/projects.json";
 import { myinfo } from "../data/myinfo.json";
 import { useEffect, useRef, useState } from "react";
 import type { Media } from "./types/MediaTypes";
-import showMedia from "./DisplayMedia";
+import showMedia from "./functions/DisplayMedia";
 import { Link } from "react-router";
-import { getPagePath } from "./GetPagePath";
+import { getPagePath } from "./functions/GetPagePath";
 import "./styles/buttons.css";
 
 function Hero() {
@@ -49,10 +49,9 @@ function Hero() {
           )}
         </div>
         <div className="hero-content-container">
-          <div className="hero-photo-text">
-            {showMedia(heroPhoto, "hero-photo", false)}
+          <div className="hero-text-button">
             <div className="hero-text">
-              <h1>{myinfo.name}</h1>
+              <h1 className="name-title">{myinfo.name}</h1>
               <h2 className="job-title">{myinfo.jobTitle}</h2>
               <p>
                 <span className="material-icons">place</span>
@@ -60,10 +59,11 @@ function Hero() {
               </p>
               <p>{myinfo.tagline}</p>
             </div>
+            <Link to={getPagePath("about")} className="about-button button">
+              Learn About Me
+            </Link>
           </div>
-          <Link to={getPagePath("about")} className="hero-about-link button">
-            Learn About Me
-          </Link>
+          {showMedia(heroPhoto, "hero-photo", false)}
         </div>
       </header>
     </>

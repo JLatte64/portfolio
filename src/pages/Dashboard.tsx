@@ -4,7 +4,7 @@ import { CardGrid } from "../components/CardGrid";
 import ProjectModal from "../components/ProjectModal";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { getPagePath } from "../components/GetPagePath";
+import { getPagePath } from "../components/functions/GetPagePath";
 import { projects } from "../data/projects.json";
 import ProjectCard from "../components/ProjectCard";
 import type { ProjectData } from "../components/types/ProjectTypes";

@@ -22,7 +22,7 @@ a:visited {
   text-align: center;
   text-justify: auto;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: bold !important;
 
   display: flex;
   justify-content: center;

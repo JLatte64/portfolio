@@ -1,5 +1,5 @@
 import type { EduCardData } from "../EducationCard";
-import type { ExpCardData } from "../ExperienceCard";
+import type { ExpCardData } from "../RoleCard";
 import type { ProjectData } from "./ProjectTypes";
 import type { SoftwareCardData } from "../SoftwareCard";
 

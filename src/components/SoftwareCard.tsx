@@ -1,22 +1,25 @@
 import Card from "./Card";
 import type { CardData } from "./types/CardTypes";
 import type { IconData } from "./types/IconTypes";
-import { handleIconDisplay } from "./HandleIconDisplay";
+import { handleIconDisplay } from "./functions/HandleIconDisplay";
+import "../components/styles/softwareCard.css";
 
 export interface SoftwareCardData extends IconData {}
 
-export const SoftwareCard = ({
-  cardData,
-  className,
-}: {
+interface SoftwareCardProps {
   cardData: CardData;
   className?: string;
-}) => {
+}
+
+export const SoftwareCard = ({
+  cardData,
+  className = "",
+}: SoftwareCardProps) => {
   const sftwData = cardData as SoftwareCardData;
 
   return (
-    <Card className={`${className} card`.trim()}>
-      <div className={`${className} card-body`.trim()}>
+    <Card className={`${className}`.trim()}>
+      <div className={`${className}-card`.trim()}>
         {handleIconDisplay(sftwData)}
         {sftwData.ariaLabel}
       </div>

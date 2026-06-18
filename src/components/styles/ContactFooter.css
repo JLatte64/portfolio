@@ -1,20 +1,6 @@
-@media screen and (max-width: 600px) {
-  textarea.form-input {
-    min-height: 8rem;
-    resize: none;
-  }
-}
-
-@media screen and (min-width: 600px) {
-  textarea.form-input {
-    min-height: 3rem;
-    resize: vertical;
-  }
-}
-
 .contact-content > h2 {
   color: var(--text-h);
-  padding: 1rem 0 1rem 0;
+  padding: 1rem 0 0 0;
   margin: 0;
 }
 
@@ -22,11 +8,25 @@
   position: relative;
   display: block;
   bottom: 0;
-  background-color: var(--accent-bg);
+  border-bottom: 2px solid var(--accent);
+  border-top: 2px solid var(--accent);
+  background-color: var(--bg);
+}
+
+.contact-content > p {
+  padding: 0.5rem;
 }
 
 .form {
-  padding: 1rem;
+  width: 80%;
+  margin: auto;
+}
+
+.form-button {
+  font-size: inherit;
+  width: 100%;
+  padding: 0.75rem;
+  font-family: inherit;
 }
 
 .form-inputs-container {
@@ -34,15 +34,73 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
 }
 
 .form-input {
   width: 100%;
-  margin: 0.5rem;
   padding: 0.5rem;
   border: none;
   border-radius: 4px;
   font-size: 1rem;
   text-align: center;
   text-justify: auto;
+}
+
+textarea.form-input {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+.form-input,
+textarea {
+  font-family: inherit;
+}
+
+.contact-widgets-container {
+  overflow: hidden;
+  display: flex;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  max-width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-widget-container > * {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 80cqw;
+  line-height: 80cqw;
+  text-justify: auto;
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+  padding: 0.25rem;
+}
+
+.contact-widget-container > img {
+  block-size: auto;
+}
+
+.contact-widget-container {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 4rem;
+  margin: 0.5rem;
+  transition: transform 0.05s linear;
+  border-radius: 0.25rem;
+  aspect-ratio: 1 / 1;
+  container-type: inline-size;
+  overflow: hidden;
+  background-color: var(--accent);
+  color: var(--text-h);
+}
+
+.contact-widget-container:hover {
+  transform: scale(1.1);
 }

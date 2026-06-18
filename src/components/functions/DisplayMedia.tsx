@@ -1,4 +1,4 @@
-import type { ImageContent, Media } from "./types/MediaTypes";
+import type { ImageData, Media } from "../types/MediaTypes";
 import purifyString from "./PurifyString";
 
 export function resolveMediaSrc(src: string): string {
@@ -55,7 +55,7 @@ export default function displayMedia(
         </ul>
       );
     case "image": {
-      const image = media?.content as ImageContent;
+      const image = media?.content as ImageData;
       const src = resolveMediaSrc(image?.src);
       return (
         <img
@@ -69,7 +69,7 @@ export default function displayMedia(
       );
     }
     case "imageGallery": {
-      const imageGallery = media?.content as ImageContent[];
+      const imageGallery = media?.content as ImageData[];
       return imageGallery.map((galleryItem, galleryIndex) => {
         const src = resolveMediaSrc(galleryItem.src);
         return (
@@ -103,7 +103,6 @@ export default function displayMedia(
             className={mediaClass}
             title="Embedded video player"
             frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
             width="100%"

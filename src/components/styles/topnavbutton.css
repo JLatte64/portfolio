@@ -3,5 +3,6 @@
   bottom: 0.5rem;
   right: 0.5rem;
   background-color: transparent;
+  color: var(--accent);
   transition: opacity 0.15s ease;
 }

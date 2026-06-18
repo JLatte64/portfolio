@@ -22,7 +22,7 @@ export const CardGrid = ({
   onClick,
   ...props
 }: CardGridProps) => (
-  <div className={`${className} cards-container`.trim()} {...props}>
+  <div className={`${className}-cards-container`.trim()} {...props}>
     {items.map((item, index) => (
       <RenderComponent
         key={index}

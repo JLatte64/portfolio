@@ -24,13 +24,13 @@
     "contactMethods": [
       {
         "type": "symbol",
-        "iconSymbolName": "email",
+        "symbolName": "email",
         "url": "mailto:jordanlatta128@gmail.com",
         "ariaLabel": "Email"
       },
       {
         "type": "symbol",
-        "iconSymbolName": "phone",
+        "symbolName": "phone",
         "url": "tel:+17247195101",
         "ariaLabel": "Phone Number"
       },
@@ -50,6 +50,24 @@
     "resume": {
       "tags": ["tech art"],
       "roles": [
+        {
+          "companyName": "Mega Cat Studios",
+          "jobTitle": "Technical Artist",
+          "timeframe": "2024-Present",
+          "responsibilities": [
+            "Developed shaders and rendering systems to go beyond engine limitations and deliver stunning, performant visual effects",
+            "Job Responsibility 2"
+          ]
+        },
+        {
+          "companyName": "Mega Cat Studios",
+          "jobTitle": "Technical Artist",
+          "timeframe": "2024-Present",
+          "responsibilities": [
+            "Developed shaders and rendering systems to go beyond engine limitations and deliver stunning, performant visual effects",
+            "Job Responsibility 2"
+          ]
+        },
         {
           "companyName": "Mega Cat Studios",
           "jobTitle": "Technical Artist",

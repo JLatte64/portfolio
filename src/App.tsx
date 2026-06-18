@@ -1,4 +1,4 @@
-import { getPagePath } from "./components/GetPagePath";
+import { getPagePath } from "./components/functions/GetPagePath";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router";
 import { Dashboard } from "./pages/Dashboard";
 import { About } from "./pages/About";

@@ -11,7 +11,7 @@ export interface IconData {
 }
 
 export interface ImageIconData extends IconData {
-  imgSrc: string;
+  iconFilename: string;
 }
 
 export interface SymbolIconData extends IconData {

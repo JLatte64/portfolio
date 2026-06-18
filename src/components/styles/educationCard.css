@@ -1,0 +1,45 @@
+.education-card-container {
+  padding: 1rem;
+  width: 100%;
+  flex: 0 1 100%;
+  border-radius: 0.25rem;
+  background-color: var(--bg);
+  filter: brightness(1);
+  transition: filter 0.05s ease;
+}
+
+.education-card-container:hover {
+  filter: brightness(1.1);
+}
+
+.education-card-header > * > h3 {
+  color: var(--text-h);
+  margin: 0;
+  padding: 0;
+}
+
+.education-card-header > * {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.education-card-header {
+  margin: 0;
+  padding-bottom: 1rem;
+  color: var(--accent);
+  width: 100%;
+}
+
+.education-card-body {
+  margin-top: 0;
+  padding-top: 0;
+  text-align: left;
+  border-left: 1vw solid var(--accent);
+  border-radius: 0.25rem;
+  color: var(--text);
+}

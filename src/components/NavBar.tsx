@@ -1,7 +1,7 @@
 import { Link } from "react-router";
-import "../components/styles/NavBar.css";
+import "../components/styles/navBar.css";
 import { useState } from "react";
-import { getPagePath } from "./GetPagePath";
+import { getPagePath } from "./functions/GetPagePath";
 
 export function NavBar() {
   const [mobileMenuOpen, toggleMobileMenu] = useState(false);

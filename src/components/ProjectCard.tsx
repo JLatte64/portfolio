@@ -1,6 +1,6 @@
 import { Card } from "./Card";
 import "./styles/projectCard.css";
-import purifyString from "./PurifyString";
+import purifyString from "./functions/PurifyString";
 import type { CardData } from "./types/CardTypes";
 import type { ProjectData } from "./types/ProjectTypes";
 
@@ -22,9 +22,9 @@ export default function ProjectCard({
       <img
         src={data.thumbnail?.src ?? ""}
         alt={data.thumbnail?.alt ?? ""}
-        className={`${className}card-thumbnail`.trim()}
+        className={`${className}-card-thumbnail`.trim()}
       />
-      <span className={`${className}card-title`.trim()}>
+      <span className={`${className}-card-title`.trim()}>
         {purifyString(data.title)}
       </span>
     </Card>
