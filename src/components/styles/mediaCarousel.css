@@ -27,7 +27,7 @@
 }
 
 .carousel-indicator.inactive {
-  background-color: var(--accent-bg);
+  background-color: var(--bg);
   border: none;
 }
 
