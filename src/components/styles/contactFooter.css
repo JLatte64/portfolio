@@ -48,7 +48,7 @@
 }
 
 textarea.form-input {
-  min-height: 8rem;
+  min-height: 6rem;
   resize: vertical;
 }
 
@@ -90,7 +90,7 @@ textarea {
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 4rem;
+  max-width: 3rem;
   margin: 0.5rem;
   transition: transform 0.05s linear;
   border-radius: 0.25rem;

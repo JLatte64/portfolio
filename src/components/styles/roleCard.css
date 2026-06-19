@@ -32,6 +32,7 @@
   margin: 0;
   padding-bottom: 1rem;
   color: var(--accent);
+  text-align: start;
   width: 100%;
 }
 

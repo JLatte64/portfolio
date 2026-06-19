@@ -22,70 +22,71 @@ export function About() {
   }
 
   return (
-    <main>
-      <div className="about-content">
-        <section className="about-intro">
-          <p className="about-story">{purifyString(myinfo.aboutDescription)}</p>
-          <div className="about-photo-link">
-            {displayMedia(myinfo.aboutPhoto as Media, "about-photo", false)}
-            <a
-              href={resolveMediaSrc(myinfo.resume.pdf.content)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="resume-button button"
-            >
-              Download/View Resume (PDF)
-            </a>
-          </div>
-        </section>
-
-        <section className="about-roles">
-          <h2>Professional Experience</h2>
-          <CardGrid
-            className="role"
-            items={(myinfo?.resume.roles ?? []) as CardData[]}
-            renderComponent={ExperienceCard}
-          />
-        </section>
-        <section className="about-skills-software">
-          <div className="about-software">
-            <h2>Software</h2>
+    <>
+      <header className="about-intro">
+        <p className="about-story">{purifyString(myinfo.aboutDescription)}</p>
+        <div className="about-photo-link">
+          {displayMedia(myinfo.aboutPhoto as Media, "about-photo", false)}
+          <a
+            href={resolveMediaSrc(myinfo.resume.pdf.content)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="resume-button button"
+          >
+            Download/View Resume (PDF)
+          </a>
+        </div>
+      </header>
+      <main>
+        <div className="about-content">
+          <section className="about-roles">
+            <h2>Professional Experience</h2>
             <CardGrid
-              className="software"
-              items={(myinfo?.software ?? []) as CardData[]}
-              renderComponent={SoftwareCard}
+              className="role"
+              items={(myinfo?.resume.roles ?? []) as CardData[]}
+              renderComponent={ExperienceCard}
             />
-          </div>
-          <div className="about-skills">
-            <h2>Skills</h2>
-            <ul className="skills-container">
-              {myinfo.resume.skills.map((skill, skillIndex) => (
-                <li className="skill" key={skillIndex}>
-                  {purifyString(skill)}
+          </section>
+          <section className="about-skills-software">
+            <div className="about-software">
+              <h2>Software</h2>
+              <CardGrid
+                className="software"
+                items={(myinfo?.software ?? []) as CardData[]}
+                renderComponent={SoftwareCard}
+              />
+            </div>
+            <div className="about-skills">
+              <h2>Skills</h2>
+              <ul className="skills-container">
+                {myinfo.resume.skills.map((skill, skillIndex) => (
+                  <li className="skill" key={skillIndex}>
+                    {purifyString(skill)}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+          <section className="about-education">
+            <h2>Education</h2>
+            <CardGrid
+              className="education"
+              items={[myinfo?.education].filter(Boolean) as CardData[]}
+              renderComponent={EducationCard}
+            />
+          </section>
+          <section className="about-languages">
+            <h2>Languages</h2>
+            <ul className="about-lang-container">
+              {myinfo.languages.map((language, langIndex) => (
+                <li key={langIndex + language} className="about-lang">
+                  {purifyString(language)}
                 </li>
               ))}
             </ul>
-          </div>
-        </section>
-        <section className="about-education">
-          <h2>Education</h2>
-          <CardGrid
-            className="education"
-            items={[myinfo?.education].filter(Boolean) as CardData[]}
-            renderComponent={EducationCard}
-          />
-        </section>
-        <section className="about-languages">
-          <h2>Languages</h2>
-          <ul className="about-lang-container">
-            {myinfo.languages.map((language, langIndex) => (
-              <li key={langIndex + language} className="about-lang">
-                {purifyString(language)}
-              </li>
-            ))}
-          </ul>
-        </section>
-      </div>
-    </main>
+          </section>
+        </div>
+      </main>
+    </>
   );
 }
