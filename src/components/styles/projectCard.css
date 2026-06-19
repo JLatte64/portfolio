@@ -1,17 +1,14 @@
 .project-card-title {
   position: absolute;
-  padding: 0.75rem;
-  line-height: 1.25rem;
+  padding: 5%;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   color: var(--text-h);
-  font-weight: bold;
-  top: 0;
+  font-weight: 600;
+  top: -4%;
   left: 0;
-  background-color: rgb(0, 0, 0, 0.5);
-  transition: opacity 0.15s ease;
+  background-image: linear-gradient(0deg, transparent, var(--shadow));
+  transform: translate(0);
+  transition: transform 0.15s ease;
 }
 
 .project-card-thumbnail {
@@ -30,15 +27,27 @@
   overflow: hidden;
   border-radius: 0.25rem;
   border: 2px solid transparent;
-  transition: transform 0.15s ease;
-  transform: scale(1);
   flex-grow: 0;
   flex-shrink: 1;
   filter: drop-shadow(0px 0px 4px var(--shadow));
+  transform: scale(1);
+  transition: transform 0.15s ease;
 }
 
 .project-card-container:active {
   transform: scale(0.95);
+}
+
+.project-card-container:hover {
+  transform: scale(1.01);
+}
+
+.project-card-container:hover .project-card-title {
+  transform: translate(0, 4%);
+}
+
+.project-card-container:hover .project-card-thumbnail {
+  transform: translate(-50%, -50%) scale(1.25);
 }
 
 .about-button {
@@ -46,40 +55,15 @@
 }
 
 @media screen and (min-width: 600px) {
-  .project-card-title {
-    height: 100%;
-    opacity: 0;
-  }
-
-  .project-card-container:hover .project-card-thumbnail {
-    transform: translate(-50%, -50%) scale(1.25);
-  }
-
-  .project-card-container:hover .project-card-title {
-    opacity: 1;
-  }
-
   .project-card-container {
-    max-width: 27cqw;
-    flex-basis: 27cqw;
-  }
-}
-
-@media screen and (min-width: 600px) and (max-width: 800px) {
-  .project-card-container {
-    max-width: 46cqw;
-    flex-basis: 46cqw;
+    max-width: 33%;
+    flex-basis: 33%;
   }
 }
 
 @media screen and (max-width: 600px) {
-  .project-card-title {
-    height: fit-content;
-    opacity: 1;
-  }
-
   .project-card-container {
-    max-width: 86cqw;
-    flex-basis: 86cqw;
+    max-width: 90vw;
+    flex-basis: 90vw;
   }
 }

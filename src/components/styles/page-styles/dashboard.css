@@ -26,8 +26,8 @@
 
 .project-cards-container {
   width: 100%;
-  padding: 1rem;
-  margin: auto;
+  padding: 0.5rem;
+  margin: 0 auto;
   height: fit-content;
   display: flex;
   justify-content: center;

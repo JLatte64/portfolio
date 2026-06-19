@@ -8,6 +8,7 @@
 .hero-text > * {
   display: flex;
   align-items: center;
+  height: fit-content;
 }
 
 .hero-text {
@@ -19,10 +20,12 @@
   color: var(--accent);
   font-weight: bold;
   margin: 0;
+  padding: 0;
 }
 
 .name-title {
-  line-height: 2.5rem;
+  padding: 0.5rem 0;
+  margin: 0;
 }
 
 .hero-text-button {
@@ -62,6 +65,7 @@
   overflow: hidden;
   position: relative;
   background-color: black;
+  padding: 2% 5%;
 }
 
 @media screen and (min-width: 600px) {
@@ -85,10 +89,6 @@
   .hero-content-container {
     flex-direction: row;
   }
-
-  .hero {
-    padding: 10vh 8vw 10vh 8vw;
-  }
 }
 
 @media screen and (max-width: 600px) {
@@ -101,7 +101,6 @@
   .hero-text {
     gap: 1rem;
     flex-direction: column;
-    padding-bottom: 0.5rem;
   }
 
   .hero-text-button {
@@ -110,9 +109,5 @@
 
   .hero-content-container {
     flex-direction: column-reverse;
-  }
-
-  .hero {
-    padding: 10vh 8vw 10vh 8vw;
   }
 }

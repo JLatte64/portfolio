@@ -135,7 +135,7 @@
   height: fit-content;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  padding: 2%;
 }
 
 .about-content > section > h2 {
@@ -155,7 +155,7 @@
 @media screen and (min-width: 600px) {
   .about-skills-software > * {
     flex: 1;
-    width: 50cqw;
+    width: 50%;
   }
 
   .role-responsibility {
@@ -163,7 +163,7 @@
   }
 
   .about-photo {
-    max-width: 17cqw;
+    max-width: 15vw;
   }
 
   .about-photo-link {
@@ -172,7 +172,12 @@
 
   .about-intro > * {
     flex: 1;
-    max-width: 50cqw;
+    max-width: 50%;
+  }
+
+  .about-story {
+    flex: 1 1 60%;
+    max-width: 60%;
   }
 
   .about-intro {

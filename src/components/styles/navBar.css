@@ -1,5 +1,5 @@
 :root {
-  --navbar-height: 3rem;
+  --navbar-height: calc(3rem + 4px);
 }
 
 .nav-spacer {
@@ -21,16 +21,16 @@
   justify-content: space-between;
 }
 
+.nav-button.home,
+.nav-button.menu {
+  width: auto !important;
+}
+
 .nav-button,
 .nav-link {
   height: var(--navbar-height);
   line-height: var(--navbar-height);
   background-color: transparent;
-}
-
-.nav-button.home,
-.nav-button.menu {
-  width: auto !important;
 }
 
 .nav {
