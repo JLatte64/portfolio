@@ -1,10 +1,15 @@
+.project-media {
+  list-style-position: outside;
+  text-align: left;
+}
+
 .project-body-section-heading {
-  padding-bottom: 2%;
+  padding-bottom: 0;
   margin: 0;
 }
 
 .project-body-section > * {
-  padding-bottom: 2%;
+  padding-bottom: 1rem;
 }
 
 .project-body-section {
@@ -16,35 +21,47 @@
 .project-body {
   background-color: var(--bg);
   color: var(--text);
+  min-width: 200px;
 }
 
 .project-title {
-  padding: 4%;
+  padding: 1rem;
+  height: fit-content;
+  font-size: 1.5rem;
+  color: var(--accent);
+}
+
+.carousel-container {
+  max-height: 80%;
+  width: 100%;
   margin: 0;
-  color: var(--text-h);
-  background-color: var(--accent-bg);
-  border-bottom: 2px solid var(--accent);
+  padding: 0;
 }
 
 .carousel-title-container {
-  margin: auto auto;
-  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.project-container {
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
 }
 
 .project-dialog {
-  margin: auto;
+  margin: 0;
   padding: 0;
   max-width: 100vw;
   max-height: 100vh;
   border: none;
   color: var(--text-h);
   background-color: var(--accent-bg);
-}
-
-.project-close-button > * {
-  font-weight: bold;
-  font-size: 2rem;
-  color: var(--text-h);
 }
 
 .project-close-button {
@@ -57,6 +74,9 @@
   right: 1%;
   margin: 0.25rem;
   padding: 0;
+  font-weight: bold;
+  font-size: 2rem;
+  color: var(--text-h);
 }
 
 @media screen and (min-width: 600px) {
@@ -66,28 +86,14 @@
     overflow-y: scroll;
   }
 
-  .carousel-container {
-    height: 80%;
-    width: 100%;
-    margin: auto;
-  }
-
   .carousel-title-container {
-    width: 60%;
-    height: 80vh;
+    width: 55%;
+    height: 100%;
     margin: auto;
   }
 
   .project-container {
     height: 100vh;
-    overflow: hidden;
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .project-media {
-    list-style-position: outside;
-    text-align: left;
   }
 
   .project-dialog {
@@ -114,10 +120,6 @@
 
   .carousel-title-container {
     width: 100%;
-  }
-
-  .project-container {
-    height: fit-content;
   }
 
   .project-dialog {
