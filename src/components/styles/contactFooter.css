@@ -8,9 +8,11 @@
   position: relative;
   display: block;
   bottom: 0;
+  left: 0;
   border-bottom: 2px solid var(--accent);
   border-top: 2px solid var(--accent);
   background-color: var(--bg);
+  height: fit-content;
 }
 
 .contact-content > p {
