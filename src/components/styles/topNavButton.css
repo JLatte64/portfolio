@@ -1,10 +1,12 @@
 .top-nav-button {
+  border-radius: 1.5rem;
   font-size: 3rem;
   padding: 0;
   margin: 0;
   bottom: 0rem;
-  right: 0rem;
+  left: 0rem;
   background-color: transparent;
-  color: var(--accent);
+  color: var(--text-h);
   transition: opacity 0.15s ease;
+  background-color: var(--accent);
 }

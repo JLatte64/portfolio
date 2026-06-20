@@ -64,18 +64,21 @@
   background-color: var(--accent-bg);
 }
 
+.project-close-button > * {
+  font-weight: bold;
+  font-size: 2.5rem;
+}
+
 .project-close-button {
   position: fixed;
   background-color: var(--accent);
   border: none;
-  border-radius: 1rem;
+  border-radius: 1.25rem;
   display: flex;
-  bottom: 1%;
-  right: 1%;
+  bottom: 0;
+  left: 0;
   margin: 0.25rem;
   padding: 0;
-  font-weight: bold;
-  font-size: 2rem;
   color: var(--text-h);
 }
 

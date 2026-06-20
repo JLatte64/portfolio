@@ -6,38 +6,44 @@ import { ContactFooter } from "./components/ContactFooter";
 import { NavBar } from "./components/NavBar";
 import TopNavButton from "./components/TopNavButton";
 
-const pageElements = [
-  {
-    path: getPagePath("dashboard"),
-    element: <Dashboard />,
-  },
-  {
-    path: ":projectName",
-    element: <Dashboard />,
-  },
-  {
-    path: getPagePath("about"),
-    element: <About />,
-  },
-];
+function RootLayout() {
+  return (
+    <>
+      <div className="nav-spacer" />
+      <Outlet />
+      <footer>
+        <ContactFooter />
+      </footer>
+      <TopNavButton />
+      <NavBar />
+    </>
+  );
+}
 
-export const pageRouter = createBrowserRouter([
+export const pageRouter = createBrowserRouter(
+  [
+    {
+      element: <RootLayout />,
+      children: [
+        {
+          path: getPagePath("dashboard"),
+          element: <Dashboard />,
+        },
+        {
+          path: getPagePath("about"),
+          element: <About />,
+        },
+        {
+          path: ":projectName",
+          element: <Dashboard />,
+        },
+      ],
+    },
+  ],
   {
-    path: getPagePath("dashboard"),
-    element: (
-      <>
-        <div className="nav-spacer" />
-        <Outlet />
-        <footer>
-          <ContactFooter />
-        </footer>
-        <TopNavButton />
-        <NavBar />
-      </>
-    ),
-    children: pageElements,
+    basename: "/portfolio",
   },
-]);
+);
 
 export default function App() {
   return <RouterProvider router={pageRouter} />;
