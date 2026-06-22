@@ -9,6 +9,7 @@ import { projects } from "../data/projects.json";
 import ProjectCard from "../components/ProjectCard";
 import type { ProjectData } from "../components/types/ProjectTypes";
 import type { CardData } from "../components/types/CardTypes";
+import { projectSlugs } from "../components/ProjectSlugs";
 
 const generateSlug = (title: string | undefined) => {
   if (!title) return "";
@@ -39,6 +40,14 @@ export function Dashboard() {
       if (dialog.open) dialog.close();
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    if (!projectName) return;
+    if (openProject && generateSlug(openProject.title) === projectName) return;
+
+    const found = projectSlugs.get(projectName);
+    if (found) setOpenProject(found);
+  }, [projectName]);
 
   const handleClose = () => {
     navigate(getPagePath("dashboard"), { preventScrollReset: true });

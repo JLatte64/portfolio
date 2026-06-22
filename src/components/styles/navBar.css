@@ -54,7 +54,6 @@
   top: 0;
   left: 0;
   backdrop-filter: blur(5px);
-  pointer-events: none;
 }
 
 @media screen and (max-width: 600px) {
@@ -76,6 +75,10 @@
     width: 100%;
   }
 
+  .project-button {
+    visibility: visible;
+  }
+
   .mobile-background {
     display: inline-block;
   }
@@ -94,6 +97,10 @@
   }
 
   .nav-button.menu {
+    display: none;
+  }
+
+  .project-button {
     display: none;
   }
 

@@ -2,19 +2,30 @@ import { Link } from "react-router";
 import "../components/styles/navBar.css";
 import { useState } from "react";
 import { getPagePath } from "./functions/GetPagePath";
+import { projectSlugs } from "./ProjectSlugs";
 
 export function NavBar() {
   const [mobileMenuOpen, toggleMobileMenu] = useState(false);
 
   return (
     <>
-      {mobileMenuOpen ? <span className="mobile-background" /> : null}
+      {mobileMenuOpen ? (
+        <span
+          className="mobile-background"
+          onClick={() => {
+            toggleMobileMenu(!mobileMenuOpen);
+          }}
+        />
+      ) : null}
 
       <nav className="nav">
         <Link
-          to={getPagePath("home")}
+          to={`${getPagePath("home")}#top`}
           aria-label="Home button"
           className="button nav-button home"
+          onClick={() => {
+            window.scrollTo({ top: 0 });
+          }}
         >
           <span className="material-icons">home</span>
           <h2 className="site-title">Portfolio - Jordan Latta</h2>
@@ -36,13 +47,14 @@ export function NavBar() {
           }
         >
           <Link
-            to={getPagePath("about")}
+            to={`${getPagePath("about")}`}
             className="button nav-button"
             onClick={() => {
               toggleMobileMenu(false);
+              window.scrollTo({ top: 0 });
             }}
           >
-            <h2>Resume / About</h2>
+            <h2>About/Resume</h2>
           </Link>
           <a
             href="#contact"
@@ -53,6 +65,16 @@ export function NavBar() {
           >
             <h2>Contact</h2>
           </a>
+          {[...projectSlugs.entries()].map(([slug, project]) => (
+            <Link
+              key={slug}
+              to={`/${slug}`}
+              className={"button nav-button project-button"}
+              onClick={() => toggleMobileMenu(false)}
+            >
+              <h2>{project.title}</h2>
+            </Link>
+          ))}
         </div>
       </nav>
     </>
