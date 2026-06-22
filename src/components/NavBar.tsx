@@ -19,62 +19,64 @@ export function NavBar() {
       ) : null}
 
       <nav className="nav">
-        <Link
-          to={`${getPagePath("home")}#top`}
-          aria-label="Home button"
-          className="button nav-button home"
-          onClick={() => {
-            window.scrollTo({ top: 0 });
-          }}
-        >
-          <span className="material-icons">home</span>
-          <h2 className="site-title">Portfolio - Jordan Latta</h2>
-        </Link>
-
-        <button
-          className="button material-icons nav-button menu"
-          aria-hidden="true"
-          onClick={() => {
-            toggleMobileMenu(!mobileMenuOpen);
-          }}
-        >
-          {mobileMenuOpen ? "close" : " menu"}
-        </button>
-
-        <div
-          className={
-            "nav-links-container" + (mobileMenuOpen ? " show" : " hide")
-          }
-        >
+        <div className="nav-content-container">
           <Link
-            to={`${getPagePath("about")}`}
-            className="button nav-button"
+            to={`${getPagePath("home")}#top`}
+            aria-label="Home button"
+            className="button nav-button home"
             onClick={() => {
-              toggleMobileMenu(false);
               window.scrollTo({ top: 0 });
             }}
           >
-            <h2>About/Resume</h2>
+            <span className="material-icons">home</span>
+            <h2 className="site-title">Portfolio - Jordan Latta</h2>
           </Link>
-          <a
-            href="#contact"
-            className="button nav-button"
+
+          <button
+            className="button material-icons nav-button menu"
+            aria-hidden="true"
             onClick={() => {
-              toggleMobileMenu(false);
+              toggleMobileMenu(!mobileMenuOpen);
             }}
           >
-            <h2>Contact</h2>
-          </a>
-          {[...projectSlugs.entries()].map(([slug, project]) => (
+            {mobileMenuOpen ? "close" : " menu"}
+          </button>
+
+          <div
+            className={
+              "nav-links-container" + (mobileMenuOpen ? " show" : " hide")
+            }
+          >
             <Link
-              key={slug}
-              to={`/${slug}`}
-              className={"button nav-button project-button"}
-              onClick={() => toggleMobileMenu(false)}
+              to={`${getPagePath("about")}`}
+              className="button nav-button"
+              onClick={() => {
+                toggleMobileMenu(false);
+                window.scrollTo({ top: 0 });
+              }}
             >
-              <h2>{project.title}</h2>
+              <h2>About/Resume</h2>
             </Link>
-          ))}
+            <a
+              href="#contact"
+              className="button nav-button"
+              onClick={() => {
+                toggleMobileMenu(false);
+              }}
+            >
+              <h2>Contact</h2>
+            </a>
+            {[...projectSlugs.entries()].map(([slug, project]) => (
+              <Link
+                key={slug}
+                to={`/${slug}`}
+                className={"button nav-button project-button"}
+                onClick={() => toggleMobileMenu(false)}
+              >
+                <h2>{project.title}</h2>
+              </Link>
+            ))}
+          </div>
         </div>
       </nav>
     </>
