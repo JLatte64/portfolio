@@ -31,15 +31,18 @@
 .education-card-header {
   margin: 0;
   padding-bottom: 1rem;
-  color: var(--accent);
+  color: var(--text-h);
   width: 100%;
+}
+
+.education-card-body > *::marker {
+  color: var(--accent);
 }
 
 .education-card-body {
   margin-top: 0;
   padding-top: 0;
   text-align: left;
-  border-left: 1vw solid var(--accent);
-  border-radius: 0.25rem;
+  border-left: 2px solid var(--accent);
   color: var(--text);
 }

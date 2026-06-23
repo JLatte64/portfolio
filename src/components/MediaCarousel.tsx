@@ -28,7 +28,7 @@ export function MediaCarousel({ srcArray }: { srcArray: Array<Media> }) {
           <div className="slides-container">
             {srcArray.map((media, index) => (
               <div className="slide" key={index}>
-                {showMedia(media)}
+                {showMedia(media, "")}
               </div>
             ))}
           </div>

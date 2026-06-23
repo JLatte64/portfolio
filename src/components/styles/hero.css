@@ -1,6 +1,6 @@
 .hero-photo {
   border-radius: 0.25rem;
-  border: 2px solid var(--accent);
+  border: 2px solid var(--text);
   block-size: auto;
 }
 

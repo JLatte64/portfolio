@@ -31,9 +31,13 @@
 .role-card-header {
   margin: 0;
   padding-bottom: 1rem;
-  color: var(--accent);
+  color: var(--text-h);
   text-align: start;
   width: 100%;
+}
+
+.role-card-body > *::marker {
+  color: var(--accent);
 }
 
 .role-card-body {
@@ -42,7 +46,6 @@
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   text-align: left;
-  border-left: 1vw solid var(--accent);
-  border-radius: 0.25rem;
+  border-left: 2px solid var(--accent);
   color: var(--text);
 }

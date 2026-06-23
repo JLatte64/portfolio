@@ -26,11 +26,22 @@ export default function displayMedia(
   shouldLazyLoad: boolean = true,
   mediaIndex?: number,
 ) {
-  const mediaClass = `base-style ${className || "project-media"}`;
+  const mediaClass = `${className}`;
 
   const loadingStrategy = shouldLazyLoad ? "lazy" : "eager";
 
   switch (media?.mediaType) {
+    case "code": {
+      const code = purifyString(media?.content as string);
+      return (
+        <code
+          className={mediaClass}
+          key={`${media.mediaType}-${mediaIndex}-${code}`}
+        >
+          {code}
+        </code>
+      );
+    }
     case "paragraph": {
       const text = purifyString(media?.content as string);
       return (

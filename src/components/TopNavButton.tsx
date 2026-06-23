@@ -20,7 +20,7 @@ export default function TopNavButton() {
   return (
     <a
       href="#top"
-      className={`material-icons button overlay-button top-nav-button ${isAtTop ? "hidden" : "visible"}`}
+      className={`material-icons button top-nav-button ${isAtTop ? "hidden" : "visible"}`}
       aria-label="Back to top"
     >
       arrow_circle_up

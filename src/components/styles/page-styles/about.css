@@ -114,7 +114,7 @@
 
 .about-photo {
   border-radius: var(--border-radius);
-  border: 2px solid var(--accent);
+  border: 2px solid var(--text);
 }
 
 .about-photo-link {
@@ -125,7 +125,7 @@
 }
 
 .about-story {
-  padding: 1.5rem;
+  padding: 1rem;
   background-color: var(--bg);
   border-radius: var(--border-radius);
 }

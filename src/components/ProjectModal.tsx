@@ -1,7 +1,6 @@
 import MediaCarousel from "./MediaCarousel";
 import displayMedia from "./functions/DisplayMedia";
 import "../components/styles/projectModal.css";
-import "../components/styles/projectMedia.css";
 import { type RefObject } from "react";
 import purifyString from "./functions/PurifyString";
 import type { ProjectData } from "./types/ProjectTypes";
@@ -47,14 +46,9 @@ export function ProjectModal({
                   {purifyString(bodySection.sectionHeading)}
                 </h4>
 
-                {(bodySection.sectionMedia ?? []).map((media, mediaIndex) => (
-                  <div
-                    className="pj-body-media-container"
-                    key={`${secIndex}-${mediaIndex}`}
-                  >
-                    <div>{displayMedia(media)}</div>
-                  </div>
-                ))}
+                {(bodySection.sectionMedia ?? []).map((media, mediaIndex) =>
+                  displayMedia(media, "project-media", true, mediaIndex),
+                )}
               </div>
             ))}
           </div>

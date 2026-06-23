@@ -1,11 +1,24 @@
 import { Link } from "react-router";
 import "../components/styles/navBar.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getPagePath } from "./functions/GetPagePath";
 import { projectSlugs } from "./ProjectSlugs";
 
 export function NavBar() {
   const [mobileMenuOpen, toggleMobileMenu] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 600) {
+        toggleMobileMenu(false);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <>
@@ -25,6 +38,7 @@ export function NavBar() {
             aria-label="Home button"
             className="button nav-button home"
             onClick={() => {
+              toggleMobileMenu(false);
               window.scrollTo({ top: 0 });
             }}
           >
