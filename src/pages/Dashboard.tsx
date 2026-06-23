@@ -77,7 +77,11 @@ export function Dashboard() {
               <h2>Portfolio</h2>
               <CardGrid
                 className="project"
-                items={(projects ?? []) as CardData[]}
+                items={
+                  (projects ?? []).map((p) =>
+                    injectProjectIds(p as ProjectData),
+                  ) as CardData<ProjectData>[]
+                }
                 renderComponent={ProjectCard}
                 onClick={(clickedItem) => {
                   const projectData = clickedItem as unknown as ProjectData;
