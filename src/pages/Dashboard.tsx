@@ -8,7 +8,7 @@ import { getPagePath } from "../components/functions/GetPagePath";
 import { projects } from "../data/projects.json";
 import ProjectCard from "../components/cards/ProjectCard";
 import type { ProjectData } from "../components/types/ProjectTypes";
-import type { CardData } from "../components/types/CardTypes";
+import type { CardData } from "../components/cards/Card";
 import { projectSlugs } from "../components/ProjectSlugs";
 import { useDashboardState } from "../components/DashboardContext";
 
