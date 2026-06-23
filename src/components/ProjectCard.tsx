@@ -24,7 +24,8 @@ export default function ProjectCard({
         alt={data.thumbnail?.alt ?? ""}
         className={`${className}-card-thumbnail`.trim()}
       />
-      <span className={`${className}-card-title`.trim()}>
+      <span className={`${className}-card-title-background`.trim()}></span>
+      <span className={`${className}-card-title`}>
         {purifyString(data.title)}
       </span>
     </Card>
