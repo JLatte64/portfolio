@@ -1,0 +1,19 @@
+.skill-card-container {
+  background-color: var(--accent-bg);
+  list-style: none;
+  list-style-position: inside;
+  text-align: center;
+  flex: 1 1 auto;
+  max-width: fit-content;
+  height: fit-content;
+  padding: 0 0.25rem;
+  margin: 0;
+  font-size: 2cqw;
+  border-radius: var(--border-radius);
+  filter: brightness(1);
+  transition: filter 0.05s ease;
+}
+
+.skill-card-container:hover {
+  filter: brightness(1.1);
+}

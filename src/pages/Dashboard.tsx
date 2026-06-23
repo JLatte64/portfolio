@@ -1,53 +1,66 @@
 import "../components/styles/page-styles/dashboard.css";
 import Hero from "../components/Hero";
-import { CardGrid } from "../components/CardGrid";
+import { CardGrid } from "../components/cards/CardGrid";
 import ProjectModal from "../components/ProjectModal";
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router";
 import { getPagePath } from "../components/functions/GetPagePath";
 import { projects } from "../data/projects.json";
-import ProjectCard from "../components/ProjectCard";
+import ProjectCard from "../components/cards/ProjectCard";
 import type { ProjectData } from "../components/types/ProjectTypes";
 import type { CardData } from "../components/types/CardTypes";
 import { projectSlugs } from "../components/ProjectSlugs";
+import { useDashboardState } from "../components/DashboardContext";
 
-const generateSlug = (title: string | undefined) => {
-  if (!title) return "";
-  return title
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .replace(/\s+/g, "-");
+const injectProjectIds = (project: ProjectData): ProjectData => {
+  const entries = Array.from(projectSlugs.entries());
+  const foundEntry = entries.find(([_, p]) => p.title === project.title);
+  const cleanTitle = foundEntry ? foundEntry[0] : "project";
+
+  return {
+    ...project,
+    id: project.id || `proj-${cleanTitle}`,
+    bodySections: (project.bodySections ?? []).map((section, secIndex) => ({
+      ...section,
+      id: section.id || `sec-${cleanTitle}-${secIndex}`,
+      sectionMedia: (section.sectionMedia ?? []).map((media, mediaIndex) => ({
+        ...media,
+        id: media.id || `media-${cleanTitle}-${secIndex}-${mediaIndex}`,
+      })),
+    })),
+  };
 };
 
 export function Dashboard() {
-  const [openProject, setOpenProject] = useState<ProjectData>();
   const dialogRef = useRef<HTMLDialogElement>(null);
   const navigate = useNavigate();
   const { projectName } = useParams();
 
-  const currentProjectSlug = openProject ? generateSlug(openProject.title) : "";
-  const isOpen = Boolean(
-    projectName && currentProjectSlug && projectName === currentProjectSlug,
-  );
+  const { scrollPosition, setScrollPosition } = useDashboardState();
 
-  useEffect(() => {
-    const dialog = dialogRef.current;
-    if (!dialog) return;
+  const matchedProject = projectName
+    ? projectSlugs.get(projectName)
+    : undefined;
+  const openProject = matchedProject
+    ? injectProjectIds(matchedProject)
+    : undefined;
+  const isOpen = Boolean(openProject);
 
-    if (isOpen) {
-      if (!dialog.open) dialog.showModal();
-    } else {
-      if (dialog.open) dialog.close();
+  useLayoutEffect(() => {
+    if (!isOpen && scrollPosition > 0) {
+      let frameId: number;
+
+      const performScroll = () => {
+        window.scrollTo({
+          top: scrollPosition,
+          behavior: "auto",
+        });
+      };
+
+      frameId = requestAnimationFrame(performScroll);
+      return () => cancelAnimationFrame(frameId);
     }
-  }, [isOpen]);
-
-  useEffect(() => {
-    if (!projectName) return;
-    if (openProject && generateSlug(openProject.title) === projectName) return;
-
-    const found = projectSlugs.get(projectName);
-    if (found) setOpenProject(found);
-  }, [projectName]);
+  }, [isOpen, scrollPosition]);
 
   const handleClose = () => {
     navigate(getPagePath("dashboard"), { preventScrollReset: true });
@@ -55,37 +68,50 @@ export function Dashboard() {
 
   return (
     <>
-      <Hero />
+      {!isOpen && <Hero />}
+
       <main>
         <div className="home-content">
-          <section id="project-links">
-            <h2>Portfolio</h2>
-            <CardGrid
-              className="project"
-              items={(projects ?? []) as CardData[]}
-              renderComponent={ProjectCard}
-              onClick={(clickedItem) => {
-                const projectData = clickedItem as unknown as ProjectData;
-                const projectSlug = generateSlug(projectData.title);
+          {!isOpen ? (
+            <section id="project-links">
+              <h2>Portfolio</h2>
+              <CardGrid
+                className="project"
+                items={(projects ?? []) as CardData[]}
+                renderComponent={ProjectCard}
+                onClick={(clickedItem) => {
+                  const projectData = clickedItem as unknown as ProjectData;
 
-                setOpenProject(projectData);
+                  const entries = Array.from(projectSlugs.entries());
+                  const match = entries.find(
+                    ([_, p]) => p.title === projectData.title,
+                  );
+                  const projectSlug = match ? match[0] : "";
 
-                navigate(`${getPagePath("dashboard")}/${projectSlug}`, {
-                  preventScrollReset: true,
-                });
-              }}
-            />
-            <div onClick={(e) => e.stopPropagation()}>
-              <ProjectModal
-                modalData={openProject}
-                isOpen={isOpen}
-                dialogRef={dialogRef}
-                handleClose={handleClose}
+                  setScrollPosition(window.scrollY);
+
+                  if (projectSlug) {
+                    navigate(`${getPagePath("dashboard")}/${projectSlug}`, {
+                      preventScrollReset: true,
+                    });
+                  }
+                }}
               />
-            </div>
-          </section>
+            </section>
+          ) : (
+            <div style={{ display: "none" }} />
+          )}
         </div>
       </main>
+
+      <div onClick={(e) => e.stopPropagation()}>
+        <ProjectModal
+          modalData={openProject}
+          isOpen={isOpen}
+          dialogRef={dialogRef}
+          handleClose={handleClose}
+        />
+      </div>
     </>
   );
 }

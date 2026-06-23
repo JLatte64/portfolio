@@ -1,8 +1,8 @@
 import { Card } from "./Card";
-import "./styles/projectCard.css";
-import purifyString from "./functions/PurifyString";
-import type { CardData } from "./types/CardTypes";
-import type { ProjectData } from "./types/ProjectTypes";
+import "../styles/card-styles/projectCard.css";
+import purifyString from "../functions/PurifyString";
+import type { CardData } from "../cards/Card";
+import type { ProjectData } from "../types/ProjectTypes";
 
 interface ProjectCardProps {
   cardData: CardData;

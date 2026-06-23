@@ -1,4 +1,4 @@
-.role-card-container {
+.education-card-container {
   padding: 1rem;
   width: 100%;
   flex: 0 1 100%;
@@ -8,17 +8,17 @@
   transition: filter 0.05s ease;
 }
 
-.role-card-container:hover {
+.education-card-container:hover {
   filter: brightness(1.1);
 }
 
-.role-card-header > * > h3 {
+.education-card-header > * > h3 {
   color: var(--text-h);
   margin: 0;
   padding: 0;
 }
 
-.role-card-header > * {
+.education-card-header > * {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -28,7 +28,7 @@
   padding: 0;
 }
 
-.role-card-header {
+.education-card-header {
   margin: 0;
   padding-bottom: 0.5rem;
   color: var(--text-h);
@@ -36,15 +36,15 @@
   width: 100%;
 }
 
-.role-card-body > *::marker {
+.education-card-body > *::marker {
   color: var(--accent);
 }
 
-.role-card-body {
+.education-card-body {
   margin-top: 0;
   margin-bottom: 0;
   padding-top: 0rem;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0rem;
   text-align: left;
   border-left: 2px solid var(--accent);
   color: var(--text);

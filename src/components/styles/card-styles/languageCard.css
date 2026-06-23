@@ -1,0 +1,16 @@
+.lang-card-container {
+  list-style-position: inside;
+  list-style: none;
+  text-align: start;
+  width: fit-content;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  text-align: center;
+  background-color: var(--bg);
+  filter: brightness(1);
+  transition: filter 0.05s ease;
+}
+
+.lang-card-container:hover {
+  filter: brightness(1.1);
+}

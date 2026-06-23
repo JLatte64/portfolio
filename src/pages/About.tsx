@@ -6,11 +6,19 @@ import displayMedia, {
 import type { Media } from "../components/types/MediaTypes";
 import { myinfo } from "../data/myinfo.json";
 import purifyString from "../components/functions/PurifyString";
-import { CardGrid } from "../components/CardGrid";
-import ExperienceCard from "../components/RoleCard";
-import type { CardData } from "../components/types/CardTypes";
-import SoftwareCard from "../components/SoftwareCard";
-import EducationCard from "../components/EducationCard";
+import { CardGrid } from "../components/cards/CardGrid";
+import type { CardData } from "../components/cards/Card";
+import RoleCard, { type RoleCardData } from "../components/cards/RoleCard";
+import SoftwareCard, {
+  type SoftwareCardData,
+} from "../components/cards/SoftwareCard";
+import EducationCard, {
+  type EducationCardData,
+} from "../components/cards/EducationCard";
+import LanguageCard, {
+  type LangCardData,
+} from "../components/cards/LanguageCard";
+import SkillCard, { type SkillCardData } from "../components/cards/SkillCard";
 
 export function About() {
   if (!myinfo) {
@@ -43,47 +51,74 @@ export function About() {
             <h2>Professional Experience</h2>
             <CardGrid
               className="role"
-              items={(myinfo?.resume.roles ?? []) as CardData[]}
-              renderComponent={ExperienceCard}
+              items={
+                (myinfo?.resume.roles ?? []).map((role, idx) => ({
+                  ...role,
+                  id: (role as any).id || `role-${idx}`,
+                })) as CardData<RoleCardData>[]
+              }
+              renderComponent={RoleCard}
             />
           </section>
+
           <section className="about-skills-software">
             <div className="about-software">
               <h2>Software</h2>
               <CardGrid
                 className="software"
-                items={(myinfo?.software ?? []) as CardData[]}
+                items={
+                  (myinfo?.software ?? []).map((soft, idx) => ({
+                    ...soft,
+                    id:
+                      (soft as any).id ||
+                      `soft-${soft.ariaLabel.toLowerCase()}-${idx}`,
+                  })) as CardData<SoftwareCardData>[]
+                }
                 renderComponent={SoftwareCard}
               />
             </div>
+
             <div className="about-skills">
               <h2>Skills</h2>
-              <ul className="skills-container">
-                {myinfo.resume.skills.map((skill, skillIndex) => (
-                  <li className="skill" key={skillIndex}>
-                    {purifyString(skill)}
-                  </li>
-                ))}
-              </ul>
+              <CardGrid
+                className="skill"
+                items={
+                  (myinfo?.resume.skills ?? []).map((skill, idx) => ({
+                    skill: skill,
+                    id: `skill-${idx}`,
+                  })) as CardData<SkillCardData>[]
+                }
+                renderComponent={SkillCard}
+              />
             </div>
           </section>
+
           <section className="about-education">
             <h2>Education</h2>
             <CardGrid
               className="education"
-              items={[myinfo?.education].filter(Boolean) as CardData[]}
+              items={
+                [myinfo?.education].filter(Boolean).map((edu, idx) => ({
+                  ...edu,
+                  id: (edu as any).id || `edu-${idx}`,
+                })) as CardData<EducationCardData>[]
+              }
               renderComponent={EducationCard}
             />
           </section>
+
           <section className="about-languages">
             <h2>Languages</h2>
-            <ul className="about-lang-container">
-              {myinfo.languages.map((language, langIndex) => (
-                <li key={langIndex + language} className="about-lang">
-                  {purifyString(language)}
-                </li>
-              ))}
-            </ul>
+            <CardGrid
+              className="lang"
+              items={
+                (myinfo?.languages ?? []).map((language, idx) => ({
+                  lang: language,
+                  id: `lang-${idx}`,
+                })) as CardData<LangCardData>[]
+              }
+              renderComponent={LanguageCard}
+            />
           </section>
         </div>
       </main>

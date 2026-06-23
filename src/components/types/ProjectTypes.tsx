@@ -1,6 +1,7 @@
 import type { ImageData, Media } from "./MediaTypes";
 
 export interface ProjectData {
+  id: string;
   title: string;
   thumbnail: ImageData;
   tags: string[];
@@ -8,7 +9,8 @@ export interface ProjectData {
   bodySections?: ProjectSectionData[];
 }
 
-export type ProjectSectionData = {
+export interface ProjectSectionData {
+  id: string;
   sectionHeading: string;
   sectionMedia: Media[];
-};
+}

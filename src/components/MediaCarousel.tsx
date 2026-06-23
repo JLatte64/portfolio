@@ -1,10 +1,19 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, useId, useRef } from "react"; // Imported React for Fragment usage
 import "./styles/mediaCarousel.css";
 import useEmblaCarousel from "embla-carousel-react";
 import type { Media } from "./types/MediaTypes";
-import showMedia from "./functions/DisplayMedia";
+import displayMedia from "./functions/DisplayMedia";
 
-export function MediaCarousel({ srcArray }: { srcArray: Array<Media> }) {
+export function MediaCarousel({
+  srcArray,
+  projectName,
+}: {
+  srcArray: Array<Media>;
+  projectName: string;
+}) {
+  const instanceId = useId();
+  const carouselContainerRef = useRef<HTMLDivElement>(null);
+
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     align: "center",
@@ -16,54 +25,113 @@ export function MediaCarousel({ srcArray }: { srcArray: Array<Media> }) {
   const scrollNext = () => emblaApi?.scrollNext();
 
   useEffect(() => {
-    emblaApi?.on("select", () => {
+    if (!emblaApi) return;
+
+    const handleSelect = () => {
       setCurrentSlide(emblaApi.selectedScrollSnap());
-    });
-  });
+    };
+
+    emblaApi.on("select", handleSelect);
+
+    return () => {
+      emblaApi.off("select", handleSelect);
+    };
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (!carouselContainerRef.current?.contains(document.activeElement)) {
+        return;
+      }
+
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        emblaApi.scrollPrev();
+      } else if (event.key === "ArrowRight") {
+        event.preventDefault();
+        emblaApi.scrollNext();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [emblaApi]);
+
+  const cleanProjectName = (projectName ?? "project")
+    .replace(/\s+/g, "-")
+    .toLowerCase();
+  const carouselKeyPrefix = `${cleanProjectName}-${instanceId}`;
+  const showControls = srcArray && srcArray.length > 1;
 
   return (
-    <div className="carousel">
+    <div
+      className="carousel"
+      ref={carouselContainerRef}
+      tabIndex={0}
+      aria-label={`${projectName ?? "Media"} gallery carousel`}
+    >
       <div className="carousel-viewport-buttons-container">
         <div className="carousel-viewport" ref={emblaRef}>
           <div className="slides-container">
-            {srcArray.map((media, index) => (
-              <div className="slide" key={index}>
-                {showMedia(media, "")}
-              </div>
-            ))}
+            {srcArray.map((media, index) => {
+              const slideContentToken = `${carouselKeyPrefix}-slide-item-${index}`;
+
+              return (
+                <div
+                  className="slide"
+                  key={media.id || `${carouselKeyPrefix}-slide-${index}`}
+                >
+                  <React.Fragment key={media.id || slideContentToken}>
+                    {displayMedia(media, "")}
+                  </React.Fragment>
+                </div>
+              );
+            })}
           </div>
         </div>
-        <div className="carousel-buttons-container">
-          <button
-            className="material-icons carousel-button left"
-            onClick={scrollPrev}
-          >
-            chevron_left
-          </button>
-          <button
-            className="material-icons carousel-button right"
-            onClick={scrollNext}
-          >
-            chevron_right
-          </button>
-        </div>
-      </div>
-      <div className="carousel-indicators-container">
-        {srcArray?.map((srcElement, index) =>
-          !srcElement ? null : (
+        {showControls && (
+          <div className="carousel-buttons-container">
             <button
-              className={
-                "carousel-indicator" +
-                (currentSlide === index ? " active" : " inactive")
-              }
-              onClick={() => {
-                scrollTo(index);
-              }}
-              key={index}
-            />
-          ),
+              className="material-icons carousel-button left"
+              onClick={scrollPrev}
+              aria-label="Previous slide"
+            >
+              chevron_left
+            </button>
+            <button
+              className="material-icons carousel-button right"
+              onClick={scrollNext}
+              aria-label="Next slide"
+            >
+              chevron_right
+            </button>
+          </div>
         )}
       </div>
+      {showControls && (
+        <div className="carousel-indicators-container">
+          {srcArray?.map((srcElement, index) =>
+            !srcElement ? null : (
+              <button
+                className={
+                  "carousel-indicator" +
+                  (currentSlide === index ? " active" : " inactive")
+                }
+                onClick={() => {
+                  scrollTo(index);
+                }}
+                key={`${carouselKeyPrefix}-indicator-${index}`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ),
+          )}
+        </div>
+      )}
     </div>
   );
 }

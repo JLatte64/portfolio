@@ -1,12 +1,25 @@
 import { getPagePath } from "./components/functions/GetPagePath";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router";
+import {
+  createBrowserRouter,
+  Outlet,
+  RouterProvider,
+  useParams,
+} from "react-router";
 import { Dashboard } from "./pages/Dashboard";
 import { About } from "./pages/About";
 import { ContactFooter } from "./components/ContactFooter";
 import { NavBar } from "./components/NavBar";
 import TopNavButton from "./components/TopNavButton";
+import { DashboardProvider } from "./components/DashboardContext";
 
 function RootLayout() {
+  const { projectName } = useParams();
+  const isFullscreenProjectActive = Boolean(projectName);
+
+  if (isFullscreenProjectActive) {
+    return <Outlet />;
+  }
+
   return (
     <>
       <div className="nav-spacer" />
@@ -20,7 +33,7 @@ function RootLayout() {
   );
 }
 
-export const pageRouter = createBrowserRouter(
+const pageRouter = createBrowserRouter(
   [
     {
       element: <RootLayout />,
@@ -46,5 +59,9 @@ export const pageRouter = createBrowserRouter(
 );
 
 export default function App() {
-  return <RouterProvider router={pageRouter} />;
+  return (
+    <DashboardProvider>
+      <RouterProvider router={pageRouter} />
+    </DashboardProvider>
+  );
 }

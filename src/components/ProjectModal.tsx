@@ -1,7 +1,7 @@
+import React, { type RefObject, useEffect } from "react";
 import MediaCarousel from "./MediaCarousel";
 import displayMedia from "./functions/DisplayMedia";
 import "../components/styles/projectModal.css";
-import { type RefObject } from "react";
 import purifyString from "./functions/PurifyString";
 import type { ProjectData } from "./types/ProjectTypes";
 
@@ -18,6 +18,17 @@ export function ProjectModal({
   handleClose,
   isOpen,
 }: ProjectModalProps) {
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
+    if (isOpen) {
+      if (!dialog.open) dialog.showModal();
+    } else {
+      if (dialog.open) dialog.close();
+    }
+  }, [isOpen, dialogRef]);
+
   return (
     <dialog
       className="project-dialog"
@@ -31,35 +42,67 @@ export function ProjectModal({
         }
       }}
     >
-      {isOpen && modalData && (
-        <div className="project-container">
-          <div className="carousel-title-container">
-            <h3 className="project-title">{purifyString(modalData.title)}</h3>
-            <div className="carousel-container">
-              <MediaCarousel srcArray={modalData.showcaseMedia ?? []} />
-            </div>
-          </div>
-          <div className="project-body">
-            {(modalData.bodySections ?? []).map((bodySection, secIndex) => (
-              <div className="project-body-section" key={secIndex}>
-                <h4 className="project-body-section-heading">
-                  {purifyString(bodySection.sectionHeading)}
-                </h4>
+      {modalData &&
+        (() => {
+          const cleanProjectName =
+            (purifyString(modalData.title) as string)
+              ?.toLowerCase()
+              ?.replace(/[^a-z0-9\s-]/g, "")
+              ?.replace(/\s+/g, "-") || "project";
 
-                {(bodySection.sectionMedia ?? []).map((media, mediaIndex) =>
-                  displayMedia(media, "project-media", true, mediaIndex),
-                )}
+          return (
+            <div className="project-container">
+              <div className="carousel-title-container">
+                <h3 className="project-title">
+                  {purifyString(modalData.title)}
+                </h3>
+                <div className="carousel-container">
+                  <MediaCarousel
+                    srcArray={modalData.showcaseMedia ?? []}
+                    projectName={cleanProjectName}
+                  />
+                </div>
               </div>
-            ))}
-          </div>
-          <button
-            className="button overlay-button project-close-button"
-            onClick={handleClose}
-          >
-            <span className="material-icons">close</span>
-          </button>
-        </div>
-      )}
+
+              <div className="project-body">
+                {(modalData.bodySections ?? []).map((bodySection, secIndex) => (
+                  <div
+                    className="project-body-section"
+                    key={
+                      bodySection.id ||
+                      `${cleanProjectName}-section-${secIndex}`
+                    }
+                  >
+                    <h4 className="project-body-section-heading">
+                      {purifyString(bodySection.sectionHeading)}
+                    </h4>
+
+                    {(bodySection.sectionMedia ?? []).map(
+                      (media, mediaIndex) => {
+                        const combinedIndexToken = `${cleanProjectName}-${secIndex}-${mediaIndex}`;
+
+                        return (
+                          <React.Fragment key={media.id || combinedIndexToken}>
+                            {displayMedia(media, "project-media", true)}
+                          </React.Fragment>
+                        );
+                      },
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              <button
+                className="button overlay-button project-close-button"
+                onClick={handleClose}
+                aria-label="Close modal dialog"
+                autoFocus
+              >
+                <span className="material-icons">close</span>
+              </button>
+            </div>
+          );
+        })()}
     </dialog>
   );
 }

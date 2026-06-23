@@ -24,44 +24,24 @@ export default function displayMedia(
   media: Media,
   className?: string | null,
   shouldLazyLoad: boolean = true,
-  mediaIndex?: number,
 ) {
   const mediaClass = `${className}`;
-
   const loadingStrategy = shouldLazyLoad ? "lazy" : "eager";
 
   switch (media?.mediaType) {
     case "code": {
       const code = purifyString(media?.content as string);
-      return (
-        <code
-          className={mediaClass}
-          key={`${media.mediaType}-${mediaIndex}-${code}`}
-        >
-          {code}
-        </code>
-      );
+      return <code className={mediaClass}>{code}</code>;
     }
     case "paragraph": {
       const text = purifyString(media?.content as string);
-      return (
-        <p
-          className={mediaClass}
-          key={`${media.mediaType}-${mediaIndex}-${text}`}
-        >
-          {text}
-        </p>
-      );
+      return <p className={mediaClass}>{text}</p>;
     }
     case "list":
       return (
         <ul className={mediaClass}>
           {(media?.content as string[]).map((listItem, listIndex) => (
-            <li
-              key={`${media.mediaType}-${mediaIndex}-${listIndex}-${listItem}`}
-            >
-              {purifyString(listItem)}
-            </li>
+            <li key={`list-item-${listIndex}`}>{purifyString(listItem)}</li>
           ))}
         </ul>
       );
@@ -73,7 +53,6 @@ export default function displayMedia(
           src={src}
           alt={image?.alt || ""}
           className={mediaClass}
-          key={`${media.mediaType}-${mediaIndex}-${src}`}
           loading={loadingStrategy}
           decoding="async"
         />
@@ -87,7 +66,7 @@ export default function displayMedia(
           <img
             src={src}
             alt={galleryItem.alt || ""}
-            key={`${media.mediaType}-${mediaIndex}-${galleryIndex}-${src}`}
+            key={`gallery-img-${galleryIndex}`}
             className={mediaClass}
             loading={loadingStrategy}
             decoding="async"
@@ -97,7 +76,6 @@ export default function displayMedia(
     }
     case "video": {
       const rawUrl = media?.content as string;
-
       const isYouTube =
         rawUrl.includes("youtube.com") || rawUrl.includes("youtu.be");
       const isGoogleDrive = rawUrl.includes("://google.com");
@@ -118,7 +96,6 @@ export default function displayMedia(
             allowFullScreen
             width="100%"
             height="100%"
-            key={`${media.mediaType}-${mediaIndex}-${embedUrl}`}
             loading={loadingStrategy}
           />
         );
@@ -129,7 +106,6 @@ export default function displayMedia(
         <video
           src={videoSrc}
           className={mediaClass}
-          key={videoSrc}
           controls
           preload={shouldLazyLoad ? "metadata" : "auto"}
         >
@@ -137,7 +113,6 @@ export default function displayMedia(
         </video>
       );
     }
-
     case "pdf": {
       const pdfUrl = media?.content as string;
       const src = resolveMediaSrc(pdfUrl);
@@ -149,9 +124,7 @@ export default function displayMedia(
           className={mediaClass}
           width="100%"
           height="100%"
-          key={`${media.mediaType}-${mediaIndex}-${src}`}
         >
-          {/* Safe internal element fallback to prevent React Router interception */}
           <div style={{ padding: "20px", textAlign: "center" }}>
             <p>PDF Preview encountered an error.</p>
             <br />
@@ -162,7 +135,6 @@ export default function displayMedia(
         </object>
       );
     }
-
     default:
       return <p className={mediaClass}>Error: Unrecognized content type.</p>;
   }

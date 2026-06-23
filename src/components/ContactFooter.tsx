@@ -1,9 +1,9 @@
-import { Link } from "react-router";
 import "../components/styles/contactFooter.css";
 import { myinfo } from "../data/myinfo.json";
 import "./styles/buttons.css";
-import { handleIconDisplay } from "./functions/HandleIconDisplay";
-import type { IconData } from "./types/IconTypes";
+import { CardGrid } from "./cards/CardGrid";
+import type { CardData } from "./cards/Card";
+import { ContactCard, type ContactCardData } from "./cards/ContactMethodCard";
 
 export function ContactFooter() {
   return (
@@ -43,18 +43,22 @@ export function ContactFooter() {
         </div>
       </form>
       <p>Or find me at:</p>
-      <div className="contact-widgets-container">
-        {myinfo.contactMethods.map((contactMethod, contactIndex) => (
-          <Link
-            to={contactMethod.url}
-            className="contact-widget-container"
-            aria-label={contactMethod.ariaLabel}
-            key={contactIndex}
-          >
-            {handleIconDisplay(contactMethod as IconData)}
-          </Link>
-        ))}
-      </div>
+      <CardGrid
+        className="contact"
+        items={
+          (myinfo?.contactMethods ?? []).map((method, idx) => {
+            const cleanLabel = (method.ariaLabel ?? "method")
+              .toLowerCase()
+              .replace(/\s+/g, "-");
+
+            return {
+              ...method,
+              id: (method as any).id || `contact-${cleanLabel}-${idx}`,
+            };
+          }) as CardData<ContactCardData>[]
+        }
+        renderComponent={ContactCard}
+      />
     </section>
   );
 }

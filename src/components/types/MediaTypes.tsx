@@ -3,7 +3,8 @@ export type ImageData = {
   alt: string;
 };
 
-export type Media = {
+export interface Media {
+  id: string;
   mediaType: string;
   content: string | string[] | ImageData[] | ImageData;
-};
+}
