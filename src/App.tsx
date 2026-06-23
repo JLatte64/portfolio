@@ -47,7 +47,7 @@ const pageRouter = createBrowserRouter(
           element: <About />,
         },
         {
-          path: "/project/:projectName",
+          path: ":projectName",
           element: <Dashboard />,
         },
       ],
