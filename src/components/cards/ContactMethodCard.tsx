@@ -28,9 +28,7 @@ export const ContactCard = ({
       onClick={(e) => e.stopPropagation()}
     >
       <Card className={`${className}`.trim()}>
-        <div className={`${className}-card`.trim()}>
-          {handleIconDisplay(cardData)}
-        </div>
+        {handleIconDisplay(cardData)}
       </Card>
     </Link>
   );

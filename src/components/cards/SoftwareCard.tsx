@@ -1,9 +1,9 @@
 import Card, { type CardData } from "./Card";
-import type { IconData } from "../types/IconTypes";
+import type { ImageIconData } from "../types/IconTypes";
 import { handleIconDisplay } from "../functions/HandleIconDisplay";
 import "../styles/card-styles/softwareCard.css";
 
-export interface SoftwareCardData extends IconData {}
+export interface SoftwareCardData extends ImageIconData {}
 
 interface SoftwareCardProps {
   cardData: CardData<SoftwareCardData>;
@@ -14,12 +14,11 @@ export const SoftwareCard = ({
   cardData,
   className = "",
 }: SoftwareCardProps) => {
+  const sftwData = cardData as SoftwareCardData;
   return (
     <Card className={`${className}`.trim()}>
-      <div className={`${className}-card`.trim()}>
-        {handleIconDisplay(cardData)}
-        {cardData.ariaLabel}
-      </div>
+      {handleIconDisplay(sftwData)}
+      {sftwData.ariaLabel}
     </Card>
   );
 };

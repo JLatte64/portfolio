@@ -83,32 +83,32 @@
     "software": [
       {
         "type": "image",
-        "iconFilename": "GitHub_Invertocat_Black.svg",
+        "iconFilename": "GitHub_Invertocat_White.svg",
         "ariaLabel": "Blender"
       },
       {
         "type": "image",
-        "iconFilename": "GitHub_Invertocat_Black.svg",
+        "iconFilename": "GitHub_Invertocat_White.svg",
         "ariaLabel": "Unity"
       },
       {
         "type": "image",
-        "iconFilename": "GitHub_Invertocat_Black.svg",
+        "iconFilename": "GitHub_Invertocat_White.svg",
         "ariaLabel": "C#"
       },
       {
         "type": "image",
-        "iconFilename": "GitHub_Invertocat_Black.svg",
+        "iconFilename": "GitHub_Invertocat_White.svg",
         "ariaLabel": "HLSL"
       },
       {
         "type": "image",
-        "iconFilename": "GitHub_Invertocat_Black.svg",
+        "iconFilename": "GitHub_Invertocat_White.svg",
         "ariaLabel": "Photoshop"
       },
       {
         "type": "image",
-        "iconFilename": "GitHub_Invertocat_Black.svg",
+        "iconFilename": "GitHub_Invertocat_White.svg",
         "ariaLabel": "AutoDesk Maya"
       }
     ]

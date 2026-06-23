@@ -6,17 +6,10 @@
   margin-top: 1rem;
   color: var(--text-h);
   font-weight: 600;
-  font-size: 2.5cqh;
+  font-size: 1rem;
   transition: font-size 0.1s ease;
-
-  /* 1. Reduce base width so 110% scale fits perfectly inside */
   width: calc(100% - 2rem);
-
-  /* 2. Center the text alignment inside its bounding box */
   text-align: center;
-
-  /* 3. Optional: Prevent long words from breaking layout */
-  word-wrap: break-word;
 }
 
 .project-card-title-background {

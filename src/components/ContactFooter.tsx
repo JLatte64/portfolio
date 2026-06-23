@@ -42,7 +42,7 @@ export function ContactFooter() {
           </button>
         </div>
       </form>
-      <p>Or find me at:</p>
+      <p>Or reach me at:</p>
       <CardGrid
         className="contact"
         items={
