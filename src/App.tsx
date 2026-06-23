@@ -39,15 +39,15 @@ const pageRouter = createBrowserRouter(
       element: <RootLayout />,
       children: [
         {
-          path: getPagePath("dashboard"),
+          path: getPagePath("dashboard"), // "/"
           element: <Dashboard />,
         },
         {
-          path: getPagePath("about"),
+          path: getPagePath("about"), // "/about"
           element: <About />,
         },
         {
-          path: ":projectName",
+          path: "/project/:projectName",
           element: <Dashboard />,
         },
       ],
