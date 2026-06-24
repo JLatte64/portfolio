@@ -70,12 +70,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.carousel-lightbox-indicators-container {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0%);
 }
 
 .carousel-nav-button.right {
@@ -92,7 +90,7 @@
   border: none;
   background-color: rgba(0, 0, 0, 0.5);
   color: var(--accent);
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: bold;
   height: 100%;
   width: auto;
@@ -110,9 +108,10 @@
   justify-content: space-between;
   pointer-events: none;
   position: absolute;
-  height: 100%;
+  height: fit-content;
   width: 100%;
-  top: 0;
+  top: 50%;
+  transform: translate(0, -50%);
   left: 0;
 }
 

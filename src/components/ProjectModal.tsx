@@ -52,44 +52,49 @@ export function ProjectModal({
 
           return (
             <div className="project-container">
-              <div className="carousel-title-container">
+              <div className="carousel-container">
+                <MediaCarousel
+                  srcArray={modalData.showcaseMedia ?? []}
+                  projectName={cleanProjectName}
+                />
+              </div>
+
+              <div className="project-body-container">
                 <h3 className="project-title">
                   {purifyString(modalData.title)}
                 </h3>
-                <div className="carousel-container">
-                  <MediaCarousel
-                    srcArray={modalData.showcaseMedia ?? []}
-                    projectName={cleanProjectName}
-                  />
+                <div className="project-body-sections-container">
+                  {(modalData.bodySections ?? []).map(
+                    (bodySection, secIndex) => (
+                      <div className="project-body-section-container">
+                        <h4 className="project-body-section-heading">
+                          {purifyString(bodySection.sectionHeading)}
+                        </h4>
+                        <div
+                          className="project-body-media-container"
+                          key={
+                            bodySection.id ||
+                            `${cleanProjectName}-section-${secIndex}`
+                          }
+                        >
+                          {(bodySection.sectionMedia ?? []).map(
+                            (media, mediaIndex) => {
+                              const combinedIndexToken = `${cleanProjectName}-${secIndex}-${mediaIndex}`;
+
+                              return (
+                                <React.Fragment
+                                  key={media.id || combinedIndexToken}
+                                >
+                                  {displayMedia(media, "project-media", true)}
+                                </React.Fragment>
+                              );
+                            },
+                          )}
+                        </div>
+                      </div>
+                    ),
+                  )}
                 </div>
-              </div>
-
-              <div className="project-body">
-                {(modalData.bodySections ?? []).map((bodySection, secIndex) => (
-                  <div
-                    className="project-body-section"
-                    key={
-                      bodySection.id ||
-                      `${cleanProjectName}-section-${secIndex}`
-                    }
-                  >
-                    <h4 className="project-body-section-heading">
-                      {purifyString(bodySection.sectionHeading)}
-                    </h4>
-
-                    {(bodySection.sectionMedia ?? []).map(
-                      (media, mediaIndex) => {
-                        const combinedIndexToken = `${cleanProjectName}-${secIndex}-${mediaIndex}`;
-
-                        return (
-                          <React.Fragment key={media.id || combinedIndexToken}>
-                            {displayMedia(media, "project-media", true)}
-                          </React.Fragment>
-                        );
-                      },
-                    )}
-                  </div>
-                ))}
               </div>
 
               <button

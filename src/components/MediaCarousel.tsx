@@ -126,35 +126,33 @@ export function MediaCarousel({
                 chevron_right
               </button>
             </div>
+            <button
+              className="material-icons carousel-lightbox-button"
+              onClick={() => {}}
+              aria-label="Enlarge"
+            >
+              fit_screen
+            </button>
           </>
         )}
       </div>
       {showControls && (
-        <div className="carousel-lightbox-indicators-container">
-          <div className="carousel-indicators-container">
-            {srcArray?.map((srcElement, index) =>
-              !srcElement ? null : (
-                <button
-                  className={
-                    "carousel-indicator" +
-                    (currentSlide === index ? " active" : " inactive")
-                  }
-                  onClick={() => {
-                    scrollTo(index);
-                  }}
-                  key={`${carouselKeyPrefix}-indicator-${index}`}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
-              ),
-            )}
-          </div>
-          <button
-            className="material-icons carousel-lightbox-button"
-            onClick={() => {}}
-            aria-label="Enlarge"
-          >
-            fit_screen
-          </button>
+        <div className="carousel-indicators-container">
+          {srcArray?.map((srcElement, index) =>
+            !srcElement ? null : (
+              <button
+                className={
+                  "carousel-indicator" +
+                  (currentSlide === index ? " active" : " inactive")
+                }
+                onClick={() => {
+                  scrollTo(index);
+                }}
+                key={`${carouselKeyPrefix}-indicator-${index}`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ),
+          )}
         </div>
       )}
     </div>
