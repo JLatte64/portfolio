@@ -1,9 +1,9 @@
-import type { ImageData, Media } from "./MediaTypes";
+import type { Media } from "./MediaTypes";
 
 export interface ProjectData {
   id: string;
   title: string;
-  thumbnail: ImageData;
+  thumbnail: Media;
   tags: string[];
   showcaseMedia?: Media[];
   bodySections?: ProjectSectionData[];

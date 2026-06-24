@@ -76,11 +76,25 @@ export function MediaCarousel({
       aria-label={`${projectName ?? "Media"} gallery carousel`}
     >
       <div className="carousel-viewport-buttons-container">
+        <div className="carousel-bg-container">
+          {[-1, 0, 1].map((offset) => {
+            const index =
+              (currentSlide + offset + srcArray.length) % srcArray.length;
+            return (
+              <React.Fragment key={`${projectName}-carousel-bg-${index}`}>
+                {displayMedia(
+                  srcArray[index],
+                  `carousel-bg-fade-image${index === currentSlide ? " active" : ""}`,
+                  true,
+                )}
+              </React.Fragment>
+            );
+          })}
+        </div>
         <div className="carousel-viewport" ref={emblaRef}>
           <div className="slides-container">
             {srcArray.map((media, index) => {
               const slideContentToken = `${carouselKeyPrefix}-slide-item-${index}`;
-
               return (
                 <div
                   className="slide"
@@ -95,41 +109,52 @@ export function MediaCarousel({
           </div>
         </div>
         {showControls && (
-          <div className="carousel-buttons-container">
-            <button
-              className="material-icons carousel-button left"
-              onClick={scrollPrev}
-              aria-label="Previous slide"
-            >
-              chevron_left
-            </button>
-            <button
-              className="material-icons carousel-button right"
-              onClick={scrollNext}
-              aria-label="Next slide"
-            >
-              chevron_right
-            </button>
-          </div>
+          <>
+            <div className="carousel-nav-buttons-container">
+              <button
+                className="material-icons carousel-nav-button left"
+                onClick={scrollPrev}
+                aria-label="Previous slide"
+              >
+                chevron_left
+              </button>
+              <button
+                className="material-icons carousel-nav-button right"
+                onClick={scrollNext}
+                aria-label="Next slide"
+              >
+                chevron_right
+              </button>
+            </div>
+          </>
         )}
       </div>
       {showControls && (
-        <div className="carousel-indicators-container">
-          {srcArray?.map((srcElement, index) =>
-            !srcElement ? null : (
-              <button
-                className={
-                  "carousel-indicator" +
-                  (currentSlide === index ? " active" : " inactive")
-                }
-                onClick={() => {
-                  scrollTo(index);
-                }}
-                key={`${carouselKeyPrefix}-indicator-${index}`}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ),
-          )}
+        <div className="carousel-lightbox-indicators-container">
+          <div className="carousel-indicators-container">
+            {srcArray?.map((srcElement, index) =>
+              !srcElement ? null : (
+                <button
+                  className={
+                    "carousel-indicator" +
+                    (currentSlide === index ? " active" : " inactive")
+                  }
+                  onClick={() => {
+                    scrollTo(index);
+                  }}
+                  key={`${carouselKeyPrefix}-indicator-${index}`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ),
+            )}
+          </div>
+          <button
+            className="material-icons carousel-lightbox-button"
+            onClick={() => {}}
+            aria-label="Enlarge"
+          >
+            fit_screen
+          </button>
         </div>
       )}
     </div>

@@ -33,8 +33,11 @@
     {
       "title": "God of War: Sons of Sparta",
       "thumbnail": {
-        "src": "https://media.istockphoto.com/id/91615941/photo/king-leonidas-sparta.webp?s=2048x2048&w=is&k=20&c=Lf0mUXCl6PU3NJMsV0IR0ZjftTNwsJbaGtlq-ixkQwk=",
-        "alt": ""
+        "mediaType": "image",
+        "content": {
+          "src": "god-of-war-sons-of-sparta/thumbnail.png",
+          "alt": "God of War: Sons of Sparta Thumbnail"
+        }
       },
       "tags": ["tech art"],
       "showcaseMedia": [
@@ -45,18 +48,53 @@
         {
           "mediaType": "image",
           "content": {
-            "src": "data:image/webp;base64,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",
+            "src": "god-of-war-sons-of-sparta/showcaseMedia/screenshot0.png",
+            "alt": ""
+          }
+        },
+        {
+          "mediaType": "image",
+          "content": {
+            "src": "god-of-war-sons-of-sparta/showcaseMedia/screenshot1.png",
+            "alt": ""
+          }
+        },
+        {
+          "mediaType": "image",
+          "content": {
+            "src": "god-of-war-sons-of-sparta/showcaseMedia/screenshot2.png",
+            "alt": ""
+          }
+        },
+        {
+          "mediaType": "image",
+          "content": {
+            "src": "god-of-war-sons-of-sparta/showcaseMedia/screenshot3.png",
+            "alt": ""
+          }
+        },
+        {
+          "mediaType": "image",
+          "content": {
+            "src": "god-of-war-sons-of-sparta/showcaseMedia/screenshot4.png",
+            "alt": ""
+          }
+        },
+        {
+          "mediaType": "image",
+          "content": {
+            "src": "god-of-war-sons-of-sparta/showcaseMedia/screenshot5.png",
             "alt": ""
           }
         }
       ],
       "bodySections": [
         {
-          "sectionHeading": "SectionTitle",
+          "sectionHeading": "Custom 2D Lighting System",
           "sectionMedia": [
             {
               "mediaType": "paragraph",
-              "content": "Lorem ipsum dolor sit amet consectetur adipiscing elit. Consectetur adipiscing elit quisque faucibus ex sapien vitae. Ex sapien vitae pellentesque sem placerat in id. Placerat in id cursus mi pretium tellus duis. Pretium tellus duis convallis tempus leo eu aenean."
+              "content": "This system uses the stencil buffer, multiple custom render targets, custom shaders and extensions to Unity's Scriptable Render Pipeline (SRP) to allow for 256 individually-lit sprite layers."
             },
             {
               "mediaType": "list",
@@ -65,22 +103,22 @@
                 "Developed 13 key environment shaders - running water, swaying foliage, dynamic lights",
                 "Developed the key shader-base underpinning environments and characters"
               ]
+            }
+          ]
+        },
+        {
+          "sectionHeading": "Custom Sprite Shader Suite",
+          "sectionMedia": [
+            {
+              "mediaType": "paragraph",
+              "content": "This system uses the stencil buffer, multiple custom render targets, custom shaders and extensions to Unity's Scriptable Render Pipeline (SRP) to allow for 256 individually-lit sprite layers."
             },
             {
-              "mediaType": "imageGallery",
+              "mediaType": "list",
               "content": [
-                {
-                  "src": "https://cdn.pixabay.com/photo/2015/12/04/14/05/code-1076536_1280.jpg",
-                  "alt": ""
-                },
-                {
-                  "src": "https://cdn.pixabay.com/photo/2015/12/04/14/05/code-1076536_1280.jpg",
-                  "alt": ""
-                },
-                {
-                  "src": "https://cdn.pixabay.com/photo/2015/12/04/14/05/code-1076536_1280.jpg",
-                  "alt": ""
-                }
+                "Developed a custom lighting system to go beyond engine limitations and give artists 256 individual sprite layers to light",
+                "Developed 13 key environment shaders - running water, swaying foliage, dynamic lights",
+                "Developed the key shader-base underpinning environments and characters"
               ]
             }
           ]
@@ -90,19 +128,29 @@
     {
       "title": "Backyard Baseball",
       "thumbnail": {
-        "src": "https://media.istockphoto.com/id/91615941/photo/king-leonidas-sparta.webp?s=2048x2048&w=is&k=20&c=Lf0mUXCl6PU3NJMsV0IR0ZjftTNwsJbaGtlq-ixkQwk=",
-        "alt": ""
+        "mediaType": "image",
+        "content": {
+          "src": "backyard-baseball/thumbnail.png",
+          "alt": "Backyard Baseball Thumbnail"
+        }
       },
       "tags": ["tech art"],
       "showcaseMedia": [
         {
           "mediaType": "video",
-          "content": "https://www.youtube.com/embed/eFhOo6NTt70?si=5Rk5sKEtqwXRIC4B&amp;controls=0"
+          "content": "https://www.youtube.com/embed/gXTeQ3a6BHs?si=_9kjQv-iD6IYS44W"
         },
         {
           "mediaType": "image",
           "content": {
-            "src": "data:image/webp;base64,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",
+            "src": "backyard-baseball/showcaseMedia/screenshot0.png",
+            "alt": ""
+          }
+        },
+        {
+          "mediaType": "image",
+          "content": {
+            "src": "backyard-baseball/showcaseMedia/screenshot1.png",
             "alt": ""
           }
         }
@@ -147,8 +195,11 @@
     {
       "title": "Super Mario 64 ROMHack",
       "thumbnail": {
-        "src": "https://media.istockphoto.com/id/91615941/photo/king-leonidas-sparta.webp?s=2048x2048&w=is&k=20&c=Lf0mUXCl6PU3NJMsV0IR0ZjftTNwsJbaGtlq-ixkQwk=",
-        "alt": ""
+        "mediaType": "image",
+        "content": {
+          "src": "/files/backyard-baseball/thumbnail.png",
+          "alt": "Backyard Baseball Thumbnail"
+        }
       },
       "tags": ["tech art"],
       "showcaseMedia": [

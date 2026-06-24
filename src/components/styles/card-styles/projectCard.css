@@ -1,13 +1,15 @@
 .project-card-title {
   position: absolute;
-  top: 0;
+  top: -50%;
   left: 50%;
-  transform: translate(-50%, 0%) scale(1);
-  margin-top: 1rem;
+  transform: translate(-50%, 50%);
+  margin-top: 0.5rem;
   color: var(--text-h);
   font-weight: 600;
   font-size: 1rem;
-  transition: font-size 0.1s ease;
+  transition:
+    transform 0.1s ease,
+    top 0.1s ease;
   width: calc(100% - 2rem);
   text-align: center;
 }
@@ -15,16 +17,16 @@
 .project-card-title-background {
   position: absolute;
   width: 110%;
-  top: -50%;
+  top: -110%;
   left: 0;
-  height: 25%;
+  height: 110%;
   display: flex;
   justify-content: center;
   align-items: center;
   background-image: linear-gradient(
     0deg,
     rgba(0, 0, 0, 0) 0%,
-    var(--shadow) 100%
+    rgba(0, 0, 0, 1) 100%
   );
   transition: transform 0.1s ease-out;
 }
@@ -35,7 +37,7 @@
   left: 50%;
   transform: translate(-50%, -50%) scale(1);
   filter: brightness(100%);
-  height: 100%;
+  width: 100%;
   transition: transform 0.15s ease;
 }
 
@@ -47,12 +49,13 @@
   flex: 0 1;
 }
 
-.project-card-container:hover .project-card-title {
-  font-size: 2.75cqh;
+.project-card-container:hover .project-card-title-background {
+  transform: translate(0, 100%) scale(1, 2);
 }
 
-.project-card-container:hover .project-card-title-background {
-  transform: translate(0, 150%);
+.project-card-container:hover .project-card-title {
+  top: 50%;
+  transform: translate(-50%, -100%);
 }
 
 .project-card-container:hover .project-card-thumbnail {
