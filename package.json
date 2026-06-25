@@ -11,7 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "dompurify": "^3.4.9",
+    "dompurify": "^3.4.11",
     "embla-carousel": "^8.6.0",
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-fade": "^8.6.0",

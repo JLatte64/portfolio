@@ -7,4 +7,5 @@ export interface Media {
   id: string;
   mediaType: string;
   content: string | string[] | ImageData[] | ImageData;
+  caption?: string;
 }
