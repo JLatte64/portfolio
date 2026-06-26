@@ -146,7 +146,8 @@ code.project-media {
   }
 
   .project-body-container {
-    width: 400px;
+    min-width: 400px;
+    max-width: 30dvw;
     height: 100%;
   }
 }
