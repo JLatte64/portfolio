@@ -1,5 +1,5 @@
 :root {
-  --carousel-controls-bg-col: rgba(0, 0, 0, 0.65);
+  --carousel-controls-bg-col: rgba(0, 0, 0, 0.5);
 }
 
 .slide > * {
@@ -57,10 +57,10 @@
 }
 
 .carousel-indicator {
-  border-radius: 1.25rem;
-  flex: 0 0 1.25rem;
-  width: 1.25rem;
-  height: 1.25rem;
+  border-radius: 1rem;
+  flex: 0 0 1rem;
+  width: 1rem;
+  height: 1rem;
   border: none;
   background-color: var(--accent);
   transition: transform 0.15s ease;
@@ -81,7 +81,6 @@
   flex-wrap: wrap;
   pointer-events: auto;
   justify-content: center;
-  max-width: 62%;
   gap: 4cqw;
 }
 
@@ -137,15 +136,37 @@
   position: absolute;
   overflow: hidden;
   bottom: 0;
-  padding: 0.25rem;
+  padding: 0.5rem;
   max-width: 100%;
-  margin: 1rem;
+  margin: 0.5rem;
   border-radius: 1rem;
   overflow-wrap: break-word;
   word-break: break-word;
   background-color: var(--carousel-controls-bg-col);
-  color: var(--text-h);
+  color: var(--text);
   text-align: center;
+}
+
+.lightbox-open-button {
+  position: absolute;
+  background-color: var(--accent);
+  border: none;
+  border-radius: var(--button-icon-font-size);
+  display: flex;
+  top: 0;
+  left: 0;
+  padding: calc(var(--button-icon-font-size) / 8);
+  color: var(--text-h);
+  cursor: pointer;
+  pointer-events: all;
+}
+
+.lightbox-open-button:active {
+  transform: translate(15%, -15%);
+}
+
+.lightbox-open-button > * {
+  font-size: var(--button-icon-font-size);
 }
 
 .carousel-controls-container {

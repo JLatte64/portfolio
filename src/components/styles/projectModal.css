@@ -39,7 +39,6 @@
   border-bottom: 4px solid var(--accent);
   color: var(--accent);
   filter: brightness(1.2);
-  font-size: x-large;
 }
 
 .project-body-sections-container {
@@ -102,16 +101,12 @@ code.project-media {
   position: fixed;
   background-color: var(--accent);
   border: none;
-  border-radius: 0 0 1rem 0;
+  border-radius: var(--button-icon-font-size);
   display: flex;
   top: 0;
-  left: 0;
-  padding: 0.125rem;
+  right: 0;
+  padding: calc(var(--button-icon-font-size) / 8);
   color: var(--text-h);
-}
-
-.project-close-button:active {
-  transform: translate(-15%, -15%);
 }
 
 .project-close-button > * {
@@ -126,7 +121,7 @@ code.project-media {
 
   .carousel-container {
     width: 100%;
-    height: 45dvh;
+    height: 50dvh;
   }
 
   .project-body-container {
@@ -146,8 +141,7 @@ code.project-media {
   }
 
   .project-body-container {
-    min-width: 400px;
-    max-width: 30dvw;
+    width: 50dvw;
     height: 100%;
   }
 }
