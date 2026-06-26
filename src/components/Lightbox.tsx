@@ -3,14 +3,13 @@ import React, {
   useImperativeHandle,
   type RefObject,
   useState,
+  type JSX,
 } from "react";
-import displayMedia from "./functions/DisplayMedia";
-import type {Media} from "./types/MediaTypes";
+import "./styles/lightbox.css";
 
 export interface LightboxRefMethods {
   toggleOpen: () => void;
-  toggleCaptions: (enabled: boolean | null) => void;
-  setMedia: (media: Media) => void;
+  setContent: (content: React.ReactNode | undefined | JSX.Element) => void;
 }
 
 interface LightboxProps {
@@ -21,28 +20,28 @@ interface LightboxProps {
 export default function Lightbox(props: LightboxProps) {
   const {ref} = props;
   const nativeDialogRef = useRef<HTMLDialogElement>(null);
-  const [activeMedia, setActiveMedia] = useState<Media | null>(null);
-  const [captionsEnabled, setCaptionsEnabled] = useState(false);
+  const [lightboxContent, setLightboxContent] =
+    useState<React.ReactNode | null>(null);
+
+  // 1. Add state to track visibility
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleOpenDialog = () => {
+    setIsOpen(true);
     nativeDialogRef.current?.showModal();
   };
 
   const handleCloseDialog = () => {
+    setIsOpen(false);
     nativeDialogRef.current?.close();
-  };
-
-  const handleTriggerCaptions = (enabled: boolean | null) => {
-    setCaptionsEnabled((prev) => enabled ?? !prev);
   };
 
   useImperativeHandle(
     ref,
     () => ({
       toggleOpen: handleOpenDialog,
-      toggleCaptions: handleTriggerCaptions,
-      setMedia: (media: Media) => {
-        setActiveMedia(media);
+      setContent: (content: React.ReactNode | undefined | JSX.Element) => {
+        setLightboxContent(content);
       },
     }),
     [],
@@ -55,20 +54,27 @@ export default function Lightbox(props: LightboxProps) {
         e.preventDefault();
         handleCloseDialog();
       }}
-      style={{padding: "20px", borderRadius: "8px"}}
+      onClick={(e) => {
+        if (e.target === nativeDialogRef.current) {
+          handleCloseDialog();
+        }
+      }}
     >
-      <h3>Dialog Container</h3>
-
-      {activeMedia && (
-        <div className="lightbox-media-container">
-          {displayMedia(activeMedia)}
-          {captionsEnabled && (
-            <p className="lightbox-caption">{activeMedia.caption}</p>
+      {/* 2. Wrap everything inside the dialog with the isOpen check */}
+      {isOpen && (
+        <>
+          {lightboxContent && (
+            <div className="lightbox-media-container">{lightboxContent}</div>
           )}
-        </div>
+          <button
+            className="button lightbox-close-button"
+            onClick={handleCloseDialog}
+            aria-label="Close zoom preview"
+          >
+            <span className="material-icons">close</span>
+          </button>
+        </>
       )}
-
-      <button onClick={handleCloseDialog}>Close</button>
     </dialog>
   );
 }

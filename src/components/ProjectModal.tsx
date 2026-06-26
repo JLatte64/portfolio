@@ -22,7 +22,6 @@ export function ProjectModal({
   useEffect(() => {
     const dialog = dialogRef.current;
     if (!dialog) return;
-
     if (isOpen) {
       if (!dialog.open) dialog.showModal();
     } else {
@@ -31,6 +30,20 @@ export function ProjectModal({
   }, [isOpen, dialogRef]);
 
   const lightboxRef = useRef<LightboxRefMethods>(null);
+  const carouselWrapperRef = useRef<HTMLDivElement>(null);
+
+  const handleTriggerZoom = () => {
+    const carouselNode = carouselWrapperRef.current?.querySelector(".carousel");
+    if (carouselNode && (carouselNode as any).triggerZoom) {
+      (carouselNode as any).triggerZoom();
+    }
+  };
+
+  const handleLightboxPopulate = (activeElement: React.ReactNode) => {
+    if (!lightboxRef.current) return;
+    lightboxRef.current.setContent(activeElement);
+    lightboxRef.current.toggleOpen();
+  };
 
   return (
     <>
@@ -53,16 +66,22 @@ export function ProjectModal({
                 ?.toLowerCase()
                 ?.replace(/[^a-z0-9\s-]/g, "")
                 ?.replace(/\s+/g, "-") || "project";
-
             return (
               <div className="project-container">
-                <div className="carousel-container">
+                <div className="carousel-container" ref={carouselWrapperRef}>
                   <MediaCarousel
                     srcArray={modalData.showcaseMedia ?? []}
                     projectName={cleanProjectName}
+                    onZoomClick={handleLightboxPopulate}
                   />
+                  <button
+                    className="button lightbox-open-button"
+                    onClick={handleTriggerZoom}
+                    aria-label="Zoom"
+                  >
+                    <span className="material-icons">fit_screen</span>
+                  </button>
                 </div>
-
                 <div className="project-body-container">
                   <h3 className="project-title">
                     {purifyString(modalData.title)}
@@ -70,21 +89,20 @@ export function ProjectModal({
                   <div className="project-body-sections-container">
                     {(modalData.bodySections ?? []).map(
                       (bodySection, secIndex) => (
-                        <div className="project-body-section-container">
+                        <div
+                          className="project-body-section-container"
+                          key={
+                            bodySection.id ||
+                            `${cleanProjectName}-section-block-${secIndex}`
+                          }
+                        >
                           <h4 className="project-body-section-heading">
                             {purifyString(bodySection.sectionHeading)}
                           </h4>
-                          <div
-                            className="project-body-media-container"
-                            key={
-                              bodySection.id ||
-                              `${cleanProjectName}-section-${secIndex}`
-                            }
-                          >
+                          <div className="project-body-media-container">
                             {(bodySection.sectionMedia ?? []).map(
                               (media, mediaIndex) => {
                                 const combinedIndexToken = `${cleanProjectName}-${secIndex}-${mediaIndex}`;
-
                                 return (
                                   <React.Fragment
                                     key={media.id || combinedIndexToken}
@@ -100,7 +118,6 @@ export function ProjectModal({
                     )}
                   </div>
                 </div>
-
                 <button
                   className="button overlay-button project-close-button"
                   onClick={handleClose}

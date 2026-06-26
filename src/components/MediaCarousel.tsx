@@ -7,9 +7,11 @@ import displayMedia from "./functions/DisplayMedia";
 export function MediaCarousel({
   srcArray,
   projectName,
+  onZoomClick,
 }: {
   srcArray: Array<Media>;
   projectName: string;
+  onZoomClick?: (activeElement: React.ReactNode) => void;
 }) {
   const instanceId = useId();
   const carouselContainerRef = useRef<HTMLDivElement>(null);
@@ -62,6 +64,18 @@ export function MediaCarousel({
     .toLowerCase();
   const carouselKeyPrefix = `${cleanProjectName}-${instanceId}`;
   const showControls = srcArray && srcArray.length > 1;
+
+  const handleZoomTrigger = () => {
+    if (!onZoomClick || !srcArray.length) return;
+    const activeMediaItem = displayMedia(srcArray[currentSlide], "");
+    onZoomClick(activeMediaItem);
+  };
+
+  useEffect(() => {
+    if (carouselContainerRef.current) {
+      (carouselContainerRef.current as any).triggerZoom = handleZoomTrigger;
+    }
+  }, [currentSlide, srcArray, onZoomClick]);
 
   return (
     <div
