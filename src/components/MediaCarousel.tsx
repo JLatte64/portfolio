@@ -1,8 +1,9 @@
-import React, {useEffect, useState, useId, useRef} from "react";
+import React, { useEffect, useState, useId, useRef } from "react";
 import "./styles/mediaCarousel.css";
 import useEmblaCarousel from "embla-carousel-react";
-import type {Media} from "./types/MediaTypes";
+import type { Media } from "./types/MediaTypes";
 import displayMedia from "./functions/DisplayMedia";
+import "./styles/lightbox.css";
 
 export function MediaCarousel({
   srcArray,
@@ -151,7 +152,9 @@ export function MediaCarousel({
             >
               chevron_right
             </button>
-
+            <button className="button lightbox-open-button" aria-label="Zoom">
+              <span className="material-icons">fit_screen</span>
+            </button>
             <div className="carousel-controls-spacer"></div>
             {!!caption && <div className="carousel-captions">{caption}</div>}
           </div>

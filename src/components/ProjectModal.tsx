@@ -1,10 +1,10 @@
-import React, {type RefObject, useEffect, useRef} from "react";
+import React, { type RefObject, useEffect, useRef } from "react";
 import MediaCarousel from "./MediaCarousel";
 import displayMedia from "./functions/DisplayMedia";
 import "../components/styles/projectModal.css";
 import purifyString from "./functions/PurifyString";
-import type {ProjectData} from "./types/ProjectTypes";
-import Lightbox, {type LightboxRefMethods} from "./Lightbox";
+import type { ProjectData } from "./types/ProjectTypes";
+import Lightbox, { type LightboxRefMethods } from "./Lightbox";
 
 interface ProjectModalProps {
   modalData?: ProjectData | undefined;
@@ -74,13 +74,6 @@ export function ProjectModal({
                     projectName={cleanProjectName}
                     onZoomClick={handleLightboxPopulate}
                   />
-                  <button
-                    className="button lightbox-open-button"
-                    onClick={handleTriggerZoom}
-                    aria-label="Zoom"
-                  >
-                    <span className="material-icons">fit_screen</span>
-                  </button>
                 </div>
                 <div className="project-body-container">
                   <h3 className="project-title">

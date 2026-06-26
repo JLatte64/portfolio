@@ -1,3 +1,7 @@
+:root {
+  --button-icon-font-size: 2rem;
+}
+
 a:visited {
   text-decoration: none;
 }

@@ -1,3 +1,7 @@
+:root {
+  --carousel-controls-bg-col: rgba(0, 0, 0, 0.65);
+}
+
 .slide > * {
   width: 100%;
   height: 100%;
@@ -39,11 +43,17 @@
 
 .carousel-indicator.active {
   transform: scale(1.25);
+  filter: brightness(1.2);
 }
 
 .carousel-indicator.inactive {
   transform: scale(0.75);
   border: none;
+}
+
+.carousel-indicator.inactive:hover {
+  transform: scale(1.05);
+  filter: brightness(1.2);
 }
 
 .carousel-indicator {
@@ -54,7 +64,6 @@
   border: none;
   background-color: var(--accent);
   transition: transform 0.15s ease;
-  margin: 0.25rem;
 }
 
 .carousel-indicator:active {
@@ -64,15 +73,16 @@
 .carousel-indicators-container {
   display: flex;
   flex-direction: row;
-  gap: 0.25rem;
   margin: 0;
-  padding: 0rem;
-  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0.5rem;
+  border-radius: 1rem;
+  background-color: var(--carousel-controls-bg-col);
   cursor: pointer;
-  width: 100%;
-  max-width: 100%;
+  flex-wrap: wrap;
   pointer-events: auto;
   justify-content: center;
+  max-width: 62%;
+  gap: 4cqw;
 }
 
 .carousel-nav-button.right {
@@ -80,25 +90,37 @@
   border-radius: 1rem 0 0 1rem;
 }
 
+.carousel-nav-button.right:active {
+  transform: translate(15%, -50%);
+}
+
 .carousel-nav-button.left {
   left: 0;
   border-radius: 0 1rem 1rem 0;
+}
+
+.carousel-nav-button.left:active {
+  transform: translate(-15%, -50%);
+}
+
+.carousel-nav-button:hover,
+.carousel-nav-button:hover .carousel-nav-button > * {
+  font-size: 3rem;
+  filter: brightness(1.2);
 }
 
 .carousel-nav-button {
   display: flex;
   align-items: center;
   border: none;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--carousel-controls-bg-col);
   color: var(--accent);
-  font-size: 2rem;
+  font-size: 2.5rem;
   height: 9rem;
-  font-weight: bold;
   justify-content: center;
   width: auto;
   pointer-events: auto;
   cursor: pointer;
-  transition: opacity 0.25s ease;
   user-select: none;
   -moz-user-select: none;
   margin: 0;
@@ -106,15 +128,22 @@
   position: absolute;
   top: 50%;
   transform: translate(0, -50%);
+  transition:
+    transform 0.1s ease,
+    font-size 0.1s ease;
 }
 
 .carousel-captions {
-  font-size: 0.825rem;
-  width: 100%;
+  position: absolute;
+  overflow: hidden;
+  bottom: 0;
   padding: 0.25rem;
+  max-width: 100%;
+  margin: 1rem;
+  border-radius: 1rem;
   overflow-wrap: break-word;
   word-break: break-word;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--carousel-controls-bg-col);
   color: var(--text-h);
   text-align: center;
 }
@@ -127,11 +156,9 @@
   height: 100%;
   pointer-events: none;
   display: flex;
+  align-items: center;
   flex-direction: column;
-}
-
-.carousel-controls-spacer {
-  flex-grow: 1;
+  container-type: inline-size;
 }
 
 .carousel-bg-fade-image.active {
@@ -146,18 +173,20 @@
   height: 100%;
   transition: opacity 0.75s ease-in-out;
   transform: translate(-50%, -50%) scale(2, 1.5);
-  filter: blur(8px) brightness(0.7);
+
   pointer-events: none;
 }
 
 .carousel-bg-container {
   position: absolute;
+  overflow: hidden;
   display: inline-block;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
   pointer-events: none;
+  filter: blur(8px) brightness(0.5);
 }
 
 .carousel-viewport {
@@ -168,19 +197,16 @@
 
 .carousel-viewport-container {
   position: relative;
-  width: 100%;
-  height: 100%;
   flex: 1;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
 }
 
 .carousel {
-  position: relative;
+  position: absolute;
   width: 100%;
   height: 100%;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
 }
 
 .carousel-nav-button,
@@ -188,22 +214,6 @@
   pointer-events: all;
 }
 
-@media (hover: hover) {
-  .carousel-nav-button,
-  .carousel-indicators-container {
-    opacity: 0;
-    transition: opacity 0.25s ease-in-out;
-  }
-
-  .carousel-viewport-container:hover .carousel-nav-button,
-  .carousel-viewport-container:hover .carousel-indicators-container {
-    opacity: 1;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .carousel {
-    height: 50dvh;
-    min-height: 300px;
-  }
+.carousel-indicators-container {
+  pointer-events: none;
 }

@@ -15,13 +15,10 @@
   height: fit-content;
 }
 
-.contact-content > p {
-  padding: 0.5rem;
-}
-
 .form {
   width: 80%;
   margin: auto;
+  padding: 0.5rem 0;
 }
 
 .form-button {
@@ -60,11 +57,14 @@ textarea {
 }
 
 .contact-cards-container {
+  margin: auto;
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
-  max-width: 100%;
+  max-width: calc(100% - 8rem);
+  flex-wrap: wrap;
   height: fit-content;
   justify-content: center;
   align-items: center;
+  padding: 0 0.5rem;
 }

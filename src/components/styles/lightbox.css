@@ -68,3 +68,25 @@ dialog::backdrop {
   font-weight: bold;
   font-size: 2rem;
 }
+
+.lightbox-open-button {
+  position: absolute;
+  background-color: var(--accent);
+  border: none;
+  border-radius: 0 0 0 1rem;
+  display: flex;
+  top: 0;
+  right: 0;
+  padding: 0.125rem;
+  color: var(--text-h);
+  cursor: pointer;
+  pointer-events: all;
+}
+
+.lightbox-open-button:active {
+  transform: translate(15%, -15%);
+}
+
+.lightbox-open-button > * {
+  font-size: var(--button-icon-font-size);
+}
