@@ -1,3 +1,4 @@
+import { type RefObject } from "react";
 import type { ImageData, Media } from "../types/MediaTypes";
 import purifyString from "./PurifyString";
 
@@ -24,6 +25,7 @@ export default function displayMedia(
   media: Media,
   className?: string | null,
   shouldLazyLoad: boolean = true,
+  ref?: RefObject<any>,
 ) {
   const mediaClass = `${className}`;
   const loadingStrategy = shouldLazyLoad ? "lazy" : "eager";
@@ -31,15 +33,23 @@ export default function displayMedia(
   switch (media?.mediaType) {
     case "code": {
       const code = purifyString(media?.content as string);
-      return <code className={mediaClass}>{code}</code>;
+      return (
+        <code ref={ref} className={mediaClass}>
+          {code}
+        </code>
+      );
     }
     case "paragraph": {
       const text = purifyString(media?.content as string);
-      return <p className={mediaClass}>{text}</p>;
+      return (
+        <p ref={ref} className={mediaClass}>
+          {text}
+        </p>
+      );
     }
     case "list":
       return (
-        <ul className={mediaClass}>
+        <ul ref={ref} className={mediaClass}>
           {(media?.content as string[]).map((listItem, listIndex) => (
             <li key={`list-item-${listIndex}`}>{purifyString(listItem)}</li>
           ))}
@@ -50,6 +60,7 @@ export default function displayMedia(
       const src = resolveMediaSrc(image?.src);
       return (
         <img
+          ref={ref}
           src={src}
           alt={image?.alt || ""}
           className={mediaClass}
@@ -64,6 +75,7 @@ export default function displayMedia(
         const src = resolveMediaSrc(galleryItem.src);
         return (
           <img
+            ref={ref}
             src={src}
             alt={galleryItem.alt || ""}
             key={`gallery-img-${galleryIndex}`}
@@ -88,6 +100,7 @@ export default function displayMedia(
 
         return (
           <iframe
+            ref={ref}
             src={embedUrl}
             className={mediaClass}
             title="Embedded video player"
@@ -104,6 +117,7 @@ export default function displayMedia(
       const videoSrc = resolveMediaSrc(rawUrl);
       return (
         <video
+          ref={ref}
           src={videoSrc}
           className={mediaClass}
           controls
@@ -119,6 +133,7 @@ export default function displayMedia(
 
       return (
         <object
+          ref={ref}
           data={`${src}#toolbar=1`}
           type="application/pdf"
           className={mediaClass}
@@ -136,6 +151,10 @@ export default function displayMedia(
       );
     }
     default:
-      return <p className={mediaClass}>Error: Unrecognized content type.</p>;
+      return (
+        <p ref={ref} className={mediaClass}>
+          Error: Unrecognized content type.
+        </p>
+      );
   }
 }

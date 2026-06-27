@@ -1,22 +1,26 @@
-import React, { useEffect, useState, useId, useRef } from "react";
+import React, { useEffect, useState, useId, useRef, type JSX } from "react";
 import "./styles/mediaCarousel.css";
 import useEmblaCarousel from "embla-carousel-react";
 import type { Media } from "./types/MediaTypes";
 import displayMedia from "./functions/DisplayMedia";
 import "./styles/lightbox.css";
-import LightboxButton from "./buttons/LightboxButton";
+// import LightboxButton from "./buttons/LightboxButton";
 
 export function MediaCarousel({
   srcArray,
   projectName,
-  onZoomClick,
+  onSlideChange,
 }: {
   srcArray: Array<Media>;
   projectName: string;
-  onZoomClick?: (activeElement: React.ReactNode) => void;
+  onSlideChange?: (
+    index: number,
+    mediaRef: React.RefObject<Media | null>,
+  ) => void;
 }) {
   const instanceId = useId();
   const carouselContainerRef = useRef<HTMLDivElement>(null);
+  const currentMediaRef = useRef<HTMLElement>(null);
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     align: "center",
@@ -31,15 +35,37 @@ export function MediaCarousel({
 
   useEffect(() => {
     if (!emblaApi) return;
+
     const handleSelect = () => {
-      setCurrentSlide(emblaApi.selectedScrollSnap());
-      setCaption(srcArray[emblaApi.selectedScrollSnap()]?.caption || undefined);
+      const playingVideo = currentMediaRef.current?.querySelector(
+        "video:not([paused])",
+      ) as HTMLVideoElement;
+
+      if (playingVideo) {
+        playingVideo.pause();
+        playingVideo.currentTime = 0;
+      }
+
+      const activeIndex = emblaApi.selectedScrollSnap();
+      const currentMediaItem = srcArray[activeIndex] || null;
+
+      setCurrentSlide(activeIndex);
+      setCaption(currentMediaItem?.caption || undefined);
+
+      const activeMediaRef: React.RefObject<Media | null> = {
+        current: currentMediaItem,
+      };
+      if (onSlideChange) {
+        onSlideChange(activeIndex, activeMediaRef);
+      }
     };
+    handleSelect();
+
     emblaApi.on("select", handleSelect);
     return () => {
       emblaApi.off("select", handleSelect);
     };
-  }, [emblaApi, srcArray]);
+  }, [emblaApi, srcArray, onSlideChange]);
 
   useEffect(() => {
     if (!emblaApi) return;
@@ -66,18 +92,6 @@ export function MediaCarousel({
     .toLowerCase();
   const carouselKeyPrefix = `${cleanProjectName}-${instanceId}`;
   const showControls = srcArray && srcArray.length > 1;
-
-  const handleZoomTrigger = () => {
-    if (!onZoomClick || !srcArray.length) return;
-    const activeMediaItem = displayMedia(srcArray[currentSlide], "");
-    onZoomClick(activeMediaItem);
-  };
-
-  useEffect(() => {
-    if (carouselContainerRef.current) {
-      (carouselContainerRef.current as any).triggerZoom = handleZoomTrigger;
-    }
-  }, [currentSlide, srcArray, onZoomClick]);
 
   return (
     <div
@@ -113,7 +127,7 @@ export function MediaCarousel({
                   key={media.id || `${carouselKeyPrefix}-slide-${index}`}
                 >
                   <React.Fragment key={media.id || slideContentToken}>
-                    {displayMedia(media, "")}
+                    {displayMedia(media, "", true, currentMediaRef)}
                   </React.Fragment>
                 </div>
               );

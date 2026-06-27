@@ -4,7 +4,7 @@ import displayMedia from "./functions/DisplayMedia";
 import "../components/styles/projectModal.css";
 import purifyString from "./functions/PurifyString";
 import type { ProjectData } from "./types/ProjectTypes";
-import Lightbox, { type LightboxRefMethods } from "./Lightbox";
+// import Lightbox, { type LightboxRefMethods } from "./Lightbox";
 
 interface ProjectModalProps {
   modalData?: ProjectData | undefined;
@@ -29,21 +29,8 @@ export function ProjectModal({
     }
   }, [isOpen, dialogRef]);
 
-  const lightboxRef = useRef<LightboxRefMethods>(null);
+  // const lightboxRef = useRef<LightboxRefMethods>(null);
   const carouselWrapperRef = useRef<HTMLDivElement>(null);
-
-  const handleTriggerZoom = () => {
-    const carouselNode = carouselWrapperRef.current?.querySelector(".carousel");
-    if (carouselNode && (carouselNode as any).triggerZoom) {
-      (carouselNode as any).triggerZoom();
-    }
-  };
-
-  const handleLightboxPopulate = (activeElement: React.ReactNode) => {
-    if (!lightboxRef.current) return;
-    lightboxRef.current.setContent(activeElement);
-    lightboxRef.current.toggleOpen();
-  };
 
   return (
     <>
@@ -72,7 +59,6 @@ export function ProjectModal({
                   <MediaCarousel
                     srcArray={modalData.showcaseMedia ?? []}
                     projectName={cleanProjectName}
-                    onZoomClick={handleLightboxPopulate}
                   />
                 </div>
                 <div className="project-body-container">
@@ -123,7 +109,7 @@ export function ProjectModal({
             );
           })()}
       </dialog>
-      <Lightbox />
+      {/* <Lightbox /> */}
     </>
   );
 }
