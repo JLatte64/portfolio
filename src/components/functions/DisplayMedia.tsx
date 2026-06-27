@@ -93,10 +93,16 @@ export default function displayMedia(
       const isGoogleDrive = rawUrl.includes("://google.com");
 
       if (isYouTube || isGoogleDrive) {
-        const embedUrl =
+        let embedUrl =
           isGoogleDrive && rawUrl.endsWith("/view")
             ? rawUrl.replace(/\/view.*/, "/preview")
             : rawUrl;
+
+        if (isYouTube) {
+          embedUrl = embedUrl
+            .replace("youtube.com", "youtube-nocookie.com")
+            .replace("youtu.be/", "://youtube-nocookie.com");
+        }
 
         return (
           <iframe
@@ -104,7 +110,6 @@ export default function displayMedia(
             src={embedUrl}
             className={mediaClass}
             title="Embedded video player"
-            frameBorder="0"
             referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
             width="100%"

@@ -1,10 +1,9 @@
-import React, { useEffect, useState, useId, useRef, type JSX } from "react";
+import React, { useEffect, useState, useId, useRef } from "react";
 import "./styles/mediaCarousel.css";
 import useEmblaCarousel from "embla-carousel-react";
 import type { Media } from "./types/MediaTypes";
 import displayMedia from "./functions/DisplayMedia";
 import "./styles/lightbox.css";
-// import LightboxButton from "./buttons/LightboxButton";
 
 export function MediaCarousel({
   srcArray,
@@ -20,7 +19,8 @@ export function MediaCarousel({
 }) {
   const instanceId = useId();
   const carouselContainerRef = useRef<HTMLDivElement>(null);
-  const currentMediaRef = useRef<HTMLElement>(null);
+  const currentMediaRef = useRef<any>(null);
+
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     align: "center",
@@ -37,13 +37,17 @@ export function MediaCarousel({
     if (!emblaApi) return;
 
     const handleSelect = () => {
-      const playingVideo = currentMediaRef.current?.querySelector(
-        "video:not([paused])",
-      ) as HTMLVideoElement;
+      const activeElement = currentMediaRef.current;
+      if (activeElement) {
+        const playingVideo = (
+          activeElement.tagName === "VIDEO"
+            ? activeElement
+            : activeElement.querySelector("video")
+        ) as HTMLVideoElement | null;
 
-      if (playingVideo) {
-        playingVideo.pause();
-        playingVideo.currentTime = 0;
+        if (playingVideo) {
+          playingVideo.pause();
+        }
       }
 
       const activeIndex = emblaApi.selectedScrollSnap();
@@ -121,13 +125,19 @@ export function MediaCarousel({
           <div className="slides-container">
             {srcArray.map((media, index) => {
               const slideContentToken = `${carouselKeyPrefix}-slide-item-${index}`;
+
+              const isTargetActive = index === currentSlide;
+              const activeRefWire = isTargetActive
+                ? currentMediaRef
+                : undefined;
+
               return (
                 <div
                   className="slide"
                   key={media.id || `${carouselKeyPrefix}-slide-${index}`}
                 >
                   <React.Fragment key={media.id || slideContentToken}>
-                    {displayMedia(media, "", true, currentMediaRef)}
+                    {displayMedia(media, "", true, activeRefWire)}
                   </React.Fragment>
                 </div>
               );
