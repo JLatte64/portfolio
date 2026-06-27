@@ -21,6 +21,7 @@
     "react-dom": "^19.2.5",
     "react-router": "^7.17.0",
     "react-router-dom": "^7.17.0",
+    "react-zoom-pan-pinch": "^4.0.3",
     "universal-scrollbar": "^1.0.4"
   },
   "devDependencies": {

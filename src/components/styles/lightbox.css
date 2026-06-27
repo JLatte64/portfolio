@@ -1,10 +1,11 @@
-dialog:modal {
-  max-width: 100dvw;
-  max-height: 100dvh;
-  width: 100%;
-  height: 100%;
-  border: none;
-  background-color: transparent;
+.fullscreen-lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100dvw;
+  height: 100dvh;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(4px);
   padding: 0;
   margin: 0;
   overflow: hidden;
@@ -12,11 +13,23 @@ dialog:modal {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
 }
 
-dialog::backdrop {
-  background-color: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(4px);
+.lightbox-content-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-zoom-target-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .lightbox-media-container {
@@ -30,19 +43,19 @@ dialog::backdrop {
   box-sizing: border-box;
 }
 
-.lightbox-media-container > * {
+.lightbox-media-container img,
+.lightbox-media-container video,
+.lightbox-media-container code,
+.lightbox-media-container p,
+.lightbox-media-container ul {
   max-width: 100%;
   max-height: 100%;
   width: auto;
   height: auto;
   object-fit: contain;
-  position: relative !important;
-  transform: none !important;
-  top: auto !important;
-  left: auto !important;
 }
 
-.lightbox-media-container > iframe {
+.lightbox-media-container iframe {
   aspect-ratio: 16 / 9;
   width: 100%;
   height: auto;

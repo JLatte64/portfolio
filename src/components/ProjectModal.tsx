@@ -123,7 +123,7 @@ export function ProjectModal({
             );
           })()}
       </dialog>
-      <Lightbox ref={lightboxRef} />
+      <Lightbox />
     </>
   );
 }

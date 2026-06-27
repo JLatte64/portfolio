@@ -1,0 +1,17 @@
+.lightbox-button > * {
+  font-size: var(--button-icon-font-size);
+}
+
+.lightbox-button {
+  position: absolute;
+  background-color: var(--accent);
+  border: none;
+  border-radius: var(--button-icon-font-size);
+  display: flex;
+  top: 0;
+  left: 0;
+  padding: calc(var(--button-icon-font-size) / 8);
+  color: var(--text-h);
+  cursor: pointer;
+  pointer-events: all;
+}

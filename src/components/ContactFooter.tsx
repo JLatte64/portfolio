@@ -1,6 +1,6 @@
 import "../components/styles/contactFooter.css";
 import { myinfo } from "../data/myinfo.json";
-import "./styles/buttons.css";
+import "./styles/button-styles/buttons.css";
 import { CardGrid } from "./cards/CardGrid";
 import type { CardData } from "./cards/Card";
 import { ContactCard, type ContactCardData } from "./cards/ContactMethodCard";

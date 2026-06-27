@@ -161,14 +161,6 @@
   pointer-events: all;
 }
 
-.lightbox-open-button:active {
-  transform: translate(15%, -15%);
-}
-
-.lightbox-open-button > * {
-  font-size: var(--button-icon-font-size);
-}
-
 .carousel-controls-container {
   position: absolute;
   top: 0;

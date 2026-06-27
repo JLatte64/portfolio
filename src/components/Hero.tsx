@@ -6,7 +6,7 @@ import type { Media } from "./types/MediaTypes";
 import showMedia from "./functions/DisplayMedia";
 import { Link } from "react-router";
 import { getPagePath } from "./functions/GetPagePath";
-import "./styles/buttons.css";
+import "./styles/button-styles/buttons.css";
 import { useDashboardState } from "./DashboardContext";
 
 function Hero() {

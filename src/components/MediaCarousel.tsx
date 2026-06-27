@@ -4,6 +4,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import type { Media } from "./types/MediaTypes";
 import displayMedia from "./functions/DisplayMedia";
 import "./styles/lightbox.css";
+import LightboxButton from "./buttons/LightboxButton";
 
 export function MediaCarousel({
   srcArray,
@@ -151,9 +152,6 @@ export function MediaCarousel({
               aria-label="Next slide"
             >
               chevron_right
-            </button>
-            <button className="button lightbox-open-button" aria-label="Zoom">
-              <span className="material-icons">fit_screen</span>
             </button>
             <div className="carousel-controls-spacer"></div>
             {!!caption && <div className="carousel-captions">{caption}</div>}

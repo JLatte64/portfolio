@@ -9,7 +9,7 @@ import { Dashboard } from "./pages/Dashboard";
 import { About } from "./pages/About";
 import { ContactFooter } from "./components/ContactFooter";
 import { NavBar } from "./components/NavBar";
-import TopNavButton from "./components/TopNavButton";
+import TopNavButton from "./components/buttons/TopNavButton";
 import { DashboardProvider } from "./components/DashboardContext";
 
 function RootLayout() {

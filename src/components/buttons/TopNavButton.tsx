@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import "./styles/buttons.css";
-import "./styles/topNavButton.css";
+import "../styles/button-styles/topNavButton.css";
 
 export default function TopNavButton() {
   const [isAtTop, setIsAtTop] = useState<boolean>(true);

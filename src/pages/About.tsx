@@ -1,5 +1,5 @@
 import "../components/styles/page-styles/about.css";
-import "../components/styles/buttons.css";
+import "../components/styles/button-styles/buttons.css";
 import displayMedia, {
   resolveMediaSrc,
 } from "../components/functions/DisplayMedia";
