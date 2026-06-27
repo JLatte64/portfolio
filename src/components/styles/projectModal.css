@@ -98,6 +98,27 @@ code.project-media {
   margin: 0;
 }
 
+.lightbox-button.wrapper span {
+  font-size: calc(var(--button-icon-font-size) * 0.75);
+}
+
+.lightbox-button.wrapper {
+  position: absolute;
+  height: var(--button-icon-font-size);
+  width: var(--button-icon-font-size);
+}
+
+.lightbox-trigger-wrapper {
+  border: 2px solid var(--accent);
+  position: relative;
+  border-radius: 0.25rem;
+  height: auto;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .project-close-button {
   position: fixed;
   background-color: var(--accent);

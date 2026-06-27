@@ -5,22 +5,27 @@ import React, {
   useEffect,
 } from "react";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import displayMedia from "./functions/DisplayMedia";
+import type { Media } from "./types/MediaTypes";
 import "./styles/lightbox.css";
 
 export interface LightboxRefMethods {
   toggleOpen: () => void;
+  setContent: (media: Media) => void; // Expose content injector
 }
 
 interface LightboxProps {
   overlayElement?: React.ReactNode;
   lightboxRef: RefObject<LightboxRefMethods>;
-  contentSlot: React.ReactNode | null;
 }
 
 export default function Lightbox(props: LightboxProps) {
-  const { lightboxRef, contentSlot } = props;
+  const { lightboxRef } = props;
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+
+  // Local state is the absolute single source of truth for what is visible
+  const [lightboxMedia, setLightboxMedia] = useState<Media | null>(null);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -42,6 +47,9 @@ export default function Lightbox(props: LightboxProps) {
     lightboxRef,
     () => ({
       toggleOpen: handleOpenDialog,
+      setContent: (media: Media) => {
+        setLightboxMedia(media); // Direct synchronous injection
+      },
     }),
     [],
   );
@@ -73,13 +81,13 @@ export default function Lightbox(props: LightboxProps) {
       }}
     >
       <div className="lightbox-content-wrapper">
-        {contentSlot && (
+        {lightboxMedia && (
           <TransformWrapper
             initialScale={1}
-            panning={{ disabled: isMobile }}
-            pinch={{ disabled: isMobile }}
-            wheel={{ disabled: isMobile }}
-            doubleClick={{ disabled: isMobile }}
+            panning={{ disabled: !isMobile }}
+            pinch={{ disabled: !isMobile }}
+            wheel={{ disabled: true }}
+            doubleClick={{ disabled: true }}
           >
             <TransformComponent
               wrapperStyle={{ width: "100%", height: "100%" }}
@@ -91,7 +99,11 @@ export default function Lightbox(props: LightboxProps) {
                 alignItems: "center",
               }}
             >
-              <div className="lightbox-media-container">{contentSlot}</div>
+              <div className="lightbox-media-container">
+                <div className="lightbox-zoom-target-wrapper">
+                  {displayMedia(lightboxMedia, "", true)}
+                </div>
+              </div>
             </TransformComponent>
           </TransformWrapper>
         )}

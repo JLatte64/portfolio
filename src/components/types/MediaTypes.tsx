@@ -6,6 +6,6 @@ export type ImageData = {
 export interface Media {
   id: string;
   mediaType: string;
-  content: string | string[] | ImageData[] | ImageData;
+  content: string | string[] | ImageData;
   caption?: string;
 }

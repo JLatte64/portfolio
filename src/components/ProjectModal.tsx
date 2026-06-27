@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { type RefObject, useEffect, useRef } from "react";
 import MediaCarousel from "./MediaCarousel";
 import displayMedia from "./functions/DisplayMedia";
 import "../components/styles/projectModal.css";
 import purifyString from "./functions/PurifyString";
 import type { ProjectData } from "./types/ProjectTypes";
-import type { Media } from "./types/MediaTypes";
 import Lightbox, { type LightboxRefMethods } from "./Lightbox";
+import LightboxButton from "./buttons/LightboxButton";
 
 interface ProjectModalProps {
   modalData?: ProjectData | undefined;
@@ -22,12 +22,6 @@ export function ProjectModal({
   const lightboxRef = useRef<LightboxRefMethods>(null);
   const carouselWrapperRef = useRef<HTMLDivElement>(null);
 
-  const [activeLightboxMedia, setActiveLightboxMedia] = useState<Media | null>(
-    () => {
-      return modalData?.showcaseMedia?.[0] || null;
-    },
-  );
-
   useEffect(() => {
     const dialog = dialogRef.current;
     if (!dialog) return;
@@ -38,16 +32,6 @@ export function ProjectModal({
       if (dialog.open) dialog.close();
     }
   }, [isOpen]);
-
-  const handleSlideChange = useCallback((mediaObject: Media) => {
-    setActiveLightboxMedia(mediaObject);
-  }, []);
-
-  const lightboxSlotContent = activeLightboxMedia ? (
-    <div className="lightbox-zoom-target-wrapper">
-      {displayMedia(activeLightboxMedia, "", true)}
-    </div>
-  ) : null;
 
   return (
     <>
@@ -76,8 +60,9 @@ export function ProjectModal({
                   <MediaCarousel
                     srcArray={modalData.showcaseMedia ?? []}
                     projectName={cleanProjectName}
-                    lightboxRef={lightboxRef}
-                    onSlideChange={handleSlideChange}
+                    lightboxRef={
+                      lightboxRef as React.RefObject<LightboxRefMethods>
+                    }
                   />
                 </div>
                 <div className="project-body-container">
@@ -101,13 +86,42 @@ export function ProjectModal({
                             {(bodySection.sectionMedia ?? []).map(
                               (media, mediaIndex) => {
                                 const combinedIndexToken = `${cleanProjectName}-${secIndex}-${mediaIndex}`;
-                                return (
-                                  <React.Fragment
-                                    key={media.id || combinedIndexToken}
-                                  >
-                                    {displayMedia(media, "project-media", true)}
-                                  </React.Fragment>
+                                const displayedMedia = displayMedia(
+                                  media,
+                                  "project-media",
+                                  true,
                                 );
+                                if (
+                                  media.mediaType === "video" ||
+                                  media.mediaType === "image"
+                                )
+                                  return (
+                                    <div
+                                      className="lightbox-trigger-wrapper"
+                                      key={media.id || combinedIndexToken}
+                                    >
+                                      {displayedMedia}
+                                      <LightboxButton
+                                        lightboxRef={
+                                          lightboxRef as RefObject<LightboxRefMethods>
+                                        }
+                                        className="wrapper"
+                                        onClick={() => {
+                                          lightboxRef.current?.setContent(
+                                            media,
+                                          );
+                                        }}
+                                      />
+                                    </div>
+                                  );
+                                else
+                                  return (
+                                    <React.Fragment
+                                      key={media.id || combinedIndexToken}
+                                    >
+                                      {displayedMedia}
+                                    </React.Fragment>
+                                  );
                               },
                             )}
                           </div>
@@ -119,18 +133,15 @@ export function ProjectModal({
                 <button
                   className="button overlay-button project-close-button"
                   onClick={handleClose}
-                  aria-label="Close modal dialog"
-                  autoFocus
+                  aria-label="Close project modal dialog"
                 >
                   <span className="material-icons">close</span>
                 </button>
               </div>
             );
           })()}
-
         <Lightbox
           lightboxRef={lightboxRef as React.RefObject<LightboxRefMethods>}
-          contentSlot={lightboxSlotContent}
         />
       </dialog>
     </>

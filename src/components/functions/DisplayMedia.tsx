@@ -69,23 +69,6 @@ export default function displayMedia(
         />
       );
     }
-    case "imageGallery": {
-      const imageGallery = media?.content as ImageData[];
-      return imageGallery.map((galleryItem, galleryIndex) => {
-        const src = resolveMediaSrc(galleryItem.src);
-        return (
-          <img
-            ref={ref}
-            src={src}
-            alt={galleryItem.alt || ""}
-            key={`gallery-img-${galleryIndex}`}
-            className={mediaClass}
-            loading={loadingStrategy}
-            decoding="async"
-          />
-        );
-      });
-    }
     case "video": {
       const rawUrl = media?.content as string;
       const isYouTube =

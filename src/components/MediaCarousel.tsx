@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useId, useRef } from "react";
+import React, {
+  useEffect,
+  useState,
+  useId,
+  useRef,
+  type RefObject,
+} from "react";
 import "./styles/mediaCarousel.css";
 import useEmblaCarousel from "embla-carousel-react";
 import type { Media } from "./types/MediaTypes";
@@ -10,13 +16,11 @@ import type { LightboxRefMethods } from "./Lightbox";
 export function MediaCarousel({
   srcArray,
   projectName,
-  onSlideChange,
   lightboxRef,
 }: {
   srcArray: Array<Media>;
   projectName: string;
-  onSlideChange?: (currentMedia: Media) => void;
-  lightboxRef?: React.RefObject<LightboxRefMethods | null>;
+  lightboxRef?: React.RefObject<LightboxRefMethods>;
 }) {
   const instanceId = useId();
   const carouselContainerRef = useRef<HTMLDivElement>(null);
@@ -40,14 +44,8 @@ export function MediaCarousel({
 
     const handleSelect = () => {
       const activeIndex = emblaApi.selectedScrollSnap();
-      const currentMediaItem = srcArray[activeIndex];
-
       setCurrentSlide(activeIndex);
-      setCaption(currentMediaItem?.caption || undefined);
-
-      if (onSlideChange && currentMediaItem) {
-        onSlideChange(currentMediaItem);
-      }
+      setCaption(srcArray[activeIndex]?.caption || undefined);
     };
 
     handleSelect();
@@ -56,7 +54,7 @@ export function MediaCarousel({
     return () => {
       emblaApi.off("select", handleSelect);
     };
-  }, [emblaApi, srcArray, onSlideChange]);
+  }, [emblaApi, srcArray]);
 
   useEffect(() => {
     if (!emblaApi) return;
@@ -173,7 +171,16 @@ export function MediaCarousel({
           </div>
         )}
       </div>
-      {lightboxRef && <LightboxButton lightboxRef={lightboxRef} />}
+      {lightboxRef && (
+        <LightboxButton
+          lightboxRef={lightboxRef as RefObject<LightboxRefMethods>}
+          onClick={() => {
+            if (srcArray[currentSlide]) {
+              lightboxRef.current?.setContent(srcArray[currentSlide]);
+            }
+          }}
+        />
+      )}
     </div>
   );
 }

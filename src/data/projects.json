@@ -178,21 +178,11 @@
               ]
             },
             {
-              "mediaType": "imageGallery",
-              "content": [
-                {
-                  "src": "https://cdn.pixabay.com/photo/2015/12/04/14/05/code-1076536_1280.jpg",
-                  "alt": ""
-                },
-                {
-                  "src": "https://cdn.pixabay.com/photo/2015/12/04/14/05/code-1076536_1280.jpg",
-                  "alt": ""
-                },
-                {
-                  "src": "https://cdn.pixabay.com/photo/2015/12/04/14/05/code-1076536_1280.jpg",
-                  "alt": ""
-                }
-              ]
+              "mediaType": "image",
+              "content": {
+                "src": "god-of-war-sons-of-sparta/showcaseMedia/screenshot4.png",
+                "alt": ""
+              }
             }
           ]
         }
