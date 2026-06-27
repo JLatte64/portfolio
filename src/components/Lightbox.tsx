@@ -76,10 +76,10 @@ export default function Lightbox(props: LightboxProps) {
         {contentSlot && (
           <TransformWrapper
             initialScale={1}
-            panning={{ disabled: !isMobile }}
-            pinch={{ disabled: !isMobile }}
-            wheel={{ disabled: true }}
-            doubleClick={{ disabled: true }}
+            panning={{ disabled: isMobile }}
+            pinch={{ disabled: isMobile }}
+            wheel={{ disabled: isMobile }}
+            doubleClick={{ disabled: isMobile }}
           >
             <TransformComponent
               wrapperStyle={{ width: "100%", height: "100%" }}
