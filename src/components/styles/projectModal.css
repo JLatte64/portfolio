@@ -104,8 +104,8 @@ code.project-media {
   border: none;
   border-radius: var(--button-icon-font-size);
   display: flex;
-  top: 0;
-  right: 0;
+  top: 0.125rem;
+  right: 0.125rem;
   padding: calc(var(--button-icon-font-size) / 8);
   color: var(--text-h);
 }
@@ -131,6 +131,7 @@ code.project-media {
     height: auto;
     overflow: visible;
     min-height: 0;
+    box-shadow: 0px -2px 10px var(--shadow);
   }
 }
 
@@ -147,5 +148,6 @@ code.project-media {
   .project-body-container {
     width: 40dvw;
     height: 100%;
+    box-shadow: -2px 0px 10px var(--shadow);
   }
 }

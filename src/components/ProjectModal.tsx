@@ -1,36 +1,53 @@
-import React, { type RefObject, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import MediaCarousel from "./MediaCarousel";
 import displayMedia from "./functions/DisplayMedia";
 import "../components/styles/projectModal.css";
 import purifyString from "./functions/PurifyString";
 import type { ProjectData } from "./types/ProjectTypes";
-// import Lightbox, { type LightboxRefMethods } from "./Lightbox";
+import type { Media } from "./types/MediaTypes";
+import Lightbox, { type LightboxRefMethods } from "./Lightbox";
 
 interface ProjectModalProps {
   modalData?: ProjectData | undefined;
-  dialogRef: RefObject<HTMLDialogElement | null>;
   handleClose: () => void;
   isOpen: boolean;
 }
 
 export function ProjectModal({
   modalData,
-  dialogRef,
   handleClose,
   isOpen,
 }: ProjectModalProps) {
+  const dialogRef = useRef<HTMLDialogElement | null>(null);
+  const lightboxRef = useRef<LightboxRefMethods>(null);
+  const carouselWrapperRef = useRef<HTMLDivElement>(null);
+
+  const [activeLightboxMedia, setActiveLightboxMedia] = useState<Media | null>(
+    () => {
+      return modalData?.showcaseMedia?.[0] || null;
+    },
+  );
+
   useEffect(() => {
     const dialog = dialogRef.current;
     if (!dialog) return;
+
     if (isOpen) {
       if (!dialog.open) dialog.showModal();
     } else {
       if (dialog.open) dialog.close();
     }
-  }, [isOpen, dialogRef]);
+  }, [isOpen]);
 
-  // const lightboxRef = useRef<LightboxRefMethods>(null);
-  const carouselWrapperRef = useRef<HTMLDivElement>(null);
+  const handleSlideChange = useCallback((mediaObject: Media) => {
+    setActiveLightboxMedia(mediaObject);
+  }, []);
+
+  const lightboxSlotContent = activeLightboxMedia ? (
+    <div className="lightbox-zoom-target-wrapper">
+      {displayMedia(activeLightboxMedia, "", true)}
+    </div>
+  ) : null;
 
   return (
     <>
@@ -59,6 +76,8 @@ export function ProjectModal({
                   <MediaCarousel
                     srcArray={modalData.showcaseMedia ?? []}
                     projectName={cleanProjectName}
+                    lightboxRef={lightboxRef}
+                    onSlideChange={handleSlideChange}
                   />
                 </div>
                 <div className="project-body-container">
@@ -108,8 +127,12 @@ export function ProjectModal({
               </div>
             );
           })()}
+
+        <Lightbox
+          lightboxRef={lightboxRef as React.RefObject<LightboxRefMethods>}
+          contentSlot={lightboxSlotContent}
+        />
       </dialog>
-      {/* <Lightbox /> */}
     </>
   );
 }

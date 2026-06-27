@@ -4,62 +4,54 @@ import useEmblaCarousel from "embla-carousel-react";
 import type { Media } from "./types/MediaTypes";
 import displayMedia from "./functions/DisplayMedia";
 import "./styles/lightbox.css";
+import LightboxButton from "./buttons/LightboxButton";
+import type { LightboxRefMethods } from "./Lightbox";
 
 export function MediaCarousel({
   srcArray,
   projectName,
   onSlideChange,
+  lightboxRef,
 }: {
   srcArray: Array<Media>;
   projectName: string;
-  onSlideChange?: (
-    index: number,
-    mediaRef: React.RefObject<Media | null>,
-  ) => void;
+  onSlideChange?: (currentMedia: Media) => void;
+  lightboxRef?: React.RefObject<LightboxRefMethods | null>;
 }) {
   const instanceId = useId();
   const carouselContainerRef = useRef<HTMLDivElement>(null);
-  const currentMediaRef = useRef<any>(null);
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     align: "center",
   });
+
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [caption, setCaption] = useState<string | undefined>("");
+
+  const totalSlides = srcArray.length;
 
   const scrollTo = (index: number) => emblaApi?.scrollTo(index);
   const scrollPrev = () => emblaApi?.scrollPrev();
   const scrollNext = () => emblaApi?.scrollNext();
 
-  const [caption, setCaption] = useState<string | undefined>("");
-
   useEffect(() => {
     if (!emblaApi) return;
 
     const handleSelect = () => {
-      const activeVideo = currentMediaRef.current as HTMLVideoElement | null;
-
-      if (activeVideo && typeof activeVideo.pause === "function") {
-        if (!activeVideo.paused) {
-          activeVideo.pause();
-        }
-      }
-
       const activeIndex = emblaApi.selectedScrollSnap();
-      const currentMediaItem = srcArray[activeIndex] || null;
+      const currentMediaItem = srcArray[activeIndex];
 
       setCurrentSlide(activeIndex);
       setCaption(currentMediaItem?.caption || undefined);
 
-      const activeMediaRef: React.RefObject<Media | null> = {
-        current: currentMediaItem,
-      };
-      if (onSlideChange) {
-        onSlideChange(activeIndex, activeMediaRef);
+      if (onSlideChange && currentMediaItem) {
+        onSlideChange(currentMediaItem);
       }
     };
 
     handleSelect();
+
     emblaApi.on("select", handleSelect);
     return () => {
       emblaApi.off("select", handleSelect);
@@ -102,8 +94,7 @@ export function MediaCarousel({
       <div className="carousel-viewport-container">
         <div className="carousel-bg-container">
           {[-1, 0, 1].map((offset) => {
-            const index =
-              (currentSlide + offset + srcArray.length) % srcArray.length;
+            const index = (currentSlide + offset + totalSlides) % totalSlides;
             return (
               <React.Fragment key={`${projectName}-carousel-bg-${index}`}>
                 {displayMedia(
@@ -121,10 +112,11 @@ export function MediaCarousel({
             {srcArray.map((media, index) => {
               const slideContentToken = `${carouselKeyPrefix}-slide-item-${index}`;
 
-              const isTargetActive = index === currentSlide;
-              const activeRefWire = isTargetActive
-                ? currentMediaRef
-                : undefined;
+              const shouldRender = [-1, 0, 1].some((offset) => {
+                const computedIndex =
+                  (currentSlide + offset + totalSlides) % totalSlides;
+                return computedIndex === index;
+              });
 
               return (
                 <div
@@ -132,7 +124,11 @@ export function MediaCarousel({
                   key={media.id || `${carouselKeyPrefix}-slide-${index}`}
                 >
                   <React.Fragment key={media.id || slideContentToken}>
-                    {displayMedia(media, "", true, activeRefWire)}
+                    {shouldRender ? (
+                      displayMedia(media, "", true)
+                    ) : (
+                      <div className="slide-unmounted-placeholder" />
+                    )}
                   </React.Fragment>
                 </div>
               );
@@ -177,6 +173,7 @@ export function MediaCarousel({
           </div>
         )}
       </div>
+      {lightboxRef && <LightboxButton lightboxRef={lightboxRef} />}
     </div>
   );
 }
