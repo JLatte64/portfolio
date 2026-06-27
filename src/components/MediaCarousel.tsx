@@ -37,16 +37,11 @@ export function MediaCarousel({
     if (!emblaApi) return;
 
     const handleSelect = () => {
-      const activeElement = currentMediaRef.current;
-      if (activeElement) {
-        const playingVideo = (
-          activeElement.tagName === "VIDEO"
-            ? activeElement
-            : activeElement.querySelector("video")
-        ) as HTMLVideoElement | null;
+      const activeVideo = currentMediaRef.current as HTMLVideoElement | null;
 
-        if (playingVideo) {
-          playingVideo.pause();
+      if (activeVideo && typeof activeVideo.pause === "function") {
+        if (!activeVideo.paused) {
+          activeVideo.pause();
         }
       }
 
@@ -63,8 +58,8 @@ export function MediaCarousel({
         onSlideChange(activeIndex, activeMediaRef);
       }
     };
-    handleSelect();
 
+    handleSelect();
     emblaApi.on("select", handleSelect);
     return () => {
       emblaApi.off("select", handleSelect);
