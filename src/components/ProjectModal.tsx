@@ -86,42 +86,33 @@ export function ProjectModal({
                             {(bodySection.sectionMedia ?? []).map(
                               (media, mediaIndex) => {
                                 const combinedIndexToken = `${cleanProjectName}-${secIndex}-${mediaIndex}`;
+                                const isLightboxed =
+                                  media.enableLightbox === "true";
                                 const displayedMedia = displayMedia(
                                   media,
-                                  "project-media",
+                                  `project-media ${isLightboxed ? "lightboxed" : ""}`.trim(),
                                   true,
                                 );
-                                if (
-                                  media.mediaType === "video" ||
-                                  media.mediaType === "image"
-                                )
-                                  return (
-                                    <div
-                                      className="lightbox-trigger-wrapper"
-                                      key={media.id || combinedIndexToken}
-                                    >
-                                      {displayedMedia}
+                                return (
+                                  <React.Fragment
+                                    key={media.id || combinedIndexToken}
+                                  >
+                                    {displayedMedia}
+                                    {isLightboxed && (
                                       <LightboxButton
                                         lightboxRef={
                                           lightboxRef as RefObject<LightboxRefMethods>
                                         }
-                                        className="wrapper"
+                                        className="media-anchored"
                                         onClick={() => {
                                           lightboxRef.current?.setContent(
                                             media,
                                           );
                                         }}
                                       />
-                                    </div>
-                                  );
-                                else
-                                  return (
-                                    <React.Fragment
-                                      key={media.id || combinedIndexToken}
-                                    >
-                                      {displayedMedia}
-                                    </React.Fragment>
-                                  );
+                                    )}
+                                  </React.Fragment>
+                                );
                               },
                             )}
                           </div>

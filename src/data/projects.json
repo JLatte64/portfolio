@@ -182,7 +182,8 @@
               "content": {
                 "src": "god-of-war-sons-of-sparta/showcaseMedia/screenshot4.png",
                 "alt": ""
-              }
+              },
+              "enableLightbox": "true"
             }
           ]
         }

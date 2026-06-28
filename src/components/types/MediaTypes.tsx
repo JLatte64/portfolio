@@ -8,4 +8,5 @@ export interface Media {
   mediaType: string;
   content: string | string[] | ImageData;
   caption?: string;
+  enableLightbox?: string;
 }

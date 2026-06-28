@@ -1,6 +1,131 @@
-import { type RefObject } from "react";
+import { type RefObject, useState } from "react";
 import type { ImageData, Media } from "../types/MediaTypes";
 import purifyString from "./PurifyString";
+
+function getYouTubeId(url: string): string | null {
+  const regExp =
+    /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+  const match = url.match(regExp);
+  return match && match[2].length === 11 ? match[2] : null;
+}
+
+function getGoogleDriveId(url: string): string | null {
+  const match = url.match(/(?:\/d\/|id=)([\w-]+)/);
+  return match ? match[1] : null;
+}
+
+interface LazyVideoPlayerProps {
+  rawUrl: string;
+  mediaClass: string;
+  loadingStrategy: "lazy" | "eager";
+  shouldLazyLoad: boolean;
+}
+
+function LazyVideoPlayer({
+  rawUrl,
+  mediaClass,
+  loadingStrategy,
+  shouldLazyLoad,
+}: LazyVideoPlayerProps) {
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const isYouTube =
+    rawUrl.includes("youtube.com") || rawUrl.includes("youtu.be");
+  const isGoogleDrive =
+    rawUrl.includes("://google.com") || rawUrl.includes("://google.com");
+
+  let previewSrc: string | null = null;
+  let embedUrl = rawUrl;
+
+  if (isYouTube) {
+    const videoId = getYouTubeId(rawUrl);
+    if (videoId) {
+      previewSrc = `https://ytimg.com{videoId}/maxresdefault.jpg`;
+      embedUrl = `https://youtube-nocookie.com{videoId}`;
+    }
+  } else if (isGoogleDrive) {
+    const fileId = getGoogleDriveId(rawUrl);
+    if (fileId) {
+      previewSrc = `https://://google.com/thumbnail?id=${fileId}&sz=w1280`;
+      embedUrl = rawUrl.endsWith("/view")
+        ? rawUrl.replace(/\/view.*/, "/preview")
+        : rawUrl;
+    }
+  }
+
+  // Render clickable preview setup matching your aspect ratios
+  if (previewSrc && !isPlaying) {
+    return (
+      <>
+        <img
+          src={previewSrc}
+          alt="Video preview"
+          className={mediaClass}
+          loading={loadingStrategy}
+          style={{ cursor: "pointer", objectFit: "cover" }}
+          onClick={() => setIsPlaying(true)}
+          onError={(e) => {
+            if (isYouTube && !e.currentTarget.src.includes("hqdefault")) {
+              const videoId = getYouTubeId(rawUrl);
+              e.currentTarget.src = `https://ytimg.com{videoId}/hqdefault.jpg`;
+            }
+          }}
+        />
+        {/* Play icon centered over your slide using absolute positioning */}
+        <div
+          onClick={() => setIsPlaying(true)}
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            background: "rgba(0, 0, 0, 0.75)",
+            borderRadius: "50%",
+            width: "60px",
+            height: "60px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "white",
+            fontSize: "22px",
+            paddingLeft: "4px",
+            cursor: "pointer",
+            pointerEvents: "auto",
+            zIndex: 2,
+          }}
+        >
+          ▶
+        </div>
+      </>
+    );
+  }
+
+  if (isYouTube || isGoogleDrive) {
+    return (
+      <iframe
+        src={`${embedUrl}${isYouTube ? "?autoplay=1" : ""}`}
+        className={mediaClass}
+        title="Embedded video player"
+        referrerPolicy="strict-origin-when-cross-origin"
+        allowFullScreen
+        allow="autoplay; encrypted-media"
+        loading={loadingStrategy}
+      />
+    );
+  }
+
+  const videoSrc = resolveMediaSrc(rawUrl);
+  return (
+    <video
+      src={videoSrc}
+      className={mediaClass}
+      controls
+      preload={shouldLazyLoad ? "none" : "auto"}
+    >
+      Your browser does not support the video tag.
+    </video>
+  );
+}
 
 export function resolveMediaSrc(src: string): string {
   if (!src) return "";
@@ -71,48 +196,13 @@ export default function displayMedia(
     }
     case "video": {
       const rawUrl = media?.content as string;
-      const isYouTube =
-        rawUrl.includes("youtube.com") || rawUrl.includes("youtu.be");
-      const isGoogleDrive = rawUrl.includes("://google.com");
-
-      if (isYouTube || isGoogleDrive) {
-        let embedUrl =
-          isGoogleDrive && rawUrl.endsWith("/view")
-            ? rawUrl.replace(/\/view.*/, "/preview")
-            : rawUrl;
-
-        if (isYouTube) {
-          embedUrl = embedUrl
-            .replace("youtube.com", "youtube-nocookie.com")
-            .replace("youtu.be/", "://youtube-nocookie.com");
-        }
-
-        return (
-          <iframe
-            ref={ref}
-            src={embedUrl}
-            className={mediaClass}
-            title="Embedded video player"
-            referrerPolicy="strict-origin-when-cross-origin"
-            allowFullScreen
-            width="100%"
-            height="100%"
-            loading={loadingStrategy}
-          />
-        );
-      }
-
-      const videoSrc = resolveMediaSrc(rawUrl);
       return (
-        <video
-          ref={ref}
-          src={videoSrc}
-          className={mediaClass}
-          controls
-          preload={shouldLazyLoad ? "metadata" : "auto"}
-        >
-          Your browser does not support the video tag.
-        </video>
+        <LazyVideoPlayer
+          rawUrl={rawUrl}
+          mediaClass={mediaClass}
+          loadingStrategy={loadingStrategy}
+          shouldLazyLoad={shouldLazyLoad}
+        />
       );
     }
     case "pdf": {

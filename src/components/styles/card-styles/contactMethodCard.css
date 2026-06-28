@@ -1,8 +1,13 @@
+:root {
+  --contact-card-size: 2.25rem;
+  --contact-card-padding: 0.25rem;
+}
+
 .contact-card-container > * {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
+  font-size: var(--contact-card-size);
   text-justify: auto;
   text-decoration: none;
   width: 100%;
@@ -11,12 +16,12 @@
 }
 
 .contact-card-container {
-  flex: 1 1 auto;
+  flex: 0 0 calc(var(--contact-card-size) + var(--contact-card-padding));
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 3rem;
-  margin: 0.5rem;
+  max-width: calc(var(--contact-card-size) + var(--contact-card-padding));
+  padding: var(--contact-card-padding);
   transition: transform 0.05s linear;
   border-radius: 0.25rem;
   aspect-ratio: 1 / 1;
