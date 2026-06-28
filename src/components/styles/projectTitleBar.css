@@ -1,0 +1,100 @@
+/* ========================================================
+   PROJECT TITLE BAR LAYOUT CONTAINER
+   ======================================================== */
+.project-title-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  padding: 1.5rem 3rem 1.25rem 3rem;
+  box-sizing: border-box;
+
+  /* 🚀 CRITICAL CLICK CAPTURE RESCUE UPGRADES */
+  position: relative; /* Assures a distinct stacking execution space context */
+  pointer-events: auto !important; /* Overrides accidental parent masking frames */
+}
+
+/* Clear standard semantic heading margins */
+.project-title-heading {
+  margin: 0;
+  padding: 0;
+}
+
+/* ========================================================
+   THE INTERACTIVE COPY LINK TRIGGER BUTTON
+   ======================================================== */
+.title-copy-btn {
+  position: relative;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+
+  /* Wipe out native browser button box framing entirely */
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+
+  /* Typography Design Tokens Alignment */
+  color: var(--accent); /* Your accessible vibrant mint green token */
+  font-size: 1.35rem; /* Optimized size threshold prevents multi-line fragmentation */
+  font-weight: 800;
+  line-height: 1.2;
+
+  /* Flexbox parameters guarantee precision inline vertical alignment for text & icon */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem; /* Crisp built-in text character spacing margin rule */
+
+  /* 🚀 RENDERING FIX: Use border-bottom instead of text-decoration to avoid jagged underlines */
+  border-bottom: 2px solid transparent;
+  padding-bottom: 4px; /* Essential breathing space gap above the solid highlight line */
+
+  /* Smooth hardware-accelerated property transitions across 0.2 seconds */
+  transition:
+    border-color 0.2s ease,
+    text-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+/* ========================================================
+   HOVER, INTERACTION, AND FOCUS GLOW ACCESSIBILITY STATES
+   ======================================================== */
+.title-copy-btn:hover,
+.title-copy-btn:focus {
+  filter: brightness(1.25); /* Boosts green color contrast safely */
+  text-shadow: 0 0 10px rgba(0, 187, 125, 0.4); /* Premium gaming halo glow pulse effect */
+  border-color: var(
+    --accent
+  ); /* Instantly reveals a flat, continuous accent line */
+}
+
+/* 🚀 ACCESSIBILITY CORE REQUIREMENT: High-contrast Cyan ring for keyboard tab navigators */
+.title-copy-btn:focus-visible {
+  outline: var(--focus-ring); /* High-contrast Cyan outline ring */
+  outline-offset: 6px;
+  border-radius: 4px;
+}
+
+/* ========================================================
+   MATERIAL ICON ELEMENT SCALE HOLDER
+   ======================================================== */
+.link-icon-span {
+  font-size: 1.35rem; /* Scaled identically to text baseline depth */
+  vertical-align: middle;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-title-bar {
+  /* ... your existing styles ... */
+  pointer-events: auto !important; /* Forces the browser to pass clicks through */
+}
+
+.title-copy-btn {
+  /* ... your existing styles ... */
+  pointer-events: auto !important;
+}

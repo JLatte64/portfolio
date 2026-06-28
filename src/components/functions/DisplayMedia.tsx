@@ -51,7 +51,9 @@ export default function displayMedia(
       return (
         <ul ref={ref} className={mediaClass}>
           {(media?.content as string[]).map((listItem, listIndex) => (
-            <li key={`list-item-${listIndex}`}>{purifyString(listItem)}</li>
+            <li key={`list-item-${listIndex}`}>
+              <p>{purifyString(listItem)}</p>
+            </li>
           ))}
         </ul>
       );

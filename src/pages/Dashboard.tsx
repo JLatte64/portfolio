@@ -5,31 +5,11 @@ import ProjectModal from "../components/ProjectModal";
 import { useLayoutEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router";
 import { getPagePath } from "../components/functions/GetPagePath";
-import { projects } from "../data/projects.json";
 import ProjectCard from "../components/cards/ProjectCard";
 import type { ProjectData } from "../components/types/ProjectTypes";
 import type { CardData } from "../components/cards/Card";
-import { projectSlugs } from "../components/ProjectSlugs";
-import { useDashboardState } from "../components/DashboardContext";
-
-const injectProjectIds = (project: ProjectData): ProjectData => {
-  const entries = Array.from(projectSlugs.entries());
-  const foundEntry = entries.find(([_, p]) => p.title === project.title);
-  const cleanTitle = foundEntry ? foundEntry[0] : "project";
-
-  return {
-    ...project,
-    id: project.id || `proj-${cleanTitle}`,
-    bodySections: (project.bodySections ?? []).map((section, secIndex) => ({
-      ...section,
-      id: section.id || `sec-${cleanTitle}-${secIndex}`,
-      sectionMedia: (section.sectionMedia ?? []).map((media, mediaIndex) => ({
-        ...media,
-        id: media.id || `media-${cleanTitle}-${secIndex}-${mediaIndex}`,
-      })),
-    })),
-  };
-};
+import { useDashboardState } from "../context/DashboardContext";
+import { useSlugs } from "../context/SlugContext";
 
 export function Dashboard() {
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -38,12 +18,9 @@ export function Dashboard() {
 
   const { scrollPosition, setScrollPosition } = useDashboardState();
 
-  const matchedProject = projectName
-    ? projectSlugs.get(projectName)
-    : undefined;
-  const openProject = matchedProject
-    ? injectProjectIds(matchedProject)
-    : undefined;
+  const { processedProjects, slugToProject, titleToSlug } = useSlugs();
+
+  const openProject = projectName ? slugToProject.get(projectName) : undefined;
   const isOpen = Boolean(openProject);
 
   useLayoutEffect(() => {
@@ -68,31 +45,22 @@ export function Dashboard() {
 
   return (
     <>
-      {!isOpen && <Hero />}
+      <div aria-hidden={isOpen}>{!isOpen && <Hero />}</div>
 
-      <main>
+      <main className="dashboard-main-content">
         <div className="home-content">
           {!isOpen ? (
-            <section id="project-links">
-              <h2>Portfolio</h2>
+            <section id="project-links" aria-label="Project Portfolio Showcase">
+              <h2 className="portfolio-section-heading">Portfolio</h2>
               <CardGrid
                 className="project"
-                items={
-                  (projects ?? []).map((p) =>
-                    injectProjectIds(p as ProjectData),
-                  ) as CardData<ProjectData>[]
-                }
+                items={processedProjects as CardData<ProjectData>[]}
                 renderComponent={ProjectCard}
                 onClick={(clickedItem) => {
                   const projectData = clickedItem as unknown as ProjectData;
-
-                  const entries = Array.from(projectSlugs.entries());
-                  const match = entries.find(
-                    ([_, p]) => p.title === projectData.title,
-                  );
-                  const projectSlug = match ? match[0] : "";
-
                   setScrollPosition(window.scrollY);
+
+                  const projectSlug = titleToSlug[projectData.title] || "";
 
                   if (projectSlug) {
                     navigate(`${getPagePath("dashboard")}/${projectSlug}`, {
@@ -102,20 +70,16 @@ export function Dashboard() {
                 }}
               />
             </section>
-          ) : (
-            <div style={{ display: "none" }} />
-          )}
+          ) : null}
         </div>
       </main>
 
-      <div onClick={(e) => e.stopPropagation()}>
-        <ProjectModal
-          modalData={openProject}
-          isOpen={isOpen}
-          dialogRef={dialogRef}
-          handleClose={handleClose}
-        />
-      </div>
+      <ProjectModal
+        modalData={openProject}
+        isOpen={isOpen}
+        dialogRef={dialogRef}
+        handleClose={handleClose}
+      />
     </>
   );
 }

@@ -1,0 +1,68 @@
+/* ========================================================
+   SYSTEM TOAST BASE LAYOUT (POPOVER API)
+   ======================================================== */
+.toast {
+  /* Clear native user-agent browser dialogue styles entirely */
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  max-width: none;
+  max-height: none;
+  overflow: visible;
+
+  /* Screen viewport anchor coordinates positioning */
+  position: fixed;
+  bottom: 2rem; /* Anchors safely above mobile browser navigation rows */
+  left: 50%;
+
+  /* Contrast Layout Sizing and Design Tokens */
+  background-color: #1a1a1a; /* Charcoal grey matching dark theme components */
+  color: #ffffff; /* Crisp white high-contrast text copy */
+  border: 2px solid rgb(0, 187, 125); /* Accessible brand mint green outline */
+  border-radius: 30px; /* Smooth capsule shape */
+
+  padding: 0.75rem 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+
+  /* Base hidden entry states */
+  opacity: 0;
+  transform: translate(-50%, 20px);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* NATIVE TRIGGER: The browser injects :popover-open automatically on showPopover() */
+.toast:popover-open {
+  opacity: 1;
+  transform: translate(
+    -50%,
+    0
+  ); /* Pulls up smoothly into baseline visual view */
+  display: inline-flex; /* Forces layout rules to persist inside top layer */
+}
+
+.toast-icon {
+  font-size: 1.1rem;
+}
+
+output.toast-text {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  display: inline-block;
+}
+
+/* Small smartphone viewport sizing optimizations */
+@media screen and (max-width: 480px) {
+  .toast {
+    width: 85%;
+    box-sizing: border-box;
+    justify-content: center;
+    bottom: 1.5rem;
+  }
+}

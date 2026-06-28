@@ -7,7 +7,7 @@ import showMedia from "./functions/DisplayMedia";
 import { Link } from "react-router";
 import { getPagePath } from "./functions/GetPagePath";
 import "./styles/button-styles/buttons.css";
-import { useDashboardState } from "./DashboardContext";
+import { useDashboardState } from "../context/DashboardContext";
 
 function Hero() {
   const { heroSlide, setHeroSlide, heroTimeElapsed, setHeroTimeElapsed } =
