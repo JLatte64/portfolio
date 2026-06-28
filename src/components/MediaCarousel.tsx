@@ -166,11 +166,10 @@ export function MediaCarousel({
             >
               chevron_right
             </button>
-            <div className="carousel-controls-spacer"></div>
-            {!!caption && <div className="carousel-captions">{caption}</div>}
           </div>
         )}
       </div>
+
       {lightboxRef && (
         <LightboxButton
           lightboxRef={lightboxRef as RefObject<LightboxRefMethods>}
@@ -181,6 +180,7 @@ export function MediaCarousel({
           }}
         />
       )}
+      {!!caption && <div className="carousel-captions">{caption}</div>}
     </div>
   );
 }
