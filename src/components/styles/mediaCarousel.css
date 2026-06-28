@@ -141,14 +141,15 @@
   overflow: hidden;
   bottom: 0;
   padding: 0.5rem;
-  max-width: 100%;
-  margin: 0.5rem;
+  width: 100%;
   border-radius: 1rem;
   overflow-wrap: break-word;
   word-break: break-word;
   background-color: var(--carousel-controls-bg-col);
   color: var(--text);
   text-align: center;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
 .carousel-controls-container {
