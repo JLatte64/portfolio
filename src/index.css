@@ -171,13 +171,13 @@ html:has(dialog[open]) {
   --bg: #0e0e0e;
   --accent-bg: #1e222b;
   --text-h: #ffffff;
-  --accent: #16c975;
-  --subtitle: #66f3bd;
+  --accent: #1fbe6f;
+  --subtitle: #95ff6b;
   --text: #dbdcdf;
   --shadow: 4px 4px 4px black;
   --button-icon-font-size: 2rem;
   --border-static: 3px solid #2d2d2d;
-  --focus-ring: 3px solid #ffffff;
+  --focus-ring: 3px solid var(--subtitle);
   --sans: system-ui, "Segoe UI", Roboto, sans-serif;
   --heading: system-ui, "Segoe UI", Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;

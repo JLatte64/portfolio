@@ -1,23 +1,14 @@
 import { Link } from "react-router";
 import "../components/styles/navBar.css";
-import { useEffect, useState, useId } from "react";
+import { useState, useId } from "react";
 import { getPagePath } from "./functions/GetPagePath";
 import { useSlugs } from "../context/SlugContext";
+import { isMobile } from "react-device-detect";
 
 export function NavBar() {
   const [mobileMenuOpen, toggleMobileMenu] = useState(false);
   const { processedProjects, titleToSlug } = useSlugs();
   const menuPanelId = useId();
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth > 600) toggleMobileMenu(false);
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   return (
     <>
@@ -50,7 +41,7 @@ export function NavBar() {
           <button
             type="button"
             className="material-icons nav-hamburger-toggle"
-            aria-expanded={mobileMenuOpen}
+            aria-expanded={mobileMenuOpen && isMobile}
             aria-controls={menuPanelId}
             aria-label={
               mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"
@@ -60,34 +51,34 @@ export function NavBar() {
             {mobileMenuOpen ? "close" : "menu"}
           </button>
 
-          <div
-            id={menuPanelId}
-            className={`nav-menu-panel ${mobileMenuOpen ? "is-open" : "is-hidden"}`}
-          >
-            <ul className="nav-links-list">
-              <li>
-                <Link
-                  to={`${getPagePath("about")}`}
-                  className="nav-link-item"
-                  onClick={() => {
-                    toggleMobileMenu(false);
-                    window.scrollTo({ top: 0 });
-                  }}
-                >
-                  About/Resume
-                </Link>
-              </li>
+          <ul className="nav-links-list">
+            <li>
+              <Link
+                to={`${getPagePath("about")}`}
+                className="nav-link-item"
+                onClick={() => {
+                  toggleMobileMenu(false);
+                  window.scrollTo({ top: 0 });
+                }}
+              >
+                About/Resume
+              </Link>
+            </li>
 
-              <li>
-                <a
-                  href="#contact"
-                  className="nav-link-item"
-                  onClick={() => toggleMobileMenu(false)}
-                >
-                  Contact
-                </a>
-              </li>
+            <li>
+              <a
+                href="#contact"
+                className="nav-link-item"
+                onClick={() => toggleMobileMenu(false)}
+              >
+                Contact
+              </a>
+            </li>
 
+            <div
+              id={menuPanelId}
+              className={`nav-menu-panel ${mobileMenuOpen ? "is-open" : "is-hidden"}`}
+            >
               <ul className="project-nav-links">
                 {processedProjects.map((project) => {
                   const projectSlug = titleToSlug[project.title] || "project";
@@ -104,8 +95,8 @@ export function NavBar() {
                   );
                 })}
               </ul>
-            </ul>
-          </div>
+            </div>
+          </ul>
         </div>
       </nav>
     </>
