@@ -77,7 +77,6 @@ header.hero {
   left: 50%;
   transition: opacity 1.25s ease-in-out;
   transform: translate(-50%, -50%) scale(3.5);
-  filter: blur(2px);
 }
 
 .fade-image.active {
@@ -95,7 +94,8 @@ header.hero {
 .hero-slider-overlay {
   height: 100%;
   width: 100%;
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
   position: absolute;
   top: 0;
   left: 0;

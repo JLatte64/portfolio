@@ -94,7 +94,7 @@ function Hero() {
             </div>
           );
         })}
-        <div className="h" aria-hidden={true} />
+        <div className="hero-slider-overlay" aria-hidden={true} />
       </div>
       <section>
         <div className="hero-intro">
