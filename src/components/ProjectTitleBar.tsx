@@ -11,12 +11,10 @@ interface ProjectTitleBarProps {
 export default function ProjectTitleBar({
   projModalData,
 }: ProjectTitleBarProps) {
-  // Safety gate: If no metadata exists yet, exit early to prevent thread crashes
   if (!projModalData) return null;
 
   const { titleToSlug } = useSlugs();
 
-  // 🚀 FIXED: Reads directly from your structured props object instead of an unbound variable
   const purifiedTitleStr = purifyString(projModalData.title);
 
   const handleCopyLink = async () => {
@@ -26,7 +24,6 @@ export default function ProjectTitleBar({
 
       await navigator.clipboard.writeText(projectUrl);
 
-      // 🚀 Streamlined direct static method trigger
       ToastEmitter.show("Link copied to clipboard!");
     } catch (err) {
       ToastEmitter.show("Failed to copy link.");
@@ -39,7 +36,7 @@ export default function ProjectTitleBar({
         <button
           type="button"
           className="title-copy-btn"
-          onClick={handleCopyLink} // 🚀 Wired securely directly to unblocked function
+          onClick={handleCopyLink}
           aria-label={`Copy shareable link for the ${purifiedTitleStr} project`}
         >
           {purifiedTitleStr}

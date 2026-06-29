@@ -42,42 +42,47 @@ article.project-body-container {
   display: flex;
   flex-direction: column;
   border-bottom: 4px solid var(--accent);
-  background-color: var(--accent-bg);
+  background: var(--accent-bg);
   padding: var(--project-body-padding);
 }
 
 section.project-body-section-container {
   width: 100%;
-  padding: var(--project-section-padding);
   height: fit-content;
+  padding: 0.5rem;
 }
 
 .project-body-section-heading {
-  margin: 0;
-  padding-bottom: var(--project-section-padding);
-  margin-bottom: var(--project-section-padding);
+  margin: 0.75rem 0 0.75rem 0;
   color: var(--text-h);
-  border-bottom: 2px solid var(--accent);
   width: 100%;
+  text-align: start;
+  font-size: 1.2rem;
 }
 
 .project-body-media-container {
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
 }
 
-.project-body-media-container > *:not(:last-child) {
-  padding-bottom: var(--project-section-padding);
+ul.project-media > * {
+  list-style-position: outside;
+  margin: 0 0 0 1rem;
 }
 
 ul.project-media {
   padding-left: 1.5rem;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
 }
 
 ul.project-media > *::marker {
   color: var(--accent);
+  font-size: 1.25rem;
 }
 
 code.project-media {
@@ -92,10 +97,9 @@ code.project-media {
   width: 100%;
   height: fit-content;
   border-radius: 0.25rem;
-  list-style-position: outside;
   text-align: left;
   margin: 0;
-  padding: 0;
+  padding: 0.25rem;
   anchor-name: --project-body-media-anchor;
 }
 
@@ -150,7 +154,7 @@ code.project-media {
   filter: brightness(1.15);
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
   .project-container {
     flex-direction: column;
     height: 100dvh;
@@ -172,7 +176,7 @@ code.project-media {
   }
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 768px) {
   .project-container {
     flex-direction: row;
   }
@@ -183,7 +187,7 @@ code.project-media {
   }
 
   article.project-body-container {
-    width: 40dvw;
+    width: 45dvw;
     height: 100%;
     box-shadow: -2px 0px 10px var(--shadow);
   }

@@ -55,6 +55,7 @@ ul.slides-container:active {
 .carousel-indicator.inactive {
   transform: scale(var(--carousel-indicator-inactive-scale));
   border: none;
+  background-color: var(--accent);
 }
 
 .carousel-indicator.inactive:hover {
@@ -68,12 +69,8 @@ ul.slides-container:active {
   width: var(--carousel-indicator-size);
   height: var(--carousel-indicator-size);
   border: none;
-  background-color: var(--accent);
+  background-color: var(--subtitle);
   transition: transform 0.15s ease;
-}
-
-.carousel-indicator:active {
-  transform: scale(0.9);
 }
 
 .carousel-indicators-container {

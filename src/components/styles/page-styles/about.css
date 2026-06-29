@@ -126,13 +126,13 @@
   box-sizing: border-box;
 }
 
-@media screen and (min-width: 1600px) {
+@media screen and (min-width: 1536px) {
   .about-content {
-    width: 1600px;
+    width: 1536px;
   }
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 768px) {
   .about-skills-software > section {
     flex: 1;
     width: 50%;
@@ -166,13 +166,13 @@
   }
 }
 
-@media screen and (max-width: 1600px) and (min-width: 600px) {
+@media screen and (max-width: 1536px) and (min-width: 768px) {
   .about-content {
     width: 95%;
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
   .about-skills-software > section {
     flex: 1 1 100%;
   }

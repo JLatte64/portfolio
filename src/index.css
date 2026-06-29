@@ -10,10 +10,11 @@ html:has(dialog[open]) {
 }
 
 :root {
-  --bg: #000000;
-  --accent-bg: #1a1a1a;
+  --bg: #040404;
+  --accent-bg: #202025;
   --text-h: #ffffff;
-  --accent: rgb(0, 187, 125);
+  --accent: #00cc66;
+  --subtitle: #b7f7a3;
   --text: #c5c5c5;
   --shadow:
     rgba(0, 0, 0, 0.5) 0 8px 10px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;

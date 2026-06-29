@@ -1,5 +1,5 @@
 // src/components/ToastEmitter.tsx
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import "../components/styles/toastEmitter.css";
 
 interface ToastEventDetail {
@@ -17,18 +17,14 @@ export function ToastEmitter() {
       const toastEl = toastRef.current;
       if (!toastEl) return;
 
-      // 1. Clear out any active auto-hide timers
       if (timerRef.current) window.clearTimeout(timerRef.current);
 
-      // 2. Load the string message instantly
       setMessage(customEvent.detail.message);
 
-      // 3. Native Popover API: Float the item safely to the top layer layout stack
       try {
         toastEl.showPopover();
       } catch (e) {}
 
-      // 4. Auto-hide and drop out of view cleanly after 2.5 seconds
       timerRef.current = window.setTimeout(() => {
         try {
           toastEl.hidePopover();
@@ -58,7 +54,6 @@ export function ToastEmitter() {
   );
 }
 
-// Unified static launcher method
 ToastEmitter.show = (messageText: string): void => {
   const event = new CustomEvent<ToastEventDetail>("SHOW_TOAST_TRIGGER", {
     detail: { message: messageText },

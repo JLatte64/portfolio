@@ -1,6 +1,3 @@
-/* ========================================================
-   UNIVERSAL LIGHTBOX SYSTEM (POPOVER API - ZERO Z-INDEX)
-   ======================================================== */
 .fullscreen-lightbox-overlay {
   border: none;
   background: none;
@@ -10,34 +7,27 @@
   max-height: none;
   overflow: hidden;
 
-  /* Closed Baseline Position State Parameter Constraints */
   position: absolute;
   width: 0;
   height: 0;
   display: none;
 }
 
-/* 🚀 THE OPEN ACTIVE LAYOUT MATRIX
-   Natively expands to full screen size metrics when showPopover() fires */
 .fullscreen-lightbox-overlay:popover-open {
   position: fixed;
   top: 0;
   left: 0;
   width: 100dvw;
   height: 100dvh;
-  display: block; /* Swapped from flex to block to allow absolute sub-layers to stack natively */
+  display: block;
   box-sizing: border-box;
 }
 
-/* Modifies the native browser backdrop masking tint when open */
 .fullscreen-lightbox-overlay:popover-open::backdrop {
   background-color: rgba(10, 10, 10, 0.96);
   backdrop-filter: blur(8px);
 }
 
-/* ========================================================
-   🚀 STRUCTURAL FIX: INDEPENDENT FILL CHANNELS
-   ======================================================== */
 .lightbox-content-wrapper {
   position: absolute;
   top: 0;
@@ -48,8 +38,6 @@
   align-items: center;
   justify-content: center;
 
-  /* 🚀 SAFETY MATRIX: Let click events pass straight through the empty spaces 
-     of the zoom canvas wrapper back down to the overlay backdrop handles */
   pointer-events: none;
 }
 
@@ -57,7 +45,7 @@
   width: 100%;
   height: 100%;
   display: block;
-  pointer-events: auto; /* Restores touch gestures strictly inside the active image box area */
+  pointer-events: auto;
 }
 
 .lightbox-zoom-bounding-box {
@@ -72,7 +60,6 @@
   cursor: grabbing;
 }
 
-/* Restrict large high-fidelity screenshot assets from fracturing monitor bounds */
 .lightbox-scaled-image {
   max-width: 95vw;
   max-height: 95vh;
@@ -82,9 +69,6 @@
   display: block;
 }
 
-/* ========================================================
-   INTERACTIVE OVERLAY GESTURE AUTOMATIC FADING
-   ======================================================== */
 .lightbox-close-button,
 .lightbox-captions {
   transition:
@@ -101,13 +85,8 @@
   pointer-events: none !important;
 }
 
-/* ========================================================
-   🚀 FLOATING OVERLAY SWITCH TOGGLE BUTTON
-   Natively sits at the top right corner since it's declared 
-   lower down the DOM tree inside LightboxContext.tsx
-   ======================================================== */
 .lightbox-close-button {
-  position: absolute; /* Changes to absolute so it anchors relative to screen dimensions */
+  position: absolute;
   top: 1.5rem;
   right: 1.5rem;
   background-color: rgba(26, 26, 26, 0.85);
@@ -120,10 +99,9 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  pointer-events: auto; /* Always accepts mouse coordinate clicks */
+  pointer-events: auto;
 }
 
-/* FOOTER CAPTIONS DESCRIPTION TRACK BAR */
 .lightbox-captions {
   position: absolute;
   bottom: 0;

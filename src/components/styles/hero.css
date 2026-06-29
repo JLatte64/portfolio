@@ -27,6 +27,11 @@
   align-items: center;
 }
 
+.hero-profile-photo-wrapper {
+  flex: 1;
+  display: flex;
+}
+
 .hero-text {
   display: flex;
   flex-direction: column;
@@ -47,22 +52,31 @@
 }
 
 .job-title {
-  color: var(--accent);
+  color: var(--subtitle);
   font-weight: bold;
   margin: 0;
   padding: 0;
 }
 
 .hero-location-text {
+  color: var(--subtitle);
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
+  padding: 0;
+  margin: 0;
+}
+
+.hero-tagline-text {
+  padding: 0;
+  margin: 0;
 }
 
 .hero-photo {
   border-radius: 0.25rem;
-  border: 2px solid var(--text);
+  border: var(--border-static);
   block-size: auto;
+  align-self: flex-start;
 }
 
 .hero-slide-item-wrapper {
@@ -71,6 +85,12 @@
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+.about-button {
+  background-color: var(--accent-bg) !important;
+  border: 2px solid var(--accent) !important;
+  color: var(--text-h) !important;
 }
 
 .fade-image {
@@ -147,7 +167,7 @@
   border-color: var(--accent);
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 768px) {
   .hero-photo {
     align-self: flex-end;
     margin-left: auto;
@@ -155,9 +175,9 @@
   }
 
   .hero-text {
-    gap: 1rem;
     flex-direction: column;
     flex: 1 1 45%;
+    gap: 1rem;
   }
 
   .hero-text-button {
@@ -170,7 +190,7 @@
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
   .hero-photo {
     align-self: flex-start;
     width: 30dvw;

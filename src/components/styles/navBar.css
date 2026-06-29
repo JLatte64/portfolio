@@ -97,7 +97,7 @@
   backdrop-filter: blur(5px);
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
   .nav-brand-link,
   .nav-hamburger-toggle {
     border: none;
@@ -148,7 +148,7 @@
   }
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 768px) {
   .nav-links-list {
     justify-content: flex-end;
     height: var(--navbar-height);
