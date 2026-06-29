@@ -154,7 +154,7 @@ code.project-media {
   filter: brightness(1.15);
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 600px) {
   .project-container {
     flex-direction: column;
     height: 100dvh;
@@ -176,7 +176,7 @@ code.project-media {
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 600px) {
   .project-container {
     flex-direction: row;
   }

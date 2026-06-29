@@ -10,17 +10,17 @@ html:has(dialog[open]) {
 }
 
 :root {
-  --bg: #040404;
-  --accent-bg: #202025;
+  --bg: #0e0e0e;
+  --accent-bg: #1e222b;
   --text-h: #ffffff;
-  --accent: #00cc66;
-  --subtitle: #b7f7a3;
-  --text: #c5c5c5;
+  --accent: #16c975;
+  --subtitle: #16c975;
+  --text: #eaebee;
   --shadow:
     rgba(0, 0, 0, 0.5) 0 8px 10px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-  --border-static: 1px solid #2d2d2d;
-  --border-interactive: 2px solid #555555;
-  --focus-ring: 3px solid #22d3ee;
+  --border-static: 2px solid #2d2d2d;
+  --border-interactive: 3px solid #555555;
+  --focus-ring: 3px solid #ffffff;
   --border-radius: 0.25rem;
   --sans: system-ui, "Segoe UI", Roboto, sans-serif;
   --heading: system-ui, "Segoe UI", Roboto, sans-serif;
@@ -37,7 +37,7 @@ html:has(dialog[open]) {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  @media (max-width: 1536px) {
+  @media (max-width: 1200px) {
     font-size: 16px;
   }
 }
@@ -76,7 +76,7 @@ h2 {
 h1 {
   font-size: 42px;
   font-weight: 800;
-  @media (max-width: 768px) {
+  @media (max-width: 600px) {
     font-size: 40px;
   }
 }
@@ -205,7 +205,6 @@ a:visited {
   transform: scale(0.95);
 }
 
-/* Global utility rule for overlay action controls */
 .overlay-button {
   position: fixed;
   filter: drop-shadow(0px 2px 5px var(--shadow));

@@ -88,20 +88,22 @@ export function NavBar() {
                 </a>
               </li>
 
-              {processedProjects.map((project) => {
-                const projectSlug = titleToSlug[project.title] || "project";
-                return (
-                  <li key={project.id}>
-                    <Link
-                      to={`${getPagePath("dashboard")}/${projectSlug}`}
-                      className="nav-link-item project-nav-link"
-                      onClick={() => toggleMobileMenu(false)}
-                    >
-                      {project.title}
-                    </Link>
-                  </li>
-                );
-              })}
+              <ul className="project-nav-links">
+                {processedProjects.map((project) => {
+                  const projectSlug = titleToSlug[project.title] || "project";
+                  return (
+                    <li key={project.id}>
+                      <Link
+                        to={`${getPagePath("dashboard")}/${projectSlug}`}
+                        className={`nav-link-item project-nav-link`}
+                        onClick={() => toggleMobileMenu(false)}
+                      >
+                        {project.title}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
             </ul>
           </div>
         </div>

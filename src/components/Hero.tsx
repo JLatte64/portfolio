@@ -106,46 +106,6 @@ function Hero() {
               </div>
             );
           })}
-
-          {totalSlides > 1 && (
-            <button
-              type="button"
-              className="hero-carousel-pause-toggle"
-              aria-label={
-                isPaused
-                  ? "Play background image slider animation"
-                  : "Pause background image slider animation"
-              }
-              aria-pressed={isPaused}
-              onClick={() => setIsPaused(!isPaused)}
-            >
-              <span className="material-icons" aria-hidden="true">
-                {isPaused ? "play_arrow" : "pause"}
-              </span>
-            </button>
-          )}
-          {totalSlides > 1 && (
-            <div
-              className="hero-slider-dots-tray"
-              role="tablist"
-              aria-label="Select background project slide showcase visual"
-            >
-              {heroMedia.map((_, dotIdx) => (
-                <button
-                  key={`dot-ctrl-${dotIdx}`}
-                  type="button"
-                  role="tab"
-                  className={`hero-dot-indicator ${dotIdx === heroSlide ? "current-active" : ""}`}
-                  aria-selected={dotIdx === heroSlide}
-                  aria-label={`Go directly to slide display layout ${dotIdx + 1}`}
-                  onClick={() => {
-                    setHeroSlide(dotIdx);
-                    elapsedRef.current = 0;
-                  }}
-                />
-              ))}
-            </div>
-          )}
         </section>
         <div className="hero-content-container">
           <div className="hero-text-button">
