@@ -72,9 +72,7 @@ export function ProjectModal({
               className="project-body-container"
               aria-label={`${purifiedTitleStr} project logs`}
             >
-              <div id={uniqueTitleId}>
-                <ProjectTitleBar projModalData={modalData} />
-              </div>
+              <ProjectTitleBar projModalData={modalData} id={uniqueTitleId} />
 
               <div className="project-body-sections-container">
                 {(modalData.bodySections ?? []).map((bodySection) => {

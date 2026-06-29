@@ -1,12 +1,11 @@
 import "./styles/hero.css";
 import { heroSlides } from "../data/projects.json";
 import { myinfo } from "../data/myinfo.json";
-import React, { useEffect, useRef, useState, useId } from "react";
+import { useEffect, useRef, useState, useId } from "react";
 import type { Media } from "./types/MediaTypes";
 import showMedia from "./functions/DisplayMedia";
 import { Link } from "react-router";
 import { getPagePath } from "./functions/GetPagePath";
-import "./styles/button-styles/buttons.css";
 import { useDashboardState } from "../context/DashboardContext";
 
 function Hero() {

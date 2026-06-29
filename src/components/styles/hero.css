@@ -1,24 +1,15 @@
 .hero-av {
-  border-radius: 0;
   border: var(--border-static);
   block-size: auto;
 }
 
-.cta-btn {
-  font-weight: 100 !important;
-  border-radius: 0 !important;
-  color: var(--accent-bg) !important;
-  height: fit-content;
-  width: 100%;
-  box-shadow: 0px 0px 15px rgba(0, 205, 108, 0.3);
-  transition: all 0.2s ease-in-out;
+.hero-av-wrapper {
+  justify-content: end !;
+  align-items: end !important;
 }
 
-.cta-button:hover {
-  background-color: #00e67a;
-  /* Slightly stronger glow on hover */
-  box-shadow: 0px 0px 25px rgba(0, 205, 108, 0.5);
-  transform: translateY(-5px);
+.cta-btn {
+  width: 100%;
 }
 
 .hero-loc > span {
@@ -26,29 +17,31 @@
 }
 
 .hero-loc {
+  font-family: "Mario64" !important;
   color: var(--text-h);
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  font-size: 1rem;
+  font-size: 1.25em;
+  margin: 0;
   gap: 0.25rem;
 }
 
 .hero-job-title {
-  font-family: "Dizhitl";
-  font-size: 1.5rem;
+  color: var(--text-h);
+  font-family: "Mario64" !important;
+  font-size: 1.75em;
   font-weight: 600;
+  margin: 0;
 }
 
 .hero h1 {
-  font-family: "Mario64";
-  font-size: 4rem;
-  line-height: 4rem;
+  margin: 0;
   flex: 0 0 fit-content;
 }
 
-.hero-intro > *:not(button) {
-  filter: drop-shadow(0px 2px 0px black);
+.hero-intro > *:not(a) {
+  filter: drop-shadow(0px 0.15em 2px rgba(0, 0, 0, 0.5));
 }
 
 .hero section > * {
@@ -57,22 +50,22 @@
   justify-content: center;
   align-items: start;
   flex: 1;
-  gap: 1rem;
-  overflow: hidden;
+  gap: 2rem;
   text-align: start;
 }
 
 .hero section {
+  border-radius: 0.25rem;
   position: relative;
   display: flex;
   justify-content: space-between;
-  margin: 5dvw 5dvh;
+  padding: 2.5dvh 2.5dvw;
+  margin: 5dvh 5dvw;
 }
 
 /* --- HERO SLIDER --- */
 .hero-slider-overlay {
-  background: rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(3px) brightness(0.75);
   inset: 0;
   position: absolute;
 }

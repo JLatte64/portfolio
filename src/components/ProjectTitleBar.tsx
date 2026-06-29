@@ -3,13 +3,15 @@ import { ToastEmitter } from "./ToastEmitter"; // 🚀 Connect to your global co
 import { useSlugs } from "../context/SlugContext";
 import type { ProjectData } from "./types/ProjectTypes";
 import "./styles/projectTitleBar.css";
+import type { ComponentPropsWithoutRef } from "react";
 
-interface ProjectTitleBarProps {
+interface ProjectTitleBarProps extends ComponentPropsWithoutRef<"div"> {
   projModalData: ProjectData | undefined;
 }
 
 export default function ProjectTitleBar({
   projModalData,
+  ...props
 }: ProjectTitleBarProps) {
   if (!projModalData) return null;
 
@@ -31,7 +33,7 @@ export default function ProjectTitleBar({
   };
 
   return (
-    <div className="project-title-bar">
+    <div className="project-title-bar" {...props}>
       <h2 className="project-title-heading">
         <button
           type="button"

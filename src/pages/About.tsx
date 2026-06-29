@@ -1,5 +1,4 @@
 import "../components/styles/page-styles/about.css";
-import "../components/styles/button-styles/buttons.css";
 import displayMedia, {
   resolveMediaSrc,
 } from "../components/functions/DisplayMedia";
@@ -44,7 +43,7 @@ export function About() {
             href={resolveMediaSrc(myinfo.resume.pdf.content)}
             target="_blank"
             rel="noopener noreferrer"
-            className="resume-button button"
+            className="resume-button button-inverted"
             aria-label="Download or view full resume PDF in a new tab"
           >
             Download/View Resume (PDF)
