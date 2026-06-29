@@ -1,11 +1,8 @@
-/* ========================================================
-   LANGUAGE DATA BADGE CONTAINER
-   ======================================================== */
 .lang-card-container {
   width: fit-content;
-  padding: 0.5rem 1rem; /* Added an extra side padding breath room for better text badge layout tracking */
+  padding: 0.5rem 1rem;
   border-radius: 0.25rem;
-  text-align: center; /* Preserves your definitive centered visual presentation */
+  text-align: center;
   background-color: var(--bg);
   filter: brightness(1);
   transition: filter 0.05s ease;
@@ -16,9 +13,8 @@
   filter: brightness(1.1);
 }
 
-/* Typography control handle matching your theme weights */
 .lang-card-text-label {
   font-size: 1rem;
   font-weight: 600;
-  color: var(--text); /* Safe passing contrast neutral text token */
+  color: var(--text);
 }

@@ -1,6 +1,3 @@
-/* ========================================================
-   BACK TO TOP ACTION ANCHOR
-   ======================================================== */
 .top-nav-button {
   position: fixed;
   border-radius: var(--button-icon-font-size);
@@ -16,33 +13,23 @@
   align-items: center;
   color: var(--text-h);
 
-  /* Safe layer stacking profile above card link containers */
-  z-index: 50;
-
-  /* Smooth visibility hardware-accelerated transitions */
   transition:
     opacity 0.2s ease,
     transform 0.2s ease;
 }
 
-/* ========================================================
-   🚀 ACCESSIBLE TRANSITION STATE CONTROLS
-   ======================================================== */
 .top-nav-button.is-hidden {
   opacity: 0;
-  transform: translateY(
-    15px
-  ); /* Tucks slightly downward out of the view row when top is reached */
-  pointer-events: none; /* 🚀 CRITICAL: Stops mouse clicks from hitting the hidden box coordinate */
+  transform: translateY(15px);
+  pointer-events: none;
 }
 
 .top-nav-button.is-visible {
   opacity: 1;
   transform: translateY(0);
-  pointer-events: auto; /* Restores full functional touch target tracking paths */
+  pointer-events: auto;
 }
 
-/* Material font symbol scale properties */
 .top-nav-button span {
   font-size: inherit;
   font-weight: inherit;

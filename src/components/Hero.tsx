@@ -14,8 +14,6 @@ function Hero() {
     useDashboardState();
 
   const [isVisible, setIsVisible] = useState(false);
-
-  // 🚀 ACCESSIBILITY FIX: Track manual override pause states to respect user control constraints
   const [isPaused, setIsPaused] = useState(false);
 
   const sliderRef = useRef<HTMLDivElement>(null);
@@ -23,8 +21,6 @@ function Hero() {
 
   const lastUpdateRef = useRef<number | null>(null);
   const elapsedRef = useRef<number>(heroTimeElapsed);
-
-  // Unique label namespace handles for screen readers
   const carouselRegionId = useId();
 
   useEffect(() => {
@@ -38,7 +34,6 @@ function Hero() {
   }, []);
 
   useEffect(() => {
-    // 🚀 FIXED: Added isPaused to instantly halt animation frame calculations when triggered
     if (!isVisible || isPaused || totalSlides <= 1) {
       lastUpdateRef.current = null;
       return;
@@ -84,9 +79,6 @@ function Hero() {
   return (
     <>
       <header className="hero" aria-label="Introduction and Background Gallery">
-        {/* ========================================================
-           🚀 SEMANTIC UPDATE: Background slides act as an orderly carousel
-           ======================================================== */}
         <section
           ref={sliderRef}
           className="hero-slider-container"
@@ -115,7 +107,6 @@ function Hero() {
             );
           })}
 
-          {/* 🚀 WCAG 2.2 MANDATE CONTROLS: Hidden accessible toggle lets keyboard/screen-readers pause motion */}
           {totalSlides > 1 && (
             <button
               type="button"
@@ -133,8 +124,6 @@ function Hero() {
               </span>
             </button>
           )}
-
-          {/* 🚀 SEMANTIC CAROUSEL INDICATOR TRAY */}
           {totalSlides > 1 && (
             <div
               className="hero-slider-dots-tray"
@@ -151,19 +140,16 @@ function Hero() {
                   aria-label={`Go directly to slide display layout ${dotIdx + 1}`}
                   onClick={() => {
                     setHeroSlide(dotIdx);
-                    elapsedRef.current = 0; // Restart clock timing slice on user selection click
+                    elapsedRef.current = 0;
                   }}
                 />
               ))}
             </div>
           )}
         </section>
-
-        {/* FRONT LAYOUT INFO BLOCK TEXT */}
         <div className="hero-content-container">
           <div className="hero-text-button">
             <div className="hero-text">
-              {/* Strict singular document tree hierarchy starting baseline node */}
               <h1 className="name-title">{myinfo.name}</h1>
               <h2 className="job-title">{myinfo.jobTitle}</h2>
 

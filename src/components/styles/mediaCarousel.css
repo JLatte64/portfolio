@@ -224,7 +224,6 @@ ul.slides-container:active {
   pointer-events: none;
 }
 
-/* Global focus ring integration compatibility */
 .carousel-indicator:focus-visible,
 .carousel-nav-button:focus-visible,
 .carousel:focus-visible {

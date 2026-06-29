@@ -2,9 +2,6 @@
   --navbar-height: calc(3rem + 4px);
 }
 
-/* ========================================================
-   LANDMARK NAVIGATION BOX FRAMING
-   ======================================================== */
 .nav-container {
   position: fixed;
   top: 0;
@@ -33,9 +30,6 @@
   height: var(--navbar-height);
 }
 
-/* ========================================================
-   THE BRAND LINKS AND ITEM TYPOGRAPHY KEYS
-   ======================================================== */
 .nav-brand-link,
 .nav-link-item {
   display: flex;
@@ -67,9 +61,6 @@
   font-size: 1rem;
 }
 
-/* ========================================================
-   🚀 SEMANTIC TREE COMPLIANT LINKS CONTAINER (DESKTOP MODE)
-   ======================================================== */
 .nav-links-list {
   list-style: none;
   padding: 0;
@@ -78,9 +69,6 @@
   position: relative;
 }
 
-/* ========================================================
-   HAMBURGER TOGGLE BUTTON SETTINGS
-   ======================================================== */
 .nav-hamburger-toggle {
   background-color: transparent;
   border: none;
@@ -96,7 +84,6 @@
   padding: 0 1rem;
 }
 
-/* THE INVISIBLE BACKDROP OVERLAY OVERRIDES */
 .mobile-background-overlay {
   position: fixed;
   width: 100vw;
@@ -107,12 +94,9 @@
   background: none;
   padding: 0;
   cursor: pointer;
-  backdrop-filter: blur(5px); /* Preserves your exact blur styling mask */
+  backdrop-filter: blur(5px);
 }
 
-/* ========================================================
-   📱 MOBILE RESPONSIVE SIZES (VIEWPORTS UP TO 600px)
-   ======================================================== */
 @media screen and (max-width: 600px) {
   .nav-brand-link,
   .nav-hamburger-toggle {
@@ -120,7 +104,6 @@
     background-color: transparent;
   }
 
-  /* Structural block transitions mapping your original class rules */
   .nav-menu-panel.is-open .nav-links-list {
     display: flex;
   }
@@ -148,7 +131,6 @@
     box-sizing: border-box;
   }
 
-  /* Clear overlapping borders from top items safely */
   .nav-links-list > li:not(:first-child) .nav-link-item {
     border-top: none;
   }
@@ -162,13 +144,10 @@
   }
 
   .site-title-text {
-    display: none; /* Keeps brand title safely hidden on ultra-small mobile displays */
+    display: none;
   }
 }
 
-/* ========================================================
-   💻 DESKTOP SCREEN CODES (VIEWPORTS WIDER THAN 600px)
-   ======================================================== */
 @media screen and (min-width: 600px) {
   .nav-links-list {
     justify-content: flex-end;

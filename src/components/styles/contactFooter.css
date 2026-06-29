@@ -1,6 +1,3 @@
-/* ========================================================
-   ORIGINAL LAYOUT GEOMETRY & FRAMING
-   ======================================================== */
 .contact-content {
   position: relative;
   display: block;
@@ -10,7 +7,7 @@
   border-top: 2px solid var(--accent);
   background-color: var(--bg);
   height: fit-content;
-  text-align: center; /* Preserves your global text alignment layout */
+  text-align: center;
 }
 
 .contact-content > h2 {
@@ -33,7 +30,6 @@
   gap: 1rem;
 }
 
-/* 🚀 Structural field wrapper group locks width parameters cleanly */
 .form-field-group {
   width: 100%;
 }
@@ -41,13 +37,13 @@
 .form-input {
   width: 100%;
   padding: 0.5rem;
-  border: 2px solid transparent; /* Keeps smooth border animations stable */
+  border: 2px solid transparent;
   border-radius: 4px;
   font-size: 1rem;
   text-align: center;
   text-justify: auto;
   box-sizing: border-box;
-  background-color: #ffffff; /* Preserves your bright flat input look */
+  background-color: #ffffff;
   color: #111111;
   transition:
     border-color 0.2s ease,
@@ -85,14 +81,8 @@ textarea {
   padding: 0.5rem;
 }
 
-/* ========================================================
-   🚀 HIGH-CONTRAST ACCESSIBILITY IMPROVEMENTS
-   ======================================================== */
-/* Clean keyboard focus indicator ring on active elements */
 .form-input:focus {
   outline: none;
-  border-color: var(
-    --accent
-  ); /* Highlights the inputs with your mint green branding on focus */
+  border-color: var(--accent);
   box-shadow: 0 0 8px rgba(0, 187, 125, 0.3);
 }

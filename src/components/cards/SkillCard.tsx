@@ -16,8 +16,6 @@ export const SkillCard = ({ cardData, className = "" }: SkillCardProps) => {
 
   return (
     <Card className={`${className}`.trim()}>
-      {/* 🚀 ACCESSIBILITY FIX: Replaced the unsemantic inner <div> wrapper with a clean,
-          semantic text element to handle font family and tracking variables cleanly */}
       <span className={`${className}-text-badge`.trim()}>{purifiedSkill}</span>
     </Card>
   );

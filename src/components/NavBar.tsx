@@ -60,7 +60,6 @@ export function NavBar() {
             {mobileMenuOpen ? "close" : "menu"}
           </button>
 
-          {/* 🚀 Clean list panels map your structural responsive animation toggles */}
           <div
             id={menuPanelId}
             className={`nav-menu-panel ${mobileMenuOpen ? "is-open" : "is-hidden"}`}

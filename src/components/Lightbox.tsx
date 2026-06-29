@@ -25,17 +25,10 @@ export const LightboxProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [lightboxMedia, setLightboxMedia] = useState<Media | null>(null);
   const [isInteracting, setIsInteracting] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
 
   const popoverRef = useRef<HTMLDivElement>(null);
   const triggerElementRef = useRef<HTMLElement | null>(null);
   const timerRef = useRef<number | null>(null);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setIsMobile(window.navigator.maxTouchPoints > 0);
-    }
-  }, []);
 
   const openLightbox = (media: Media) => {
     triggerElementRef.current = document.activeElement as HTMLElement;
@@ -72,7 +65,6 @@ export const LightboxProvider: React.FC<{ children: React.ReactNode }> = ({
     <LightboxContext.Provider value={{ openLightbox, closeLightbox }}>
       {children}
 
-      {/* 🚀 THE DEFINITIVE TOP-LAYER LIGHTBOX STRUCTURE */}
       <div
         ref={popoverRef}
         popover="manual"
@@ -84,7 +76,6 @@ export const LightboxProvider: React.FC<{ children: React.ReactNode }> = ({
       >
         {lightboxMedia && (
           <>
-            {/* STACK POSITION 1 (BOTTOM LAYER): Zoom canvas is declared first */}
             <div className="lightbox-content-wrapper">
               <TransformWrapper
                 initialScale={1}
@@ -116,7 +107,6 @@ export const LightboxProvider: React.FC<{ children: React.ReactNode }> = ({
               </TransformWrapper>
             </div>
 
-            {/* 🚀 STACK POSITION 2 (MID LAYER): Declared below the canvas to sit on top naturally */}
             <button
               type="button"
               className="button lightbox-close-button overlay-button"
@@ -128,7 +118,6 @@ export const LightboxProvider: React.FC<{ children: React.ReactNode }> = ({
               </span>
             </button>
 
-            {/* 🚀 STACK POSITION 3 (TOP LAYER): Captions block declared last to anchor over the entire scene */}
             {!!lightboxMedia.caption && (
               <output
                 className="lightbox-captions"

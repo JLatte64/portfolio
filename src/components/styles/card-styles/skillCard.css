@@ -1,13 +1,10 @@
-/* ========================================================
-   SKILL DATA PROFILE BADGE CONTAINER
-   ======================================================== */
 .skill-card-container {
   background-color: var(--accent-bg);
   text-align: center;
   flex: 1 1 auto;
   max-width: fit-content;
   height: fit-content;
-  padding: 0.25rem 0.75rem; /* Balanced your vertical and horizontal padding frames */
+  padding: 0.25rem 0.75rem;
   margin: 0;
   border-radius: var(--border-radius);
   filter: brightness(1);
@@ -18,11 +15,9 @@
 .skill-card-container:hover {
   filter: brightness(1.1);
 }
-
-/* 🚀 Typography token alignment matching your resume data stack */
 .skill-card-text-badge {
   font-size: 100%;
   font-weight: normal;
-  color: var(--text); /* Clean neutral high-contrast reading text */
+  color: var(--text);
   display: inline-block;
 }

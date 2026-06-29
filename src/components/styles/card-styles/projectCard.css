@@ -1,6 +1,3 @@
-/* ========================================================
-   CINEMATIC PORTFOLIO PROJECT SHOWCASE TILES
-   ======================================================== */
 .project-card-container {
   position: relative;
   aspect-ratio: 1/1;
@@ -10,12 +7,6 @@
   border: 2px solid var(--accent);
   box-sizing: border-box;
 }
-
-/* 🚀 RENDERING CLEANUP: 
-   Removed the custom duplicate '.project-card-container:active' scale 
-   shrink block entirely. This lets the card seamlessly inherit the 
-   global hardware-accelerated click responses from your index.css file, 
-   completely resolving structural rendering micro-stutters. */
 
 .project-card-thumbnail {
   position: absolute;
@@ -60,10 +51,6 @@
   text-align: center;
 }
 
-/* ========================================================
-   🚀 HIGH-PERFORMANCE KEYBOARD TAB & MOUSE HOVER RIGS
-   Executes identical micro-interactions for ALL site visitors
-   ======================================================== */
 .project-card-container:hover .project-card-title-background,
 .project-card-container:focus-within .project-card-title-background {
   transform: translate(0, 100%) scale(1, 2);
@@ -84,9 +71,6 @@
   width: 100%;
 }
 
-/* ========================================================
-   RESPONSIVE LAYOUT COLUMNS GRID SCALING
-   ======================================================== */
 @media screen and (min-width: 600px) {
   .project-card-container {
     max-width: 33%;

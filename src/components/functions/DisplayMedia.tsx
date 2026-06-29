@@ -51,11 +51,7 @@ export default function displayMedia(
       return (
         <ul ref={ref} className={mediaClass}>
           {(media?.content as string[]).map((listItem, listIndex) => (
-            <li key={`list-item-${listIndex}`}>
-              {/* 🚀 ACCESSIBILITY FIX: Placed the plain text string directly inside the list item 
-                  node to prevent jagged double-landmark announcements. */}
-              {purifyString(listItem)}
-            </li>
+            <li key={`list-item-${listIndex}`}>{purifyString(listItem)}</li>
           ))}
         </ul>
       );
@@ -106,11 +102,6 @@ export default function displayMedia(
             width="100%"
             height="auto"
             loading={loadingStrategy}
-            /* ========================================================
-               🚀 PERMISSIONS POLICY & WARNING SUPPRESSION FIX
-               Explicitly restricts the sandbox context to multimedia tools,
-               silencing the browser's "compute-pressure" warning logs.
-               ======================================================== */
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           />
         );

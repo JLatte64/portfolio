@@ -23,7 +23,6 @@ import SkillCard, { type SkillCardData } from "../components/cards/SkillCard";
 export function About() {
   if (!myinfo) {
     return (
-      /* 🚀 ACCESSIBILITY FIX: Wrapped loading fallback state inside a valid main region */
       <main className="about-main-content">
         <p style={{ color: "#ffffff", padding: "2rem", textAlign: "center" }}>
           Loading profile information...
@@ -33,12 +32,10 @@ export function About() {
   }
 
   return (
-    /* 🚀 ACCESSIBILITY FIX: Placed the entire body of information inside a single main landmark */
     <main
       className="about-main-content"
       aria-label="About and Resume Breakdown Profile"
     >
-      {/* 🚀 SEMANTIC UPDATE: Header sits nested correctly as the intro landmark of the main page content */}
       <header className="about-intro">
         <p className="about-story">{purifyString(myinfo.aboutDescription)}</p>
         <div className="about-photo-link">
@@ -48,7 +45,6 @@ export function About() {
             target="_blank"
             rel="noopener noreferrer"
             className="resume-button button"
-            /* Tells screen-readers explicitly that this anchor link targets a document download */
             aria-label="Download or view full resume PDF in a new tab"
           >
             Download/View Resume (PDF)
@@ -57,7 +53,6 @@ export function About() {
       </header>
 
       <div className="about-content">
-        {/* SECTION 1: ROLES BREAKDOWN */}
         <section className="about-roles" aria-labelledby="experience-heading">
           <h2 id="experience-heading">Professional Experience</h2>
           <CardGrid
@@ -72,7 +67,6 @@ export function About() {
           />
         </section>
         <div className="about-skills-software">
-          {/* 🚀 SEMANTIC MATCH: Converted to section to inherit the clean 50% spacing and styles */}
           <section
             className="about-software"
             aria-labelledby="software-heading"
@@ -92,7 +86,6 @@ export function About() {
             />
           </section>
 
-          {/* 🚀 SEMANTIC MATCH: Converted to section to inherit the background tokens cleanly */}
           <section className="about-skills" aria-labelledby="skills-heading">
             <h2 id="skills-heading">Skills</h2>
             <CardGrid
@@ -107,7 +100,6 @@ export function About() {
             />
           </section>
         </div>
-        {/* SECTION 4: EDUCATION ACCREDITATION */}
         <section
           className="about-education"
           aria-labelledby="education-heading"
@@ -124,7 +116,6 @@ export function About() {
             renderComponent={EducationCard}
           />
         </section>
-        {/* SECTION 5: LANGUAGES PROFILE */}
         <section
           className="about-languages"
           aria-labelledby="languages-heading"

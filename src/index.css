@@ -118,18 +118,11 @@ a:active {
   opacity: 1;
 }
 
-/* ========================================================
-   GLOBAL SYSTEM ACCESSIBILITY & LAYOUT DEFAULTS
-   ======================================================== */
-
-/* 🚀 KEYBOARD FOCUS INDICATOR: Global high-contrast Cyan ring */
 :focus-visible {
-  outline: 2px solid rgb(0, 229, 255) !important; /* Vivid accessible high-contrast Cyan */
+  outline: 2px solid rgb(0, 229, 255) !important;
   outline-offset: 4px !important;
 }
 
-/* 🚀 SCREEN READER DISPLAY HOOK: 
-   Visually hides semantic labels while keeping them completely readable by screen readers */
 .sr-only {
   position: absolute !important;
   width: 1px !important;
@@ -142,13 +135,11 @@ a:active {
   border: 0 !important;
 }
 
-/* 🚀 CROSS-BROWSER SCROLLBAR COMPLIANCE VARIABLES (Firefox) */
 * {
   scrollbar-width: thin;
   scrollbar-color: #444444 transparent;
 }
 
-/* 🚀 WEBKIT SCROLLBAR COMPLIANCE VARIABLES (Chrome, Safari, Edge, iOS) */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -164,26 +155,20 @@ a:active {
   background: #666666;
 }
 
-/* ========================================================
-   GLOBAL SYSTEM BUTTON & LINK TOKENS
-   ======================================================== */
 :root {
   --button-icon-font-size: 2rem;
 }
 
-/* Clear native browser color overrides for viewed text anchor routes */
 a:visited {
   text-decoration: none;
 }
 
-/* Ensure text decorators don't fracture nested button inline segments */
 .button > * {
   text-decoration: none;
   padding: 0;
   margin: 0;
 }
 
-/* Base button token framework applied seamlessly to all interactive assets */
 .button {
   color: var(--text-h);
   border: none;
@@ -204,14 +189,12 @@ a:visited {
     transform 0.1s ease,
     filter 0.1s ease;
 
-  /* Prevent awkward selection highlights when clicking buttons rapidly */
   user-select: none;
   -webkit-user-select: none; /* Safari, Chrome, Opera, iOS, Android */
   -moz-user-select: none; /* Firefox */
   cursor: pointer;
 }
 
-/* Premium micro-interaction bounce responses on cursor contact */
 .button:hover {
   filter: brightness(1.1);
   transform: scale(1.05);

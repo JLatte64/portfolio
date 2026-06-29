@@ -3,29 +3,21 @@
   --contact-card-padding: 0.25rem;
 }
 
-/* ========================================================
-   🚀 ACCESSIBILITY WRAPPER: THE SEAMLESS ANCHOR LINK
-   ======================================================== */
 .contact-card-link-wrapper {
   display: inline-flex;
   text-decoration: none;
   border-radius: 0.25rem;
-  outline: none; /* Let index.css handle the focus ring safely */
+  outline: none;
 
-  /* 🚀 MIXED HOVER LOGIC: Shifting the scale effect here ensures the entire card 
-     and its interactive link bounds lift in harmony when the cursor makes contact */
   transition: transform 0.05s linear;
   box-sizing: border-box;
 }
 
 .contact-card-link-wrapper:hover,
 .contact-card-link-wrapper:focus-visible {
-  transform: scale(1.1); /* Original scale lift value */
+  transform: scale(1.1);
 }
 
-/* ========================================================
-   ORIGINAL BOX GEOMETRY & FRAMING
-   ======================================================== */
 .contact-card-container {
   flex: 0 0 calc(var(--contact-card-size) + var(--contact-card-padding));
   display: flex;
@@ -42,7 +34,6 @@
   box-sizing: border-box;
 }
 
-/* Targets the inner icon element display returned by handleIconDisplay */
 .contact-card-container > * {
   display: flex;
   justify-content: center;

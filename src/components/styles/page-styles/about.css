@@ -1,6 +1,3 @@
-/* ========================================================
-   1. SEMANTIC LIST TRACK CONTAINER LAYOUTS (CARD GRIDS)
-   ======================================================== */
 .lang-cards-container {
   display: flex;
   justify-content: center;
@@ -42,11 +39,8 @@
   padding: 0;
 }
 
-/* ========================================================
-   2. MAIN CONTAINER REGIONS & STACKING SHADINGS
-   ======================================================== */
 .about-main-content {
-  background-color: var(--bg); /* Full canvas baseline fallback */
+  background-color: var(--bg);
   min-height: 100vh;
   width: 100%;
 }
@@ -84,15 +78,11 @@
   width: 100%;
 }
 
-/* ========================================================
-   3. THE MAIN RESUME CONTENT WRAPPERS
-   ======================================================== */
 .about-content {
   margin: auto;
   box-shadow: 0px 5px 10px black;
 }
 
-/* 🚀 SEMANTIC RE-TARGETING: Added native elements to handle your background variables exactly */
 .about-content,
 .about-content > *,
 .about-content > section,
@@ -109,14 +99,13 @@
   border-bottom: 2px solid var(--accent);
   border-top: 2px solid var(--accent);
   background-color: var(--bg);
-  text-align: center; /* Preserves centered section headlines visual look */
+  text-align: center;
 }
 
 .about-roles {
   border-bottom: 2px solid var(--accent);
 }
 
-/* Skills and software grid layout block row */
 .about-skills-software {
   display: flex;
   height: fit-content;
@@ -127,7 +116,6 @@
   gap: 1rem;
 }
 
-/* 🚀 SEMANTIC UPDATE: Maps styles cleanly onto the new section element wrappers instead of generic divs */
 .about-skills-software > section {
   background-color: var(--bg);
   border-radius: var(--border-radius);
@@ -138,9 +126,6 @@
   box-sizing: border-box;
 }
 
-/* ========================================================
-   💻 WIDESCREEN RESPONSIVE CODES (DESKTOP METRICS)
-   ======================================================== */
 @media screen and (min-width: 1600px) {
   .about-content {
     width: 1600px;
@@ -148,7 +133,6 @@
 }
 
 @media screen and (min-width: 600px) {
-  /* 🚀 SEMANTIC UPDATE: Target the new section tags directly for the 50% split width */
   .about-skills-software > section {
     flex: 1;
     width: 50%;
@@ -188,11 +172,7 @@
   }
 }
 
-/* ========================================================
-   📱 MOBILE RESPONSIVE OVERRIDES (SMARTPHONE VIEWS)
-   ======================================================== */
 @media screen and (max-width: 600px) {
-  /* 🚀 SEMANTIC UPDATE: Target section elements for full-width mobile card stacks */
   .about-skills-software > section {
     flex: 1 1 100%;
   }
@@ -206,7 +186,7 @@
   }
 
   .about-intro {
-    flex-direction: column-reverse; /* Preserves your exact intro layout shift flip on phones */
+    flex-direction: column-reverse;
     gap: 1rem;
   }
 

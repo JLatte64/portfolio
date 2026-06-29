@@ -23,10 +23,8 @@ export const EducationCard = ({
   return (
     <Card className={className}>
       <div className={`${className}-card-header`}>
-        {/* 🚀 ACCESSIBILITY FIX: Fits perfectly as a level-3 node underneath your About page's H2 */}
         <h3>{purifiedSchool}</h3>
 
-        {/* 🚀 SEMANTIC FIX: Converted timeframe to a clean text span with an explicit screen reader date label */}
         <span className={`${className}-timeframe-span`}>
           <span className="sr-only">Timeframe: </span>
           {`[${purifiedTimeframe}]`}

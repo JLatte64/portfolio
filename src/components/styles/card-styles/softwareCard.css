@@ -1,6 +1,3 @@
-/* ========================================================
-   SOFTWARE EXPERIENCE PORTFOLIO BADGES
-   ======================================================== */
 .software-card-container {
   flex: 1 1 auto;
   transition: filter 0.05s ease;
@@ -12,7 +9,7 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.25rem 0.75rem; /* Balanced side breathing spaces for standard textual elements */
+  padding: 0.25rem 0.75rem;
   box-sizing: border-box;
 }
 
@@ -20,18 +17,16 @@
   filter: brightness(1.1);
 }
 
-/* Image asset dimension restriction tracking */
 .software-card-container > img {
   block-size: auto;
   height: 2rem;
   display: block;
 }
 
-/* 🚀 Typography token alignment matching your resume data stack */
 .software-card-text-label {
   font-size: 100%;
   font-weight: normal;
-  color: var(--text); /* Safe neutral contrast reading text token */
+  color: var(--text);
   text-align: center;
   text-justify: auto;
   display: inline-block;

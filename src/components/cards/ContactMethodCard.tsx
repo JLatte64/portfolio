@@ -18,8 +18,6 @@ export const ContactCard = ({
   className = "",
 }: ContactCardDataProps) => {
   return (
-    /* 🚀 ACCESSIBILITY FIX: Converted to a clean, native external anchor link 
-       that acts as the single, definitive interactive wrapper element */
     <a
       href={cardData.url}
       target="_blank"
@@ -28,9 +26,6 @@ export const ContactCard = ({
       className={`${className}-card-link-wrapper`.trim()}
       onClick={(e) => e.stopPropagation()}
     >
-      {/* 🚀 ACCESSIBILITY FIX: Render Card without custom onClick props. 
-          This prevents Card from injecting conflicting 'role="button"' or 
-          tabIndex markers, keeping the DOM structure perfectly valid. */}
       <Card className={`${className}`.trim()}>
         {handleIconDisplay(cardData)}
       </Card>

@@ -1,4 +1,4 @@
-import React, { type RefObject, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import MediaCarousel from "./MediaCarousel";
 import displayMedia from "./functions/DisplayMedia";
 import "../components/styles/projectModal.css";
@@ -61,7 +61,6 @@ export function ProjectModal({
       >
         {modalData && (
           <div className="project-container">
-            {/* LEFT COLUMN: Visual Presentation Deck Container */}
             <div className="carousel-container" ref={carouselWrapperRef}>
               <MediaCarousel
                 srcArray={modalData.showcaseMedia ?? []}
@@ -69,7 +68,6 @@ export function ProjectModal({
               />
             </div>
 
-            {/* RIGHT COLUMN: Semantic Independent Scroll Panel Landmark */}
             <article
               className="project-body-container"
               aria-label={`${purifiedTitleStr} project logs`}

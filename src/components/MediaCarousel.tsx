@@ -3,7 +3,6 @@ import "./styles/mediaCarousel.css";
 import useEmblaCarousel from "embla-carousel-react";
 import type { Media } from "./types/MediaTypes";
 import displayMedia from "./functions/DisplayMedia";
-import { Link } from "react-router";
 
 export function MediaCarousel({
   srcArray,
@@ -12,7 +11,7 @@ export function MediaCarousel({
 }: {
   srcArray: Array<Media>;
   projectName: string;
-  lightboxRef?: React.RefObject<any>; // Restored to generic placeholder
+  lightboxRef?: React.RefObject<any>;
 }) {
   const instanceId = useId();
   const carouselContainerRef = useRef<HTMLDivElement>(null);
@@ -68,10 +67,7 @@ export function MediaCarousel({
     };
   }, [emblaApi]);
 
-  const cleanProjectName = (projectName ?? "project")
-    .replace(/\s+/g, "-")
-    .toLowerCase();
-  const carouselKeyPrefix = `${cleanProjectName}-${instanceId}`;
+  const carouselKeyPrefix = `${projectName}-${instanceId}`;
   const showControls = srcArray && srcArray.length > 1;
 
   return (
@@ -79,7 +75,7 @@ export function MediaCarousel({
       className="carousel"
       ref={carouselContainerRef}
       tabIndex={0}
-      aria-label={`${projectName ?? "Media"} gallery carousel`}
+      aria-label={`${projectName} gallery carousel`}
     >
       <div className="carousel-viewport-container">
         <div className="carousel-bg-container" aria-hidden="true">
@@ -175,7 +171,6 @@ export function MediaCarousel({
         )}
       </div>
 
-      {/* Legacy external lightbox attachment interface trigger point placeholder logic */}
       {lightboxRef && <div style={{ display: "none" }} aria-hidden="true" />}
       {!!caption && <div className="carousel-captions">{caption}</div>}
     </div>
