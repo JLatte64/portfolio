@@ -83,12 +83,12 @@ function Hero() {
           return (
             <div
               key={slideKey}
-              className={`hero-slide-item ${isActive ? "is-visible" : "is-hidden"}`}
+              className={`hero-slide ${isActive ? "is-visible" : "is-hidden"}`}
               aria-hidden={true}
             >
               {showMedia(
                 media,
-                "fade-image " + (isActive ? "active" : ""),
+                "hero-slide-media " + (isActive ? "active" : ""),
                 false,
               )}
             </div>

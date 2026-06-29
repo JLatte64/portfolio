@@ -41,9 +41,14 @@
 }
 
 .hero h1 {
+  font-family: "Mario64";
   font-size: 4rem;
   line-height: 4rem;
   flex: 0 0 fit-content;
+}
+
+.hero-intro > *:not(button) {
+  filter: drop-shadow(0px 2px 0px black);
 }
 
 .hero section > * {
@@ -64,49 +69,54 @@
   margin: 5dvw 5dvh;
 }
 
-header.hero {
-  overflow: hidden;
-  background-color: black;
-}
-
 /* --- HERO SLIDER --- */
-.fade-image {
-  position: fixed;
-  opacity: 0;
-  top: 50%;
-  left: 50%;
-  transition: opacity 1.25s ease-in-out;
-  transform: translate(-50%, -50%) scale(3.5);
-}
-
-.fade-image.active {
-  opacity: 1;
-}
-
-.hero-slide-item {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
 .hero-slider-overlay {
-  height: 100%;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(4px);
+  inset: 0;
   position: absolute;
-  top: 0;
-  left: 0;
 }
 
 .hero-slider {
   height: 100%;
   width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.hero-slide {
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-slide-media {
+  height: 100%;
+  max-height: 100%;
+  inline-size: auto;
+  object-fit: cover;
+
+  opacity: 0;
+  transform: scale(1);
+  transition: opacity 1.25s ease-in-out;
+}
+
+.hero-slide-media.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+header.hero {
+  overflow: hidden;
+  background-color: black;
 }
 
 /* --- HERO MEDIA QUERIES --- */
