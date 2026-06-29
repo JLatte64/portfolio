@@ -12,11 +12,13 @@ interface SkillCardProps {
 }
 
 export const SkillCard = ({ cardData, className = "" }: SkillCardProps) => {
+  const purifiedSkill = purifyString(cardData.skill);
+
   return (
     <Card className={`${className}`.trim()}>
-      <div className={`${className}-card`.trim()}>
-        {purifyString(cardData.skill)}
-      </div>
+      {/* 🚀 ACCESSIBILITY FIX: Replaced the unsemantic inner <div> wrapper with a clean,
+          semantic text element to handle font family and tracking variables cleanly */}
+      <span className={`${className}-text-badge`.trim()}>{purifiedSkill}</span>
     </Card>
   );
 };

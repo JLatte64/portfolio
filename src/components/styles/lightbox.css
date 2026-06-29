@@ -1,63 +1,139 @@
+/* ========================================================
+   UNIVERSAL LIGHTBOX SYSTEM (POPOVER API - ZERO Z-INDEX)
+   ======================================================== */
 .fullscreen-lightbox-overlay {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  max-width: none;
+  max-height: none;
+  overflow: hidden;
+
+  /* Closed Baseline Position State Parameter Constraints */
+  position: absolute;
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+/* 🚀 THE OPEN ACTIVE LAYOUT MATRIX
+   Natively expands to full screen size metrics when showPopover() fires */
+.fullscreen-lightbox-overlay:popover-open {
   position: fixed;
   top: 0;
   left: 0;
   width: 100dvw;
   height: 100dvh;
-  background-color: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(4px);
-  padding: 0;
-  margin: 0;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: block; /* Swapped from flex to block to allow absolute sub-layers to stack natively */
+  box-sizing: border-box;
 }
 
+/* Modifies the native browser backdrop masking tint when open */
+.fullscreen-lightbox-overlay:popover-open::backdrop {
+  background-color: rgba(10, 10, 10, 0.96);
+  backdrop-filter: blur(8px);
+}
+
+/* ========================================================
+   🚀 STRUCTURAL FIX: INDEPENDENT FILL CHANNELS
+   ======================================================== */
 .lightbox-content-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  /* 🚀 SAFETY MATRIX: Let click events pass straight through the empty spaces 
+     of the zoom canvas wrapper back down to the overlay backdrop handles */
+  pointer-events: none;
 }
 
-.lightbox-zoom-target-wrapper {
+.lightbox-gesture-catcher-node {
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: auto; /* Restores touch gestures strictly inside the active image box area */
+}
+
+.lightbox-zoom-bounding-box {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: grab;
+}
+.lightbox-zoom-bounding-box:active {
+  cursor: grabbing;
 }
 
-.lightbox-media-container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  padding: 0;
-  margin: 0;
-}
-
-.lightbox-media-container img,
-.lightbox-media-container video,
-.lightbox-media-container code,
-.lightbox-media-container p,
-.lightbox-media-container ul {
-  max-width: 100%;
-  max-height: 100%;
+/* Restrict large high-fidelity screenshot assets from fracturing monitor bounds */
+.lightbox-scaled-image {
+  max-width: 95vw;
+  max-height: 95vh;
   width: auto;
   height: auto;
   object-fit: contain;
+  display: block;
 }
 
-.lightbox-media-container iframe {
-  aspect-ratio: 16 / 9;
+/* ========================================================
+   INTERACTIVE OVERLAY GESTURE AUTOMATIC FADING
+   ======================================================== */
+.lightbox-close-button,
+.lightbox-captions {
+  transition:
+    opacity 0.25s ease-in-out,
+    visibility 0.25s step-end;
+  visibility: visible;
+  opacity: 1;
+}
+
+.fullscreen-lightbox-overlay[data-interacting="true"] .lightbox-close-button,
+.fullscreen-lightbox-overlay[data-interacting="true"] .lightbox-captions {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* ========================================================
+   🚀 FLOATING OVERLAY SWITCH TOGGLE BUTTON
+   Natively sits at the top right corner since it's declared 
+   lower down the DOM tree inside LightboxContext.tsx
+   ======================================================== */
+.lightbox-close-button {
+  position: absolute; /* Changes to absolute so it anchors relative to screen dimensions */
+  top: 1.5rem;
+  right: 1.5rem;
+  background-color: rgba(26, 26, 26, 0.85);
+  border: 2px solid var(--accent);
+  color: var(--text-h);
+  border-radius: 50%;
+  width: 46px;
+  height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  pointer-events: auto; /* Always accepts mouse coordinate clicks */
+}
+
+/* FOOTER CAPTIONS DESCRIPTION TRACK BAR */
+.lightbox-captions {
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: 100%;
-  height: auto;
-  max-height: 80dvh;
-  border: none;
+  padding: 1.25rem;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: var(--text-h);
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  box-sizing: border-box;
 }

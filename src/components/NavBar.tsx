@@ -1,95 +1,109 @@
 import { Link } from "react-router";
 import "../components/styles/navBar.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useId } from "react";
 import { getPagePath } from "./functions/GetPagePath";
-import { projectSlugs } from "./ProjectSlugs";
+import { useSlugs } from "../context/SlugContext";
 
 export function NavBar() {
   const [mobileMenuOpen, toggleMobileMenu] = useState(false);
+  const { processedProjects, titleToSlug } = useSlugs();
+  const menuPanelId = useId();
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 600) {
-        toggleMobileMenu(false);
-      }
+      if (window.innerWidth > 600) toggleMobileMenu(false);
     };
 
     handleResize();
     window.addEventListener("resize", handleResize);
-
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
     <>
-      {mobileMenuOpen ? (
-        <span
-          className="mobile-background"
-          onClick={() => {
-            toggleMobileMenu(!mobileMenuOpen);
-          }}
+      {mobileMenuOpen && (
+        <button
+          type="button"
+          className="mobile-background-overlay"
+          aria-label="Close navigation menu"
+          onClick={() => toggleMobileMenu(false)}
         />
-      ) : null}
+      )}
 
-      <nav className="nav">
-        <div className="nav-content-container">
+      <nav className="nav-container" aria-label="Main Site Navigation">
+        <div className="nav-content-inner">
           <Link
             to={`${getPagePath("home")}#top`}
-            aria-label="Home button"
-            className="button nav-button home"
+            aria-label="Home - Portfolio of Jordan Latta"
+            className="nav-brand-link"
             onClick={() => {
               toggleMobileMenu(false);
               window.scrollTo({ top: 0 });
             }}
           >
-            <span className="material-icons">home</span>
-            <h2 className="site-title">Portfolio - Jordan Latta</h2>
+            <span className="material-icons" aria-hidden="true">
+              home
+            </span>
+            <span className="site-title-text">Portfolio - Jordan Latta</span>
           </Link>
 
           <button
-            className="button material-icons nav-button menu"
-            aria-hidden="true"
-            onClick={() => {
-              toggleMobileMenu(!mobileMenuOpen);
-            }}
+            type="button"
+            className="material-icons nav-hamburger-toggle"
+            aria-expanded={mobileMenuOpen}
+            aria-controls={menuPanelId}
+            aria-label={
+              mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"
+            }
+            onClick={() => toggleMobileMenu(!mobileMenuOpen)}
           >
-            {mobileMenuOpen ? "close" : " menu"}
+            {mobileMenuOpen ? "close" : "menu"}
           </button>
 
+          {/* 🚀 Clean list panels map your structural responsive animation toggles */}
           <div
-            className={
-              "nav-links-container" + (mobileMenuOpen ? " show" : " hide")
-            }
+            id={menuPanelId}
+            className={`nav-menu-panel ${mobileMenuOpen ? "is-open" : "is-hidden"}`}
           >
-            <Link
-              to={`${getPagePath("about")}`}
-              className="button nav-button"
-              onClick={() => {
-                toggleMobileMenu(false);
-                window.scrollTo({ top: 0 });
-              }}
-            >
-              <h2>About/Resume</h2>
-            </Link>
-            <a
-              href="#contact"
-              className="button nav-button"
-              onClick={() => {
-                toggleMobileMenu(false);
-              }}
-            >
-              <h2>Contact</h2>
-            </a>
-            {[...projectSlugs.entries()].map(([slug, project]) => (
-              <Link
-                key={slug}
-                to={`/${slug}`}
-                className={"button nav-button project-button"}
-                onClick={() => toggleMobileMenu(false)}
-              >
-                <h2>{project.title}</h2>
-              </Link>
-            ))}
+            <ul className="nav-links-list">
+              <li>
+                <Link
+                  to={`${getPagePath("about")}`}
+                  className="nav-link-item"
+                  onClick={() => {
+                    toggleMobileMenu(false);
+                    window.scrollTo({ top: 0 });
+                  }}
+                >
+                  About/Resume
+                </Link>
+              </li>
+
+              <li>
+                <a
+                  href="#contact"
+                  className="nav-link-item"
+                  onClick={() => toggleMobileMenu(false)}
+                >
+                  Contact
+                </a>
+              </li>
+
+              {processedProjects.map((project) => {
+                const projectSlug = titleToSlug[project.title] || "project";
+                return (
+                  <li key={project.id}>
+                    <Link
+                      to={`${getPagePath("dashboard")}/${projectSlug}`}
+                      className="nav-link-item project-nav-link"
+                      onClick={() => toggleMobileMenu(false)}
+                    >
+                      {project.title}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         </div>
       </nav>

@@ -6,7 +6,8 @@ export default function TopNavButton() {
 
   useEffect(() => {
     const handleScroll = (): void => {
-      setIsAtTop(window.scrollY === 0);
+      // 🚀 Optimization: Give a tiny bit of scroll breathing space before popping the button into view
+      setIsAtTop(window.scrollY < 100);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -19,10 +20,16 @@ export default function TopNavButton() {
   return (
     <a
       href="#top"
-      className={`material-icons button top-nav-button ${isAtTop ? "hidden" : "visible"}`}
+      className={`button top-nav-button ${isAtTop ? "is-hidden" : "is-visible"}`}
       aria-label="Back to top"
+      /* 🚀 ACCESSIBILITY FIX: Stops keyboard tabs from targeting an invisible element when at the top */
+      tabIndex={isAtTop ? -1 : 0}
+      aria-hidden={isAtTop ? "true" : undefined}
     >
-      arrow_circle_up
+      {/* 🚀 ACCESSIBILITY FIX: Mutes the literal font text icon from screen reader streams */}
+      <span className="material-icons" aria-hidden="true">
+        arrow_circle_up
+      </span>
     </a>
   );
 }

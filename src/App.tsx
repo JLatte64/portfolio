@@ -43,34 +43,20 @@ const pageRouter = createBrowserRouter(
     {
       element: <RootLayout />,
       children: [
-        {
-          path: getPagePath("dashboard"), // "/"
-          element: <Dashboard />,
-        },
-        {
-          path: getPagePath("about"), // "/about"
-          element: <About />,
-        },
-        {
-          path: ":projectName",
-          element: <Dashboard />,
-        },
+        { path: getPagePath("dashboard"), element: <Dashboard /> },
+        { path: getPagePath("about"), element: <About /> },
+        { path: ":projectName", element: <Dashboard /> },
       ],
     },
   ],
-  {
-    basename: "/portfolio",
-  },
+  { basename: "/portfolio" },
 );
 
-// Inside App.tsx (or whichever file returns your main routes)
 export default function App() {
   return (
     <DashboardProvider>
       <SlugProvider>
         <RouterProvider router={pageRouter} />
-
-        {/* 🚀 CRITICAL FINAL PIECE: Mount the layout box here so it can listen for the click! */}
         <ToastEmitter />
       </SlugProvider>
     </DashboardProvider>

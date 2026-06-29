@@ -1,16 +1,24 @@
+/* ========================================================
+   LANGUAGE DATA BADGE CONTAINER
+   ======================================================== */
 .lang-card-container {
-  list-style-position: inside;
-  list-style: none;
-  text-align: start;
   width: fit-content;
-  padding: 0.5rem;
+  padding: 0.5rem 1rem; /* Added an extra side padding breath room for better text badge layout tracking */
   border-radius: 0.25rem;
-  text-align: center;
+  text-align: center; /* Preserves your definitive centered visual presentation */
   background-color: var(--bg);
   filter: brightness(1);
   transition: filter 0.05s ease;
+  box-sizing: border-box;
 }
 
 .lang-card-container:hover {
   filter: brightness(1.1);
+}
+
+/* Typography control handle matching your theme weights */
+.lang-card-text-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text); /* Safe passing contrast neutral text token */
 }

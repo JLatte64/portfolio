@@ -4,8 +4,6 @@ import displayMedia from "./functions/DisplayMedia";
 import "../components/styles/projectModal.css";
 import purifyString from "./functions/PurifyString";
 import type { ProjectData } from "./types/ProjectTypes";
-import Lightbox, { type LightboxRefMethods } from "./Lightbox";
-import LightboxButton from "./buttons/LightboxButton";
 import { useSlugs } from "../context/SlugContext";
 import ProjectTitleBar from "./ProjectTitleBar";
 
@@ -22,9 +20,7 @@ export function ProjectModal({
   isOpen,
   dialogRef,
 }: ProjectModalProps) {
-  const lightboxRef = useRef<LightboxRefMethods>(null);
   const carouselWrapperRef = useRef<HTMLDivElement>(null);
-
   const { titleToSlug } = useSlugs();
 
   useEffect(() => {
@@ -44,28 +40,6 @@ export function ProjectModal({
   const purifiedTitleStr = modalData
     ? (purifyString(modalData.title) as string)
     : "";
-
-  const handleDialogBackdropClick = (
-    e: React.MouseEvent<HTMLDialogElement>,
-  ) => {
-    const dialog = dialogRef.current;
-    if (!dialog) return;
-
-    // 🚀 HIGH-PERFORMANCE BOUNDARY SAFETY CHECK:
-    // Only execute a modal close action if the cursor physical coordinate matches the transparent backdrop mask area
-    const rect = dialog.getBoundingClientRect();
-    const isInDialog =
-      e.clientX >= rect.left &&
-      e.clientX <= rect.right &&
-      e.clientY >= rect.top &&
-      e.clientY <= rect.bottom;
-
-    if (!isInDialog) {
-      handleClose();
-    }
-  };
-
-  /* 🚀 UNIQUE IDENTIFIER: Formulates a strictly unique ID string for this specific project instance */
   const uniqueTitleId = `${projectSlug}-modal-title`;
 
   return (
@@ -79,19 +53,23 @@ export function ProjectModal({
         onClose={() => {
           if (isOpen) handleClose();
         }}
-        onClick={
-          handleDialogBackdropClick
-        } /* 🚀 Wired securely up to your clean safety function */
+        onClick={(e: React.MouseEvent<HTMLDialogElement>) => {
+          if (e.target === dialogRef?.current) {
+            handleClose();
+          }
+        }}
       >
         {modalData && (
           <div className="project-container">
+            {/* LEFT COLUMN: Visual Presentation Deck Container */}
             <div className="carousel-container" ref={carouselWrapperRef}>
               <MediaCarousel
                 srcArray={modalData.showcaseMedia ?? []}
                 projectName={projectSlug}
-                lightboxRef={lightboxRef as React.RefObject<LightboxRefMethods>}
               />
             </div>
+
+            {/* RIGHT COLUMN: Semantic Independent Scroll Panel Landmark */}
             <article
               className="project-body-container"
               aria-label={`${purifiedTitleStr} project logs`}
@@ -119,26 +97,9 @@ export function ProjectModal({
 
                       <div className="project-body-media-container">
                         {(bodySection.sectionMedia ?? []).map((media) => {
-                          const isLightboxed = media.enableLightbox === "true";
-                          const displayedMedia = displayMedia(
-                            media,
-                            `project-media ${isLightboxed ? "lightboxed" : ""}`.trim(),
-                            true,
-                          );
                           return (
                             <React.Fragment key={media.id}>
-                              {displayedMedia}
-                              {isLightboxed && (
-                                <LightboxButton
-                                  lightboxRef={
-                                    lightboxRef as RefObject<LightboxRefMethods>
-                                  }
-                                  className="media-anchored"
-                                  onClick={() => {
-                                    lightboxRef.current?.setContent(media);
-                                  }}
-                                />
-                              )}
+                              {displayMedia(media, "project-media", true)}
                             </React.Fragment>
                           );
                         })}
@@ -148,8 +109,9 @@ export function ProjectModal({
                 })}
               </div>
             </article>
+
             <button
-              className="button overlay-button project-close-button"
+              className="button project-close-button"
               onClick={handleClose}
               aria-label="Close project modal dialog"
             >
@@ -159,9 +121,6 @@ export function ProjectModal({
             </button>
           </div>
         )}
-        <Lightbox
-          lightboxRef={lightboxRef as React.RefObject<LightboxRefMethods>}
-        />
       </dialog>
     </>
   );

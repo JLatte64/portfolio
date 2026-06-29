@@ -2,37 +2,22 @@
   --navbar-height: calc(3rem + 4px);
 }
 
-.nav-button,
-.nav-link {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* ========================================================
+   LANDMARK NAVIGATION BOX FRAMING
+   ======================================================== */
+.nav-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   height: var(--navbar-height);
-  line-height: var(--navbar-height);
-  background-color: transparent;
-  transition: background-color 0.1s ease;
-  font-weight: bold;
+  border-bottom: 2px solid var(--accent);
+  border-top: 2px solid var(--accent);
+  background-color: var(--bg);
+  box-sizing: border-box;
 }
 
-.nav-button.home {
-  gap: 1rem;
-  justify-content: space-between;
-}
-
-.nav-button.home,
-.nav-button.menu {
-  width: auto !important;
-}
-
-.nav-links-container {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  position: relative;
-}
-
-.nav-content-container {
+.nav-content-inner {
   position: relative;
   width: 100%;
   height: fit-content;
@@ -48,92 +33,158 @@
   height: var(--navbar-height);
 }
 
-.nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+/* ========================================================
+   THE BRAND LINKS AND ITEM TYPOGRAPHY KEYS
+   ======================================================== */
+.nav-brand-link,
+.nav-link-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: var(--navbar-height);
-  border-bottom: 2px solid var(--accent);
-  border-top: 2px solid var(--accent);
-  background-color: var(--bg);
+  line-height: var(--navbar-height);
+  background-color: transparent;
+  transition: background-color 0.1s ease;
+  font-weight: bold;
+  text-decoration: none;
 }
 
-.mobile-background {
+.nav-brand-link {
+  color: var(--text-h);
+  gap: 1rem;
+  justify-content: space-between;
+  width: auto !important;
+}
+
+.site-title-text {
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+}
+
+.nav-link-item {
+  color: var(--text);
+  font-size: 1rem;
+}
+
+/* ========================================================
+   🚀 SEMANTIC TREE COMPLIANT LINKS CONTAINER (DESKTOP MODE)
+   ======================================================== */
+.nav-links-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  position: relative;
+}
+
+/* ========================================================
+   HAMBURGER TOGGLE BUTTON SETTINGS
+   ======================================================== */
+.nav-hamburger-toggle {
+  background-color: transparent;
+  border: none;
+  color: var(--text-h);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: var(--navbar-height);
+  line-height: var(--navbar-height);
+  font-weight: bold;
+  width: auto !important;
+  padding: 0 1rem;
+}
+
+/* THE INVISIBLE BACKDROP OVERLAY OVERRIDES */
+.mobile-background-overlay {
   position: fixed;
   width: 100vw;
   height: 100vh;
   top: 0;
   left: 0;
-  backdrop-filter: blur(5px);
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  backdrop-filter: blur(5px); /* Preserves your exact blur styling mask */
 }
 
+/* ========================================================
+   📱 MOBILE RESPONSIVE SIZES (VIEWPORTS UP TO 600px)
+   ======================================================== */
 @media screen and (max-width: 600px) {
-  .nav-button.home,
-  .nav-button.menu {
+  .nav-brand-link,
+  .nav-hamburger-toggle {
     border: none;
     background-color: transparent;
   }
 
-  .nav-links-container.show {
-    display: block;
+  /* Structural block transitions mapping your original class rules */
+  .nav-menu-panel.is-open .nav-links-list {
+    display: flex;
   }
 
-  .nav-links-container.hide {
+  .nav-menu-panel.is-hidden .nav-links-list {
     display: none;
   }
 
-  .nav-links-container > *:not(:first-child) {
-    border-top: none;
-  }
-
-  .nav-links-container {
+  .nav-links-list {
     position: fixed;
     display: flex;
     flex-direction: column;
-
     background-color: var(--accent-bg);
     top: var(--navbar-height);
     width: 100%;
-
     gap: 1rem;
+    padding: 0;
+    margin: 0;
   }
 
-  .nav-button {
+  .nav-link-item {
     width: 100%;
     border-radius: 0;
     border: 2px solid var(--accent);
+    box-sizing: border-box;
   }
 
-  .project-button {
+  /* Clear overlapping borders from top items safely */
+  .nav-links-list > li:not(:first-child) .nav-link-item {
+    border-top: none;
+  }
+
+  .project-nav-link {
     visibility: visible;
   }
 
-  .mobile-background {
+  .mobile-background-overlay {
     display: inline-block;
   }
 
-  .site-title {
-    display: none;
+  .site-title-text {
+    display: none; /* Keeps brand title safely hidden on ultra-small mobile displays */
   }
 }
 
+/* ========================================================
+   💻 DESKTOP SCREEN CODES (VIEWPORTS WIDER THAN 600px)
+   ======================================================== */
 @media screen and (min-width: 600px) {
-  .nav-links-container {
+  .nav-links-list {
     justify-content: flex-end;
     height: var(--navbar-height);
     gap: 1.5rem;
   }
 
-  .nav-button.menu {
+  .nav-hamburger-toggle {
     display: none;
   }
 
-  .project-button {
+  .project-nav-link {
     display: none;
   }
 
-  .mobile-background {
+  .mobile-background-overlay {
     display: none !important;
   }
 }

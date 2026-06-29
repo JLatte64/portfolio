@@ -38,7 +38,9 @@ export const LightboxProvider: React.FC<{ children: React.ReactNode }> = ({
   }, []);
 
   const openLightbox = (media: Media) => {
+    // Cache the currently focused button to restore focus smoothly upon closing
     triggerElementRef.current = document.activeElement as HTMLElement;
+
     setLightboxMedia(media);
 
     requestAnimationFrame(() => {
@@ -59,8 +61,10 @@ export const LightboxProvider: React.FC<{ children: React.ReactNode }> = ({
         popoverRef.current.hidePopover();
       } catch (e) {}
     }
+
     setLightboxMedia(null);
 
+    // 🚀 FOCUS RESTORATION: Returns keyboard focus back to the triggering button instantly
     requestAnimationFrame(() => {
       if (triggerElementRef.current) {
         triggerElementRef.current.focus();
@@ -84,7 +88,6 @@ export const LightboxProvider: React.FC<{ children: React.ReactNode }> = ({
       >
         {lightboxMedia && (
           <>
-            {/* STACK POSITION 1 (BOTTOM LAYER): Zoom canvas is declared first */}
             <div className="lightbox-content-wrapper">
               <TransformWrapper
                 initialScale={1}
@@ -116,7 +119,7 @@ export const LightboxProvider: React.FC<{ children: React.ReactNode }> = ({
               </TransformWrapper>
             </div>
 
-            {/* 🚀 STACK POSITION 2 (MID LAYER): Declared below the canvas to sit on top naturally */}
+            {/* FLOATING CLOSE SWITCH TOGGLE */}
             <button
               type="button"
               className="button lightbox-close-button overlay-button"
@@ -128,7 +131,7 @@ export const LightboxProvider: React.FC<{ children: React.ReactNode }> = ({
               </span>
             </button>
 
-            {/* 🚀 STACK POSITION 3 (TOP LAYER): Captions block declared last to anchor over the entire scene */}
+            {/* FOOTER DESCRIPTIVE CAPTIONS BAR */}
             {!!lightboxMedia.caption && (
               <output
                 className="lightbox-captions"

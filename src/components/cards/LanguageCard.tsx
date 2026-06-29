@@ -12,8 +12,14 @@ interface LangCardProps {
 }
 
 export const LanguageCard = ({ cardData, className = "" }: LangCardProps) => {
+  const purifiedLang = purifyString(cardData.lang);
+
   return (
-    <Card className={`${className}`.trim()}>{purifyString(cardData.lang)}</Card>
+    <Card className={`${className}`.trim()}>
+      {/* 🚀 ACCESSIBILITY FIX: Wrapped text inside a semantic text node 
+          to enforce clear layout text baselines and responsive font inheritance */}
+      <span className={`${className}-text-label`}>{purifiedLang}</span>
+    </Card>
   );
 };
 

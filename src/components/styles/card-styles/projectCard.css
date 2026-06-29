@@ -1,17 +1,30 @@
-.project-card-title {
+/* ========================================================
+   CINEMATIC PORTFOLIO PROJECT SHOWCASE TILES
+   ======================================================== */
+.project-card-container {
+  position: relative;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  box-shadow: 0px 2px 10px var(--shadow);
+  border-radius: 0.25rem;
+  border: 2px solid var(--accent);
+  box-sizing: border-box;
+}
+
+/* 🚀 RENDERING CLEANUP: 
+   Removed the custom duplicate '.project-card-container:active' scale 
+   shrink block entirely. This lets the card seamlessly inherit the 
+   global hardware-accelerated click responses from your index.css file, 
+   completely resolving structural rendering micro-stutters. */
+
+.project-card-thumbnail {
   position: absolute;
-  top: -50%;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, 50%);
-  margin-top: 0.5rem;
-  color: var(--text-h);
-  font-weight: 600;
-  font-size: 1rem;
-  transition:
-    transform 0.1s ease,
-    top 0.1s ease;
-  width: calc(100% - 2rem);
-  text-align: center;
+  transform: translate(-50%, -50%) scale(1);
+  filter: brightness(100%);
+  width: 100%;
+  transition: transform 0.15s ease;
 }
 
 .project-card-title-background {
@@ -31,48 +44,49 @@
   transition: transform 0.1s ease-out;
 }
 
-.project-card-thumbnail {
+.project-card-title {
   position: absolute;
-  top: 50%;
+  top: -50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(1);
-  filter: brightness(100%);
-  width: 100%;
-  transition: transform 0.15s ease;
+  transform: translate(-50%, 50%);
+  margin-top: 0.5rem;
+  color: var(--text-h);
+  font-weight: 600;
+  font-size: 1rem;
+  transition:
+    transform 0.1s ease,
+    top 0.1s ease;
+  width: calc(100% - 2rem);
+  text-align: center;
 }
 
-.project-card-container {
-  position: relative;
-  aspect-ratio: 1/1;
-  overflow: hidden;
-  border: none;
-  flex: 0 1;
-  box-shadow: 0px 2px 10px var(--shadow);
-  border-radius: 0.25rem;
-  border: 2px solid var(--accent);
-}
-
-.project-card-container:hover .project-card-title-background {
+/* ========================================================
+   🚀 HIGH-PERFORMANCE KEYBOARD TAB & MOUSE HOVER RIGS
+   Executes identical micro-interactions for ALL site visitors
+   ======================================================== */
+.project-card-container:hover .project-card-title-background,
+.project-card-container:focus-within .project-card-title-background {
   transform: translate(0, 100%) scale(1, 2);
 }
 
-.project-card-container:hover .project-card-title {
+.project-card-container:hover .project-card-title,
+.project-card-container:focus-within .project-card-title {
   top: 50%;
   transform: translate(-50%, -100%);
 }
 
-.project-card-container:hover .project-card-thumbnail {
+.project-card-container:hover .project-card-thumbnail,
+.project-card-container:focus-within .project-card-thumbnail {
   transform: translate(-50%, -50%) scale(1.25);
-}
-
-.project-card-container:active {
-  transform: scale(0.95);
 }
 
 .about-button {
   width: 100%;
 }
 
+/* ========================================================
+   RESPONSIVE LAYOUT COLUMNS GRID SCALING
+   ======================================================== */
 @media screen and (min-width: 600px) {
   .project-card-container {
     max-width: 33%;

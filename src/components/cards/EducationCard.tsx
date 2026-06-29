@@ -17,11 +17,20 @@ export const EducationCard = ({
   cardData,
   className = "",
 }: EducationCardProps) => {
+  const purifiedSchool = purifyString(cardData.school);
+  const purifiedTimeframe = purifyString(cardData.timeframe);
+
   return (
     <Card className={className}>
       <div className={`${className}-card-header`}>
-        <h3>{purifyString(cardData.school)}</h3>
-        <h4>{`[${purifyString(cardData.timeframe)}]`}</h4>
+        {/* 🚀 ACCESSIBILITY FIX: Fits perfectly as a level-3 node underneath your About page's H2 */}
+        <h3>{purifiedSchool}</h3>
+
+        {/* 🚀 SEMANTIC FIX: Converted timeframe to a clean text span with an explicit screen reader date label */}
+        <span className={`${className}-timeframe-span`}>
+          <span className="sr-only">Timeframe: </span>
+          {`[${purifiedTimeframe}]`}
+        </span>
       </div>
       <ul className={`${className}-card-body`}>
         <li>{purifyString(cardData.degree)}</li>

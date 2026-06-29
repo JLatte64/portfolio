@@ -1,7 +1,6 @@
 import Card, { type CardData } from "./Card";
 import type { IconData } from "../types/IconTypes";
 import { handleIconDisplay } from "../functions/HandleIconDisplay";
-import { Link } from "react-router";
 import "../styles/card-styles/contactMethodCard.css";
 
 export interface ContactCardData extends IconData {
@@ -19,18 +18,23 @@ export const ContactCard = ({
   className = "",
 }: ContactCardDataProps) => {
   return (
-    <Link
-      to={cardData.url}
+    /* 🚀 ACCESSIBILITY FIX: Converted to a clean, native external anchor link 
+       that acts as the single, definitive interactive wrapper element */
+    <a
+      href={cardData.url}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={cardData.ariaLabel}
-      className={`${className}-card-container`.trim()}
+      className={`${className}-card-link-wrapper`.trim()}
       onClick={(e) => e.stopPropagation()}
     >
+      {/* 🚀 ACCESSIBILITY FIX: Render Card without custom onClick props. 
+          This prevents Card from injecting conflicting 'role="button"' or 
+          tabIndex markers, keeping the DOM structure perfectly valid. */}
       <Card className={`${className}`.trim()}>
         {handleIconDisplay(cardData)}
       </Card>
-    </Link>
+    </a>
   );
 };
 

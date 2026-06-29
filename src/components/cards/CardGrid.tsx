@@ -2,7 +2,7 @@ import React, { type ComponentPropsWithoutRef } from "react";
 import type { CardData } from "./Card";
 
 interface CardGridProps extends Omit<
-  ComponentPropsWithoutRef<"div">,
+  ComponentPropsWithoutRef<"ul">, // 🚀 ACCESSIBILITY UPDATE: Change base type from div to semantic ul
   "onClick"
 > {
   items?: CardData<any>[];
@@ -22,14 +22,15 @@ export const CardGrid = ({
   onClick,
   ...props
 }: CardGridProps) => (
-  <div className={`${className}-cards-container`.trim()} {...props}>
+  /* 🚀 SEMANTIC UPDATE: Converted container element to a native unstyled list */
+  <ul className={`${className}-cards-container`.trim()} {...props}>
     {items.map((item, index) => (
       <RenderComponent
-        key={item.id || index}
+        key={item.id || index} // Safe build-time static keys
         cardData={item}
         className={className}
         onClick={onClick}
       />
     ))}
-  </div>
+  </ul>
 );

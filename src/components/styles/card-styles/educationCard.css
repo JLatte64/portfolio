@@ -1,3 +1,6 @@
+/* ========================================================
+   EDUCATION DATA PROFILE CARD CONTAINER
+   ======================================================== */
 .education-card-container {
   padding: 1rem;
   width: 100%;
@@ -6,40 +9,46 @@
   background-color: var(--bg);
   filter: brightness(1);
   transition: filter 0.05s ease;
+  box-sizing: border-box;
 }
 
 .education-card-container:hover {
   filter: brightness(1.1);
 }
 
-.education-card-header > * > h3 {
-  color: var(--text-h);
-  margin: 0;
-  padding: 0;
-}
-
-.education-card-header > * {
+/* ========================================================
+   🚀 FIX: RE-TARGET CORRUPTED HEADER SELECTOR PATHS
+   Matches the actual JSX flat child arrangement precisely
+   ======================================================== */
+.education-card-header {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   margin: 0;
-  padding: 0;
-}
-
-.education-card-header {
-  margin: 0;
   padding-bottom: 0.5rem;
   color: var(--text-h);
   text-align: start;
-  width: 100%;
 }
 
-.education-card-body > *::marker {
-  color: var(--accent);
+.education-card-header h3 {
+  color: var(--text-h);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
 }
 
+.education-card-timeframe-span {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+/* ========================================================
+   CARD EXPANSION BODY LOGS LIST
+   ======================================================== */
 .education-card-body {
   margin-top: 0;
   margin-bottom: 0;
@@ -49,4 +58,8 @@
   text-align: left;
   border-left: 2px solid var(--accent);
   color: var(--text);
+}
+
+.education-card-body > *::marker {
+  color: var(--accent);
 }

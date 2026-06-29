@@ -1,9 +1,6 @@
-.lightbox-button.media-anchored {
-  position-anchor: --project-body-media-anchor;
-  top: calc(anchor(top) + 0.125rem);
-  left: calc(anchor(left) + 0.125rem);
-}
-
+/* ========================================================
+   LIGHTBOX COMPONENT ACTIONS LAYER
+   ======================================================== */
 .lightbox-button {
   position: absolute;
   top: 0.125rem;
@@ -11,7 +8,7 @@
   background-color: var(--accent);
   color: var(--text-h);
   border: none;
-  border-radius: 1.25rem;
+  border-radius: 1.25rem; /* Overrides global rectangular border radius tokens for circular look */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -19,7 +16,18 @@
   cursor: pointer;
 }
 
+/* Material font symbol scale properties */
 .lightbox-button span {
   font-weight: bold;
   font-size: 2rem;
+}
+
+/* ========================================================
+   🚀 CSS ANCHOR POSITIONING EXTENSION LAYER
+   Ensures the action toggle follows anchored media targets
+   ======================================================== */
+.lightbox-button.media-anchored {
+  position-anchor: --project-body-media-anchor;
+  top: calc(anchor(top) + 0.125rem);
+  left: calc(anchor(left) + 0.125rem);
 }

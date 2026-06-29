@@ -1,7 +1,7 @@
 import "./styles/hero.css";
 import { heroSlides } from "../data/projects.json";
 import { myinfo } from "../data/myinfo.json";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useId } from "react";
 import type { Media } from "./types/MediaTypes";
 import showMedia from "./functions/DisplayMedia";
 import { Link } from "react-router";
@@ -14,11 +14,18 @@ function Hero() {
     useDashboardState();
 
   const [isVisible, setIsVisible] = useState(false);
+
+  // 🚀 ACCESSIBILITY FIX: Track manual override pause states to respect user control constraints
+  const [isPaused, setIsPaused] = useState(false);
+
   const sliderRef = useRef<HTMLDivElement>(null);
   const totalSlides = heroSlides?.length || 0;
 
   const lastUpdateRef = useRef<number | null>(null);
   const elapsedRef = useRef<number>(heroTimeElapsed);
+
+  // Unique label namespace handles for screen readers
+  const carouselRegionId = useId();
 
   useEffect(() => {
     if (!sliderRef.current) return;
@@ -31,7 +38,8 @@ function Hero() {
   }, []);
 
   useEffect(() => {
-    if (!isVisible || totalSlides <= 1) {
+    // 🚀 FIXED: Added isPaused to instantly halt animation frame calculations when triggered
+    if (!isVisible || isPaused || totalSlides <= 1) {
       lastUpdateRef.current = null;
       return;
     }
@@ -61,46 +69,126 @@ function Hero() {
       cancelAnimationFrame(frameId);
       setHeroTimeElapsed(elapsedRef.current);
     };
-  }, [isVisible, totalSlides, heroSlide, setHeroSlide, setHeroTimeElapsed]);
+  }, [
+    isVisible,
+    isPaused,
+    totalSlides,
+    heroSlide,
+    setHeroSlide,
+    setHeroTimeElapsed,
+  ]);
 
   const heroMedia = heroSlides as Media[];
   const heroPhoto = myinfo?.heroPhoto as Media;
 
   return (
     <>
-      <header className="hero">
-        <div ref={sliderRef} className="hero-slider-container">
+      <header className="hero" aria-label="Introduction and Background Gallery">
+        {/* ========================================================
+           🚀 SEMANTIC UPDATE: Background slides act as an orderly carousel
+           ======================================================== */}
+        <section
+          ref={sliderRef}
+          className="hero-slider-container"
+          aria-roledescription="carousel"
+          aria-label="Background project showcase rotation slider"
+          id={carouselRegionId}
+        >
           {heroMedia?.map((media, mediaIndex) => {
             const slideKey = media.id || `hero-slide-${mediaIndex}`;
+            const isActive = mediaIndex === heroSlide;
+
             return (
-              <React.Fragment key={slideKey}>
+              <div
+                key={slideKey}
+                className={`hero-slide-item-wrapper ${isActive ? "is-visible" : "is-hidden"}`}
+                aria-roledescription="slide"
+                aria-label={`Slide ${mediaIndex + 1} of ${totalSlides}`}
+                aria-hidden={!isActive}
+              >
                 {showMedia(
                   media,
-                  "fade-image " + (mediaIndex === heroSlide ? "active" : ""),
+                  "fade-image " + (isActive ? "active" : ""),
                   false,
                 )}
-              </React.Fragment>
+              </div>
             );
           })}
-        </div>
+
+          {/* 🚀 WCAG 2.2 MANDATE CONTROLS: Hidden accessible toggle lets keyboard/screen-readers pause motion */}
+          {totalSlides > 1 && (
+            <button
+              type="button"
+              className="hero-carousel-pause-toggle"
+              aria-label={
+                isPaused
+                  ? "Play background image slider animation"
+                  : "Pause background image slider animation"
+              }
+              aria-pressed={isPaused}
+              onClick={() => setIsPaused(!isPaused)}
+            >
+              <span className="material-icons" aria-hidden="true">
+                {isPaused ? "play_arrow" : "pause"}
+              </span>
+            </button>
+          )}
+
+          {/* 🚀 SEMANTIC CAROUSEL INDICATOR TRAY */}
+          {totalSlides > 1 && (
+            <div
+              className="hero-slider-dots-tray"
+              role="tablist"
+              aria-label="Select background project slide showcase visual"
+            >
+              {heroMedia.map((_, dotIdx) => (
+                <button
+                  key={`dot-ctrl-${dotIdx}`}
+                  type="button"
+                  role="tab"
+                  className={`hero-dot-indicator ${dotIdx === heroSlide ? "current-active" : ""}`}
+                  aria-selected={dotIdx === heroSlide}
+                  aria-label={`Go directly to slide display layout ${dotIdx + 1}`}
+                  onClick={() => {
+                    setHeroSlide(dotIdx);
+                    elapsedRef.current = 0; // Restart clock timing slice on user selection click
+                  }}
+                />
+              ))}
+            </div>
+          )}
+        </section>
+
+        {/* FRONT LAYOUT INFO BLOCK TEXT */}
         <div className="hero-content-container">
           <div className="hero-text-button">
             <div className="hero-text">
+              {/* Strict singular document tree hierarchy starting baseline node */}
               <h1 className="name-title">{myinfo.name}</h1>
               <h2 className="job-title">{myinfo.jobTitle}</h2>
-              <p>
-                <span className="material-icons">place</span>
+
+              <p className="hero-location-text">
+                <span className="material-icons" aria-hidden="true">
+                  place
+                </span>
+                <span className="sr-only">Location: </span>
                 {myinfo.location}
               </p>
-              <p>{myinfo.tagline}</p>
+
+              <p className="hero-tagline-text">{myinfo.tagline}</p>
             </div>
+
             <Link to={getPagePath("about")} className="about-button button">
               Learn About Me
             </Link>
           </div>
-          <React.Fragment key={heroPhoto?.id || "hero-profile-photo"}>
+
+          <div
+            className="hero-profile-photo-wrapper"
+            key={heroPhoto?.id || "hero-profile-photo"}
+          >
             {showMedia(heroPhoto, "hero-photo", false)}
-          </React.Fragment>
+          </div>
         </div>
       </header>
     </>

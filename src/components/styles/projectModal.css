@@ -3,6 +3,9 @@
   --project-section-padding: 0.5rem;
 }
 
+/* ========================================================
+   BASE LANDMARK DIALOG BOUNDS (ZERO Z-INDEX TOP LAYER)
+   ======================================================== */
 .project-dialog {
   width: 100dvw;
   height: 100dvh;
@@ -15,31 +18,58 @@
   background-color: var(--bg);
 }
 
+.project-dialog::backdrop {
+  background-color: rgba(17, 17, 17, 0.85);
+  backdrop-filter: blur(4px);
+}
+
 .project-container {
   display: flex;
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
-.project-body-container {
+/* ========================================================
+   THE CAROUSEL PARENT LAYER HOOKS
+   ======================================================== */
+.carousel-container {
+  position: relative;
+  /* Smooth geometry transition matching your slide animation curves */
+  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 🚀 THE FULLSCREEN LIGHTBOX RESCUE:
+   When our inner child component goes full screen (.is-expanded-lightbox),
+   we use :has() to instantly un-pin this parent wrapper from the modal layout grid. 
+   This lets the canvas expand past all side padding and body boxes smoothly! */
+.project-container:has(.is-expanded-lightbox) .carousel-container {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100dvw !important;
+  height: 100dvh !important;
+  z-index: 9000 !important; /* Forces layout layer priority over the rest of the modal text */
+}
+
+/* ========================================================
+   SEMANTIC PROJECT TEXT DETAIL CONTENT WRAPPERS
+   ======================================================== */
+article.project-body-container {
   position: relative;
   background-color: var(--bg);
   color: var(--text);
   min-height: 0;
   overflow-y: auto;
+  transition: opacity 0.25s ease;
 }
 
-.carousel-container {
-  position: relative;
-}
-
-.project-title {
-  width: 100%;
-  margin: 0;
-  padding: 1rem 1.75rem 1rem 1.75rem;
-  border-bottom: 4px solid var(--accent);
-  color: var(--accent);
-  filter: brightness(1.2);
+/* 🚀 ACCESSIBILITY & LAYOUT FEEDBACK:
+   Vanish the textual writeups from sight when the canvas enters fullscreen 
+   so screen magnifiers and users don't see content bleed beneath the player view */
+.project-container:has(.is-expanded-lightbox) article.project-body-container {
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 .project-body-sections-container {
@@ -50,7 +80,7 @@
   padding: var(--project-body-padding);
 }
 
-.project-body-section-container {
+section.project-body-section-container {
   width: 100%;
   padding: var(--project-section-padding);
   height: fit-content;
@@ -65,17 +95,22 @@
   width: 100%;
 }
 
-.project-body-media-container > *:not(:last-child) {
-  padding-bottom: var(--project-section-padding);
-}
-
 .project-body-media-container {
   display: flex;
   flex-direction: column;
 }
 
+.project-body-media-container > *:not(:last-child) {
+  padding-bottom: var(--project-section-padding);
+}
+
+/* ========================================================
+   MEDIA NODE ASSIGNMENTS
+   ======================================================== */
 ul.project-media {
-  padding-left: 1rem;
+  padding-left: 1.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 ul.project-media > *::marker {
@@ -87,6 +122,7 @@ code.project-media {
   border: 2px solid var(--accent);
   color: var(--text-h);
   padding: var(--project-section-padding);
+  font-family: monospace;
 }
 
 .project-media {
@@ -105,6 +141,9 @@ code.project-media {
   padding: 0;
 }
 
+/* ========================================================
+   INTERACTIVE BUTTON OVERLAYS
+   ======================================================== */
 .lightbox-button.wrapper span {
   font-size: calc(var(--button-icon-font-size) * 0.75);
 }
@@ -136,6 +175,11 @@ code.project-media {
   right: 0.125rem;
   padding: calc(var(--button-icon-font-size) / 8);
   color: var(--text-h);
+  cursor: pointer;
+  transition:
+    filter 0.2s ease,
+    transform 0.1s ease;
+  z-index: 10;
 }
 
 .project-close-button > * {
@@ -143,18 +187,33 @@ code.project-media {
   font-size: var(--button-icon-font-size);
 }
 
+.project-close-button:hover {
+  filter: brightness(1.15);
+}
+
+/* Hide the main close modal switch if the user is zooming an asset */
+.project-container:has(.is-expanded-lightbox) .project-close-button {
+  display: none !important;
+}
+
+/* ========================================================
+   📱 MOBILE RESPONSIVE OVERRIDES (VIEWPORTS UP TO 600px)
+   ======================================================== */
 @media screen and (max-width: 600px) {
   .project-container {
     flex-direction: column;
     height: 100dvh;
     overflow: hidden auto;
   }
-  .carousel-container {
+
+  /* STANDARD CONDITIONAL STATE: Locks height to exactly 60% of screen */
+  .project-container:not(:has(.is-expanded-lightbox)) .carousel-container {
     width: 100%;
     height: 60dvh;
     flex-shrink: 0;
   }
-  .project-body-container {
+
+  article.project-body-container {
     width: 100%;
     height: auto;
     overflow: visible;
@@ -163,17 +222,21 @@ code.project-media {
   }
 }
 
+/* ========================================================
+   💻 DESKTOP SCREEN CODES (VIEWPORTS WIDER THAN 600px)
+   ======================================================== */
 @media screen and (min-width: 600px) {
   .project-container {
     flex-direction: row;
   }
 
-  .carousel-container {
+  /* STANDARD CONDITIONAL STATE: Locks layout to clean flex proportions side-by-side */
+  .project-container:not(:has(.is-expanded-lightbox)) .carousel-container {
     flex: 1;
     height: 100%;
   }
 
-  .project-body-container {
+  article.project-body-container {
     width: 40dvw;
     height: 100%;
     box-shadow: -2px 0px 10px var(--shadow);

@@ -1,17 +1,9 @@
-import React, {
-  useEffect,
-  useState,
-  useId,
-  useRef,
-  type RefObject,
-} from "react";
+import React, { useEffect, useState, useId, useRef } from "react";
 import "./styles/mediaCarousel.css";
 import useEmblaCarousel from "embla-carousel-react";
 import type { Media } from "./types/MediaTypes";
 import displayMedia from "./functions/DisplayMedia";
-import "./styles/lightbox.css";
-import LightboxButton from "./buttons/LightboxButton";
-import type { LightboxRefMethods } from "./Lightbox";
+import { Link } from "react-router";
 
 export function MediaCarousel({
   srcArray,
@@ -20,7 +12,7 @@ export function MediaCarousel({
 }: {
   srcArray: Array<Media>;
   projectName: string;
-  lightboxRef?: React.RefObject<LightboxRefMethods>;
+  lightboxRef?: React.RefObject<any>; // Restored to generic placeholder
 }) {
   const instanceId = useId();
   const carouselContainerRef = useRef<HTMLDivElement>(null);
@@ -90,7 +82,7 @@ export function MediaCarousel({
       aria-label={`${projectName ?? "Media"} gallery carousel`}
     >
       <div className="carousel-viewport-container">
-        <div className="carousel-bg-container">
+        <div className="carousel-bg-container" aria-hidden="true">
           {[-1, 0, 1].map((offset) => {
             const index = (currentSlide + offset + totalSlides) % totalSlides;
             return (
@@ -106,7 +98,7 @@ export function MediaCarousel({
         </div>
 
         <div className="carousel-viewport" ref={emblaRef}>
-          <div className="slides-container">
+          <ul className="slides-container">
             {srcArray.map((media, index) => {
               const slideContentToken = `${carouselKeyPrefix}-slide-item-${index}`;
 
@@ -117,9 +109,13 @@ export function MediaCarousel({
               });
 
               return (
-                <div
+                <li
                   className="slide"
                   key={media.id || `${carouselKeyPrefix}-slide-${index}`}
+                  role="group"
+                  aria-roledescription="slide"
+                  aria-label={`Slide ${index + 1} of ${totalSlides}`}
+                  aria-hidden={index !== currentSlide}
                 >
                   <React.Fragment key={media.id || slideContentToken}>
                     {shouldRender ? (
@@ -128,24 +124,31 @@ export function MediaCarousel({
                       <div className="slide-unmounted-placeholder" />
                     )}
                   </React.Fragment>
-                </div>
+                </li>
               );
             })}
-          </div>
+          </ul>
         </div>
 
         {showControls && (
           <div className="carousel-controls-container">
-            <div className="carousel-indicators-container">
+            <div
+              className="carousel-indicators-container"
+              role="tablist"
+              aria-label="Select specific gallery image slide showcase"
+            >
               {srcArray?.map((srcElement, index) =>
                 !srcElement ? null : (
                   <button
+                    type="button"
+                    role="tab"
                     className={
                       "carousel-indicator" +
                       (currentSlide === index ? " active" : " inactive")
                     }
                     onClick={() => scrollTo(index)}
                     key={`${carouselKeyPrefix}-indicator-${index}`}
+                    aria-selected={currentSlide === index}
                     aria-label={`Go to slide ${index + 1}`}
                   />
                 ),
@@ -153,6 +156,7 @@ export function MediaCarousel({
             </div>
 
             <button
+              type="button"
               className="material-icons carousel-nav-button left"
               onClick={scrollPrev}
               aria-label="Previous slide"
@@ -160,6 +164,7 @@ export function MediaCarousel({
               chevron_left
             </button>
             <button
+              type="button"
               className="material-icons carousel-nav-button right"
               onClick={scrollNext}
               aria-label="Next slide"
@@ -170,16 +175,8 @@ export function MediaCarousel({
         )}
       </div>
 
-      {lightboxRef && (
-        <LightboxButton
-          lightboxRef={lightboxRef as RefObject<LightboxRefMethods>}
-          onClick={() => {
-            if (srcArray[currentSlide]) {
-              lightboxRef.current?.setContent(srcArray[currentSlide]);
-            }
-          }}
-        />
-      )}
+      {/* Legacy external lightbox attachment interface trigger point placeholder logic */}
+      {lightboxRef && <div style={{ display: "none" }} aria-hidden="true" />}
       {!!caption && <div className="carousel-captions">{caption}</div>}
     </div>
   );

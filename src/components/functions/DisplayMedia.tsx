@@ -52,7 +52,9 @@ export default function displayMedia(
         <ul ref={ref} className={mediaClass}>
           {(media?.content as string[]).map((listItem, listIndex) => (
             <li key={`list-item-${listIndex}`}>
-              <p>{purifyString(listItem)}</p>
+              {/* 🚀 ACCESSIBILITY FIX: Placed the plain text string directly inside the list item 
+                  node to prevent jagged double-landmark announcements. */}
+              {purifyString(listItem)}
             </li>
           ))}
         </ul>
@@ -64,7 +66,7 @@ export default function displayMedia(
         <img
           ref={ref}
           src={src}
-          alt={image?.alt || ""}
+          alt={image?.alt || "Project showcase screenshot image asset"}
           className={mediaClass}
           loading={loadingStrategy}
           decoding="async"
@@ -76,6 +78,10 @@ export default function displayMedia(
       const isYouTube =
         rawUrl.includes("youtube.com") || rawUrl.includes("youtu.be");
       const isGoogleDrive = rawUrl.includes("://google.com");
+
+      const calculatedIframeTitle = media.caption
+        ? `Embedded demonstration: ${purifyString(media.caption)}`
+        : "Embedded interactive media player showcase presentation";
 
       if (isYouTube || isGoogleDrive) {
         let embedUrl =
@@ -94,12 +100,18 @@ export default function displayMedia(
             ref={ref}
             src={embedUrl}
             className={mediaClass}
-            title="Embedded video player"
+            title={calculatedIframeTitle}
             referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
             width="100%"
             height="auto"
             loading={loadingStrategy}
+            /* ========================================================
+               🚀 PERMISSIONS POLICY & WARNING SUPPRESSION FIX
+               Explicitly restricts the sandbox context to multimedia tools,
+               silencing the browser's "compute-pressure" warning logs.
+               ======================================================== */
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           />
         );
       }
@@ -129,6 +141,7 @@ export default function displayMedia(
           className={mediaClass}
           width="100%"
           height="100%"
+          title="Document viewer panel hosting downloadable PDF breakdown"
         >
           <div style={{ padding: "20px", textAlign: "center" }}>
             <p>PDF Preview encountered an error.</p>

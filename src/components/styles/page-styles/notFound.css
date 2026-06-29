@@ -1,0 +1,64 @@
+/* ========================================================
+   NOT FOUND 404 SCREEN LAYOUT
+   ======================================================== */
+.not-found-main {
+  background-color: var(--bg); /* #111111 seamless dark palette canvas */
+  min-height: 80vh; /* Spacious viewport centering ratio */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 2rem;
+}
+
+.not-found-card {
+  text-align: center;
+  max-width: 500px;
+  background-color: var(--accent-bg); /* Deep charcoal #1a1a1a container card */
+  border: 2px solid #222222;
+  border-radius: 8px;
+  padding: 3rem 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+
+  /* 🚀 LAYOUT REPLACEMENT: Flex gap manages standard clean spacing distances automatically,
+     completely eliminating the need for unsemantic browser <br /> tags */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.not-found-heading {
+  color: var(
+    --accent
+  ); /* Your signature vibrant mint green token accent line */
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.not-found-text {
+  color: var(
+    --text-h
+  ); /* Clear high-contrast pure white body text description */
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Inherits your portfolio's base button styling layout tokens smoothly */
+.return-home-button {
+  margin-top: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.85rem 1.5rem;
+  width: auto;
+  cursor: pointer;
+}
