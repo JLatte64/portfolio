@@ -14,7 +14,6 @@ function Hero() {
     useDashboardState();
 
   const [isVisible, setIsVisible] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
 
   const sliderRef = useRef<HTMLDivElement>(null);
   const totalSlides = heroSlides?.length || 0;
@@ -34,7 +33,7 @@ function Hero() {
   }, []);
 
   useEffect(() => {
-    if (!isVisible || isPaused || totalSlides <= 1) {
+    if (!isVisible || totalSlides <= 1) {
       lastUpdateRef.current = null;
       return;
     }
@@ -64,80 +63,69 @@ function Hero() {
       cancelAnimationFrame(frameId);
       setHeroTimeElapsed(elapsedRef.current);
     };
-  }, [
-    isVisible,
-    isPaused,
-    totalSlides,
-    heroSlide,
-    setHeroSlide,
-    setHeroTimeElapsed,
-  ]);
+  }, [isVisible, totalSlides, heroSlide, setHeroSlide, setHeroTimeElapsed]);
 
   const heroMedia = heroSlides as Media[];
   const heroPhoto = myinfo?.heroPhoto as Media;
 
   return (
-    <>
-      <header className="hero" aria-label="Introduction and Background Gallery">
-        <section
-          ref={sliderRef}
-          className="hero-slider-container"
-          aria-roledescription="carousel"
-          aria-label="Background project showcase rotation slider"
-          id={carouselRegionId}
-        >
-          {heroMedia?.map((media, mediaIndex) => {
-            const slideKey = media.id || `hero-slide-${mediaIndex}`;
-            const isActive = mediaIndex === heroSlide;
+    <header className="hero">
+      <div
+        ref={sliderRef}
+        className="hero-slider"
+        aria-hidden={true}
+        id={carouselRegionId}
+      >
+        {heroMedia?.map((media, mediaIndex) => {
+          const slideKey = media.id || `hero-slide-${mediaIndex}`;
+          const isActive = mediaIndex === heroSlide;
 
-            return (
-              <div
-                key={slideKey}
-                className={`hero-slide-item-wrapper ${isActive ? "is-visible" : "is-hidden"}`}
-                aria-roledescription="slide"
-                aria-label={`Slide ${mediaIndex + 1} of ${totalSlides}`}
-                aria-hidden={!isActive}
-              >
-                {showMedia(
-                  media,
-                  "fade-image " + (isActive ? "active" : ""),
-                  false,
-                )}
-              </div>
-            );
-          })}
-        </section>
-        <div className="hero-content-container">
-          <div className="hero-text-button">
-            <div className="hero-text">
-              <h1 className="name-title">{myinfo.name}</h1>
-              <h2 className="job-title">{myinfo.jobTitle}</h2>
-
-              <p className="hero-location-text">
-                <span className="material-icons" aria-hidden="true">
-                  place
-                </span>
-                <span className="sr-only">Location: </span>
-                {myinfo.location}
-              </p>
-
-              <p className="hero-tagline-text">{myinfo.tagline}</p>
+          return (
+            <div
+              key={slideKey}
+              className={`hero-slide-item ${isActive ? "is-visible" : "is-hidden"}`}
+              aria-hidden={true}
+            >
+              {showMedia(
+                media,
+                "fade-image " + (isActive ? "active" : ""),
+                false,
+              )}
             </div>
-
-            <Link to={getPagePath("about")} className="about-button button">
-              Learn About Me
-            </Link>
-          </div>
-
-          <div
-            className="hero-profile-photo-wrapper"
-            key={heroPhoto?.id || "hero-profile-photo"}
+          );
+        })}
+        <div className="h" aria-hidden={true} />
+      </div>
+      <section>
+        <div className="hero-intro">
+          <h1 id="name-title">{myinfo.name}</h1>
+          <p
+            aria-label={`Job title: ${myinfo.jobTitle}`}
+            aria-describedby="name-title"
+            className="hero-job-title"
           >
-            {showMedia(heroPhoto, "hero-photo", false)}
-          </div>
+            {myinfo.jobTitle}
+          </p>
+
+          <p className="hero-loc">
+            <span className="material-icons" aria-hidden="true">
+              place
+            </span>
+            <span className="sr-only">Location: </span>
+            {myinfo.location}
+          </p>
+
+          <p>{myinfo.tagline}</p>
+          <Link to={getPagePath("about")} className="cta-btn button">
+            Learn About Me
+          </Link>
         </div>
-      </header>
-    </>
+
+        <div className="hero-av-wrapper" key={heroPhoto?.id || "hero-av"}>
+          {showMedia(heroPhoto, "hero-av", false)}
+        </div>
+      </section>
+    </header>
   );
 }
 
