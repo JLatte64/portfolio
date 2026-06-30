@@ -65,18 +65,18 @@ export function ProjectModal({
           <div className="proj-panes-container">
             {/* -------- SHOWCASE PANE - LIGHTBOX / CAROUSEL --------- */}
             <div
-              className="project-pane showcase"
+              className="proj-pane showcase"
               role="region"
               aria-label="Project Media Preview"
             >
-              {/* <MediaCarousel
+              <MediaCarousel
                 srcArray={modalData.showcaseMedia ?? []}
                 projectName={projectSlug}
-              /> */}
+              />
             </div>
             {/* -------- DETAILS PANE - BODY PARAGRAPHS / MEDIA --------- */}
             <div
-              className="project-pane details"
+              className="proj-pane details"
               aria-label={`${purifiedTitleStr} project details`}
               id={`${purifiedTitleStr}-details`}
               role="region"
@@ -86,11 +86,10 @@ export function ProjectModal({
 
                 return (
                   <section
-                    className="project-body-section"
                     key={bodySection.id}
                     aria-labelledby={uniqueSectionHeadingId}
                   >
-                    <header className="project-body-section-heading">
+                    <header>
                       <h2 id={uniqueSectionHeadingId}>
                         {purifyString(bodySection.sectionHeading)}
                       </h2>
@@ -98,7 +97,7 @@ export function ProjectModal({
                     {(bodySection.sectionMedia ?? []).map((media) => {
                       return (
                         <React.Fragment key={media.id}>
-                          {displayMedia(media, "project-media", true)}
+                          {displayMedia(media, "proj-media", true)}
                         </React.Fragment>
                       );
                     })}
@@ -119,7 +118,7 @@ export function ProjectModal({
               </span>
             </button>
 
-            <h1 className="proj-heading">
+            <h1>
               {purifiedTitleStr}
 
               <button

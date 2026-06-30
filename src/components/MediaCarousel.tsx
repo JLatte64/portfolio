@@ -169,12 +169,13 @@ export function MediaCarousel({
             >
               chevron_right
             </button>
+            {lightboxRef && (
+              <div style={{ display: "none" }} aria-hidden="true" />
+            )}
+            {!!caption && <div className="carousel-captions">{caption}</div>}
           </div>
         )}
       </div>
-
-      {lightboxRef && <div style={{ display: "none" }} aria-hidden="true" />}
-      {!!caption && <div className="carousel-captions">{caption}</div>}
     </div>
   );
 }
