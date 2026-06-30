@@ -169,9 +169,9 @@ html:has(dialog[open]) {
 
 :root {
   --bg: #0e0e0e;
-  --accent-bg: #1e222b;
+  --accent-bg: #212632;
   --text-h: #ffffff;
-  --accent: #1fbe6f;
+  --accent: #20d47a;
   --subtitle: #95ff6b;
   --text: #dbdcdf;
   --shadow: 4px 4px 4px black;
@@ -291,17 +291,17 @@ a {
 
 .button {
   border-radius: 0.25em;
-  border: 3px solid var(--accent-bg);
-  background-color: var(--accent);
-  color: var(--accent-bg);
-  box-shadow: var(--shadow);
+  border: 3px solid var(--accent-bg) !important;
+  background-color: var(--accent) !important;
+  color: var(--accent-bg) !important;
+  box-shadow: var(--shadow) !important;
 }
 
 .button-inverted {
-  border: 3px solid var(--text);
-  background-color: var(--accent-bg);
-  color: var(--text-h);
-  box-shadow: var(--shadow);
+  border: 3px solid var(--text) !important;
+  background-color: var(--accent-bg) !important;
+  color: var(--text-h) !important;
+  box-shadow: var(--shadow) !important;
 }
 
 .button:hover,
