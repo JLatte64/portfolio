@@ -227,8 +227,8 @@ h2 {
 }
 
 h1 {
-  font-size: 4rem;
-  line-height: 4rem;
+  font-size: 3rem;
+  line-height: 3.5rem;
   font-weight: 800;
   font-family: "Dizhitl";
   @media (max-width: 600px) {

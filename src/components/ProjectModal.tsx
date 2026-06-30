@@ -5,7 +5,7 @@ import "../components/styles/projectModal.css";
 import purifyString from "./functions/PurifyString";
 import type { ProjectData } from "./types/ProjectTypes";
 import { useSlugs } from "../context/SlugContext";
-import ProjectTitleBar from "./ProjectTitleBar";
+import { handleCopyLink } from "./functions/HandleCopyLink";
 
 interface ProjectModalProps {
   modalData?: ProjectData | undefined;
@@ -43,82 +43,103 @@ export function ProjectModal({
   const uniqueTitleId = `${projectSlug}-modal-title`;
 
   return (
-    <>
-      <dialog
-        className="project-dialog"
-        ref={dialogRef as React.RefObject<HTMLDialogElement>}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={uniqueTitleId}
-        onClose={() => {
-          if (isOpen) handleClose();
-        }}
-        onClick={(e: React.MouseEvent<HTMLDialogElement>) => {
-          if (e.target === dialogRef?.current) {
-            handleClose();
-          }
-        }}
-      >
-        {modalData && (
-          <div className="project-container">
-            <div className="carousel-container" ref={carouselWrapperRef}>
-              <MediaCarousel
+    <dialog
+      className={`${projectSlug} proj-modal`}
+      ref={dialogRef as React.RefObject<HTMLDialogElement>}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby={uniqueTitleId}
+      onClose={() => {
+        if (isOpen) handleClose();
+      }}
+      onClick={(e: React.MouseEvent<HTMLDialogElement>) => {
+        if (e.target === dialogRef?.current) {
+          handleClose();
+        }
+      }}
+    >
+      {modalData && (
+        <div className="proj-container">
+          {/* -------- MAIN TITLE HEADER --------- */}
+
+          <div className="proj-panes-container">
+            {/* -------- SHOWCASE PANE - LIGHTBOX / CAROUSEL --------- */}
+            <div
+              className="project-pane showcase"
+              role="region"
+              aria-label="Project Media Preview"
+            >
+              {/* <MediaCarousel
                 srcArray={modalData.showcaseMedia ?? []}
                 projectName={projectSlug}
-              />
+              /> */}
             </div>
-
-            <article
-              className="project-body-container"
-              aria-label={`${purifiedTitleStr} project logs`}
+            {/* -------- DETAILS PANE - BODY PARAGRAPHS / MEDIA --------- */}
+            <div
+              className="project-pane details"
+              aria-label={`${purifiedTitleStr} project details`}
+              id={`${purifiedTitleStr}-details`}
+              role="region"
             >
-              <ProjectTitleBar projModalData={modalData} id={uniqueTitleId} />
+              {(modalData.bodySections ?? []).map((bodySection) => {
+                const uniqueSectionHeadingId = `${bodySection.id}-heading`;
 
-              <div className="project-body-sections-container">
-                {(modalData.bodySections ?? []).map((bodySection) => {
-                  const uniqueSectionHeadingId = `${bodySection.id}-heading`;
-
-                  return (
-                    <section
-                      className="project-body-section-container"
-                      key={bodySection.id}
-                      aria-labelledby={uniqueSectionHeadingId}
-                    >
-                      <h3
-                        id={uniqueSectionHeadingId}
-                        className="project-body-section-heading"
-                      >
+                return (
+                  <section
+                    className="project-body-section"
+                    key={bodySection.id}
+                    aria-labelledby={uniqueSectionHeadingId}
+                  >
+                    <header className="project-body-section-heading">
+                      <h2 id={uniqueSectionHeadingId}>
                         {purifyString(bodySection.sectionHeading)}
-                      </h3>
-
-                      <div className="project-body-media-container">
-                        {(bodySection.sectionMedia ?? []).map((media) => {
-                          return (
-                            <React.Fragment key={media.id}>
-                              {displayMedia(media, "project-media", true)}
-                            </React.Fragment>
-                          );
-                        })}
-                      </div>
-                    </section>
-                  );
-                })}
-              </div>
-            </article>
-
+                      </h2>
+                    </header>
+                    {(bodySection.sectionMedia ?? []).map((media) => {
+                      return (
+                        <React.Fragment key={media.id}>
+                          {displayMedia(media, "project-media", true)}
+                        </React.Fragment>
+                      );
+                    })}
+                  </section>
+                );
+              })}
+            </div>
+          </div>
+          <header id={uniqueTitleId} className="proj-header">
             <button
-              className="button project-close-button"
+              type="button"
+              className="button proj-back-btn"
               onClick={handleClose}
               aria-label="Close project modal dialog"
             >
               <span className="material-icons" aria-hidden="true">
-                close
+                chevron_left
               </span>
             </button>
-          </div>
-        )}
-      </dialog>
-    </>
+
+            <h1 className="proj-heading">
+              {purifiedTitleStr}
+
+              <button
+                type="button"
+                className="proj-link-copy-btn"
+                onClick={() => handleCopyLink}
+                aria-label={`Copy shareable link for ${purifiedTitleStr} project`}
+              >
+                <span
+                  className="material-icons link-icon-span"
+                  aria-hidden="true"
+                >
+                  link
+                </span>
+              </button>
+            </h1>
+          </header>
+        </div>
+      )}
+    </dialog>
   );
 }
 
