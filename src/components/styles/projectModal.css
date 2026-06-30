@@ -49,6 +49,8 @@
   display: inline-block;
   width: fit-content;
   padding-right: 2.3rem;
+  font-size: 5cqw;
+  line-height: 5cqh;
 }
 
 .proj-link-copy-btn {
@@ -72,7 +74,7 @@
   color: var(--accent);
 
   span {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 }
 
@@ -175,7 +177,7 @@ code.project-media {
 
 @media screen and (min-width: 600px) {
   .proj-header > h1 {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   .proj-panes-container {

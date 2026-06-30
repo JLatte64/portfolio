@@ -82,12 +82,10 @@ export function MediaCarousel({
           {[-1, 0, 1].map((offset) => {
             const index = (currentSlide + offset + totalSlides) % totalSlides;
             return (
-              <React.Fragment
-                key={`${projectName}-carousel-bg-${index}-${offset}`}
-              >
+              <React.Fragment key={`${projectName}-carousel-bg-${index}`}>
                 {displayMedia(
                   srcArray[index],
-                  `carousel-bg-fade-image${index === currentSlide ? " active" : ""}`,
+                  `carousel-bg-fade-image ${index === currentSlide ? "active" : ""}`,
                   true,
                 )}
               </React.Fragment>
