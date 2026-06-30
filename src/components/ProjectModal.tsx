@@ -109,7 +109,7 @@ export function ProjectModal({
           <header id={uniqueTitleId} className="proj-header">
             <button
               type="button"
-              className="button proj-back-btn"
+              className="proj-back-btn"
               onClick={handleClose}
               aria-label="Close project modal dialog"
             >
@@ -118,13 +118,15 @@ export function ProjectModal({
               </span>
             </button>
 
-            <h1>
+            <h1 className="proj-heading">
               {purifiedTitleStr}
 
               <button
                 type="button"
                 className="proj-link-copy-btn"
-                onClick={() => handleCopyLink}
+                onClick={() => {
+                  handleCopyLink({ link: projectSlug });
+                }}
                 aria-label={`Copy shareable link for ${purifiedTitleStr} project`}
               >
                 <span
