@@ -1,5 +1,5 @@
-import { type RefObject } from "react";
-import type { ImageData, Media } from "../types/MediaTypes";
+import {type RefObject} from "react";
+import type {ImageData, Media} from "../types/MediaTypes";
 import purifyString from "./PurifyString";
 
 export function resolveMediaSrc(src: string): string {
@@ -84,11 +84,16 @@ export default function displayMedia(
           isGoogleDrive && rawUrl.endsWith("/view")
             ? rawUrl.replace(/\/view.*/, "/preview")
             : rawUrl;
+        let allowStr = "";
 
         if (isYouTube) {
           embedUrl = embedUrl
             .replace("youtube.com", "youtube-nocookie.com")
             .replace("youtu.be/", "://youtube-nocookie.com");
+        }
+
+        if (isGoogleDrive) {
+          allowStr.concat("web-share; ");
         }
 
         return (
@@ -102,7 +107,7 @@ export default function displayMedia(
             width="100%"
             height="auto"
             loading={loadingStrategy}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allow={`accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; ${allowStr}`}
           />
         );
       }
@@ -134,7 +139,7 @@ export default function displayMedia(
           height="100%"
           title="Document viewer panel hosting downloadable PDF breakdown"
         >
-          <div style={{ padding: "20px", textAlign: "center" }}>
+          <div style={{padding: "20px", textAlign: "center"}}>
             <p>PDF Preview encountered an error.</p>
             <br />
             <a href={src} target="_blank" rel="noopener noreferrer">
