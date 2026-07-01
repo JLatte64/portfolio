@@ -1,10 +1,5 @@
 import {useId} from "react";
 
-export interface CustomInputHandle {
-  focus: () => void;
-  clear: () => void;
-}
-
 interface ShowcaseControlProps {
   currentIndex: number;
   totalSlides: number;
@@ -47,7 +42,7 @@ export default function ShowcaseControls({
       <button
         type="button"
         className="material-icons nav-button left"
-        onClick={() => onNavigate(currentIndex - (1 % totalSlides))}
+        onClick={() => onNavigate((currentIndex - 1) % totalSlides)}
         aria-label="Previous slide"
       >
         chevron_left
@@ -55,7 +50,7 @@ export default function ShowcaseControls({
       <button
         type="button"
         className="material-icons nav-button right"
-        onClick={() => onNavigate(currentIndex + (1 % totalSlides))}
+        onClick={() => onNavigate((currentIndex + 1) % totalSlides)}
         aria-label="Next slide"
       >
         chevron_right
