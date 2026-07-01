@@ -146,12 +146,16 @@ ul.proj-media > *::marker {
   font-size: 1.25rem;
 }
 
-code.project-media {
-  border-radius: 0.25rem;
-  border: 2px solid var(--accent);
-  color: var(--text-h);
-  padding: var(--project-section-padding);
+.proj-media * code:only-of-type {
+  border: 2px solid color-mix(in srgb, var(--accent) 50%, transparent);
+  color: var(--subtitle) !important;
+  padding: 0.125rem;
+  background-color: var(--bg);
   font-family: monospace;
+}
+
+.proj-media * b:only-of-type {
+  color: var(--accent) !important;
 }
 
 @media screen and (max-width: 600px) {

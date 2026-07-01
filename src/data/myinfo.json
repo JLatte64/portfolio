@@ -6,14 +6,14 @@
       "mediaType": "image",
       "content": {
         "src": "herophoto.png",
-        "alt": ""
+        "alt": "A high-resolution profile photo of Jordan Latta."
       }
     },
     "aboutPhoto": {
       "mediaType": "image",
       "content": {
         "src": "herophoto.png",
-        "alt": ""
+        "alt": "A high-resolution profile photo of Jordan Latta."
       }
     },
     "jobTitle": "Technical Artist",
@@ -56,18 +56,21 @@
           "jobTitle": "Technical Artist",
           "timeframe": "2024-Present",
           "responsibilities": [
-            "Developed shaders and rendering systems to go beyond engine limitations and deliver stunning, performant visual effects",
-            "Job Responsibility 2"
+            "Owned the design and development of custom GPU-driven rendering systems in C# on Unity's SRP, extending visuals and performance beyond default engine capabilities.",
+            "Partnered closely with clients, engineers, artists, and designers to build tools — including a grass creation system and a 2D lighting editor — that streamlined both art and engineering workflows.",
+            "Authored and maintained tools, shaders, models, materials, and textures across evolving art styles and shifting platform targets.",
+            "Built and documented asset pipelines end-to-end, training peers along the way."
           ]
         }
       ],
       "skills": [
-        "Procedural Content Generation",
+        "Shaders & Materials (HLSL, Shader Graph)",
         "Compute Shaders",
-        "Materials & Shaders",
-        "Scene Lighting / Realtime Global Illumination",
-        "Performance Optimization",
-        "VFX & GPU Particle Systems"
+        "Performance Profiling",
+        "3D Modeling & UV Mapping",
+        "Tool Development",
+        "Cross-platform Optimization",
+        "Real-time Lighting Systems"
       ],
       "pdf": {
         "mediaType": "pdf",
@@ -84,12 +87,12 @@
       {
         "type": "image",
         "iconFilename": "GitHub_Invertocat_White.svg",
-        "ariaLabel": "Blender"
+        "ariaLabel": "Unity3D (SRP/URP)"
       },
       {
         "type": "image",
         "iconFilename": "GitHub_Invertocat_White.svg",
-        "ariaLabel": "Unity"
+        "ariaLabel": "Unreal Engine 5"
       },
       {
         "type": "image",
@@ -104,12 +107,37 @@
       {
         "type": "image",
         "iconFilename": "GitHub_Invertocat_White.svg",
-        "ariaLabel": "Photoshop"
+        "ariaLabel": "Shader Graph"
+      },
+      {
+        "type": "image",
+        "iconFilename": "GitHub_Invertocat_White.svg",
+        "ariaLabel": "RenderDoc"
+      },
+      {
+        "type": "image",
+        "iconFilename": "GitHub_Invertocat_White.svg",
+        "ariaLabel": "Nvidia Nsight Graphics"
+      },
+      {
+        "type": "image",
+        "iconFilename": "GitHub_Invertocat_White.svg",
+        "ariaLabel": "Blender"
       },
       {
         "type": "image",
         "iconFilename": "GitHub_Invertocat_White.svg",
         "ariaLabel": "AutoDesk Maya"
+      },
+      {
+        "type": "image",
+        "iconFilename": "GitHub_Invertocat_White.svg",
+        "ariaLabel": "Photoshop"
+      },
+      {
+        "type": "image",
+        "iconFilename": "GitHub_Invertocat_White.svg",
+        "ariaLabel": "Git"
       }
     ]
   }

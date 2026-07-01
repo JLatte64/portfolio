@@ -4,21 +4,21 @@
       "mediaType": "image",
       "content": {
         "src": "god-of-war-sons-of-sparta/showcaseMedia/screenshot5.png",
-        "alt": ""
+        "alt": "Hero Showcase Slide 1"
       }
     },
     {
       "mediaType": "image",
       "content": {
         "src": "god-of-war-sons-of-sparta/showcaseMedia/screenshot4.png",
-        "alt": ""
+        "alt": "Hero Showcase Slide 2"
       }
     },
     {
       "mediaType": "image",
       "content": {
         "src": "god-of-war-sons-of-sparta/showcaseMedia/screenshot1.png",
-        "alt": ""
+        "alt": "Hero Showcase Slide 3"
       }
     }
   ],
@@ -29,7 +29,7 @@
         "mediaType": "image",
         "content": {
           "src": "god-of-war-sons-of-sparta/thumbnail.png",
-          "alt": "God of War: Sons of Sparta Thumbnail"
+          "alt": "God of War: Sons of Sparta Project Thumbnail"
         }
       },
       "tags": ["tech art"],
@@ -42,47 +42,43 @@
           "mediaType": "image",
           "content": {
             "src": "god-of-war-sons-of-sparta/showcaseMedia/screenshot0.png",
-            "alt": ""
-          },
-          "caption": "aaasdfnsdhfjkdshfjsdkhfkjshdfkjdshfksdhfjkskdhfjksfksdfhkjhsdkfkhdjsfhjksdfhdksjf"
+            "alt": "God of War Screenshot 1"
+          }
         },
         {
           "mediaType": "image",
           "content": {
             "src": "god-of-war-sons-of-sparta/showcaseMedia/screenshot1.png",
-            "alt": ""
-          },
-          "caption": "aaasdfnsdhfjkdshfjsdkhfkjshdfkjdshfksdhfjkskdhfjksfksdfhkjhsdkfkhdjsfhjksdfhdksjf"
+            "alt": "God of War Screenshot 2"
+          }
         },
         {
           "mediaType": "image",
           "content": {
             "src": "god-of-war-sons-of-sparta/showcaseMedia/screenshot2.png",
-            "alt": ""
+            "alt": "God of War Screenshot 3"
           },
-          "caption": "aaasdfnsdhfjkdshfjsdkhfkjshdfkjdshfksdhfjkskdhfjksfksdfhkjhsdkfkhdjsfhjksdfhdksjf"
+          "caption": ""
         },
         {
           "mediaType": "image",
           "content": {
             "src": "god-of-war-sons-of-sparta/showcaseMedia/screenshot3.png",
-            "alt": ""
-          },
-          "caption": "aaasdfnsdhfjkdshfjsdkhfkjshdfkjdshfksdhfjkskdhfjksfksdfhkjhsdkfkhdjsfhjksdfhdksjf"
+            "alt": "God of War Screenshot 4"
+          }
         },
         {
           "mediaType": "image",
           "content": {
             "src": "god-of-war-sons-of-sparta/showcaseMedia/screenshot4.png",
-            "alt": ""
-          },
-          "caption": "aaasdfnsdhfjkdshfjsdkhfkjshdfkjdshfksdhfjkskdhfjksfksdfhkjhsdkfkhdjsfhjksdfhdksjf"
+            "alt": "God of War Screenshot 5"
+          }
         },
         {
           "mediaType": "image",
           "content": {
             "src": "god-of-war-sons-of-sparta/showcaseMedia/screenshot5.png",
-            "alt": ""
+            "alt": "God of War Screenshot 6"
           },
           "caption": "aaasdfnsdhfjkdshfjsdkhfkjshdfkjdshfksdhfjkskdhfjksfksdfhkjhsdkfkhdjsfhjksdfhdksjf"
         }
@@ -93,31 +89,30 @@
           "sectionMedia": [
             {
               "mediaType": "paragraph",
-              "content": "This system uses the stencil buffer, multiple custom render targets, custom shaders and extensions to Unity's Scriptable Render Pipeline (SRP) to allow for 256 individually-lit sprite layers."
+              "content": "Built a custom 2D lighting pipeline to fix a CPU bottleneck in Unity's default system, which choked under hundreds of lights. Gives artists 256 individually-lit sprite layers with negligible CPU cost on PS5 — even with hundreds of lights in a scene."
             },
             {
               "mediaType": "list",
               "content": [
-                "Developed a custom lighting system to go beyond engine limitations and give artists 256 individual sprite layers to light",
-                "Developed 13 key environment shaders - running water, swaying foliage, dynamic lights",
-                "Developed the key shader-base underpinning environments and characters"
+                "<b>Lighting:</b> Stencil-buffer bit encoding isolates each light to its sprite layer",
+                "<b>Tooling:</b> Built an in-editor tool to serve a team of 20+ lighting artists; enables authoring/placing lights with no code",
+                "<b>Optimization:</b> All lights/shadows instanced to one draw call per blend mode; GPU & CPU cost effectively flat regardless of light count"
               ]
             }
           ]
         },
         {
-          "sectionHeading": "Custom Sprite Shader Suite",
+          "sectionHeading": "Environment & Character Sprite Shaders",
           "sectionMedia": [
             {
               "mediaType": "paragraph",
-              "content": "This system uses the stencil buffer, multiple custom render targets, custom shaders and extensions to Unity's Scriptable Render Pipeline (SRP) to allow for 256 individually-lit sprite layers."
+              "content": "Authored 13+ production-ready sprite shaders underpinning character/environment interaction with the lighting system, as well as procedural surface effects across both."
             },
             {
               "mediaType": "list",
               "content": [
-                "Developed a custom lighting system to go beyond engine limitations and give artists 256 individual sprite layers to light",
-                "Developed 13 key environment shaders - running water, swaying foliage, dynamic lights",
-                "Developed the key shader-base underpinning environments and characters"
+                "<b>Shaders:</b> Pixel-perfect running water, foliage, screen-space reflections, directional lights",
+                "<b>Optimization:</b> All sprite shaders use instancing or SRP Batcher to minimize batch & draw call count on <i>PS5</i>"
               ]
             }
           ]
@@ -130,7 +125,7 @@
         "mediaType": "image",
         "content": {
           "src": "backyard-baseball/thumbnail.png",
-          "alt": "Backyard Baseball Thumbnail"
+          "alt": "Backyard Baseball Project Thumbnail"
         }
       },
       "tags": ["tech art"],
@@ -143,14 +138,14 @@
           "mediaType": "image",
           "content": {
             "src": "backyard-baseball/showcaseMedia/screenshot0.png",
-            "alt": ""
+            "alt": "Backyard Baseball Screenshot 1"
           }
         },
         {
           "mediaType": "image",
           "content": {
             "src": "backyard-baseball/showcaseMedia/screenshot1.png",
-            "alt": ""
+            "alt": "Backyard Baseball Screenshot 2"
           }
         }
       ],
@@ -160,23 +155,24 @@
           "sectionMedia": [
             {
               "mediaType": "paragraph",
-              "content": "We needed grass that went beyond simple turf. Since the camera is pulled in closer, it needed to be high-quality, even up close. We needed it to scale across PC and Mobile platforms (Nintendo Switch). To solve this issue, I:"
+              "content": "Led R&D on a scalable GPU-driven grass system for close-up-quality stadium turf with a nostalgic look. Renders 1M+ triangles in a single draw call at ~5ms render cost on <i>Nintendo Switch</i>."
             },
             {
               "mediaType": "list",
               "content": [
-                "Developed a custom lighting system to go beyond engine limitations and give artists 256 individual sprite layers to light",
-                "Developed 13 key environment shaders - running water, swaying foliage, dynamic lights",
-                "Developed the key shader-base underpinning environments and characters"
+                "<b>Culling:</b> A <code>ComputeShader</code> generates and culls instances using a Morton-ordered, groupshared-cached grid; async, double-buffered CPU <-> GPU transfer avoids pipeline stalls, profiled with <i>Nvidia Nsight Graphics</i>",
+                "<b>Rendering:</b> Custom low-overhead hook into <code>Camera.Render</code> drives per-camera culling; <i>Shader Graph</i> shader derives color/height from a world-space LUT instead of per-blade textures (3 lookups, ~128 tris per blade)",
+                "<b>Tooling:</b> Modeled/UV'd all grass in <i>Blender</i>; built an in-editor tool for artists to hand-paint per-stadium color/height LUTs"
               ]
-            },
+            }
+          ]
+        },
+        {
+          "sectionHeading": "Memory & Draw Call Optimization",
+          "sectionMedia": [
             {
-              "mediaType": "image",
-              "content": {
-                "src": "god-of-war-sons-of-sparta/showcaseMedia/screenshot4.png",
-                "alt": ""
-              },
-              "enableLightbox": "true"
+              "mediaType": "paragraph",
+              "content": "Worked cross-department with Level Design to combine environment meshes, Materials, and textures across the project to fit within <i>Nintendo Switch</i> memory budgets — cutting batch count by 50% and memory usage by 75%."
             }
           ]
         }
