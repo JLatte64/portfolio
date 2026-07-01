@@ -55,7 +55,15 @@ export default function ShowcaseControls({
       >
         chevron_right
       </button>
-      <footer></footer>
+      <footer>
+        <button className="lightbox-btn">
+          <span className="material-icons">fullscreen</span>
+        </button>
+        <span>Captions</span>
+        <button className="caption-btn">
+          <span className="material-icons">closed_captions</span>
+        </button>
+      </footer>
     </div>
   );
 }
