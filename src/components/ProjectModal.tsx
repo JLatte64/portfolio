@@ -1,6 +1,5 @@
-import React, {useEffect, useRef} from "react";
+import React, {useEffect} from "react";
 import MediaCarousel from "./MediaCarousel";
-import displayMedia from "./functions/DisplayMedia";
 import "../components/styles/projectModal.css";
 import purifyString from "./functions/PurifyString";
 import type {ProjectData} from "./types/ProjectTypes";

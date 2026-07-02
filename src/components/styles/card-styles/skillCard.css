@@ -4,19 +4,20 @@
   flex: 1 1 auto;
   max-width: fit-content;
   height: fit-content;
-  padding: 0.25rem 0.75rem;
   margin: 0;
   border-radius: var(--border-radius);
   filter: brightness(1);
   transition: filter 0.05s ease;
   box-sizing: border-box;
+  font-size: 0.75rem;
+  list-style: none;
 }
 
 .skill-card-container:hover {
   filter: brightness(1.1);
 }
+
 .skill-card-text-badge {
-  font-size: 100%;
   font-weight: normal;
   color: var(--text);
   display: inline-block;

@@ -84,7 +84,6 @@
   display: flex;
 
   flex-wrap: wrap;
-  outline-offset: -4px;
 }
 
 .proj-pane.showcase {
@@ -94,10 +93,9 @@
 .proj-pane.details {
   overflow-y: auto;
   background-color: var(--accent-bg);
-  padding: 0.5rem;
+  padding: 2.5cqh 2.5cqw;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
 }
 
 .proj-pane.details section {
@@ -106,7 +104,7 @@
 }
 
 .proj-pane.details header {
-  margin: 0.75rem 0 0.75rem 0;
+  margin: 0 0 0.75rem 0;
   color: var(--text-h);
   width: 100%;
   text-align: start;
@@ -117,7 +115,6 @@
   width: 100%;
   text-align: left;
   margin: 0;
-  padding: 0.25rem 0;
   anchor-name: --project-body-media-anchor;
 }
 
@@ -128,7 +125,7 @@
 }
 
 ul.proj-media {
-  padding-left: 1.5rem;
+  padding-left: 0.75cqw;
   font-size: 14px;
   display: flex;
   flex-direction: column;
@@ -137,6 +134,7 @@ ul.proj-media {
 }
 
 ul.proj-media > * {
+  padding-top: 1rem;
   list-style-position: outside;
   margin: 0 0 0 1rem;
 }
@@ -193,11 +191,11 @@ ul.proj-media > *::marker {
   }
 
   .proj-pane.showcase {
-    width: 50%;
+    width: 60%;
   }
 
   .proj-pane.details {
-    width: 50%;
+    width: 40%;
   }
 }
 

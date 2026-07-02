@@ -196,7 +196,7 @@ ul.slides-container {
   padding: 0;
   margin: 0;
   display: flex;
-  touch-action: pan-y pinch-zoom;
+  touch-action: pan-y scroll-x pinch-zoom;
   cursor: grab;
   margin-left: calc(var(--slide-spacing) * -1);
   height: 100%;
@@ -222,9 +222,11 @@ li.slide {
   object-fit: contain;
 }
 
-.slide > * {
+.slide * {
   width: 100%;
   height: 100%;
+  padding: 0;
+  margin: 0;
   position: absolute;
   top: 0;
   left: 0;

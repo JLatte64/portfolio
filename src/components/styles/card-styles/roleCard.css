@@ -29,8 +29,7 @@
   color: var(--text-h);
   margin: 0;
   padding: 0;
-  font-size: 1.15rem;
-  font-weight: 700;
+  font-size: 1rem;
 }
 
 .role-card-timeframe-span {
@@ -40,6 +39,7 @@
 }
 
 .role-card-body {
+  font-size: 0.75rem;
   margin-top: 0;
   margin-bottom: 0;
   padding-top: 0rem;

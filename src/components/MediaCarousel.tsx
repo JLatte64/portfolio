@@ -1,6 +1,7 @@
 import React, {useEffect, useState, useId, useRef} from "react";
 import "./styles/mediaCarousel.css";
 import useEmblaCarousel from "embla-carousel-react";
+import {WheelGesturesPlugin} from "embla-carousel-wheel-gestures";
 import type {Media} from "./types/MediaTypes";
 import DisplayMedia from "./functions/DisplayMedia";
 
@@ -16,10 +17,18 @@ export function MediaCarousel({
   const instanceId = useId();
   const carouselContainerRef = useRef<HTMLDivElement>(null);
 
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: true,
-    align: "center",
-  });
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      loop: true,
+      align: "center",
+    },
+    [
+      WheelGesturesPlugin({
+        forceWheelAxis: "x", // Smooth horizontal sliding
+        wheelDraggingClass: "is-dragging", // Custom active CSS class
+      }),
+    ],
+  );
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [caption, setCaption] = useState<string | undefined>("");
