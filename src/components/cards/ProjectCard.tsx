@@ -1,9 +1,10 @@
-import { Card } from "./Card";
+import {Card} from "./Card";
 import "../styles/card-styles/projectCard.css";
 import purifyString from "../functions/PurifyString";
-import type { CardData } from "../cards/Card";
-import type { ProjectData } from "../types/ProjectTypes";
+import type {CardData} from "../cards/Card";
+import type {ProjectData} from "../types/ProjectTypes";
 import displayMedia from "../functions/DisplayMedia";
+import DisplayMedia from "../functions/DisplayMedia";
 
 interface ProjectCardProps {
   cardData: CardData<ProjectData>;
@@ -20,11 +21,11 @@ export default function ProjectCard({
 
   return (
     <Card onClick={() => onClick?.(cardData)} className="project">
-      {displayMedia(
-        cardData.thumbnail,
-        `${className}-card-thumbnail`.trim(),
-        false,
-      )}
+      <DisplayMedia
+        media={cardData.thumbnail}
+        className={`${className}-card-thumbnail`.trim()}
+        shouldLazyLoad={false}
+      />
 
       <span
         className={`${className}-card-title-background`.trim()}

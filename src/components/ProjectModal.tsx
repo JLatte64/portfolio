@@ -1,11 +1,12 @@
-import React, { useEffect, useRef } from "react";
+import React, {useEffect, useRef} from "react";
 import MediaCarousel from "./MediaCarousel";
 import displayMedia from "./functions/DisplayMedia";
 import "../components/styles/projectModal.css";
 import purifyString from "./functions/PurifyString";
-import type { ProjectData } from "./types/ProjectTypes";
-import { useSlugs } from "../context/SlugContext";
-import { handleCopyLink } from "./functions/HandleCopyLink";
+import type {ProjectData} from "./types/ProjectTypes";
+import {useSlugs} from "../context/SlugContext";
+import {handleCopyLink} from "./functions/HandleCopyLink";
+import DisplayMedia from "./functions/DisplayMedia";
 
 interface ProjectModalProps {
   modalData?: ProjectData | undefined;
@@ -20,8 +21,7 @@ export function ProjectModal({
   isOpen,
   dialogRef,
 }: ProjectModalProps) {
-  const carouselWrapperRef = useRef<HTMLDivElement>(null);
-  const { titleToSlug } = useSlugs();
+  const {titleToSlug} = useSlugs();
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -97,7 +97,11 @@ export function ProjectModal({
                     {(bodySection.sectionMedia ?? []).map((media) => {
                       return (
                         <React.Fragment key={media.id}>
-                          {displayMedia(media, "proj-media", true)}
+                          <DisplayMedia
+                            media={media}
+                            className="proj-media"
+                            shouldLazyLoad={true}
+                          />
                         </React.Fragment>
                       );
                     })}
@@ -125,7 +129,7 @@ export function ProjectModal({
                 type="button"
                 className="proj-link-copy-btn"
                 onClick={() => {
-                  handleCopyLink({ link: projectSlug });
+                  handleCopyLink({link: projectSlug});
                 }}
                 aria-label={`Copy shareable link for ${purifiedTitleStr} project`}
               >

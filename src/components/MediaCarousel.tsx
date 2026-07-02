@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useId, useRef } from "react";
+import React, {useEffect, useState, useId, useRef} from "react";
 import "./styles/mediaCarousel.css";
 import useEmblaCarousel from "embla-carousel-react";
-import type { Media } from "./types/MediaTypes";
-import displayMedia from "./functions/DisplayMedia";
+import type {Media} from "./types/MediaTypes";
+import DisplayMedia from "./functions/DisplayMedia";
 
 export function MediaCarousel({
   srcArray,
@@ -83,11 +83,11 @@ export function MediaCarousel({
             const index = (currentSlide + offset + totalSlides) % totalSlides;
             return (
               <React.Fragment key={`${projectName}-carousel-bg-${index}`}>
-                {displayMedia(
-                  srcArray[index],
-                  `carousel-bg-fade-image ${index === currentSlide ? "active" : ""}`,
-                  true,
-                )}
+                <DisplayMedia
+                  media={srcArray[index]}
+                  className={`carousel-bg-fade-image ${index === currentSlide ? "active" : ""}`}
+                  shouldLazyLoad={true}
+                />
               </React.Fragment>
             );
           })}
@@ -115,7 +115,7 @@ export function MediaCarousel({
                 >
                   <React.Fragment key={media.id || slideContentToken}>
                     {shouldRender ? (
-                      displayMedia(media, "", true)
+                      <DisplayMedia media={media} shouldLazyLoad={true} />
                     ) : (
                       <div className="slide-unmounted-placeholder" />
                     )}
@@ -168,7 +168,7 @@ export function MediaCarousel({
               chevron_right
             </button>
             {lightboxRef && (
-              <div style={{ display: "none" }} aria-hidden="true" />
+              <div style={{display: "none"}} aria-hidden="true" />
             )}
             {!!caption && <div className="carousel-captions">{caption}</div>}
           </div>

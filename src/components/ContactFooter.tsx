@@ -1,9 +1,9 @@
 import "../components/styles/contactFooter.css";
-import { myinfo } from "../data/myinfo.json";
-import { CardGrid } from "./cards/CardGrid";
-import type { CardData } from "./cards/Card";
-import { ContactCard, type ContactCardData } from "./cards/ContactMethodCard";
-import { useId } from "react";
+import {myinfo} from "../data/myinfo.json";
+import {CardGrid} from "./cards/CardGrid";
+import type {CardData} from "./cards/Card";
+import {ContactCard, type ContactCardData} from "./cards/ContactMethodCard";
+import {useId} from "react";
 
 export function ContactFooter() {
   const nameInputId = useId();
@@ -21,7 +21,7 @@ export function ContactFooter() {
 
       <form
         target="_blank"
-        action={`https://formsubmit.co{myinfo.email}`}
+        action={`https://formsubmit.co${myinfo.email}`}
         method="POST"
         className="form"
         aria-label="Contact message form"
@@ -43,7 +43,6 @@ export function ContactFooter() {
             />
           </div>
 
-          {/* FIELD 2: EMAIL INPUT (Replaces the generic subject to collect reply handles) */}
           <div className="form-field-group">
             <label htmlFor={emailInputId} className="sr-only">
               Your Email Address
@@ -59,7 +58,6 @@ export function ContactFooter() {
             />
           </div>
 
-          {/* FIELD 3: MESSAGE TEXTAREA */}
           <div className="form-field-group">
             <label htmlFor={messageInputId} className="sr-only">
               Message Text

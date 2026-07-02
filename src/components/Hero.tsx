@@ -1,15 +1,16 @@
 import "./styles/hero.css";
-import { heroSlides } from "../data/projects.json";
-import { myinfo } from "../data/myinfo.json";
-import { useEffect, useRef, useState, useId } from "react";
-import type { Media } from "./types/MediaTypes";
+import {heroSlides} from "../data/projects.json";
+import {myinfo} from "../data/myinfo.json";
+import {useEffect, useRef, useState, useId} from "react";
+import type {Media} from "./types/MediaTypes";
 import showMedia from "./functions/DisplayMedia";
-import { Link } from "react-router";
-import { getPagePath } from "./functions/GetPagePath";
-import { useDashboardState } from "../context/DashboardContext";
+import {Link} from "react-router";
+import {getPagePath} from "./functions/GetPagePath";
+import {useDashboardState} from "../context/DashboardContext";
+import DisplayMedia from "./functions/DisplayMedia";
 
 function Hero() {
-  const { heroSlide, setHeroSlide, heroTimeElapsed, setHeroTimeElapsed } =
+  const {heroSlide, setHeroSlide, heroTimeElapsed, setHeroTimeElapsed} =
     useDashboardState();
 
   const [isVisible, setIsVisible] = useState(false);
@@ -25,7 +26,7 @@ function Hero() {
     if (!sliderRef.current) return;
     const obs = new IntersectionObserver(
       ([el]) => setIsVisible(el.isIntersecting),
-      { threshold: 0.1 },
+      {threshold: 0.1},
     );
     obs.observe(sliderRef.current);
     return () => obs.disconnect();
@@ -85,11 +86,11 @@ function Hero() {
               className={`hero-slide ${isActive ? "is-visible" : "is-hidden"}`}
               aria-hidden={true}
             >
-              {showMedia(
-                media,
-                "hero-slide-media " + (isActive ? "active" : ""),
-                false,
-              )}
+              <DisplayMedia
+                media={media}
+                className={"hero-slide-media " + (isActive ? "active" : "")}
+                shouldLazyLoad={false}
+              />
             </div>
           );
         })}
@@ -121,7 +122,11 @@ function Hero() {
         </div>
 
         <div className="hero-av-wrapper" key={heroPhoto?.id || "hero-av"}>
-          {showMedia(heroPhoto, "hero-av", false)}
+          <DisplayMedia
+            media={heroPhoto}
+            className={"hero-av"}
+            shouldLazyLoad={false}
+          />
         </div>
       </section>
     </header>
