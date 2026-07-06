@@ -1,16 +1,16 @@
 import "./styles/hero.css";
-import {heroSlides} from "../data/projects.json";
-import {myinfo} from "../data/myinfo.json";
-import {useEffect, useRef, useState, useId} from "react";
-import type {Media} from "./types/MediaTypes";
+import { heroSlides } from "../data/projects.json";
+import { myinfo } from "../data/myinfo.json";
+import { useEffect, useRef, useState, useId } from "react";
+import type { Media } from "./types/MediaTypes";
 import showMedia from "./functions/DisplayMedia";
-import {Link} from "react-router";
-import {getPagePath} from "./functions/GetPagePath";
-import {useDashboardState} from "../context/DashboardContext";
+import { Link } from "react-router";
+import { getPagePath } from "./functions/GetPagePath";
+import { useDashboardState } from "../context/DashboardContext";
 import DisplayMedia from "./functions/DisplayMedia";
 
 function Hero() {
-  const {heroSlide, setHeroSlide, heroTimeElapsed, setHeroTimeElapsed} =
+  const { heroSlide, setHeroSlide, heroTimeElapsed, setHeroTimeElapsed } =
     useDashboardState();
 
   const [isVisible, setIsVisible] = useState(false);
@@ -26,7 +26,7 @@ function Hero() {
     if (!sliderRef.current) return;
     const obs = new IntersectionObserver(
       ([el]) => setIsVisible(el.isIntersecting),
-      {threshold: 0.1},
+      { threshold: 0.1 },
     );
     obs.observe(sliderRef.current);
     return () => obs.disconnect();
@@ -96,8 +96,8 @@ function Hero() {
         })}
         <div className="hero-slider-overlay" aria-hidden={true} />
       </div>
-      <section>
-        <div className="hero-intro">
+      <section className="split-hero-content">
+        <div className="hero-intro-wrapper">
           <h1 id="name-title">{myinfo.name}</h1>
           <p
             aria-label={`Job title: ${myinfo.jobTitle}`}
