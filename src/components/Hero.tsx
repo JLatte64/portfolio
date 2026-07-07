@@ -114,9 +114,13 @@ function Hero() {
           </p>
 
           <p className="hero-tagline">{myinfo.tagline}</p>
-          <Link to="#project-links" className="cta-btn button-inverted">
+          <a
+            href="#project-links"
+            className="cta-btn button-inverted"
+            aria-label="To project links"
+          >
             View Work
-          </Link>
+          </a>
         </div>
 
         <div className="hero-av-wrapper" key={heroPhoto?.id || "hero-av"}>

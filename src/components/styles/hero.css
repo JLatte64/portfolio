@@ -3,8 +3,6 @@ header.hero {
   background-color: black;
 }
 
-/* --- HERO SLIDER --- */
-
 .hero-slider {
   height: 100%;
   width: 100%;
@@ -21,7 +19,6 @@ header.hero {
   left: 0;
   width: 100%;
   height: 100%;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,7 +29,6 @@ header.hero {
   max-height: 100%;
   inline-size: auto;
   object-fit: cover;
-
   opacity: 0;
   transform: scale(1);
   transition: opacity 1.25s ease-in-out;
@@ -42,8 +38,6 @@ header.hero {
   opacity: 1;
   transform: scale(1);
 }
-
-/* --- HERO CONTENT --- */
 
 .hero-console {
   border: 1px solid var(--glass-edge);
@@ -56,32 +50,39 @@ header.hero {
   align-items: stretch;
   margin: 1rem;
   border-radius: 0 0.25rem 0.25rem 0;
-  padding: 0.5rem 1rem;
-  backdrop-filter: blur(6px);
+  padding: 0.5rem 1.5rem;
+  backdrop-filter: blur(6px) brightness(1);
   gap: 1.25rem;
-
-  background:
-    radial-gradient(circle, rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.5) 100%),
-    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%);
-
-  background-size:
-    100% 100%,
-    100% 4px;
-
   transition:
-    transform 0.25s ease-in-out,
-    box-shadow 0.3s ease-in-out;
+    transform 0.1s ease-in-out,
+    box-shadow 0.2s ease-in-out,
+    backdrop-filter 0.2s ease-in-out;
+}
+
+.hero-console::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%);
+  background-size: 100% 3px;
+  pointer-events: none;
 }
 
 .hero-console:hover {
   transform: translateY(-2px);
-  box-shadow: 2px 4px 12px rgba(255, 208, 0, 0.301);
+  box-shadow: 0 4px 20px -2px rgba(255, 153, 0, 0.185);
+  backdrop-filter: blur(6px) brightness(1.75);
 }
 
 .hero-console > * {
   display: flex;
   flex-direction: column;
   text-align: start;
+  position: relative;
 }
 
 .hero-console * {
@@ -92,7 +93,7 @@ header.hero {
   align-items: center;
   justify-content: center;
   position: relative;
-  display: inline-flex; /* Forces container to match image size */
+  display: inline-flex;
   gap: 1.25rem;
 }
 
@@ -102,21 +103,49 @@ header.hero {
   gap: 1.25rem;
 }
 
-.hero-intro-wrapper * {
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
-}
-
 .hero-av {
-  filter: sepia(0.5);
+  filter: sepia(0.6) contrast(1.2) brightness(0.9);
+  mix-blend-mode: luminosity;
   height: 75%;
   object-fit: cover;
   border: var(--border-static);
   border-radius: var(--border-radius);
+  opacity: 0.5;
+  transition:
+    filter 0.3s ease,
+    opacity 0.3s ease;
 }
 
-.hero h1 {
+.hero-console:hover .hero-av {
+  opacity: 1;
+  filter: sepia(0) contrast(1.1) brightness(1.1);
+}
+
+.hero-console h1 {
   color: var(--accent);
   font-weight: 700;
+  transition: text-shadow 0.3s ease;
+}
+
+.hero-console:hover h1 {
+  text-shadow:
+    0 0 4px #ff5c33,
+    0 0 12px rgba(255, 224, 158, 0.5);
+}
+
+.hero-job-title,
+.hero-loc,
+.hero-tagline {
+  transition:
+    color 0.3s ease,
+    text-shadow 0.3s ease;
+}
+
+.hero-console:hover .hero-job-title,
+.hero-console:hover .hero-loc,
+.hero-console:hover .hero-tagline {
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
 }
 
 .hero-job-title {
@@ -132,10 +161,17 @@ header.hero {
   justify-content: center;
   font-size: 1rem;
   gap: 0.25rem;
+}
 
-  span {
-    color: var(--accent);
-  }
+.hero-loc span {
+  color: var(--accent);
+  transition: text-shadow 0.15s ease;
+}
+
+.hero-console:hover .hero-loc span {
+  text-shadow:
+    0 0 4px #ff5c33,
+    0 0 12px rgba(255, 224, 158, 0.5);
 }
 
 .hero-tagline {
