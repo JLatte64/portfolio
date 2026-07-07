@@ -46,33 +46,30 @@ export function Dashboard() {
   return (
     <>
       <div aria-hidden={isOpen}>{!isOpen && <Hero />}</div>
+      {!isOpen ? (
+        <main className="dashboard">
+          <section id="project-links" aria-label="Project Portfolio Showcase">
+            <h2 className="portfolio-section-heading">Portfolio</h2>
+            <CardGrid
+              className="project"
+              items={processedProjects as CardData<ProjectData>[]}
+              renderComponent={ProjectCard}
+              onClick={(clickedItem) => {
+                const projectData = clickedItem as unknown as ProjectData;
+                setScrollPosition(window.scrollY);
 
-      <main className="dashboard-main-content">
-        <div className="home-content">
-          {!isOpen ? (
-            <section id="project-links" aria-label="Project Portfolio Showcase">
-              <h2 className="portfolio-section-heading">Portfolio</h2>
-              <CardGrid
-                className="project"
-                items={processedProjects as CardData<ProjectData>[]}
-                renderComponent={ProjectCard}
-                onClick={(clickedItem) => {
-                  const projectData = clickedItem as unknown as ProjectData;
-                  setScrollPosition(window.scrollY);
+                const projectSlug = titleToSlug[projectData.title] || "";
 
-                  const projectSlug = titleToSlug[projectData.title] || "";
-
-                  if (projectSlug) {
-                    navigate(`${getPagePath("dashboard")}/${projectSlug}`, {
-                      preventScrollReset: true,
-                    });
-                  }
-                }}
-              />
-            </section>
-          ) : null}
-        </div>
-      </main>
+                if (projectSlug) {
+                  navigate(`${getPagePath("dashboard")}/${projectSlug}`, {
+                    preventScrollReset: true,
+                  });
+                }
+              }}
+            />
+          </section>
+        </main>
+      ) : null}
 
       <ProjectModal
         modalData={openProject}

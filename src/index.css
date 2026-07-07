@@ -170,11 +170,13 @@ html:has(dialog[open]) {
 :root {
   --bg: #12141c;
   --accent-bg: #212632;
-  --glass: #16182c69;
-  --glass-edge: #525c74;
-  --text-h: #ffffff;
+  --glass: #1c1d2eb4;
+  --glass-border: 1px solid rgba(255, 153, 0, 0.25);
+  --text-h: #f0faff;
   --accent: #ffd700;
-  --text: #f5f5f7;
+  --primary-accent: #ffd700;
+  --secondary-accent: #00ffff;
+  --text: #dae3ee;
   --button-icon-font-size: 2rem;
   --border-static: 1px solid var(--bg);
   --border-radius: 0.25rem;
@@ -231,9 +233,14 @@ h1 {
   line-height: 3.5rem;
   font-weight: 800;
   font-family: "Dizhitl";
+  color: var(--accent);
   @media (max-width: 600px) {
     font-size: 50px;
   }
+}
+
+span {
+  color: var(--accent);
 }
 
 h2 {
@@ -272,61 +279,79 @@ a {
   cursor: pointer;
 }
 
+/* @media (prefers-reduced-motion: reduce) {
+  .console,
+  .console *,
+  .console * * {
+    transition: none !important;
+    transform: none !important;
+    animation: none !important;
+  }
+} */
+
 .button,
 .button-inverted {
-  border-radius: var(--border-radius);
-
   font-weight: 700;
-  font-size: 1rem;
-  letter-spacing: 0.05em;
-  display: inline-flex;
-
-  font-size: inherit;
+  letter-spacing: 0.025em;
+  border-radius: 0.25rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: inherit;
+  width: max-content !important;
+  padding: 0.75rem;
+  cursor: pointer;
+
   transition:
     transform 0.05s linear,
-    box-shadow 0.05s linear;
-  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5);
-  width: max-content !important;
-
-  padding: 0.75rem;
-  letter-spacing: 0.05em;
-  cursor: pointer;
+    box-shadow 0.05s linear,
+    background-color 0.05s ease,
+    color 0.05s ease,
+    text-shadow 0.05s ease,
+    border 0.05s ease;
 }
 
 .button {
-  border: 2px solid var(--bg);
+  border: 2px solid black;
   background-color: var(--accent);
 }
 
 .button,
 .button * {
-  color: var(--bg) !important;
-}
-
-.button-inverted,
-.button-inverted * {
-  color: var(--accent) !important;
+  color: black !important;
 }
 
 .button-inverted {
-  border: 1px solid var(--accent);
+  border: 2px solid rgba(255, 153, 0, 0.5);
+  text-shadow: 2px 2px 4px black;
   background-color: transparent;
-}
-
-.button-inverted:hover {
-  text-shadow:
-    0 0 4px #ff5c33,
-    0 0 12px rgba(255, 224, 158, 0.5);
+  color: var(--accent);
 }
 
 .button-inverted:hover,
-.button:hover {
-  backdrop-filter: brightness(3);
-  transform: translateY(-6px);
-  box-shadow: 0px 6px 0px rgba(0, 0, 0, 0.5);
+.button-inverted:focus-visible {
+  text-shadow: none;
+  background-color: var(--accent);
+  color: black;
+}
+
+.button:hover,
+.button-inverted:hover,
+.button-inverted:focus-visible,
+.button:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.6);
+}
+
+.button:hover,
+.button-inverted:hover {
+  transform: translateY(-4px);
+  box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.6);
+}
+
+.button:hover,
+.button:focus-visible {
+  filter: brightness(1.15);
 }
 
 a:link,

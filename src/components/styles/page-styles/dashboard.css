@@ -38,7 +38,7 @@
   gap: 0.5rem;
 }
 
-.home-content > section > h2 {
+main.dashboard > section > h2 {
   color: var(--text-h);
   padding: 1rem 0 1rem 0;
   margin: 0;
@@ -47,14 +47,6 @@
   border-bottom: 1px solid white;
   background-color: var(--bg);
 }
-
-.home-content,
-.home-content > *,
-.home-content > section {
-  margin: 0;
-  padding: 0;
-}
-
 /* Desktop Query */
 
 @media screen and (min-width: 1200px) {
