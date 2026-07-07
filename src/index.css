@@ -170,9 +170,10 @@ html:has(dialog[open]) {
 :root {
   --bg: #12141c;
   --accent-bg: #212632;
+  --glass: #16182c69;
+  --glass-edge: #525c74;
   --text-h: #ffffff;
   --accent: #ffd700;
-  --title: #00ff66;
   --text: #f5f5f7;
   --button-icon-font-size: 2rem;
   --border-static: 1px solid var(--bg);
@@ -274,16 +275,21 @@ a {
 .button,
 .button-inverted {
   border-radius: var(--border-radius);
+
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  display: inline-flex;
+
   font-size: inherit;
-  font-weight: 500;
   display: flex;
   justify-content: center;
   align-items: center;
   transition:
-    filter 0.05s linear,
     transform 0.05s linear,
     box-shadow 0.05s linear;
-  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5);
+  width: max-content !important;
 
   padding: 0.75rem;
   letter-spacing: 0.05em;
@@ -291,8 +297,8 @@ a {
 }
 
 .button {
-  border: 3px solid var(--bg);
-  background-color: var(--title);
+  border: 2px solid var(--bg);
+  background-color: var(--accent);
 }
 
 .button,
@@ -307,15 +313,16 @@ a {
 }
 
 .button-inverted {
-  background-color: color-mix(in srgb, var(--accent) 10%, transparent 90%);
   border: 1px solid var(--accent);
+  background-color: transparent;
 }
 
 .button-inverted:hover,
 .button:hover {
+  text-shadow: 0 0 4px rgba(255, 153, 0, 0.4);
   backdrop-filter: brightness(2);
   transform: translateY(-6px);
-  box-shadow: 4px 10px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 6px 0px rgba(0, 0, 0, 0.5);
 }
 
 a:link,

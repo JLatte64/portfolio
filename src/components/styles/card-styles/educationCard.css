@@ -1,4 +1,5 @@
 .education-card-container {
+  list-style: none;
   padding: 1rem;
   width: 100%;
   flex: 0 1 100%;

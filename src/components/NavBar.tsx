@@ -23,7 +23,7 @@ export function NavBar() {
           <Link
             to={`${getPagePath("home")}`}
             aria-label="Home - Portfolio of Jordan Latta"
-            className="button-inverted nav-button nav-home-link"
+            className="nav-button nav-home-link"
             onClick={() => {
               toggleMobileMenu(false);
               window.scrollTo({ top: 0 });
@@ -54,7 +54,7 @@ export function NavBar() {
             <li>
               <Link
                 to={`${getPagePath("about")}`}
-                className="button-inverted nav-button nav-link-item"
+                className="nav-button nav-link-item"
                 onClick={() => {
                   toggleMobileMenu(false);
                   window.scrollTo({ top: 0 });
@@ -67,7 +67,7 @@ export function NavBar() {
             <li>
               <a
                 href="#contact"
-                className="button-inverted nav-button nav-link-item"
+                className="nav-button nav-link-item"
                 onClick={() => toggleMobileMenu(false)}
               >
                 Contact

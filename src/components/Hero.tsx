@@ -3,9 +3,7 @@ import { heroSlides } from "../data/projects.json";
 import { myinfo } from "../data/myinfo.json";
 import { useEffect, useRef, useState, useId } from "react";
 import type { Media } from "./types/MediaTypes";
-import showMedia from "./functions/DisplayMedia";
 import { Link } from "react-router";
-import { getPagePath } from "./functions/GetPagePath";
 import { useDashboardState } from "../context/DashboardContext";
 import DisplayMedia from "./functions/DisplayMedia";
 
@@ -96,7 +94,7 @@ function Hero() {
         })}
         <div className="hero-slider-overlay" aria-hidden={true} />
       </div>
-      <section className="split-hero-content">
+      <section className="hero-console">
         <div className="hero-intro-wrapper">
           <h1 id="name-title">{myinfo.name}</h1>
           <p
@@ -116,6 +114,9 @@ function Hero() {
           </p>
 
           <p className="hero-tagline">{myinfo.tagline}</p>
+          <Link to="#project-links" className="cta-btn button-inverted">
+            View Work
+          </Link>
         </div>
 
         <div className="hero-av-wrapper" key={heroPhoto?.id || "hero-av"}>
@@ -124,9 +125,6 @@ function Hero() {
             className={"hero-av"}
             shouldLazyLoad={false}
           />
-          <Link to={getPagePath("about")} className="cta-btn button-inverted">
-            Learn About Me
-          </Link>
         </div>
       </section>
     </header>

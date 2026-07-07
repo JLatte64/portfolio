@@ -49,7 +49,7 @@ export function About() {
             className="resume-button button"
             aria-label="Download or view full resume PDF in a new tab"
           >
-            Download/View Resume (PDF)
+            Download Resume
           </a>
         </div>
       </header>
