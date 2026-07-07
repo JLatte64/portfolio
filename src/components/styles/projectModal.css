@@ -29,11 +29,12 @@
 .proj-header {
   height: auto; /* Allow header to change size dynamically with text */
   flex: 0 0 auto; /* Zero out flex-grow so it strictly shrinks to its content footprint */
-  padding: 0.5rem 1rem;
   margin: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid var(--title);
+  padding: 0.5rem;
 }
 
 .proj-header * {
@@ -41,11 +42,11 @@
   justify-content: center;
   align-items: center;
   margin: 0;
-  color: var(--accent);
 }
 
 .proj-header > h1 {
   position: relative;
+  color: var(--title);
   display: inline-block;
   width: fit-content;
   padding-right: 2.3rem;
@@ -69,9 +70,7 @@
 
 .proj-back-btn {
   padding: 0;
-  border: none;
-  background-color: transparent;
-  color: var(--accent);
+  margin: 0;
 
   span {
     font-size: 2rem;
@@ -103,7 +102,12 @@
   height: fit-content;
 }
 
+.proj-pane.details section > * {
+  font-size: 1rem;
+}
+
 .proj-pane.details header {
+  padding: 0;
   margin: 0 0 0.75rem 0;
   color: var(--text-h);
   width: 100%;
@@ -111,22 +115,22 @@
   font-size: 1.2rem;
 }
 
+.proj-pane.details * {
+  font-weight: 400;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  color: var(--text);
+  text-align: left;
+}
+
 .proj-media {
   width: 100%;
-  text-align: left;
   margin: 0;
   anchor-name: --project-body-media-anchor;
 }
 
-.proj-media * {
-  overflow-wrap: break-word;
-  word-break: break-word;
-  color: var(--text);
-}
-
 ul.proj-media {
-  padding-left: 0.75cqw;
-  font-size: 14px;
+  padding-left: 1cqw;
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -179,7 +183,7 @@ ul.proj-media > *::marker {
 
 @media screen and (min-width: 600px) {
   .proj-header > h1 {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
 
   .proj-panes-container {

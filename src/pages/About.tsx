@@ -1,13 +1,11 @@
 import "../components/styles/page-styles/about.css";
-import displayMedia, {
-  resolveMediaSrc,
-} from "../components/functions/DisplayMedia";
-import type {Media} from "../components/types/MediaTypes";
-import {myinfo} from "../data/myinfo.json";
+import { resolveMediaSrc } from "../components/functions/DisplayMedia";
+import type { Media } from "../components/types/MediaTypes";
+import { myinfo } from "../data/myinfo.json";
 import purifyString from "../components/functions/PurifyString";
-import {CardGrid} from "../components/cards/CardGrid";
-import type {CardData} from "../components/cards/Card";
-import RoleCard, {type RoleCardData} from "../components/cards/RoleCard";
+import { CardGrid } from "../components/cards/CardGrid";
+import type { CardData } from "../components/cards/Card";
+import RoleCard, { type RoleCardData } from "../components/cards/RoleCard";
 import SoftwareCard, {
   type SoftwareCardData,
 } from "../components/cards/SoftwareCard";
@@ -17,14 +15,14 @@ import EducationCard, {
 import LanguageCard, {
   type LangCardData,
 } from "../components/cards/LanguageCard";
-import SkillCard, {type SkillCardData} from "../components/cards/SkillCard";
+import SkillCard, { type SkillCardData } from "../components/cards/SkillCard";
 import DisplayMedia from "../components/functions/DisplayMedia";
 
 export function About() {
   if (!myinfo) {
     return (
       <main className="about-main-content">
-        <p style={{color: "#ffffff", padding: "2rem", textAlign: "center"}}>
+        <p style={{ color: "#ffffff", padding: "2rem", textAlign: "center" }}>
           Loading profile information...
         </p>
       </main>
@@ -48,7 +46,7 @@ export function About() {
             href={resolveMediaSrc(myinfo.resume.pdf.content)}
             target="_blank"
             rel="noopener noreferrer"
-            className="resume-button button-inverted"
+            className="resume-button button"
             aria-label="Download or view full resume PDF in a new tab"
           >
             Download/View Resume (PDF)

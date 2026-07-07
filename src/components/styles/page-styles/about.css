@@ -49,14 +49,17 @@
   display: flex;
   flex-wrap: wrap;
   height: fit-content;
-  justify-content: center;
-  align-items: center;
-  padding: 2%;
+  justify-content: space-between;
+
   background-color: var(--accent-bg);
 }
 
 .about-story {
   padding: 1rem;
+  font-size: 1rem;
+  flex: 1 1 50%;
+  display: inline-flexbox;
+
   background-color: var(--bg);
   border-radius: var(--border-radius);
 }
@@ -154,12 +157,8 @@
     max-width: 50%;
   }
 
-  .about-story {
-    flex: 1 1 30%;
-    max-width: 30%;
-  }
-
   .about-intro {
+    padding: 1rem 5rem;
     gap: 2.5rem;
     flex-direction: row;
   }
@@ -177,15 +176,21 @@
   }
 
   .about-photo {
-    max-width: 50cqw;
+    max-width: 40cqw;
   }
 
   .about-photo-link {
     gap: 1rem;
   }
 
+  .about-story {
+    width: 100%;
+    margin: 0;
+  }
+
   .about-intro {
-    flex-direction: column-reverse;
+    flex-direction: column;
+    padding: 1rem 2rem;
     gap: 1rem;
   }
 

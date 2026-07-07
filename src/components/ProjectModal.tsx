@@ -1,10 +1,10 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import MediaCarousel from "./MediaCarousel";
 import "../components/styles/projectModal.css";
 import purifyString from "./functions/PurifyString";
-import type {ProjectData} from "./types/ProjectTypes";
-import {useSlugs} from "../context/SlugContext";
-import {handleCopyLink} from "./functions/HandleCopyLink";
+import type { ProjectData } from "./types/ProjectTypes";
+import { useSlugs } from "../context/SlugContext";
+import { handleCopyLink } from "./functions/HandleCopyLink";
 import DisplayMedia from "./functions/DisplayMedia";
 
 interface ProjectModalProps {
@@ -20,7 +20,7 @@ export function ProjectModal({
   isOpen,
   dialogRef,
 }: ProjectModalProps) {
-  const {titleToSlug} = useSlugs();
+  const { titleToSlug } = useSlugs();
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -112,7 +112,7 @@ export function ProjectModal({
           <header id={uniqueTitleId} className="proj-header">
             <button
               type="button"
-              className="proj-back-btn"
+              className="proj-back-btn button"
               onClick={handleClose}
               aria-label="Close project modal dialog"
             >
@@ -128,7 +128,7 @@ export function ProjectModal({
                 type="button"
                 className="proj-link-copy-btn"
                 onClick={() => {
-                  handleCopyLink({link: projectSlug});
+                  handleCopyLink({ link: projectSlug });
                 }}
                 aria-label={`Copy shareable link for ${purifiedTitleStr} project`}
               >

@@ -1,7 +1,7 @@
-import {Link} from "react-router";
+import { Link } from "react-router";
 import "../components/styles/navBar.css";
-import {useState, useId} from "react";
-import {getPagePath} from "./functions/GetPagePath";
+import { useState, useId } from "react";
+import { getPagePath } from "./functions/GetPagePath";
 
 export function NavBar() {
   const [mobileMenuOpen, toggleMobileMenu] = useState(false);
@@ -23,10 +23,10 @@ export function NavBar() {
           <Link
             to={`${getPagePath("home")}`}
             aria-label="Home - Portfolio of Jordan Latta"
-            className="nav-button nav-home-link"
+            className="button-inverted nav-button nav-home-link"
             onClick={() => {
               toggleMobileMenu(false);
-              window.scrollTo({top: 0});
+              window.scrollTo({ top: 0 });
             }}
           >
             <span className="material-icons" aria-hidden="true">
@@ -54,10 +54,10 @@ export function NavBar() {
             <li>
               <Link
                 to={`${getPagePath("about")}`}
-                className="nav-button nav-link-item"
+                className="button-inverted nav-button nav-link-item"
                 onClick={() => {
                   toggleMobileMenu(false);
-                  window.scrollTo({top: 0});
+                  window.scrollTo({ top: 0 });
                 }}
               >
                 About/Resume
@@ -67,7 +67,7 @@ export function NavBar() {
             <li>
               <a
                 href="#contact"
-                className="nav-button nav-link-item"
+                className="button-inverted nav-button nav-link-item"
                 onClick={() => toggleMobileMenu(false)}
               >
                 Contact

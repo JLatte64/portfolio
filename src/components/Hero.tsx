@@ -115,10 +115,7 @@ function Hero() {
             {myinfo.location}
           </p>
 
-          <p>{myinfo.tagline}</p>
-          <Link to={getPagePath("about")} className="cta-btn button">
-            Learn About Me
-          </Link>
+          <p className="hero-tagline">{myinfo.tagline}</p>
         </div>
 
         <div className="hero-av-wrapper" key={heroPhoto?.id || "hero-av"}>
@@ -127,6 +124,9 @@ function Hero() {
             className={"hero-av"}
             shouldLazyLoad={false}
           />
+          <Link to={getPagePath("about")} className="cta-btn button-inverted">
+            Learn About Me
+          </Link>
         </div>
       </section>
     </header>

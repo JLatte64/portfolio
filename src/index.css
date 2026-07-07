@@ -168,16 +168,15 @@ html:has(dialog[open]) {
 }
 
 :root {
-  --bg: #0e0e0e;
+  --bg: #12141c;
   --accent-bg: #212632;
   --text-h: #ffffff;
-  --accent: #20d47a;
-  --subtitle: #95ff6b;
-  --text: #dbdcdf;
-  --shadow: 4px 4px 4px black;
+  --accent: #ffd700;
+  --title: #00ff66;
+  --text: #f5f5f7;
   --button-icon-font-size: 2rem;
-  --border-static: 3px solid #2d2d2d;
-  --focus-ring: 3px solid var(--subtitle);
+  --border-static: 1px solid var(--bg);
+  --border-radius: 0.25rem;
   --sans: system-ui, "Segoe UI", Roboto, sans-serif;
   --heading: system-ui, "Segoe UI", Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
@@ -256,7 +255,6 @@ h4 {
 
 p {
   color: var(--text);
-  font-weight: 500;
   font-size: 14px;
   line-height: 24px;
 }
@@ -275,40 +273,49 @@ a {
 
 .button,
 .button-inverted {
-  text-align: center;
-  text-justify: auto;
-  text-decoration: none;
-  padding: 0.75rem;
-  letter-spacing: 0.025em;
-
-  font-size: 1rem;
-
-  transform: translate(0px, 0px);
+  border-radius: var(--border-radius);
+  font-size: inherit;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transition:
-    transform 0.1s ease,
-    box-shadow 0.1s ease;
+    filter 0.05s linear,
+    transform 0.05s linear,
+    box-shadow 0.05s linear;
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.5);
+
+  padding: 0.75rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
 }
 
 .button {
-  border-radius: 0.25em;
-  border: 3px solid var(--accent-bg) !important;
-  background-color: var(--accent) !important;
-  color: var(--accent-bg) !important;
-  box-shadow: var(--shadow) !important;
+  border: 3px solid var(--bg);
+  background-color: var(--accent);
+}
+
+.button,
+.button * {
+  color: var(--bg) !important;
+}
+
+.button-inverted,
+.button-inverted * {
+  color: var(--accent) !important;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 1);
 }
 
 .button-inverted {
-  border: 3px solid var(--text) !important;
-  background-color: var(--accent-bg) !important;
-  color: var(--text-h) !important;
-  box-shadow: var(--shadow) !important;
+  background-color: color-mix(in srgb, var(--accent) 10%, transparent 90%);
+  border: 1px solid var(--accent);
 }
 
-.button:hover,
-.button-inverted:hover {
-  filter: brightness(1.2);
-  transform: translate(0px, -5px);
-  box-shadow: 4px 9px 0px black;
+.button-inverted:hover,
+.button:hover {
+  backdrop-filter: brightness(2);
+  transform: translateY(-6px);
+  box-shadow: 4px 10px 0px rgba(0, 0, 0, 0.5);
 }
 
 a:link,

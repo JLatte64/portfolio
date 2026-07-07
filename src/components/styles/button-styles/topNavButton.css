@@ -13,20 +13,16 @@
   align-items: center;
   color: var(--text-h);
 
-  transition:
-    opacity 0.2s ease,
-    transform 0.2s ease;
+  transition: opacity 0.2s ease;
 }
 
 .top-nav-button.is-hidden {
   opacity: 0;
-  transform: translateY(15px);
   pointer-events: none;
 }
 
 .top-nav-button.is-visible {
   opacity: 1;
-  transform: translateY(0);
   pointer-events: auto;
 }
 
