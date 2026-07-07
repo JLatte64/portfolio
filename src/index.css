@@ -292,7 +292,7 @@ a {
 
 .button {
   border: 3px solid var(--bg);
-  background-color: var(--accent);
+  background-color: var(--title);
 }
 
 .button,

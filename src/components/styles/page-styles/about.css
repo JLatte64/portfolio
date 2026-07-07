@@ -73,7 +73,7 @@
 
 .about-photo {
   border-radius: var(--border-radius);
-  border: 2px solid var(--text);
+  border: var(--border-static);
 }
 
 .resume-button {
@@ -145,7 +145,7 @@
   }
 
   .about-photo {
-    max-width: 15vw;
+    max-width: 20cqw;
   }
 
   .about-photo-link {
