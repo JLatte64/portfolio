@@ -1,150 +1,68 @@
-header.hero {
+header {
   overflow: hidden;
   background-color: black;
-}
-
-.hero-slider {
-  height: 100%;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-  transform: scale(1.5);
-}
-
-.hero-slide {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.hero-slide-media {
-  height: 100%;
-  max-height: 100%;
-  inline-size: auto;
-  object-fit: cover;
-  opacity: 0;
-  transform: scale(1);
-  transition: opacity 1.25s ease-in-out;
-}
-
-.hero-slide-media.active {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.hero-console {
-  border: 1px solid var(--glass-edge);
-  border-left: 3px solid var(--accent);
-  background-color: var(--glass);
+  background-color: gray;
   overflow: hidden;
   position: relative;
   display: flex;
   justify-content: space-between;
   align-items: stretch;
-  margin: 2rem;
-  border-radius: 0 0.25rem 0.25rem 0;
-  backdrop-filter: blur(6px) brightness(1);
+  padding: 1.25rem;
   gap: 1.25rem;
-  transition:
-    transform 0.1s ease-in-out,
-    box-shadow 0.2s ease-in-out,
-    backdrop-filter 0.2s ease-in-out;
 }
 
-.hero-console::after {
-  content: " ";
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%);
-  background-size: 100% 3px;
-  pointer-events: none;
-}
-
-.hero-console:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 20px -2px rgba(255, 153, 0, 0.185);
-  backdrop-filter: blur(6px) brightness(1.75);
-}
-
-.hero-console > * {
+header > * {
   display: flex;
   flex-direction: column;
   text-align: start;
   position: relative;
-}
-
-.hero-console * {
-  margin: 0;
+  padding: 1rem;
 }
 
 .hero-av-wrapper {
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   position: relative;
   display: inline-flex;
   gap: 1.25rem;
 }
 
-.hero-intro-wrapper {
-  justify-content: center;
-  align-items: flex-start;
+.hero-intro {
+  box-shadow:
+    inset 1px 1px 0px rgba(255, 255, 255, 0.8),
+    inset -1px -1px 0px rgba(0, 0, 0, 0.5);
   gap: 1.25rem;
 }
 
+.hero-intro > .text-wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(59, 59, 59);
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1.25rem;
+
+  border-radius: 0.15rem;
+  padding: 0.25rem;
+}
+
+.hero-intro > .text-wrapper * {
+  margin: 0;
+}
+
 .hero-av {
-  filter: sepia(0.6) contrast(1.2) brightness(0.9);
-  mix-blend-mode: luminosity;
   height: 75%;
   object-fit: cover;
   border: var(--border-static);
   border-radius: var(--border-radius);
-  opacity: 0.5;
-  transition:
-    filter 0.3s ease,
-    opacity 0.3s ease;
 }
 
-.hero-console:hover .hero-av {
-  opacity: 1;
-  filter: sepia(0) contrast(1.1) brightness(1.1);
-}
-
-.hero-console h1 {
-  color: var(--accent);
+header h1 {
+  padding: 0 0.25rem;
+  width: 100%;
+  background-color: var(--accent);
+  color: black;
   font-weight: 700;
-  transition: text-shadow 0.3s ease;
-}
-
-.hero-console:hover h1 {
-  text-shadow:
-    0 0 4px #ff5c33,
-    0 0 12px rgba(255, 224, 158, 0.5);
-}
-
-.hero-job-title,
-.hero-loc,
-.hero-tagline {
-  transition:
-    color 0.3s ease,
-    text-shadow 0.3s ease;
-}
-
-.hero-console:hover .hero-job-title,
-.hero-console:hover .hero-loc,
-.hero-console:hover .hero-tagline {
-  color: #ffffff;
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
 }
 
 .hero-job-title {
@@ -164,13 +82,6 @@ header.hero {
 
 .hero-loc span {
   color: var(--accent);
-  transition: text-shadow 0.15s ease;
-}
-
-.hero-console:hover .hero-loc span {
-  text-shadow:
-    0 0 4px #ff5c33,
-    0 0 12px rgba(255, 224, 158, 0.5);
 }
 
 .hero-tagline {
@@ -179,7 +90,7 @@ header.hero {
 }
 
 @media screen and (min-width: 600px) {
-  .hero-console {
+  header {
     flex-wrap: nowrap;
   }
 
@@ -198,12 +109,12 @@ header.hero {
 }
 
 @media screen and (max-width: 600px) {
-  .hero-console {
+  header {
     flex-direction: column;
     flex-wrap: wrap;
   }
 
-  .hero-console > * {
+  header > * {
     min-width: 100%;
   }
 

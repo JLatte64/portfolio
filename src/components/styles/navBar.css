@@ -44,7 +44,7 @@ nav {
 .nav-btn {
   font-family: monospace;
   background-color: gray;
-  color: var(--text);
+  color: black;
   font-weight: 200;
   box-shadow:
     inset 1px 1px 0px rgba(255, 255, 255, 0.8),
@@ -62,8 +62,9 @@ nav {
   border: none !important;
 }
 
-.nav-btn.active {
-  color: var(--text-h);
+.nav-btn.active,
+.nav-btn:focus-visible {
+  color: white;
   font-weight: 600;
 }
 
@@ -90,7 +91,8 @@ nav {
     display: none;
   }
 
-  .nav-btn.active {
+  .nav-btn.active,
+  .nav-btn:focus-visible {
     transform: translateY(2px);
   }
 }
