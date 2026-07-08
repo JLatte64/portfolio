@@ -1,3 +1,39 @@
+@font-face {
+  font-family: "MajorMonoDisplay"; /* Name it whatever you want to use in your style files */
+  src: url("./assets/fonts/MajorMonoDisplay.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SpaceMono";
+  src: url("./assets/fonts/SpaceMono.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBMPlexMono-Light";
+  src: url("./assets/fonts/IBMPlexMono-Light.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBMPlexMono-SemiBold";
+  src: url("./assets/fonts/IBMPlexMono-SemiBold.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBMPlexMono-Bold";
+  src: url("./assets/fonts/IBMPlexMono-Bold.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBMPlexMono-Regular";
+  src: url("./assets/fonts/IBMPlexMono-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+
 *,
 *::before,
 *::after {
@@ -34,15 +70,15 @@ html:has(dialog[open]) {
 :root {
   --bg: #12141ccc;
 
-  --glass: #1d1e31b4;
-  --text-h: #f0faff;
+  --glass: #152027e1;
+  --text-h: #ffffff;
   --accent: #ffd700;
   --accent-bg: #212632;
   --primary-accent: #ffd700;
   --secondary-accent: #00ffff;
-  --text: #dae3ee;
+  --text: #dbe6f3;
   --button-icon-font-size: 2rem;
-  --border-static: 1px solid rgb(255, 166, 0);
+  --border-static: 1px solid #ffa6005d;
   --border-radius: 0.25rem;
   --sans: system-ui, "Segoe UI", Roboto, sans-serif;
   --heading: system-ui, "Segoe UI", Roboto, sans-serif;

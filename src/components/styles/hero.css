@@ -7,20 +7,19 @@ header.hero {
   align-items: stretch;
 
   margin: 1rem;
-  border: 1px solid rgba(0, 225, 255, 0.404);
+  border: var(--border-static);
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
-  background-color: var(--bg);
   border-left: 2px solid var(--accent);
 
   background:
     repeating-linear-gradient(
-      rgba(0, 0, 0, 0) 0px,
-      rgba(0, 0, 0, 0) 2px,
-      rgba(0, 255, 242, 0.04) 2px,
-      rgba(0, 255, 242, 0.089) 4px
+      rgba(0, 0, 0, 0.486) 0px,
+      rgba(0, 255, 255, 0.055) 3px,
+      rgba(0, 255, 242, 0.01) 1px,
+      rgba(0, 0, 0, 0) 4px
     ),
-    var(--bg);
+    var(--glass);
 }
 
 header.hero > * {
@@ -36,12 +35,14 @@ header.hero > * {
   align-items: flex-start;
 }
 
-.hero-intro * {
+.hero-intro *:not(a) {
   margin: 0;
+  text-shadow:
+    2px 2px 0px black,
+    0px 0px 4px black;
 }
 
 .hero-av {
-  mix-blend-mode: luminosity;
   border-radius: 0px !important;
   height: 75%;
   object-fit: cover;
@@ -99,7 +100,7 @@ header h1 {
   }
 
   .hero-av-wrapper {
-    border-left: 1px solid rgba(0, 225, 255, 0.404);
+    border-left: var(--border-static);
     flex: 1 1 50%;
     align-items: center;
   }
