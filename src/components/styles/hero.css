@@ -32,12 +32,8 @@ header.hero > * {
   padding: 2.5rem;
 }
 
-.hero-av-wrapper {
-}
-
 .hero-intro {
   align-items: flex-start;
-  gap: 2rem;
 }
 
 .hero-intro * {
@@ -105,10 +101,15 @@ header h1 {
   .hero-av-wrapper {
     border-left: 1px solid rgba(0, 225, 255, 0.404);
     flex: 1 1 50%;
+    align-items: center;
   }
 
   .hero-intro-wrapper {
     flex: 1 1 50%;
+  }
+
+  .hero-intro {
+    gap: 2.5rem;
   }
 
   .hero-av {
@@ -129,6 +130,11 @@ header h1 {
 
   .hero-av-wrapper {
     border: none;
+    align-items: flex-start;
+  }
+
+  .hero-intro {
+    gap: 2rem;
   }
 
   .hero-av {

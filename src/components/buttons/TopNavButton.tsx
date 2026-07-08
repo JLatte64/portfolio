@@ -22,7 +22,6 @@ export default function TopNavButton() {
       className={`button top-nav-button ${isAtTop ? "is-hidden" : "is-visible"}`}
       aria-label="Back to top"
       tabIndex={isAtTop ? -1 : 0}
-      aria-hidden={isAtTop ? "true" : undefined}
     >
       <span className="material-icons" aria-hidden="true">
         arrow_circle_up
