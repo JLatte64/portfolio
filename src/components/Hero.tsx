@@ -8,7 +8,7 @@ function Hero() {
 
   return (
     <header className="hero">
-      <div className="hero-intro">
+      <section className="intro">
         <h1 id="name-title" className="hud-banner">
           {myinfo.name}
         </h1>
@@ -25,20 +25,20 @@ function Hero() {
 
         <p className="hero-tagline hud-banner">{myinfo.tagline}</p>
 
-        <a href="#project-links" className="cta-btn button">
+        <a href="#project-links" className="cta-btn button hud-banner">
           View Work
         </a>
-      </div>
+      </section>
 
-      <div className="hero-av-wrapper" key={heroPhoto?.id || "hero-av"}>
-        <div className="hud-banner hero-av-overlay">
+      <section className="av">
+        <div className="hero-av-wrapper hud-banner">
           <DisplayMedia
             media={heroPhoto}
             className={"hero-av"}
             shouldLazyLoad={false}
           />
         </div>
-      </div>
+      </section>
     </header>
   );
 }

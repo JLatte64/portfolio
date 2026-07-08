@@ -158,8 +158,8 @@ html:has(dialog[open]) {
   --bg: #12141ccc;
   --accent-bg: #212632;
 
-  --hud-bg: rgb(238, 143, 0);
-  --hud-bg-rgb: 238, 143, 0;
+  --hud-bg: rgb(202, 174, 83);
+  --hud-bg-rgb: 202, 174, 83;
   --hud-border: 1px solid #ffa6005d;
 
   --button-icon-font-size: 2rem;
@@ -278,7 +278,7 @@ a {
   border-left: none;
   vertical-align: auto;
   padding: 0.5rem;
-  margin: 0;
+  margin: 1rem;
   text-shadow:
     0px 0px 8px rgb(187, 90, 0),
     0px 0px 8px rgb(255, 136, 0);
@@ -324,6 +324,15 @@ a {
   }
 }
 
+.hud-banner *:not(a, span, button) {
+  padding: 0.5rem;
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0.35) 20%,
+    transparent 100%
+  );
+}
+
 @keyframes crt-flicker {
   0% {
     opacity: 0.96;
@@ -333,13 +342,15 @@ a {
   }
 }
 
-button,
-a {
-  background-color: var(--bg);
+.hud-banner button,
+button.hud-banner,
+.hud-banner a,
+a.hud-banner {
+  background: var(--bg);
   box-shadow: inset 0 0 40px rgba(var(--hud-bg-rgb), 0.7);
 
   text-shadow: 0px 0px 8px black;
-  color: var(--text-h);
+  color: var(--accent);
   display: flex;
   justify-content: center;
   align-items: center;
