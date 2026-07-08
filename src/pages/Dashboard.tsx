@@ -2,7 +2,7 @@ import "../components/styles/page-styles/dashboard.css";
 import Hero from "../components/Hero";
 import { CardGrid } from "../components/cards/CardGrid";
 import ProjectModal from "../components/ProjectModal";
-import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { getPagePath } from "../components/functions/GetPagePath";
 import ProjectCard from "../components/cards/ProjectCard";
@@ -98,16 +98,10 @@ export function Dashboard() {
       setHeroTimeElapsed(elapsedRef.current);
     };
   }, [isVisible, totalSlides, heroSlide, setHeroSlide, setHeroTimeElapsed]);
-  const carouselRegionId = useId();
 
   return (
     <>
-      <div
-        ref={sliderRef}
-        className="db-showcase-slider"
-        aria-hidden={true}
-        id={carouselRegionId}
-      >
+      <div ref={sliderRef} className="db-showcase-slider" aria-hidden={true}>
         {heroMedia?.map((media, mediaIndex) => {
           const slideKey = media.id || `db-showcase-slide-${mediaIndex}`;
           const isActive = mediaIndex === heroSlide;
