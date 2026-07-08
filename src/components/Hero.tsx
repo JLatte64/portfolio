@@ -9,11 +9,13 @@ function Hero() {
   return (
     <header className="hero">
       <div className="hero-intro">
-        <h1 id="name-title">{myinfo.name}</h1>
+        <h1 id="name-title" className="hud-banner">
+          {myinfo.name}
+        </h1>
 
-        <p className="hero-job-title">{myinfo.jobTitle}</p>
+        <p className="hero-job-title hud-banner">{myinfo.jobTitle}</p>
 
-        <p className="hero-loc">
+        <p className="hero-loc hud-banner">
           <span className="material-icons" aria-hidden="true">
             place
           </span>
@@ -21,7 +23,7 @@ function Hero() {
           {myinfo.location}
         </p>
 
-        <p className="hero-tagline">{myinfo.tagline}</p>
+        <p className="hero-tagline hud-banner">{myinfo.tagline}</p>
 
         <a href="#project-links" className="cta-btn button">
           View Work
@@ -29,11 +31,13 @@ function Hero() {
       </div>
 
       <div className="hero-av-wrapper" key={heroPhoto?.id || "hero-av"}>
-        <DisplayMedia
-          media={heroPhoto}
-          className={"hero-av"}
-          shouldLazyLoad={false}
-        />
+        <div className="hud-banner hero-av-overlay">
+          <DisplayMedia
+            media={heroPhoto}
+            className={"hero-av"}
+            shouldLazyLoad={false}
+          />
+        </div>
       </div>
     </header>
   );

@@ -1,26 +1,21 @@
-.project-cards-container {
-  width: 100%;
-  padding: 0.5rem;
-  margin: 0 auto;
-  height: fit-content;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+.db-slider-overlay {
+  backdrop-filter: grayscale(0.9) contrast(0.65) blur(1px);
+  background: radial-gradient(circle, transparent 60%, rgba(0, 0, 0, 0.5) 100%);
+  background-size: cover;
+  background-position: center;
 }
 
-.db-showcase-slider {
+.db-slider,
+.db-slider-overlay {
   height: 100%;
   width: 100%;
   position: fixed;
   top: 0;
   left: 0;
   overflow: hidden;
-  transform: scale(1.5);
 }
 
-.db-showcase-slide {
+.db-slide {
   position: absolute;
   top: 0;
   left: 0;
@@ -31,7 +26,7 @@
   align-items: center;
 }
 
-.db-showcase-slide > * {
+.db-slide > * {
   height: 100%;
   max-height: 100%;
   inline-size: auto;
@@ -41,7 +36,7 @@
   transition: opacity 1.25s ease-in-out;
 }
 
-.db-showcase-slide > *.active {
+.db-slide > *.active {
   opacity: 1;
   transform: scale(1);
 }
@@ -71,6 +66,15 @@ main.dashboard > section {
 
 .project-cards-container {
   position: relative;
+  width: 100%;
+  padding: 0.5rem;
+  margin: 0 auto;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 /* Desktop Query */

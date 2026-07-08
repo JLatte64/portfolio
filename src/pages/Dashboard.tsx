@@ -101,15 +101,15 @@ export function Dashboard() {
 
   return (
     <>
-      <div ref={sliderRef} className="db-showcase-slider" aria-hidden={true}>
+      <div ref={sliderRef} className="db-slider" aria-hidden={true}>
         {heroMedia?.map((media, mediaIndex) => {
-          const slideKey = media.id || `db-showcase-slide-${mediaIndex}`;
+          const slideKey = media.id || `db-slide-${mediaIndex}`;
           const isActive = mediaIndex === heroSlide;
 
           return (
             <div
               key={slideKey}
-              className={`db-showcase-slide ${isActive ? "is-visible" : "is-hidden"}`}
+              className={`db-slide ${isActive ? "is-visible" : "is-hidden"}`}
               aria-hidden={true}
             >
               <DisplayMedia
@@ -121,6 +121,7 @@ export function Dashboard() {
           );
         })}
       </div>
+      <div className="db-slider-overlay" />
       <div aria-hidden={isOpen}>{!isOpen && <Hero />}</div>
       {!isOpen ? (
         <main className="dashboard">

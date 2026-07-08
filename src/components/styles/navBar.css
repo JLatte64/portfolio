@@ -1,5 +1,6 @@
 :root {
   --navbar-height: 2rem;
+  --navbar-bg: rgba(44, 44, 80, 0.904);
 }
 
 .nav-spacer {
@@ -36,7 +37,7 @@ nav {
 }
 
 .nav-links-list {
-  background-color: gray;
+  background-color: var(--accent-bg);
   gap: 0;
   display: flex;
   list-style: none;
@@ -44,12 +45,8 @@ nav {
 
 .nav-btn {
   font-family: monospace;
-  background-color: gray;
-  color: black;
+  background-color: var(--accent-bg);
   font-weight: 200;
-  box-shadow:
-    inset 1px 1px 0px rgba(255, 255, 255, 0.8),
-    inset -1px -1px 0px rgba(0, 0, 0, 0.5);
   position: relative;
 
   display: flex;
@@ -66,7 +63,15 @@ nav {
 .nav-btn.active,
 .nav-btn:focus-visible {
   color: white;
-  font-weight: 600;
+  border: 1px solid white !important;
+  border-bottom: 4px solid rgb(223, 239, 241) !important;
+  background: linear-gradient(
+    to right,
+    white -100%,
+    var(--navbar-bg) 25%,
+    var(--navbar-bg) 75%,
+    white 200%
+  );
 }
 
 @media screen and (min-width: 600px) {
