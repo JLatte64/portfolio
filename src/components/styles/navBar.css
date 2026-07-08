@@ -7,6 +7,7 @@
   left: 0;
   right: 0;
   height: var(--navbar-height);
+  background-color: black;
 }
 
 nav {
@@ -14,7 +15,7 @@ nav {
   top: 0;
   left: 0;
   right: 0;
-  background-color: gray;
+  background-color: rgba(128, 128, 128, 0.829);
   display: flex;
   flex-wrap: nowrap;
   align-items: center;

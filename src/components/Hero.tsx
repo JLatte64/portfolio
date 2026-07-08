@@ -9,32 +9,21 @@ function Hero() {
   return (
     <header className="hero">
       <div className="hero-intro">
-        <div className="text-wrapper">
-          <h1 id="name-title">{myinfo.name}</h1>
-          <p
-            aria-label={`Job title: ${myinfo.jobTitle}`}
-            aria-describedby="name-title"
-            className="hero-job-title"
-          >
-            {myinfo.jobTitle}
-          </p>
+        <h1 id="name-title">{myinfo.name}</h1>
 
-          <p className="hero-loc">
-            <span className="material-icons" aria-hidden="true">
-              place
-            </span>
-            <span className="sr-only">Location: </span>
-            {myinfo.location}
-          </p>
+        <p className="hero-job-title">{myinfo.jobTitle}</p>
 
-          <p className="hero-tagline">{myinfo.tagline}</p>
-        </div>
+        <p className="hero-loc">
+          <span className="material-icons" aria-hidden="true">
+            place
+          </span>
+          <span className="sr-only">Location: </span>
+          {myinfo.location}
+        </p>
 
-        <a
-          href="#project-links"
-          className="cta-btn button"
-          aria-label="To project links"
-        >
+        <p className="hero-tagline">{myinfo.tagline}</p>
+
+        <a href="#project-links" className="cta-btn button">
           View Work
         </a>
       </div>

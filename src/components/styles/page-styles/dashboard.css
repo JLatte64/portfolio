@@ -64,7 +64,7 @@ main.dashboard h2 {
 main.dashboard > section {
   overflow: hidden;
   position: relative;
-  background-color: var(--bg);
+  background-color: var(--accent-bg);
   width: 96%;
   margin: auto;
 }

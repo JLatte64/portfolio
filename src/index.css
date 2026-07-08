@@ -26,159 +26,23 @@
   outline-offset: 4px !important;
 }
 
-/* --- DIZHITL FONT FAMILY --- */
-/* --- THIN --- */
-@font-face {
-  font-family: "Dizhitl";
-  src: url("/fonts/dizhitl/dizhitl-thin.ttf") format("truetype");
-  font-weight: 100;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* --- THIN ITALIC --- */
-@font-face {
-  font-family: "Dizhitl";
-  src: url("/fonts/dizhitl/dizhitl-thinitalic.ttf") format("truetype");
-  font-weight: 100;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* --- EXTRA LIGHT --- */
-@font-face {
-  font-family: "Dizhitl";
-  src: url("/fonts/dizhitl/dizhitl-extralight.ttf") format("truetype");
-  font-weight: 200;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* --- EXTRA LIGHT ITALIC --- */
-@font-face {
-  font-family: "Dizhitl";
-  src: url("/fonts/dizhitl/dizhitl-extralightitalic.ttf") format("truetype");
-  font-weight: 200;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* --- LIGHT --- */
-@font-face {
-  font-family: "Dizhitl";
-  src: url("/fonts/dizhitl/dizhitl-light.ttf") format("truetype");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* --- LIGHT ITALIC --- */
-@font-face {
-  font-family: "Dizhitl";
-  src: url("/fonts/dizhitl/dizhitl-lightitalic.ttf") format("truetype");
-  font-weight: 300;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* --- MEDIUM --- */
-@font-face {
-  font-family: "Dizhitl";
-  src: url("/fonts/dizhitl/dizhitl-medium.ttf") format("truetype");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* --- MEDIUM ITALIC --- */
-@font-face {
-  font-family: "Dizhitl";
-  src: url("/fonts/dizhitl/dizhitl-mediumitalic.ttf") format("truetype");
-  font-weight: 500;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* --- SEMI BOLD --- */
-@font-face {
-  font-family: "Dizhitl";
-  src: url("/fonts/dizhitl/dizhitl-semibold.ttf") format("truetype");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* --- SEMI BOLD ITALIC --- */
-@font-face {
-  font-family: "Dizhitl";
-  src: url("/fonts/dizhitl/dizhitl-semibolditalic.ttf") format("truetype");
-  font-weight: 600;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* --- EXTRA BOLD --- */
-@font-face {
-  font-family: "Dizhitl";
-  src: url("/fonts/dizhitl/dizhitl-extrabold.ttf") format("truetype");
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* --- EXTRA BOLD ITALIC --- */
-@font-face {
-  font-family: "Dizhitl";
-  src: url("/fonts/dizhitl/dizhitl-extrabolditalic.ttf") format("truetype");
-  font-weight: 800;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* --- BLACK --- */
-@font-face {
-  font-family: "Dizhitl";
-  src: url("/fonts/dizhitl/dizhitl-black.ttf") format("truetype");
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* --- BLACK ITALIC --- */
-@font-face {
-  font-family: "Dizhitl";
-  src: url("/fonts/dizhitl/dizhitl-blackitalic.ttf") format("truetype");
-  font-weight: 900;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* --- MARIO 64 FONT --- */
-@font-face {
-  font-family: "Mario64";
-  src: url("/fonts/Mario64.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 html:has(dialog[open]) {
   overflow: hidden;
   scrollbar-gutter: stable;
 }
 
 :root {
-  --bg: #12141c;
-  --accent-bg: #212632;
-  --glass: #1c1d2eb4;
-  --glass-border: 1px solid rgba(255, 153, 0, 0.25);
+  --bg: #12141ccc;
+
+  --glass: #1d1e31b4;
   --text-h: #f0faff;
   --accent: #ffd700;
+  --accent-bg: #212632;
   --primary-accent: #ffd700;
   --secondary-accent: #00ffff;
   --text: #dae3ee;
   --button-icon-font-size: 2rem;
-  --border-static: 1px solid var(--bg);
+  --border-static: 1px solid rgb(255, 166, 0);
   --border-radius: 0.25rem;
   --sans: system-ui, "Segoe UI", Roboto, sans-serif;
   --heading: system-ui, "Segoe UI", Roboto, sans-serif;
@@ -231,8 +95,7 @@ h2 {
 h1 {
   font-size: 3rem;
   line-height: 3.5rem;
-  font-weight: 800;
-  font-family: "Dizhitl";
+  font-family: "MajorMonoDisplay";
   color: var(--accent);
   @media (max-width: 600px) {
     font-size: 50px;
@@ -244,11 +107,17 @@ span {
 }
 
 h2 {
-  font-family: "Mario64" !important;
+  font-family: "MajorMonoDisplay" !important;
   font-size: 28px;
   font-weight: 700;
   line-height: 118%;
   letter-spacing: -0.24px;
+}
+
+h3,
+h4,
+p {
+  font-family: "Changa";
 }
 
 h3 {
@@ -263,6 +132,7 @@ h4 {
 
 p {
   color: var(--text);
+  font-weight: 200;
   font-size: 14px;
   line-height: 24px;
 }
@@ -271,7 +141,6 @@ a {
   text-align: center;
   text-justify: auto;
   text-decoration: none;
-  font-weight: 700;
 
   user-select: none;
   -webkit-user-select: none; /* Safari, Chrome, Opera, iOS, Android */
@@ -291,9 +160,9 @@ a {
 
 .button,
 .button-inverted {
-  font-weight: 700;
+  font-family: "IBMPlexMono-Bold";
+  font-weight: 500;
   letter-spacing: 0.025em;
-  border-radius: 0.25rem;
   display: flex;
   justify-content: center;
   align-items: center;
