@@ -271,18 +271,10 @@ a {
 }
 
 .hud-banner {
-  *:not(a, span, button) {
-    padding: 0.5rem;
-    background: radial-gradient(
-      circle,
-      rgba(0, 0, 0, 0.35) 20%,
-      transparent 100%
-    );
-  }
-
   border: var(--hud-border);
   border-right: none;
   border-left: none;
+
   vertical-align: auto;
   padding: 0.5rem;
   text-shadow:
@@ -306,6 +298,15 @@ a {
   animation:
     crt-flicker 0.25s infinite,
     crt-scroll 2s linear infinite;
+
+  *:not(a, span, button) {
+    padding: 0.5rem;
+    background: radial-gradient(
+      circle,
+      rgba(0, 0, 0, 0.35) 20%,
+      transparent 100%
+    );
+  }
 }
 
 .hud-banner:hover {
