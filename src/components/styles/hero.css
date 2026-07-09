@@ -7,7 +7,6 @@ header.hero {
 
   justify-content: space-between;
   align-items: stretch;
-  max-width: 1400px;
 }
 
 header.hero > * {
@@ -18,11 +17,16 @@ header.hero > * {
   text-align: start;
   position: relative;
   gap: 2cqh;
+
+  section.av {
+    max-width: 40%;
+  }
 }
 
 header.hero > section.intro {
   align-items: flex-start;
-  flex: 1 1 50%;
+  flex: 1 1 auto;
+  min-width: 50ch;
 
   h1 {
     color: var(--accent);
@@ -56,11 +60,8 @@ header.hero > section.intro {
 
   * {
     margin: 0;
+    align-items: center;
   }
-}
-
-header.hero > section.intro > * {
-  align-items: center;
 }
 
 .av-wrapper {
@@ -83,27 +84,6 @@ header.hero > section.intro > * {
 @media screen and (min-width: 600px) {
   header.hero {
     flex-wrap: nowrap;
-
-    h1 {
-      font-size: 2.9rem;
-      line-height: 2.9rem;
-    }
-
-    .hero-job-title {
-      font-size: 1.8rem;
-      line-height: 1.8rem;
-      letter-spacing: 0.15em;
-    }
-
-    .hero-loc {
-      font-size: 1.4rem;
-      line-height: 1.4rem;
-    }
-  }
-
-  header.hero > section.intro {
-    max-width: calc(50ch);
-    text-align: start;
   }
 }
 
@@ -111,33 +91,5 @@ header.hero > section.intro > * {
   header.hero {
     flex-direction: column-reverse;
     flex-wrap: wrap;
-
-    * {
-      padding: 0.1rem;
-    }
-  }
-
-  header.hero > section.intro {
-    text-align: center;
-
-    h1 {
-      font-size: 9cqw;
-      line-height: 9cqw;
-    }
-
-    .hero-job-title {
-      font-size: 6cqw;
-      line-height: 6cqw;
-    }
-
-    .hero-loc {
-      font-size: 5cqw;
-      line-height: 5cqw;
-    }
-  }
-
-  header.hero > section.intro > * {
-    justify-content: center;
-    width: 100%;
   }
 }

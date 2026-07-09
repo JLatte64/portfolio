@@ -7,6 +7,8 @@
   filter: brightness(1);
   transition: filter 0.05s ease;
   box-sizing: border-box;
+  overflow: hidden;
+  list-style: none;
 }
 
 .lang-card-container:hover {

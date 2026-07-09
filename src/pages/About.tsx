@@ -35,8 +35,10 @@ export function About() {
       aria-label="About and Resume Breakdown Profile"
     >
       <header className="about-intro">
-        <p className="about-story">{purifyString(myinfo.aboutDescription)}</p>
-        <div className="about-photo-link">
+        <p className="about-story hud-banner">
+          {purifyString(myinfo.aboutDescription)}
+        </p>
+        <div className="about-photo-link hud-banner">
           <DisplayMedia
             media={myinfo.aboutPhoto as Media}
             className={"about-photo"}

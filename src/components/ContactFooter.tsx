@@ -1,9 +1,9 @@
 import "../components/styles/contactFooter.css";
-import {myinfo} from "../data/myinfo.json";
-import {CardGrid} from "./cards/CardGrid";
-import type {CardData} from "./cards/Card";
-import {ContactCard, type ContactCardData} from "./cards/ContactMethodCard";
-import {useId} from "react";
+import { myinfo } from "../data/myinfo.json";
+import { CardGrid } from "./cards/CardGrid";
+import type { CardData } from "./cards/Card";
+import { ContactCard, type ContactCardData } from "./cards/ContactMethodCard";
+import { useId } from "react";
 
 export function ContactFooter() {
   const nameInputId = useId();
@@ -11,11 +11,7 @@ export function ContactFooter() {
   const messageInputId = useId();
 
   return (
-    <section
-      className="contact-content"
-      id="contact"
-      aria-labelledby="contact-heading"
-    >
+    <footer className="contact" id="contact" aria-labelledby="contact-heading">
       <h2 id="contact-heading">Contact Me</h2>
       <p>Send me a message!</p>
 
@@ -95,6 +91,6 @@ export function ContactFooter() {
         }
         renderComponent={ContactCard}
       />
-    </section>
+    </footer>
   );
 }

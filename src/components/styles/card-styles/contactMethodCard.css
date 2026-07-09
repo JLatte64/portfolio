@@ -1,5 +1,5 @@
 :root {
-  --contact-card-size: 2.25rem;
+  --contact-card-size: 55px;
   --contact-card-padding: 0.25rem;
 }
 
@@ -19,22 +19,21 @@
 }
 
 .contact-card-container {
-  flex: 0 0 calc(var(--contact-card-size) + var(--contact-card-padding));
+  flex: 0 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: calc(var(--contact-card-size) + var(--contact-card-padding));
-  padding: var(--contact-card-padding);
-  border-radius: 0.25rem;
-  aspect-ratio: 1 / 1;
-  container-type: inline-size;
   overflow: hidden;
   background-color: var(--accent);
-  color: var(--text-h);
-  box-sizing: border-box;
+
+  border: 3px solid black;
+  width: var(--contact-card-size);
+  padding: var(--contact-card-padding);
+  aspect-ratio: 1 / 1;
 }
 
 .contact-card-container > * {
+  color: black;
   display: flex;
   justify-content: center;
   align-items: center;

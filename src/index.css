@@ -156,11 +156,11 @@ html:has(dialog[open]) {
   --text-h: #ffffff;
   --accent: #ffea00;
   --bg: #12141ccc;
-  --accent-bg: #212632;
+  --accent-bg: rgb(23, 32, 51);
 
   --glow: 0 0 4px #ff8c00, 0 0 10px #ff8c00, 0 0 18px rgba(255, 140, 0, 0.6);
 
-  --hud-bg: rgba(128, 113, 66, 0.856);
+  --hud-bg: rgba(182, 133, 65, 0.925);
   --hud-border: 1px solid #ffa60086;
 
   --button-icon-font-size: 2rem;
@@ -197,15 +197,34 @@ html:has(dialog[open]) {
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
+header,
+footer {
+  left: 0;
+  right: 0;
 }
 
-main {
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+header,
+footer {
+  position: relative;
+}
+
+header {
+  top: 0;
+}
+
+footer {
+  border-top: 3px solid var(--accent) !important;
+  bottom: 0;
+}
+
+header:not(.hero) {
+  padding: 0 0.5rem;
+  background-color: var(--accent-bg);
+  border-bottom: 3px solid var(--accent) !important;
+}
+
+body {
+  margin: 0;
 }
 
 h1,
@@ -259,7 +278,8 @@ p {
   line-height: 24px;
 }
 
-a {
+a,
+button {
   text-align: center;
   text-justify: auto;
   text-decoration: none;
@@ -275,31 +295,64 @@ a {
   border-right: none;
   border-left: none;
 
-  vertical-align: auto;
   padding: 0.5rem;
   text-shadow:
-    0 0 3px rgba(0, 0, 0, 1),
-    0 0 5px rgba(0, 0, 0, 0.8);
+    0 0 3px rgb(36, 0, 0),
+    0 0 5px rgba(255, 127, 7, 0.8);
 
-  background:
-    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.12) 50%),
-    radial-gradient(circle, var(--hud-bg) 0%, rgba(0, 0, 0, 0) 100%);
+  background: radial-gradient(
+    ellipse at center,
+    var(--hud-bg) 0%,
+    transparent 90%
+  );
 
-  background-size:
-    100% 4px,
-    cover;
+  background-size: 100%;
 
   background-blend-mode: overlay, multiply;
   background-position: center;
 
   transition:
     transform 0.1s ease,
-    box-shadow 0.75s ease;
+    box-shadow 0.1s ease;
   animation:
     crt-flicker 0.25s infinite,
     crt-scroll 2s linear infinite;
 
-  *:not(a, span, button) {
+  & :is(a, button) {
+    background:
+      radial-gradient(circle, transparent 50%, var(--hud-bg) 150%), var(--bg); /* Added missing comma between backgrounds */
+    background-size:
+      100% 4px,
+      cover;
+    text-shadow: none;
+    color: white;
+    border: 2px solid var(--accent);
+
+    padding: 1rem;
+    cursor: pointer;
+
+    font-family: "IBM Plex Mono";
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1.05rem;
+    letter-spacing: 0.08em;
+
+    transition:
+      box-shadow 0s ease,
+      transform 0.15s ease,
+      background-color 0.15s ease,
+      color 0.15s ease;
+  }
+
+  & :is(a, button):hover {
+    box-shadow: none;
+    background-color: var(--accent);
+    text-shadow: none;
+    color: black;
+    transform: translateY(-4px);
+  }
+
+  & :not(a, span, button) {
     padding: 0.5rem;
     background: radial-gradient(
       circle,
@@ -307,13 +360,34 @@ a {
       transparent 100%
     );
   }
+
+  @media (prefers-contrast: more) {
+    &,
+    & * {
+      text-shadow: none;
+      background: radial-gradient(
+        circle,
+        var(--hud-bg) 20%,
+        rgba(0, 0, 0, 0) 100%
+      );
+      background-size: cover;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &,
+    & * {
+      animation: none;
+      opacity: 1;
+    }
+  }
 }
 
 .hud-banner:hover {
   text-shadow: var(--glow);
   transform: translateY(-1px);
   border-color: var(--accent);
-  box-shadow: 0px 0px 4px var(--hud-bg);
+  box-shadow: 0px 2px 12px var(--hud-bg);
 }
 
 @keyframes crt-scroll {
@@ -334,69 +408,6 @@ a {
     opacity: 0.935;
   }
   100% {
-    opacity: 1;
-  }
-}
-
-.hud-banner button,
-button.hud-banner,
-.hud-banner a,
-a.hud-banner {
-  background:
-    radial-gradient(circle, transparent 0%, var(--hud-bg) 100%),
-    rgba(0, 0, 0, 0.75);
-  text-shadow: none;
-  color: white;
-  border: 2px solid var(--accent);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  cursor: pointer;
-
-  font-family: "IBM Plex Mono";
-  font-weight: bold;
-  text-transform: uppercase;
-  font-size: 1.05rem;
-  letter-spacing: 0.08em;
-
-  transition:
-    box-shadow 0s ease,
-    transform 0.15s ease,
-    background-color 0.15s ease,
-    color 0.15s ease;
-}
-
-button:hover,
-a:hover {
-  box-shadow: none;
-  background-color: var(--accent);
-  text-shadow: none;
-  color: black;
-  transform: translateY(-4px);
-}
-
-@media (prefers-contrast: more) {
-  .hud-banner,
-  .hud-banner * {
-    text-shadow: none;
-    background: radial-gradient(
-      circle,
-      var(--hud-bg) 20%,
-      rgba(0, 0, 0, 0) 100%
-    );
-    background-size:
-      100% 4px,
-      6px 100%,
-      cover;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hud-banner,
-  .hud-banner * {
-    animation: none;
     opacity: 1;
   }
 }

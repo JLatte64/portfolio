@@ -1,84 +1,39 @@
 .project-card-title {
-  position: absolute;
-  top: -50%;
-  left: 50%;
-  transform: translate(-50%, 50%);
-  margin-top: 0.5rem;
-  color: var(--text-h);
+  color: cyan;
+  font-family: "IBM Plex Mono";
+  position: relative;
   font-weight: 600;
-  font-size: 1rem;
-  transition:
-    transform 0.1s ease,
-    top 0.1s ease;
-  width: calc(100% - 2rem);
-  text-align: center;
-}
-
-.project-card-title-background {
-  position: absolute;
-  width: 110%;
-  top: -110%;
-  left: 0;
-  height: 110%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 1) 100%
-  );
-
-  transition: transform 0.1s ease-out;
+  font-size: 1.15rem;
+  text-overflow: ellipsis;
+  padding: 0.5rem;
+  text-decoration: underline;
 }
 
 .project-card-thumbnail {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1);
-  filter: brightness(100%);
-  width: 100%;
-  transition: transform 0.15s ease;
-  mix-blend-mode: lighten;
-  opacity: 0.5;
+  mix-blend-mode: screen;
+  position: relative;
+  width: 90%;
+  padding-bottom: 1rem;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
 }
 
 .project-card-container {
   position: relative;
-  aspect-ratio: 1/1;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  align-items: center;
+  height: fit-content;
+  list-style: none;
   overflow: hidden;
-  flex: 0 1;
-  filter: drop-shadow(var(--shadow));
-  border: 1px solid black;
-  outline: 2px solid cyan;
-}
-
-.project-card-container:hover .project-card-title-background {
-  transform: translate(0, 100%) scale(1, 2);
-}
-
-.project-card-container:hover .project-card-title {
-  top: 50%;
-  transform: translate(-50%, -100%);
-}
-
-.project-card-container:hover .project-card-thumbnail {
-  transform: translate(-50%, -50%) scale(1.25);
-}
-
-.project-card-container:active {
-  transform: scale(0.95);
+  border: 2px solid cyan;
+  max-width: 450px;
+  width: 100%;
 }
 
 @media screen and (min-width: 600px) {
   .project-card-container {
-    flex-basis: 33%;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .project-card-container {
-    width: 90%;
+    max-width: none;
   }
 }

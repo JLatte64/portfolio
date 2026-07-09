@@ -126,8 +126,16 @@ export function Dashboard() {
         <div>
           <Hero />
           <main className="dashboard">
-            <section id="project-links" aria-label="Project Portfolio Showcase">
-              <h2 className="portfolio-section-heading">Portfolio</h2>
+            <section
+              id="project-links"
+              className="console"
+              aria-label="Project Portfolio Showcase"
+            >
+              <div className="console-header">
+                <h2>Portfolio</h2>
+                <p>// Jordan_Latta</p>
+              </div>
+
               <CardGrid
                 className="project"
                 items={processedProjects as CardData<ProjectData>[]}

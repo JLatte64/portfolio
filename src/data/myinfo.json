@@ -37,13 +37,13 @@
       },
       {
         "type": "image",
-        "iconFilename": "GitHub_Invertocat_White.svg",
+        "iconFilename": "GitHub_Invertocat.svg",
         "url": "https://github.com/JLatte64",
         "ariaLabel": "Github"
       },
       {
         "type": "image",
-        "iconFilename": "InBug-White.png",
+        "iconFilename": "InBug.png",
         "url": "https://www.linkedin.com/in/jordan-latta",
         "ariaLabel": "LinkedIn"
       }

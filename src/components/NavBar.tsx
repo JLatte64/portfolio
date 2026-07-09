@@ -12,7 +12,7 @@ export function NavBar() {
       {mobileMenuOpen && (
         <button
           type="button"
-          className="mobile-nav-links-overlay"
+          className="nav-links-overlay"
           aria-label="Close navigation menu"
           onClick={() => toggleMobileMenu(false)}
         />
@@ -22,9 +22,7 @@ export function NavBar() {
         <NavLink
           to={`${getPagePath("home")}`}
           aria-label="Home - Portfolio of Jordan Latta"
-          className={({ isActive }) =>
-            "nav-btn home " + (isActive ? "active" : "")
-          }
+          className={({ isActive }) => "nav-item " + (isActive ? "active" : "")}
           onClick={() => {
             toggleMobileMenu(false);
             window.scrollTo({ top: 0 });
@@ -33,12 +31,13 @@ export function NavBar() {
           <span className="material-icons" aria-hidden="true">
             home
           </span>
-          Jordan Latta
         </NavLink>
+
+        <div className="">Jordan Latta</div>
 
         <button
           type="button"
-          className="material-icons nav-btn mb-hamburger"
+          className="nav-item"
           aria-expanded={mobileMenuOpen}
           aria-controls={menuPanelId}
           aria-label={
@@ -46,7 +45,9 @@ export function NavBar() {
           }
           onClick={() => toggleMobileMenu(!mobileMenuOpen)}
         >
-          {mobileMenuOpen ? "close" : "menu"}
+          <span className="material-icons" aria-hidden="true">
+            {mobileMenuOpen ? "close" : "menu"}
+          </span>
         </button>
 
         <ul
@@ -56,7 +57,7 @@ export function NavBar() {
             <NavLink
               to={`${getPagePath("about")}`}
               className={({ isActive }) =>
-                "nav-btn " + (isActive ? "active" : "")
+                "nav-item " + (isActive ? "active" : "")
               }
               onClick={() => {
                 toggleMobileMenu(false);
@@ -70,7 +71,7 @@ export function NavBar() {
           <li>
             <a
               href="#contact"
-              className="nav-btn"
+              className="nav-item"
               onClick={() => toggleMobileMenu(false)}
             >
               Contact
