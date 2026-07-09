@@ -1,6 +1,10 @@
 .db-slider-overlay {
-  backdrop-filter: grayscale(0.9) contrast(0.65) blur(1px);
-  background: radial-gradient(circle, transparent 60%, rgba(0, 0, 0, 0.5) 100%);
+  background: radial-gradient(
+    circle,
+    transparent 0%,
+    rgba(0, 0, 0, 0.75) 50%,
+    rgba(0, 0, 0, 1) 100%
+  );
   background-size: cover;
   background-position: center;
 }

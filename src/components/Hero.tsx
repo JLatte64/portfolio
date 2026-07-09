@@ -31,7 +31,7 @@ function Hero() {
       </section>
 
       <section className="av">
-        <div className="hero-av-wrapper hud-banner">
+        <div className="av-wrapper hud-banner">
           <DisplayMedia
             media={heroPhoto}
             className={"hero-av"}

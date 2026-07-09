@@ -154,13 +154,14 @@ html:has(dialog[open]) {
 :root {
   --text: #dbe6f3;
   --text-h: #ffffff;
-  --accent: #ffe600;
+  --accent: #ffea00;
   --bg: #12141ccc;
   --accent-bg: #212632;
 
-  --hud-bg: rgb(202, 174, 83);
-  --hud-bg-rgb: 202, 174, 83;
-  --hud-border: 1px solid #ffa6005d;
+  --glow: 0 0 4px #ff8c00, 0 0 10px #ff8c00, 0 0 18px rgba(255, 140, 0, 0.6);
+
+  --hud-bg: rgba(128, 113, 66, 0.589);
+  --hud-border: 1px solid #ffa60086;
 
   --button-icon-font-size: 2rem;
   --border-static: 1px solid #00fff25d;
@@ -202,7 +203,6 @@ body {
 
 main {
   background-attachment: fixed;
-  backdrop-filter: blur(100px);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -271,44 +271,48 @@ a {
 }
 
 .hud-banner {
+  *:not(a, span, button) {
+    padding: 0.5rem;
+    background: radial-gradient(
+      circle,
+      rgba(0, 0, 0, 0.35) 20%,
+      transparent 100%
+    );
+  }
+
   border: var(--hud-border);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
   border-right: none;
   border-left: none;
   vertical-align: auto;
   padding: 0.5rem;
-  margin: 1rem;
   text-shadow:
-    0px 0px 8px rgb(187, 90, 0),
-    0px 0px 8px rgb(255, 136, 0);
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    0 0 3px rgba(0, 0, 0, 1),
+    0 0 5px rgba(0, 0, 0, 0.8);
 
   background:
-    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%),
-    linear-gradient(
-      90deg,
-      rgba(255, 0, 0, 0.06),
-      rgba(0, 255, 0, 0.02),
-      rgba(0, 0, 255, 0.06)
-    ),
-    radial-gradient(
-      circle,
-      rgba(var(--hud-bg-rgb), 0.432) 20%,
-      rgba(0, 0, 0, 0) 100%
-    );
+    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.12) 50%),
+    radial-gradient(circle, var(--hud-bg) 0%, rgba(0, 0, 0, 0) 100%);
+
   background-size:
     100% 4px,
-    6px 100%,
     cover;
+
+  background-blend-mode: overlay, multiply;
   background-position: center;
 
   transition:
     transform 0.1s ease,
-    filter 0.15s ease;
+    box-shadow 0.75s ease;
   animation:
     crt-flicker 0.25s infinite,
     crt-scroll 2s linear infinite;
+}
+
+.hud-banner:hover {
+  text-shadow: var(--glow);
+  transform: translateY(-1px);
+  border-color: var(--accent);
+  box-shadow: 0px 0px 4px var(--hud-bg);
 }
 
 @keyframes crt-scroll {
@@ -324,18 +328,9 @@ a {
   }
 }
 
-.hud-banner *:not(a, span, button) {
-  padding: 0.5rem;
-  background: radial-gradient(
-    circle,
-    rgba(0, 0, 0, 0.35) 20%,
-    transparent 100%
-  );
-}
-
 @keyframes crt-flicker {
   0% {
-    opacity: 0.96;
+    opacity: 0.935;
   }
   100% {
     opacity: 1;
@@ -346,30 +341,30 @@ a {
 button.hud-banner,
 .hud-banner a,
 a.hud-banner {
-  background: var(--bg);
-  box-shadow: inset 0 0 40px rgba(var(--hud-bg-rgb), 0.7);
+  background:
+    radial-gradient(circle, transparent 0%, var(--hud-bg) 100%),
+    rgba(0, 0, 0, 0.75);
+  text-shadow: none;
+  color: white;
+  border: 2px solid var(--accent);
 
-  text-shadow: 0px 0px 8px black;
-  color: var(--accent);
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 1rem;
   cursor: pointer;
-  margin-top: 4px;
 
   font-family: "IBM Plex Mono";
   font-weight: bold;
   text-transform: uppercase;
-  letter-spacing: 0.25em;
-  font-size: inherit;
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
 
   transition:
     box-shadow 0s ease,
     transform 0.15s ease,
     background-color 0.15s ease,
-    color 0.15s ease,
-    filter 0.15s ease;
+    color 0.15s ease;
 }
 
 button:hover,
@@ -379,17 +374,6 @@ a:hover {
   text-shadow: none;
   color: black;
   transform: translateY(-4px);
-
-  filter: drop-shadow(0px 4px 4px var(--bg));
-}
-
-.hud-banner:hover,
-.hud-banner:hover * {
-  transform: translateY(-1px);
-}
-
-.hud-banner:hover {
-  filter: drop-shadow(0px 0px 4px rgba(var(--hud-bg-rgb), 0.25));
 }
 
 @media (prefers-contrast: more) {
@@ -398,7 +382,7 @@ a:hover {
     text-shadow: none;
     background: radial-gradient(
       circle,
-      rgba(var(--hud-bg-rgb), 0.432) 20%,
+      var(--hud-bg) 20%,
       rgba(0, 0, 0, 0) 100%
     );
     background-size:
