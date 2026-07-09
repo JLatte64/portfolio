@@ -84,7 +84,7 @@ header.hero > section.intro {
     opacity: 0.75;
     mix-blend-mode: normal;
     object-fit: cover;
-    max-height: 35dvh;
+    max-height: 30dvh;
   }
 }
 
@@ -97,7 +97,7 @@ header.hero > section.intro {
 
 @media screen and (max-width: 600px) {
   header.hero {
-    margin: 1rem 2rem;
+    margin: 1rem;
     flex-direction: column-reverse;
     flex-wrap: wrap;
   }
