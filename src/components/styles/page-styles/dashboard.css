@@ -1,9 +1,8 @@
 .db-slider-overlay {
   background: radial-gradient(
-    circle,
+    ellipse at center,
     transparent 0%,
-    rgba(0, 0, 0, 0.75) 50%,
-    rgba(0, 0, 0, 1) 100%
+    rgb(16, 16, 27) 60%
   );
   background-size: cover;
   background-position: center;
@@ -51,21 +50,36 @@ main.dashboard {
 }
 
 main.dashboard h2 {
+  border-bottom: 1px dashed rgba(0, 242, 254, 0.3);
+  margin-bottom: 24px;
+  padding-bottom: 8px;
+  font-family: "IBM Plex Mono" !important;
+  font-weight: bold;
+  font-size: 1.3rem;
   position: relative;
-  color: var(--text-h);
-  padding: 1rem 0 1rem 0;
+  color: #00f2fe;
+  border-left: 4px solid #00f2fe;
   margin: 0;
   margin: auto;
-  width: fit-content;
-  border-bottom: 1px solid white;
+  text-align: start;
+  width: 100%;
 }
 
 main.dashboard > section {
+  padding: 40px;
   overflow: hidden;
   position: relative;
-  background-color: var(--accent-bg);
   width: 96%;
   margin: auto;
+  background:
+    linear-gradient(rgba(255, 140, 0, 0) 50%, rgba(0, 0, 0, 0.45) 50%),
+    #111824 radial-gradient(transparent 50%, rgb(0, 6, 12) 100%);
+  background-size:
+    100% 4px,
+    cover,
+    cover;
+  border: 1px solid rgba(255, 174, 0, 0.171);
+  border-left: 2px solid var(--accent);
 }
 
 .project-cards-container {
@@ -78,7 +92,7 @@ main.dashboard > section {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 2rem;
 }
 
 /* Desktop Query */

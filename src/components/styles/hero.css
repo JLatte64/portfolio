@@ -98,7 +98,7 @@ header.hero > section.intro {
 @media screen and (max-width: 600px) {
   header.hero {
     margin: 1rem 2rem;
-    flex-direction: column;
+    flex-direction: column-reverse;
     flex-wrap: wrap;
   }
 }
