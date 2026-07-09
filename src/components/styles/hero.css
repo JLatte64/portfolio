@@ -2,7 +2,8 @@ header.hero {
   position: relative;
   display: flex;
   gap: 1.5cqh;
-  margin: 2rem auto;
+  margin: 0 auto;
+  padding: 1rem;
 
   justify-content: space-between;
   align-items: stretch;
@@ -21,8 +22,7 @@ header.hero > * {
 
 header.hero > section.intro {
   align-items: flex-start;
-  flex: 1 1 auto;
-  max-width: calc(65ch + 2rem);
+  flex: 1 1 50%;
 
   h1 {
     color: var(--accent);
@@ -41,6 +41,7 @@ header.hero > section.intro {
     text-transform: uppercase;
     font-weight: 300 !important;
     gap: 0.25rem;
+    letter-spacing: 0.15em;
 
     span {
       color: var(--accent);
@@ -84,22 +85,24 @@ header.hero > section.intro > * {
     flex-wrap: nowrap;
 
     h1 {
-      font-size: 3rem;
-      line-height: 3rem;
+      font-size: 2.9rem;
+      line-height: 2.9rem;
     }
 
     .hero-job-title {
-      font-size: 2rem;
+      font-size: 1.8rem;
       line-height: 1.8rem;
       letter-spacing: 0.15em;
     }
 
     .hero-loc {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
+      line-height: 1.4rem;
     }
   }
 
   header.hero > section.intro {
+    max-width: calc(50ch);
     text-align: start;
   }
 }
