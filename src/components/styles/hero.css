@@ -2,9 +2,11 @@ header.hero {
   position: relative;
   display: flex;
   gap: 1.5cqh;
+  margin: 2rem auto;
 
   justify-content: space-between;
   align-items: stretch;
+  max-width: 1400px;
 }
 
 header.hero > * {
@@ -79,7 +81,6 @@ header.hero > section.intro > * {
 
 @media screen and (min-width: 600px) {
   header.hero {
-    margin: 3rem;
     flex-wrap: nowrap;
 
     h1 {
@@ -105,7 +106,6 @@ header.hero > section.intro > * {
 
 @media screen and (max-width: 600px) {
   header.hero {
-    margin: 1rem;
     flex-direction: column-reverse;
     flex-wrap: wrap;
 

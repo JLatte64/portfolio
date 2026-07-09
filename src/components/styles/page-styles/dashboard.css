@@ -45,7 +45,6 @@
 }
 
 main.dashboard {
-  width: 100%;
   backdrop-filter: none;
 }
 
@@ -69,11 +68,11 @@ main.dashboard > section {
   padding: 40px;
   overflow: hidden;
   position: relative;
-  width: 96%;
   margin: auto;
+  max-width: 1400px;
   background:
     linear-gradient(rgba(255, 140, 0, 0) 50%, rgba(0, 0, 0, 0.45) 50%),
-    #111824 radial-gradient(transparent 50%, rgb(0, 6, 12) 100%);
+    #11182434 radial-gradient(transparent 50%, rgb(0, 6, 12) 100%);
   background-size:
     100% 4px,
     cover,
