@@ -1,27 +1,20 @@
-# Simple workflow for deploying static content to GitHub Pages
 name: Deploy static content to Pages
 
 on:
-  # Runs on pushes targeting the default branch
   push:
-    branches: ['main']
-
-  # Allows you to run this workflow manually from the Actions tab
+    branches: ["main"]
   workflow_dispatch:
 
-# Sets the GITHUB_TOKEN permissions to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow one concurrent deployment
 concurrency:
-  group: 'pages'
+  group: "pages"
   cancel-in-progress: true
 
 jobs:
-  # Single deploy job since we're just deploying
   deploy:
     environment:
       name: github-pages
@@ -29,23 +22,39 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
+
       - name: Set up Node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v4
         with:
           node-version: lts/*
-          cache: 'npm'
+          cache: "npm"
+
       - name: Install dependencies
-        run: npm ci
+        # Bypasses historical peer-dependency locks during silent scripts
+        run: npm ci --legacy-peer-deps
+
       - name: Build
+        # Triggers your "tsc -b && vite-react-ssg build" script phase
         run: npm run build
+
+      - name: Create Client-Side Routing Fallback (404.html)
+        # Duplicates your index.html file so refreshes on deep routes work flawlessly
+        run: cp dist/index.html dist/404.html
+
+      - name: Create GoDaddy Domain Connector (CNAME)
+        # Writes your domain directly into the package root so GitHub links it to GoDaddy
+        # SWAP "yourdomain.com" with your actual custom domain string!
+        run: echo "yourdomain.com" > dist/CNAME
+
       - name: Setup Pages
-        uses: actions/configure-pages@v6
+        uses: actions/configure-pages@v5
+
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
-          # Upload dist folder
-          path: './dist'
+          path: "./dist"
+
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@v4

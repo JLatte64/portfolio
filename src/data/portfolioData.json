@@ -1,0 +1,94 @@
+[
+  {
+    "title": "E-Commerce Mesh Platform",
+    "description": "asdasdasdas",
+    "year": 2026,
+    "carouselMedia": [
+      "https://pexels.com",
+      "https://vimeo.com",
+      "https://pexels.com"
+    ],
+    "sections": [
+      {
+        "heading": "The Core Challenge",
+        "subheading": "Optimizing transactional bottlenecks over distributed networks",
+        "paragraph": "Legacy checkout infrastructure introduced massive execution delays during peak traffic events. Our main mandate required decoupling checkout micro-states onto an edge-cached gateway worker pipeline.",
+        "list": [
+          "Reduced sub-second checkout latencies globally by 34%",
+          "Decoupled structural payment processing bottlenecks",
+          "Implemented global redundancy failovers for multi-region runtime isolation"
+        ],
+        "media": ["https://unsplash.com"]
+      },
+      {
+        "heading": "Infrastructure Transformation",
+        "subheading": "Implementing distributed state meshes",
+        "paragraph": "Migrated state frames to a custom global WebSocket mesh layout. We successfully compressed runtime analytical payloads globally.",
+        "list": [
+          "Deployed real-time synchronization pipelines over WebSockets",
+          "Minimized structural re-renders on low-end client endpoints",
+          "Audited transmission frames to eliminate data overhead leaks"
+        ],
+        "media": ["https://unsplash.com", "https://vimeo.com"]
+      }
+    ]
+  },
+  {
+    "title": "AI Analytics Dashboard",
+    "year": 2025,
+    "carouselMedia": ["https://pexels.com", "https://pexels.com"],
+    "sections": [
+      {
+        "heading": "Real-time Telemetry Systems",
+        "subheading": "Visualizing machine learning inferencing graphs at the edge",
+        "paragraph": "Architected edge data-streaming visual dashboards showing real-time client transaction metrics. This interface continuously aggregates pipeline operations down to single-digit millisecond latency metrics.",
+        "list": [
+          "Integrated real-time neural network tensor charting wrappers",
+          "Streamlined memory allocation layers inside client browser threads",
+          "Optimized responsive view grids for multi-monitor operation centers"
+        ],
+        "media": ["https://unsplash.com", "https://unsplash.com"]
+      },
+      {
+        "heading": "Analytical Modeling Aggregations",
+        "subheading": "Optimizing relational dataset visual loads",
+        "paragraph": "Built automated indexing structures that map complex multi-tier analytical data logs directly into human-readable chart configurations.",
+        "list": [
+          "Isolated historical trend comparisons using async worker routines",
+          "Generated raw vector layouts dynamically to ensure layout sharpness",
+          "Configured secure access logs to track active client view scopes"
+        ],
+        "media": ["https://unsplash.com"]
+      }
+    ]
+  },
+  {
+    "title": "FinTech Ledger Engine",
+    "year": 2025,
+    "carouselMedia": ["https://pexels.com", "https://vimeo.com"],
+    "sections": [
+      {
+        "heading": "Cryptographic Reconciliation Pipelines",
+        "subheading": "Securing cross-border settlement ledgers at scale",
+        "paragraph": "Designed a high-throughput transaction ledger engine running double-entry bookkeeping checks natively compiled for distributed validation topologies.",
+        "list": [
+          "Audited processing flows to settle up to 50,000 requests per second",
+          "Zero ledger mismatch discrepancies across multi-month soak cycles",
+          "Automated accounting verification hooks mapped natively into secure client layouts"
+        ],
+        "media": ["https://unsplash.com"]
+      },
+      {
+        "heading": "Compliance & Security Matrix",
+        "subheading": "End-to-end cryptographic verification protocols",
+        "paragraph": "Integrated automated hashing verification check routines across transaction steps to protect against middleman tampering loops.",
+        "list": [
+          "Passed strict external auditing checks with zero compliance gaps",
+          "Implemented zero-knowledge data masking for client field variables",
+          "Accelerated validation checks using distributed runtime memory hubs"
+        ],
+        "media": ["https://unsplash.com", "https://unsplash.com"]
+      }
+    ]
+  }
+]
