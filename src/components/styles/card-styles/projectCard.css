@@ -1,21 +1,27 @@
 .project-card-title {
-  color: cyan;
+  color: white;
   font-family: "IBM Plex Mono";
   position: relative;
-  font-weight: 600;
-  font-size: 1.15rem;
-  text-overflow: ellipsis;
-  padding: 0.5rem;
+  font-weight: 500;
+  font-size: 1.5cqh;
+  white-space: nowrap;
+  letter-spacing: -0.05em;
+  padding: 0.5rem 0;
+  flex: 1;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: underline;
 }
 
 .project-card-thumbnail {
-  mix-blend-mode: screen;
   position: relative;
-  width: 90%;
-  padding-bottom: 1rem;
-  aspect-ratio: 1 / 1;
+  max-width: 100%;
+  margin-bottom: 1rem;
   overflow: hidden;
+  outline: 2px solid white;
+  outline-offset: 2px;
 }
 
 .project-card-container {
@@ -23,13 +29,16 @@
   display: flex;
   flex-direction: column-reverse;
   justify-content: space-between;
+  background-color: rgba(255, 255, 255, 0.1);
   align-items: center;
-  height: fit-content;
   list-style: none;
-  overflow: hidden;
-  border: 2px solid cyan;
-  max-width: 450px;
-  width: 100%;
+  aspect-ratio: 1/1;
+
+  cursor: pointer;
+}
+
+.project-card-container:hover {
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 @media screen and (min-width: 600px) {

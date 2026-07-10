@@ -101,6 +101,7 @@ export function Dashboard() {
 
   return (
     <>
+      <div className="db-slider-bg" />
       <div ref={sliderRef} className="db-slider" aria-hidden={true}>
         {heroMedia?.map((media, mediaIndex) => {
           const slideKey = media.id || `db-slide-${mediaIndex}`;
@@ -128,13 +129,10 @@ export function Dashboard() {
           <main className="dashboard">
             <section
               id="project-links"
-              className="console"
+              className="db-section"
               aria-label="Project Portfolio Showcase"
             >
-              <div className="console-header">
-                <h2>Portfolio</h2>
-                <p>// Jordan_Latta</p>
-              </div>
+              <h2>Selected//Works</h2>
 
               <CardGrid
                 className="project"

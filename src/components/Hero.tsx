@@ -8,33 +8,26 @@ function Hero() {
 
   return (
     <header className="hero">
-      <section className="intro hud-banner">
-        <h1 id="name-title">{myinfo.name}</h1>
-
-        <p className="hero-job-title">{myinfo.jobTitle}</p>
-
-        <p className="hero-loc">
-          <span className="material-icons" aria-hidden="true">
-            place
-          </span>
-          <span className="sr-only">Location: </span>
-          {myinfo.location}
-        </p>
-
-        <p className="hero-tagline">{myinfo.tagline}</p>
-
-        <a href="#project-links" className="cta-btn button hud-banner">
-          View Work
-        </a>
-      </section>
-
-      <section className="av ">
-        <div className="av-wrapper hud-banner">
+      <section className="hero-row top">
+        <div className="hero-panel left">
+          <h1 className="hero-title hero-text">{myinfo.name}</h1>
+          <p className="hero-subtitle hero-text">{myinfo.jobTitle}</p>
+        </div>
+        <div className="hero-panel right">
           <DisplayMedia
             media={heroPhoto}
-            className={"hero-av"}
+            className={"hero-avatar"}
             shouldLazyLoad={false}
           />
+        </div>
+      </section>
+
+      <section className="hero-row bottom">
+        <div className="hero-panel left">
+          <p className="hero-tagline hero-text">{myinfo.tagline}</p>
+          <a className="hero-cta btn" href="#project-links">
+            View Work
+          </a>
         </div>
       </section>
     </header>

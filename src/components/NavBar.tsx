@@ -22,7 +22,7 @@ export function NavBar() {
         <NavLink
           to={`${getPagePath("home")}`}
           aria-label="Home - Portfolio of Jordan Latta"
-          className={({ isActive }) => "nav-item " + (isActive ? "active" : "")}
+          className="nav-item"
           onClick={() => {
             toggleMobileMenu(false);
             window.scrollTo({ top: 0 });
@@ -33,7 +33,7 @@ export function NavBar() {
           </span>
         </NavLink>
 
-        <div className="">Jordan Latta</div>
+        <div className="">Portfolio//JL</div>
 
         <button
           type="button"
@@ -56,9 +56,7 @@ export function NavBar() {
           <li>
             <NavLink
               to={`${getPagePath("about")}`}
-              className={({ isActive }) =>
-                "nav-item " + (isActive ? "active" : "")
-              }
+              className="nav-item"
               onClick={() => {
                 toggleMobileMenu(false);
                 window.scrollTo({ top: 0 });
@@ -69,13 +67,19 @@ export function NavBar() {
           </li>
 
           <li>
-            <a
-              href="#contact"
+            <NavLink
+              to=""
               className="nav-item"
-              onClick={() => toggleMobileMenu(false)}
+              onClick={() => {
+                toggleMobileMenu(false);
+                window.scrollTo({
+                  top: document.body.scrollHeight,
+                  behavior: "smooth",
+                });
+              }}
             >
               Contact
-            </a>
+            </NavLink>
           </li>
         </ul>
       </nav>
