@@ -1,5 +1,5 @@
-export const Navbar = () => {
-  <nav></nav>;
-};
+import "./Navbar.css";
 
-export default Navbar;
+export default function Navbar() {
+  return <nav>Here's the NavBar.</nav>;
+}

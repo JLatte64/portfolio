@@ -1,5 +1,5 @@
-export const HeroHeader = () => {
-  <header></header>;
-};
+import "./HeroHeader.css";
 
-export default HeroHeader;
+export default function HeroHeader() {
+  return <header>Hey, this is a header!</header>;
+}

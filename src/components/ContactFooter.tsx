@@ -1,5 +1,5 @@
-export const ContactFooter = () => {
-  <footer></footer>;
-};
+import "./ContactFooter.css";
 
-export default ContactFooter;
+export default function ContactFooter() {
+  return <footer>This is the Contact Footer.</footer>;
+}

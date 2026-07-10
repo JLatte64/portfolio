@@ -1,5 +1,5 @@
-export const AboutSection = () => {
-  <section></section>;
-};
+import "./AboutSection.css";
 
-export default AboutSection;
+export default function AboutSection() {
+  return <section>This is the About Section!</section>;
+}

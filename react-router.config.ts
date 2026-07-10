@@ -1,7 +1,6 @@
 import type { Config } from "@react-router/dev/config";
 import fs from "fs";
 
-// Pure Node-safe slug converter
 const getBuildSlug = (name: string): string =>
   name
     .toLowerCase()
@@ -9,26 +8,25 @@ const getBuildSlug = (name: string): string =>
     .replace(/(^-|-$)/g, "");
 
 export default {
-  // Instructs React Router v7 to use build-time SSG rendering
+  // Instructs React Router v7 that your code files live in "src/"
+  appDirectory: "src",
+
+  // 🚀 THE CRITICAL FIX: Enabling ssr tells the compiler to generate true static pages (SSG),
+  // which instantly fixes the internal 302 redirect crash loop!
+  ssr: true,
+  basename: "/portfolio/",
+
   async prerender() {
-    // Locate the source data module file safely
     const jsonUrl = new URL("./src/data/portfolioData.json", import.meta.url);
-
     const rawData = fs.readFileSync(jsonUrl, "utf-8");
-    const projects = JSON.parse(rawData);
+    const portfolioData = JSON.parse(rawData);
+    const projects = portfolioData.projects || [];
 
-    // Dynamic slug extraction loop
     const dynamicProjectPaths = projects
-      .filter(
-        (project: { title?: string }) =>
-          project && typeof project.title === "string",
-      )
-      .map(
-        (project: { title: string }) =>
-          `/projects/${getBuildSlug(project.title)}`,
-      );
+      .filter((p: any) => p && typeof p.title === "string")
+      .map((p: any) => `/projects/${getBuildSlug(p.title)}`);
 
-    // Return the root landing folder alongside all dynamic route variants
+    // Build your root homepage alongside all project case study folders statically
     return ["/", ...dynamicProjectPaths];
   },
 } satisfies Config;

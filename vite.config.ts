@@ -1,8 +1,9 @@
 import { defineConfig } from "vite";
-import react, { reactCompilerPreset } from "@vitejs/plugin-react";
-import babel from "@rolldown/plugin-babel";
+import { reactRouter } from "@react-router/dev/vite";
 
 export default defineConfig({
-  base: "/",
-  plugins: [react(), babel({ presets: [reactCompilerPreset()] })],
+  base: "/portfolio/",
+  plugins: [
+    reactRouter(), // 👈 Swapped out from react() or injectSeoLayout()
+  ],
 });

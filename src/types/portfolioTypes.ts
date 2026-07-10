@@ -1,4 +1,4 @@
-export interface ProjectSection {
+export interface ProjectSectionData {
   heading: string;
   subheading: string;
   paragraph: string;
@@ -6,10 +6,14 @@ export interface ProjectSection {
   media: string[];
 }
 
-export interface Project {
+export interface ProjectData {
   title: string;
   description: string;
   year: number;
   carouselMedia: string[];
-  sections: ProjectSection[];
+  sections: ProjectSectionData[];
+}
+
+export interface PortfolioData {
+  projects: ProjectData[];
 }

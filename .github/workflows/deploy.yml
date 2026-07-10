@@ -42,10 +42,10 @@ jobs:
         # Duplicates your index.html file so refreshes on deep routes work flawlessly
         run: cp dist/index.html dist/404.html
 
-      - name: Create GoDaddy Domain Connector (CNAME)
-        # Writes your domain directly into the package root so GitHub links it to GoDaddy
-        # SWAP "yourdomain.com" with your actual custom domain string!
-        run: echo "yourdomain.com" > dist/CNAME
+      # - name: Create GoDaddy Domain Connector (CNAME)
+      #   # Writes your domain directly into the package root so GitHub links it to GoDaddy
+      #   # SWAP "yourdomain.com" with your actual custom domain string!
+      #   run: echo "yourdomain.com" > dist/CNAME
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
