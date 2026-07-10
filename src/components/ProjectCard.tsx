@@ -1,18 +1,23 @@
 import { Link } from "react-router";
 import "./ProjectCard.css";
+import { getSlug, portfolioData } from "../data/portfolioData";
 import type { ProjectData } from "../types/portfolioTypes";
-import { getSlug } from "../data/portfolioData";
 
 interface ProjectCardProps {
-  project: ProjectData;
+  projectIndex: number;
 }
 
-export default function ProjectCard({ project }: ProjectCardProps) {
+export default function ProjectCard({ projectIndex }: ProjectCardProps) {
+  const project: ProjectData = portfolioData.projects[projectIndex];
   const slug = getSlug(project.title);
-  const thumbnailUrl = `/projects/${slug}/thumbnail.png`;
+  const thumbnailUrl = project.thumbnail;
 
   return (
-    <Link to={`/projects/${slug}`} className="project-card-link">
+    <Link
+      to={`/projects/${slug}`}
+      className="project-card-link"
+      key={`${project.title}-${projectIndex}`}
+    >
       <article className="project-card">
         <div className="thumbnail-wrapper">
           <img src={thumbnailUrl} alt={`${project.title} Preview`} />

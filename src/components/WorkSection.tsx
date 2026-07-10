@@ -8,8 +8,8 @@ export default function WorkSection() {
       <h2>This is the Work Section.</h2>
 
       <div className="portfolio-grid">
-        {portfolioData.projects.map((project, idx) => (
-          <ProjectCard key={`${project.title}-${idx}`} project={project} />
+        {Array.from({ length: portfolioData.projects.length }, (_, index) => (
+          <ProjectCard projectIndex={index} />
         ))}
       </div>
     </section>
