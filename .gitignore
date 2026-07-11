@@ -1,3 +1,19 @@
+# .gitignore
+
+# 1. Framework & Bundler Production Artifact Outputs
+build/
+dist/
+
+# 2. Local Environment Variables & Caches
+.env
+.env.local
+node_modules/
+.react-router/
+
+# 3. Log files
+*.log
+npm-debug.log*
+
 # Logs
 logs
 *.log
