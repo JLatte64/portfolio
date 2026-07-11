@@ -1,0 +1,223 @@
+/* ==========================================================================
+   1. CORE DIALOG WINDOW RESET & POSITIONING CONTROLS
+   ========================================================================== */
+.project-modal-dialog {
+  padding: 0;
+  border: none;
+  background-color: #ffffff;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Native backdrop blurred masking */
+.project-modal-dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.modal-inner-layout {
+  position: relative; /* Crucial coordinate anchor point for zero-z-index sub-layouts */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+/* ==========================================================================
+   2. HEADER ROW METADATA TOP BAR
+   ========================================================================== */
+.modal-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  background-color: #ffffff;
+}
+
+.header-left-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Clipboard utility button styles */
+.copy-link-title-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  text-align: left;
+}
+
+.copy-link-title-btn h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.copy-icon-indicator {
+  font-size: 0.9rem;
+  color: #6b7280;
+  transition: color 0.2s ease;
+}
+
+.copy-link-title-btn:hover .copy-icon-indicator {
+  color: #3b82f6;
+}
+
+.copy-link-title-btn.copied .copy-icon-indicator {
+  color: #10b981;
+}
+
+.modal-year-tag {
+  font-size: 0.875rem;
+  background-color: #f3f4f6;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.global-close-button {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: #6b7280;
+  padding: 0.5rem;
+}
+
+/* ==========================================================================
+   3. MOBILE PORTRAIT LAYOUT DEFAULT BASE (VERTICAL STACKED PANES)
+   ========================================================================== */
+.modal-panes-body {
+  display: flex;
+  flex-direction: column; /* 📱 Default stacked axis on mobile portrait view ports */
+  flex: 1;
+  overflow: hidden;
+  height: calc(100vh - 65px);
+  position: relative;
+}
+
+.pane-left-carousel {
+  width: 100%;
+  flex: 0 0 45vh; /* 📱 MOBILE VERTICAL BASING: Locks standard static sizing footprint height */
+  display: flex;
+  flex-direction: column;
+  background-color: #000000;
+  position: relative;
+  /* ⚡ FLUID AXIS SPRINGS: Animates both layout width shifts AND vertical flex growths smoothly */
+  transition:
+    flex 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Right content details pane scroll stack tracking */
+.pane-right-details {
+  width: 100%;
+  flex: 1; /* Automatically consumes the remaining stacked viewport room */
+  overflow-y: auto;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  /* Sync the fade out speed with the flex growth speed */
+  transition:
+    opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0.3s;
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-main-description-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #374151;
+  margin-bottom: 2rem;
+}
+
+.modal-sections-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ==========================================================================
+   4. ACTIVE FULL-SCREEN TRIGGER LIFECYCLES (MOBILE SPECIFIC PORTRAIT)
+   ========================================================================== */
+
+/* 📱 MOBILE GROW STATE: Forces the pane to expand vertically along the y-axis */
+.pane-left-carousel.is-lightbox-active {
+  flex: 1 0 100% !important; /* Expands to completely consume the vertical workspace */
+  height: 100% !important;
+}
+
+/* Fades the descriptions out smoothly to match the expansion speed */
+.pane-left-carousel.is-lightbox-active ~ .pane-right-details {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* ==========================================================================
+   5. MEDIA QUERIES BREAKPOINTS (DESKTOP / MOBILE LANDSCAPE)
+   ========================================================================== */
+@media screen and (min-width: 768px), screen and (orientation: landscape) {
+  .modal-panes-body {
+    flex-direction: row; /* Transforms into a clean horizontal side-by-side split grid */
+  }
+
+  .pane-left-carousel {
+    height: 100% !important;
+    flex: 0 0 55% !important; /* 💻 DESKTOP HORIZONTAL DEFAULTS: Takes exactly 55% width */
+    width: 55%;
+  }
+
+  .pane-right-details {
+    width: 45%;
+    height: 100%;
+    border-left: 1px solid #e5e7eb;
+    padding: 2rem;
+  }
+
+  /* 💻 DESKTOP GROW STATE: Forces the pane to stretch horizontally from 55% to 100% width */
+  .pane-left-carousel.is-lightbox-active {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+  }
+}
+
+/* Extra layout optimization scales for large monitors */
+@media screen and (min-width: 1440px) {
+  .pane-left-carousel:not(.is-lightbox-active) {
+    flex: 0 0 60% !important;
+    width: 60%;
+  }
+  .pane-right-details:not(.is-lightbox-active) {
+    width: 40%;
+    padding: 3rem;
+  }
+}
+
+/* Sizing clamps for ultra-wide screen monitor monitor setups */
+@media screen and (min-width: 2560px) {
+  .project-modal-dialog {
+    background-color: #f9fafb;
+  }
+  .modal-inner-layout {
+    max-width: 2000px;
+    margin: 0 auto;
+    border-left: 1px solid #e5e7eb;
+    border-right: 1px solid #e5e7eb;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+}

@@ -1,0 +1,84 @@
+.carousel-section-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+}
+
+.carousel-viewport-wrapper {
+  position: relative;
+  width: 100%;
+  height: calc(
+    100% - 110px
+  ) !important; /* Locks appropriate layout sizes exactly above the fixed 110px control bar */
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000000;
+  overflow: hidden;
+}
+
+.modal-carousel-container.embla {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.modal-carousel-track.embla__container {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  width: 100%;
+  height: 100%;
+}
+
+.modal-carousel-item.embla__slide {
+  flex: 0 0 100% !important;
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.lightbox-rendered-direct-asset {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.carousel-arrow-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  font-size: 1.5rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  transition: background-color 0.15s ease;
+}
+
+.carousel-arrow-btn:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+.arrow-prev {
+  left: 1.5rem;
+}
+.arrow-next {
+  right: 1.5rem;
+}

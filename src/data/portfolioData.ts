@@ -1,22 +1,16 @@
-import portfolioJson from "./portfolioData.json";
 import type { PortfolioData } from "../types/portfolioTypes";
+// Assuming your raw JSON file path is relative to this file:
+import rawPortfolioJSON from "./portfolioData.json";
 
-// 🚀 ZERO typecasting, ZERO validation functions.
-// Your existing tsconfig resolves and matches the types natively.
-export const portfolioData: PortfolioData = portfolioJson;
+// ✅ STEP 1: Cast the raw JSON payload to a clean, type-safe database instance
+export const portfolioData = rawPortfolioJSON as unknown as PortfolioData;
 
-// Pure URL slug converter utility
-export const getSlug = (name: string): string =>
-  name
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
+// ✅ STEP 2: Initialize your fast route-matching index lookup table
+// Inside src/data/portfolioData.ts
 
-// ⚡ Ultra-Fast Hash LUT Block
 export const projectSlugLUT: Record<string, number> = {};
 
-portfolioData.projects.forEach((project, idx) => {
-  if (project.title) {
-    projectSlugLUT[getSlug(project.title)] = idx;
-  }
+portfolioData.projects.forEach((project, index) => {
+  const encodedSlug = encodeURIComponent(project.title);
+  projectSlugLUT[encodedSlug] = index;
 });

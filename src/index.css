@@ -1,3 +1,27 @@
+/* ==========================================================================
+   1. GLOBAL SYSTEM ELEMENT RESETS
+   ========================================================================== */
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
+body:has(dialog[open]) {
+  overflow: hidden !important;
+}
+
+/* ==========================================================================
+   2. SYSTEM ROOT DESIGN TOKENS MATRIX
+   ========================================================================== */
 :root {
   --text: #6b6375;
   --text-h: #08060d;
@@ -11,8 +35,8 @@
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --sans: system-ui, "Segoe UI", Roboto, sans-serif;
+  --heading: system-ui, "Segoe UI", Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
   font: 18px/145% var(--sans);
@@ -30,6 +54,9 @@
   }
 }
 
+/* ==========================================================================
+   3. AUTOMATIC GRAPHICS THEME SWITCHERS
+   ========================================================================== */
 @media (prefers-color-scheme: dark) {
   :root {
     --text: #9ca3af;
@@ -50,6 +77,9 @@
   }
 }
 
+/* ==========================================================================
+   4. APP SHELL CENTERING INNER BOX GRID
+   ========================================================================== */
 #root {
   width: 1126px;
   max-width: 100%;
@@ -62,10 +92,19 @@
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
+/* ==========================================================================
+   5. NATIVE SCROLL FREEZE GATES
+   ========================================================================== */
+/* ✅ Lock background document scrolling tracks cleanly. 
+   Height parameters are completely stripped out to protect root boxes from collapsing to 0px! */
+body:has(dialog[open]),
+body.modal-open-lock {
+  overflow: hidden !important;
 }
 
+/* ==========================================================================
+   6. TYPOGRAPHY AND CORE ASSETS RESETS
+   ========================================================================== */
 h1,
 h2 {
   font-family: var(--heading);
@@ -82,6 +121,7 @@ h1 {
     margin: 20px 0;
   }
 }
+
 h2 {
   font-size: 24px;
   line-height: 118%;
@@ -91,6 +131,7 @@ h2 {
     font-size: 20px;
   }
 }
+
 p {
   margin: 0;
 }

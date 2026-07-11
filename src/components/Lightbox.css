@@ -1,0 +1,158 @@
+/* --- src/components/Lightbox.css --- */
+
+.lightbox-overlay-fullscreen {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-color: #000000;
+  display: flex;
+  flex-direction: column;
+
+  /* ⚡ INERT LIFECYCLE DEFAULTS: Keeps the element mounted but totally invisible and non-interactive */
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: scale(0.98);
+
+  /* Modern hardware-accelerated animations curve string */
+  transition:
+    opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0.35s;
+}
+
+/* ⚡ THE OPEN STATE ACTUATOR: Instantly unlocks visibility and fades the asset forward beautifully */
+.lightbox-overlay-fullscreen.is-open {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: scale(1);
+}
+
+.lightbox-viewport-window {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 120px) !important;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-core-direct-asset {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.lightbox-viewport-window .react-transform-component,
+.lightbox-viewport-window .react-transform-wrapper {
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Symmetrical Overlay Navigation Arrow Controls */
+.lightbox-arrow-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 1.5rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+  z-index: 10;
+}
+
+.lightbox-arrow-btn:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+.lightbox-viewport-window .arrow-prev {
+  left: 1.5rem;
+}
+.lightbox-viewport-window .arrow-next {
+  right: 1.5rem;
+}
+
+/* Floating Close Circle */
+.lightbox-exit-circle-btn {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  font-size: 1.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.lightbox-exit-circle-btn:hover {
+  background-color: #ffffff;
+  color: #000000;
+  transform: scale(1.05);
+}
+
+/* Fullscreen control dashboard bar */
+.lightbox-standalone-controls-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.25rem 2rem;
+  background-color: #0c0c0e;
+  border-top: 1px solid #27272a;
+  box-sizing: border-box;
+}
+
+.lightbox-inline-caption {
+  width: 100%;
+  text-align: center;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.4;
+  min-height: 1.4em;
+  transition: opacity 0.2s ease;
+}
+
+.lightbox-controls-row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}

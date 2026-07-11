@@ -1,0 +1,12 @@
+.portfolio-scroll-container {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  flex-shrink: 0 !important; /* Prevents flex containers from collapsing to 0px */
+}
+
+.portfolio-app-root {
+  width: 100%;
+  min-height: 100vh;
+  display: block;
+}

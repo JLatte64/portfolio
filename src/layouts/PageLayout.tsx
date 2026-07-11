@@ -1,6 +1,8 @@
+// src/layouts/PageLayout.tsx
+
 import { useParams, useNavigate } from "react-router";
 import { portfolioData, projectSlugLUT } from "../data/portfolioData";
-import { useEffect } from "react";
+import "./PageLayout.css";
 
 import Navbar from "../components/Navbar";
 import HeroHeader from "../components/HeroHeader";
@@ -10,47 +12,43 @@ import ContactFooter from "../components/ContactFooter";
 import ProjectModal from "../components/ProjectModal";
 
 export default function PageLayout() {
-  const { slug } = useParams<{ slug: string }>();
+  const { slug } = useParams<{ slug?: string }>();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape" && slug) {
-        navigate("/"); // Safely clears out the path param segment, unmounting the overlay
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [slug, navigate]);
-
+  // ✅ THE DYNAMIC LUT CACHE LOOKUP:
+  // Symmetrically maps the text parameter primitive against your pre-built keys!
   const activeIndex = slug ? projectSlugLUT[slug] : undefined;
   const project =
     activeIndex !== undefined ? portfolioData.projects[activeIndex] : null;
 
   return (
     <div className="portfolio-app-root" style={{ position: "relative" }}>
+      {/* 
+        ✅ IMMUNE TO DUPLICATION AND COLLAPSES:
+        Because we removed <Outlet /> and the nested layout loop wrapper,
+        your homepage elements render exactly ONCE. When you close the modal,
+        the background sections remain fully visible and active down the DOM tree!
+      */}
       <main className="portfolio-scroll-container">
         <HeroHeader />
         <WorkSection />
-
         <AboutSection />
         <ContactFooter />
       </main>
 
       <Navbar />
 
+      {/* ✅ The modal is pure; it mounts immediately when the card link populates the slug parameter */}
       {project && (
-        <ProjectModal project={project} onClose={() => navigate("/")} />
+        <ProjectModal
+          project={project}
+          onClose={() => navigate("/")} // ⚡ Resets the parameter trailing path cleanly on close
+        />
       )}
     </div>
   );
 }
 
-// 🚀 THE CRITICAL FIX FOR THE BLANK ELEMENT VIEWPORTS:
-// Exporting an empty clientLoader tells the React Router v7 SSG build engine
-// to treat this route as a purely client-hydrated SPA element, forcing your
-// PageLayout component layout to render on the screen instantly!
 export async function clientLoader() {
   return null;
 }

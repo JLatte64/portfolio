@@ -9,7 +9,7 @@ export default function WorkSection() {
 
       <div className="portfolio-grid">
         {Array.from({ length: portfolioData.projects.length }, (_, index) => (
-          <ProjectCard projectIndex={index} />
+          <ProjectCard projectIndex={index} key={`project-card-${index}`} />
         ))}
       </div>
     </section>

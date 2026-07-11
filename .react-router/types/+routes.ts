@@ -14,7 +14,7 @@ type Pages = {
   "/": {
     params: {};
   };
-  "/projects/:slug": {
+  "/:slug": {
     params: {
       "slug": string;
     };
@@ -24,14 +24,14 @@ type Pages = {
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/" | "/projects/:slug";
+    page: "/" | "/:slug";
   };
   "./layouts/PageLayout.tsx": {
     id: "home-index";
     page: "/";
   } | {
     id: "project-slug";
-    page: "/projects/:slug";
+    page: "/:slug";
   };
 };
 
