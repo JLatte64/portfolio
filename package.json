@@ -4,10 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && react-router build",
+    "dev": "react-router dev",
+    "build": "tsc -b && react-router build && node copy-fallback.js",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "react-router preview"
   },
   "dependencies": {
     "dompurify": "^3.4.11",

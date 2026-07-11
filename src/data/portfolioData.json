@@ -1,32 +1,79 @@
 {
-  "profile": {
+  "siteTitle": "Portfolio // Jordan Latta",
+  "siteDescription": "Portfolio of Jordan Latta, a Technical Artist specializing in high-performance rendering, shader engineering, and technical pipelines.",
+  "tagline": "I make things happen.",
+  "bannerImage": {
+    "type": "image",
+    "src": "/files/bannerPhoto.webp",
+    "alt": "Jordan Latta Portfolio Cover Banner"
+  },
+  "backgroundInfo": {
     "name": "Jordan Latta",
-    "title": "Technical Artist",
-    "tagline": "I make things happen.",
-    "phone": "7247195101",
-    "email": "jordanlatta128@gmail.com",
-    "github": "jlatte64.github.io",
-    "linkedin": "linkedin.com/jordan-latta/"
+    "occupation": "Technical Artist",
+    "aboutBlurb": "I am a Technical Artist working at the intersection of complex systems engineering and visual artistry. I specialize in designing toolsets, optimizing runtime performance, and building decoupled execution pipelines. From global network architectures to high-fidelity visual rendering, I bridge design intention with production-grade engineering reliability.",
+    "heroImage": {
+      "type": "image",
+      "src": "/img.jpg",
+      "alt": "Jordan Latta Profile Avatar Shot"
+    },
+    "contacts": [
+      { "Email": "jordanlatta128@gmail.com" },
+      { "Phone": "7247195101" }
+    ],
+    "socials": [
+      { "GitHub": "jlatte64.github.io" },
+      { "LinkedIn": "://linkedin.com" }
+    ],
+    "skills": [
+      "Shader Development (HLSL/GLSL)",
+      "Pipeline Automation & Tooling",
+      "Runtime Optimization",
+      "Systems Architecture",
+      "Procedural Content Generation"
+    ],
+    "software": ["Unreal Engine", "Houdini", "Maya", "Blender", "Git", "Vite"],
+    "experience": [
+      {
+        "title": "Lead Technical Artist",
+        "company": "Nexus Game Studios",
+        "timeframe": "2024 - Present",
+        "details": [
+          "Engineered modular procedural toolsets reducing landscape creation timelines by 35%.",
+          "Profiled and optimized memory usage, clearing runtime bottlenecks for target hardware platforms.",
+          "Designed automated asset validation scripts running via CI/CD pipelines."
+        ]
+      },
+      {
+        "title": "Technical Artist",
+        "company": "Voxel FX Interactive",
+        "timeframe": "2022 - 2024",
+        "details": [
+          "Authored custom post-processing graphics shaders and screen-space asset behaviors.",
+          "Maintained core DCC-to-engine asset ingestion pipeline scripts across multi-disciplinary teams."
+        ]
+      }
+    ]
   },
   "projects": [
     {
       "title": "E-Commerce Mesh Platform",
       "description": "A high-performance, distributed e-commerce architecture designed to eliminate transactional checkout latency during peak traffic spikes. Built by decoupling legacy checkout micro-states and shifting execution pipelines to edge-cached gateway workers, the platform leverages a custom global WebSocket mesh for real-time data sync. This engineering overhaul compressed global analytical payloads by 42% and introduced strict multi-region fault isolation, ensuring sub-second execution latencies and zero-downtime reliability under heavy concurrent loads.",
       "year": 2026,
-      "thumbnail": {
-        "type": "video",
-        "src": "video"
+      "thumbnailImage": {
+        "type": "image",
+        "src": "/img.jpg",
+        "alt": "E-Commerce Mesh Platform Project Capture Preview"
       },
       "carouselMedia": [
         {
           "type": "image",
           "src": "/img.jpg",
           "alt": "Image.JPEG",
-          "caption": "caption"
+          "caption": "Primary layout performance graph showcase frame"
         },
         {
           "type": "video",
-          "src": "video"
+          "src": "/video.mp4"
         }
       ],
       "sections": [

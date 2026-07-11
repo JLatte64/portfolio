@@ -11,8 +11,11 @@ import AboutSection from "../components/AboutSection";
 import ContactFooter from "../components/ContactFooter";
 import ProjectModal from "../components/ProjectModal";
 
+export { loader, meta } from "./PageLayout.handlers";
+
 export default function PageLayout() {
   const { slug } = useParams<{ slug?: string }>();
+
   const activeIndex =
     slug !== undefined ? projectSlugToIndexLUT[slug] : undefined;
 
@@ -24,15 +27,10 @@ export default function PageLayout() {
         <AboutSection />
         <ContactFooter />
       </main>
-
       <Navbar />
-      {activeIndex !== null && (
+      {activeIndex !== undefined && activeIndex !== null && (
         <ProjectModal key={`active-modal-node-${activeIndex}`} />
       )}
     </div>
   );
-}
-
-export async function clientLoader() {
-  return null;
 }

@@ -15,7 +15,7 @@ export default function ProjectCard({
   const project: ProjectData = portfolioData.projects[projectIndex];
 
   const slug = projectIndexToSlugLUT[projectIndex];
-  const thumbnailUrl = project.thumbnail.src;
+  const thumbnailUrl = project.thumbnailImage.src;
 
   return (
     <Link
@@ -26,7 +26,7 @@ export default function ProjectCard({
     >
       <article className="project-card">
         <div className="thumbnail-wrapper">
-          {project.thumbnail.type === "video" ? (
+          {project.thumbnailImage.type === "video" ? (
             <video
               src={thumbnailUrl}
               muted

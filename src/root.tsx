@@ -1,5 +1,4 @@
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
-import { HelmetProvider } from "react-helmet-async";
 import "./index.css";
 
 export default function Root() {
@@ -12,10 +11,7 @@ export default function Root() {
         <Links />
       </head>
       <body>
-        {/* Centralized context provider layer matches your original App layout */}
-        <HelmetProvider>
-          <Outlet />
-        </HelmetProvider>
+        <Outlet />
 
         <ScrollRestoration />
         <Scripts />

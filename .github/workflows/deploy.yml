@@ -31,21 +31,16 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
-        # Bypasses historical peer-dependency locks during silent scripts
         run: npm ci --legacy-peer-deps
 
       - name: Build
-        # Triggers your "tsc -b && vite-react-ssg build" script phase
+        # Triggers "tsc -b && react-router build && node copy-fallback.js"
         run: npm run build
 
-      - name: Create Client-Side Routing Fallback (404.html)
-        # Duplicates your index.html file so refreshes on deep routes work flawlessly
-        run: cp dist/index.html dist/404.html
-
-      # - name: Create GoDaddy Domain Connector (CNAME)
-      #   # Writes your domain directly into the package root so GitHub links it to GoDaddy
-      #   # SWAP "yourdomain.com" with your actual custom domain string!
-      #   run: echo "yourdomain.com" > dist/CNAME
+      # - name: Create Custom Domain Connector (CNAME)
+      #   # If you use a custom domain later, un-comment this step.
+      #   # It writes your clean root domain directly into your build folder.
+      #   run: echo "yourdomain.com" > build/client/CNAME
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -53,7 +48,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "./dist"
+          # CRITICAL: Target React Router v7's build path instead of Vite's old dist/ folder
+          path: "./build/client"
 
       - name: Deploy to GitHub Pages
         id: deployment

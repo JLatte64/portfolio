@@ -9,6 +9,7 @@ import React, {
 } from "react";
 import type { MediaData } from "../types/mediaTypes";
 import "./RenderMedia.css";
+import { generateSlug } from "../data/portfolioData";
 
 const LazyPlayer = lazy(() => import("./LazyPlayer"));
 export interface AssetHandles {
@@ -125,7 +126,7 @@ export const MemoMediaWrapper = React.memo(
     const captionText = item.type !== "video" ? item.caption || "" : "";
     const hasValidCaption = captionText && !isLoading;
     const assetKey = item.src
-      ? btoa(encodeURIComponent(item.src)).slice(0, 16)
+      ? btoa(generateSlug(item.src)).slice(0, 16)
       : "empty";
 
     const content = (

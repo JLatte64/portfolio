@@ -22,7 +22,14 @@
 
     "strict": true,
     "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+
+    "composite": true
   },
-  "include": ["vite.config.ts", "src/**/*"]
+  "include": [
+    "vite.config.ts",
+    "react-router.config.ts",
+    "src/data/portfolioData.ts",
+    "src/types/**/*"
+  ]
 }

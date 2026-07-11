@@ -5,5 +5,8 @@ export default defineConfig(() => {
   return {
     base: "/",
     plugins: [reactRouter()],
+    resolve: {
+      tsconfigPaths: true, // Enables native high-performance path mappings
+    },
   };
 });

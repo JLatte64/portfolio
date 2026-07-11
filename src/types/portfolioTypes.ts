@@ -1,33 +1,50 @@
 import type { MediaData } from "./mediaTypes";
 
-export interface ProfileData {
-  readonly name: string;
-  readonly title: string;
-  readonly tagline: string;
-  readonly phone: string;
-  readonly email: string;
-  readonly github: string;
-  readonly linkedin: string;
+export interface WorkExperienceData {
+  title: string;
+  company: string;
+  timeframe: string;
+  details: string[];
+}
+
+export interface BackgroundData {
+  name: string;
+  occupation: string;
+  aboutBlurb: string;
+  heroImage: MediaData;
+  contacts: (
+    { Email: string; Phone?: never } | { Phone: string; Email?: never }
+  )[];
+  socials: (
+    { GitHub: string; LinkedIn?: never } | { LinkedIn: string; GitHub?: never }
+  )[];
+  skills: string[];
+  software: string[];
+  experience: WorkExperienceData[];
 }
 
 export interface ProjectSectionData {
-  readonly heading?: string;
-  readonly subheading?: string;
-  readonly paragraph?: string;
-  readonly list?: readonly string[];
-  readonly media?: readonly MediaData[];
+  heading: string;
+  subheading: string;
+  paragraph: string;
+  list: string[];
+  media: MediaData[];
 }
 
 export interface ProjectData {
-  readonly title: string;
-  readonly description: string;
-  readonly year: number;
-  readonly thumbnail: MediaData;
-  readonly carouselMedia: readonly MediaData[];
-  readonly sections: readonly ProjectSectionData[];
+  title: string;
+  description: string;
+  year: number;
+  thumbnailImage: MediaData;
+  carouselMedia: MediaData[];
+  sections: ProjectSectionData[];
 }
 
 export interface PortfolioData {
-  readonly profile: ProfileData;
-  readonly projects: readonly ProjectData[];
+  siteTitle: string;
+  siteDescription: string;
+  tagline: string;
+  bannerImage: MediaData;
+  backgroundInfo: BackgroundData; // Hidden JSON property key hook
+  projects: ProjectData[];
 }

@@ -11,12 +11,13 @@ export default function LightboxViewer({
   if (!mediaItem) return null;
   const mediaRef = useRef<any>(null);
 
-  const renderPayload = (
+  const lightboxContent = (
     <div
-      ref={(el) => {
-        if (el && mediaRef) {
+      ref={(element) => {
+        if (element && mediaRef) {
           (mediaRef as any).current = {
-            mediaElement: el.querySelector(".universal-media-asset") || el,
+            mediaElement:
+              element.querySelector(".universal-media-asset") || element,
             captionElement: null,
           };
         }
@@ -51,15 +52,15 @@ export default function LightboxViewer({
           ⟩
         </button>
         {mediaItem.type === "image" ? (
-          <TransformWrapper initialScale={1} minScale={1} maxScale={4}>
+          <TransformWrapper initialScale={1} minScale={1} maxScale={2}>
             <TransformComponent
               wrapperStyle={{ width: "100%", height: "100%" }}
             >
-              {renderPayload}
+              {lightboxContent}
             </TransformComponent>
           </TransformWrapper>
         ) : (
-          renderPayload
+          lightboxContent
         )}
       </div>
     </div>
