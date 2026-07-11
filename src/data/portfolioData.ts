@@ -1,16 +1,21 @@
 import type { PortfolioData } from "../types/portfolioTypes";
-// Assuming your raw JSON file path is relative to this file:
-import rawPortfolioJSON from "./portfolioData.json";
 
-// ✅ STEP 1: Cast the raw JSON payload to a clean, type-safe database instance
+import rawPortfolioJSON from "./portfolioData.json";
 export const portfolioData = rawPortfolioJSON as unknown as PortfolioData;
 
-// ✅ STEP 2: Initialize your fast route-matching index lookup table
-// Inside src/data/portfolioData.ts
-
 export const projectSlugLUT: Record<string, number> = {};
+export const projectIndexToSlugLUT: string[] = [];
+
+// Standardized lower-case hyphenated slug helper
+export const generateSlug = (title: string): string => {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+};
 
 portfolioData.projects.forEach((project, index) => {
-  const encodedSlug = encodeURIComponent(project.title);
-  projectSlugLUT[encodedSlug] = index;
+  const customSlug = generateSlug(project.title);
+  projectSlugLUT[customSlug] = index;
+  projectIndexToSlugLUT[index] = customSlug;
 });

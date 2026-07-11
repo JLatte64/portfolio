@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import "./ProjectCard.css";
-import { portfolioData } from "../data/portfolioData";
+import { portfolioData, projectIndexToSlugLUT } from "../data/portfolioData";
 import type { ProjectData } from "../types/portfolioTypes";
 
 interface ProjectCardProps {
@@ -10,13 +10,18 @@ interface ProjectCardProps {
 export default function ProjectCard({ projectIndex }: ProjectCardProps) {
   const project: ProjectData = portfolioData.projects[projectIndex];
 
-  const slug = encodeURIComponent(project.title);
+  const slug = projectIndexToSlugLUT[projectIndex];
   const thumbnailUrl = project.thumbnail.src;
+
+  function logConsole() {
+    console.log("AAAAAA" + project.title);
+  }
 
   return (
     <Link
       to={`/${slug}`}
       className="project-card-link"
+      onClick={logConsole}
       key={`${project.title}-${projectIndex}`}
     >
       <article className="project-card">

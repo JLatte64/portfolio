@@ -87,7 +87,12 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
       if (typeof window === "undefined" || !navigator.clipboard) return;
 
       const serverBaseUrl = import.meta.env.BASE_URL;
-      const projectSlug = encodeURIComponent(project.title);
+
+      // Generate the identical lowercase hyphen slug format natively on user click triggers
+      const projectSlug = project.title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
       const relativePath = `${serverBaseUrl}/${projectSlug}`.replace(
         /\/+/g,
         "/",
