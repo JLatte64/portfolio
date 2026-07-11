@@ -1,16 +1,20 @@
+/* --- src/components/CarouselControls.css --- */
+
 .carousel-controls-bar {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 0.5rem;
   width: 100%;
-  height: 110px; /* FIXED SPACE HEIGHT: Blocks jumping layouts completely */
-  min-height: 110px;
-  max-height: 110px;
+  height: 110px;
   padding: 1rem 1.5rem;
   background-color: #141414;
-  box-sizing: border-box;
   border-top: 1px solid #262626;
+  box-sizing: border-box;
+
+  /* Elevates the bar to paint natively over full screen view windows */
+  transform: translateZ(20px) !important;
+  transform-style: preserve-3d !important;
 }
 
 .carousel-inline-caption {
@@ -26,10 +30,14 @@
   white-space: nowrap;
 }
 
-.controls-row-layout {
+.controls-row-layout,
+.carousel-dots-indicator {
   display: flex;
+  align-items: center;
+}
+
+.controls-row-layout {
   justify-content: space-between;
-  align-items: center; /* Clamps action buttons from vertical stretching */
   width: 100%;
 }
 
@@ -45,18 +53,22 @@
   align-items: center;
   justify-content: center;
   height: 34px;
-  box-sizing: border-box;
-  transition: all 0.15s ease;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s;
 }
 
 .control-btn:hover:not(:disabled) {
   background-color: #3f3f46;
   border-color: #52525b;
 }
+
 .control-btn:disabled {
   opacity: 0.35;
   cursor: not-allowed;
 }
+
+/* --- Update inside src/components/CarouselControls.css --- */
 
 .carousel-dots-indicator {
   display: flex;
@@ -74,12 +86,80 @@
   border: none;
   cursor: pointer;
   padding: 0;
-  transition:
-    transform 0.15s ease,
-    background-color 0.15s ease;
+  transform: translateZ(21px);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none; /* Removes the default browser focus ring box outline */
 }
 
-.indicator-dot.is-active {
-  background-color: #3b82f6;
-  transform: scale(1.2);
+.indicator-dot:hover:not(.is-active) {
+  background-color: #71717a;
+  transform: scale(1.1) translateZ(21px);
+}
+
+/* Forcing specific focus/active handlers on inactive buttons */
+.indicator-dot:focus:not(.is-active),
+.indicator-dot:active:not(.is-active) {
+  background-color: #a1a1aa;
+}
+
+/* 
+  ==========================================================================
+  💡 THE ABSOLUTE CLASS OVERRIDE FIX
+  By grouping the active selectors, we prevent browser click feedback loops 
+  from stripping out your vibrant blue background indicator color!
+  ==========================================================================
+*/
+.indicator-dot.is-active,
+.indicator-dot.is-active:hover,
+.indicator-dot.is-active:focus,
+.indicator-dot.is-active:active {
+  background-color: #3b82f6 !important;
+  transform: scale(1.2) translateZ(22px) !important;
+}
+
+.carousel-controls-actions-slot {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* 
+  ==========================================================================
+  💡 NAVIGATION ARROW CONTROL OVERLAYS
+  The 15px depth step pushes them above the lightbox layer natively 
+  inside the preserve-3d viewport stack box canvas.
+  ==========================================================================
+*/
+.carousel-arrow-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) translateZ(15px) !important;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  font-size: 1.5rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  transition:
+    background-color 0.15s,
+    color 0.15s;
+}
+
+.carousel-arrow-btn:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.arrow-prev {
+  left: 1.5rem;
+}
+.arrow-next {
+  right: 1.5rem;
 }

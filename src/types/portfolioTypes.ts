@@ -1,4 +1,4 @@
-import type { MediaItem } from "./mediaTypes"; // ✅ Import your shared object shape model
+import type { MediaData } from "./mediaTypes";
 
 export interface ProfileData {
   readonly name: string;
@@ -15,17 +15,15 @@ export interface ProjectSectionData {
   readonly subheading?: string;
   readonly paragraph?: string;
   readonly list?: readonly string[];
-  // ✅ Swapped from raw string arrays to read-only media item objects
-  readonly media?: readonly MediaItem[];
+  readonly media?: readonly MediaData[];
 }
 
 export interface ProjectData {
   readonly title: string;
   readonly description: string;
   readonly year: number;
-  readonly thumbnail: MediaItem;
-  // ✅ Swapped from raw string arrays to read-only media item objects
-  readonly carouselMedia: readonly MediaItem[];
+  readonly thumbnail: MediaData;
+  readonly carouselMedia: readonly MediaData[];
   readonly sections: readonly ProjectSectionData[];
 }
 

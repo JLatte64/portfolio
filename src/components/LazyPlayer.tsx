@@ -1,15 +1,39 @@
-// src/components/LazyPlayer.tsx
-
 import ReactPlayer from "react-player";
+
+// Define the props to pass in...
+// Because the defaults are broken.
+interface CustomPlayerProps {
+  url: string;
+  className?: string;
+  width?: string | number;
+  height?: string | number;
+  muted?: boolean;
+  playing?: boolean;
+  loop?: boolean;
+  playsinline?: boolean;
+  controls?: boolean;
+  onReady?: () => void;
+  onError?: () => void;
+  config?: {
+    file?: {
+      attributes?: {
+        controlsList?: string;
+        style?: React.CSSProperties;
+      };
+    };
+    [key: string]: any; // Allow other player configs if needed (youtube, vimeo, etc)
+  };
+}
 
 interface LazyPlayerProps {
   url: string;
   mediaKey: string;
   onReady: () => void;
-  onError?: () => void; // ✅ 1. Add optional error prop tracking method definition
+  onError?: () => void;
 }
 
-const Player = ReactPlayer as any;
+const TypedPlayer =
+  ReactPlayer as unknown as React.ComponentType<CustomPlayerProps>;
 
 export default function LazyPlayer({
   url,
@@ -18,9 +42,8 @@ export default function LazyPlayer({
   onError,
 }: LazyPlayerProps) {
   return (
-    <div className="project-media-asset player-wrapper">
-      <Player
-        key={mediaKey}
+    <div key={mediaKey} className="project-media-asset player-wrapper">
+      <TypedPlayer
         url={url}
         className="react-player"
         width="100%"
@@ -31,11 +54,12 @@ export default function LazyPlayer({
         playsinline
         controls
         onReady={onReady}
-        onError={onError} // ✅ 2. Pass it down straight onto the underlying ReactPlayer engine instance
+        onError={onError}
         config={{
           file: {
             attributes: {
               controlsList: "nodownload",
+              style: { objectFit: "cover", width: "100%", height: "100%" },
             },
           },
         }}

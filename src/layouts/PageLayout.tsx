@@ -1,7 +1,7 @@
 // src/layouts/PageLayout.tsx
 
-import { useParams, useNavigate } from "react-router";
-import { portfolioData, projectSlugLUT } from "../data/portfolioData";
+import { useParams } from "react-router";
+import { projectSlugToIndexLUT } from "../data/portfolioData";
 import "./PageLayout.css";
 
 import Navbar from "../components/Navbar";
@@ -13,11 +13,8 @@ import ProjectModal from "../components/ProjectModal";
 
 export default function PageLayout() {
   const { slug } = useParams<{ slug?: string }>();
-  const navigate = useNavigate();
-
-  const activeIndex = slug ? projectSlugLUT[slug] : undefined;
-  const project =
-    activeIndex !== undefined ? portfolioData.projects[activeIndex] : null;
+  const activeIndex =
+    slug !== undefined ? projectSlugToIndexLUT[slug] : undefined;
 
   return (
     <div className="portfolio-app-root" style={{ position: "relative" }}>
@@ -29,9 +26,8 @@ export default function PageLayout() {
       </main>
 
       <Navbar />
-
-      {project && (
-        <ProjectModal project={project} onClose={() => navigate("/")} />
+      {activeIndex !== null && (
+        <ProjectModal key={`active-modal-node-${activeIndex}`} />
       )}
     </div>
   );

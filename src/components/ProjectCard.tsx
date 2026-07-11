@@ -5,23 +5,23 @@ import type { ProjectData } from "../types/portfolioTypes";
 
 interface ProjectCardProps {
   projectIndex: number;
+  onClick?: () => void;
 }
 
-export default function ProjectCard({ projectIndex }: ProjectCardProps) {
+export default function ProjectCard({
+  projectIndex,
+  onClick,
+}: ProjectCardProps) {
   const project: ProjectData = portfolioData.projects[projectIndex];
 
   const slug = projectIndexToSlugLUT[projectIndex];
   const thumbnailUrl = project.thumbnail.src;
 
-  function logConsole() {
-    console.log("AAAAAA" + project.title);
-  }
-
   return (
     <Link
-      to={`/${slug}`}
+      to={`${slug}`}
       className="project-card-link"
-      onClick={logConsole}
+      onClick={onClick}
       key={`${project.title}-${projectIndex}`}
     >
       <article className="project-card">

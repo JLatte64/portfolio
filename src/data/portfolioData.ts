@@ -1,12 +1,11 @@
 import type { PortfolioData } from "../types/portfolioTypes";
+import portfolioJson from "./portfolioData.json";
 
-import rawPortfolioJSON from "./portfolioData.json";
-export const portfolioData = rawPortfolioJSON as unknown as PortfolioData;
+export const portfolioData: PortfolioData = portfolioJson;
 
-export const projectSlugLUT: Record<string, number> = {};
-export const projectIndexToSlugLUT: string[] = [];
+export const projectIndexToSlugLUT: Record<number, string> = {}; //number -> slug (For ProjectCard)
+export const projectSlugToIndexLUT: Record<string, number> = {}; //slug -> number (For Layout/Modal)
 
-// Standardized lower-case hyphenated slug helper
 export const generateSlug = (title: string): string => {
   return title
     .toLowerCase()
@@ -16,6 +15,7 @@ export const generateSlug = (title: string): string => {
 
 portfolioData.projects.forEach((project, index) => {
   const customSlug = generateSlug(project.title);
-  projectSlugLUT[customSlug] = index;
+
   projectIndexToSlugLUT[index] = customSlug;
+  projectSlugToIndexLUT[customSlug] = index;
 });

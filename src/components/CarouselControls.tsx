@@ -1,68 +1,85 @@
-import type { MediaItem } from "../types/mediaTypes";
+import { useEffect, useState } from "react";
 import "./CarouselControls.css";
 
 interface CarouselControlsProps {
-  readonly media: readonly MediaItem[];
-  readonly emblaApiRef: React.RefObject<any>;
-  readonly selectedIndex: number;
-  readonly showCaptions: boolean;
-  readonly onToggleCaptions: () => void;
-  readonly onToggleLightbox: (open: boolean) => void;
+  readonly length: number;
+  readonly carouselRef: React.RefObject<any>;
+  readonly children?: React.ReactNode;
 }
 
 export default function CarouselControls({
-  media,
-  emblaApiRef,
-  selectedIndex,
-  showCaptions,
-  onToggleCaptions,
-  onToggleLightbox,
+  length,
+  carouselRef,
+  children,
 }: CarouselControlsProps) {
-  const currentMediaItem = media?.[selectedIndex];
-  const isCurrentMediaVideo = currentMediaItem?.type === "video";
+  const [localSelectedIndex, setLocalSelectedIndex] = useState<number>(0);
+
+  useEffect(() => {
+    const api = carouselRef.current;
+    if (!api || !api.onSlideChange) return;
+
+    // 💡 DIRECT ASSIGNMENT LINK:
+    // This connects our local state modifier directly to the ref's exposed method.
+    // It captures index shifts from manual swipes and arrow clicks instantly.
+    api.onSlideChange((index: number) => {
+      setLocalSelectedIndex(index);
+    });
+
+    // Capture the initial state configuration index upon assembly mount
+    if (typeof api.selectedIndex === "number") {
+      setLocalSelectedIndex(api.selectedIndex);
+    }
+  }, [carouselRef, carouselRef.current]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      const activeEl = document.activeElement;
+      if (activeEl?.tagName === "INPUT" || activeEl?.tagName === "TEXTAREA")
+        return;
+      const api = carouselRef.current;
+      if (!api) return;
+
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        api.scrollNext();
+      } else if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        api.scrollPrev();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [carouselRef]);
+
+  const api = carouselRef.current;
+  if (!api || length <= 0) return null;
+
+  const isCaptionDisabled = !api.activeMedia?.captionElement;
 
   return (
     <div className="carousel-controls-bar">
-      {currentMediaItem?.caption && (
-        <div
-          className="carousel-inline-caption"
-          style={{
-            visibility: showCaptions ? "visible" : "hidden",
-            opacity: showCaptions ? 1 : 0,
-          }}
-        >
-          <span>{currentMediaItem.caption}</span>
-        </div>
-      )}
-
       <div className="controls-row-layout">
         <button
           type="button"
-          className={`control-btn caption-toggle ${showCaptions ? "active" : ""}`}
-          onClick={onToggleCaptions}
-          disabled={isCurrentMediaVideo || !currentMediaItem?.caption}
+          className="control-btn"
+          disabled={isCaptionDisabled}
         >
-          📝 {showCaptions ? "Hide Text" : "Show Text"}
+          📝 Text
         </button>
-
         <div className="carousel-dots-indicator">
-          {media.map((_, idx) => (
+          {Array.from({ length }).map((_, idx) => (
             <button
               key={`dot-${idx}`}
               type="button"
-              className={`indicator-dot ${idx === selectedIndex ? "is-active" : ""}`}
-              onClick={() => emblaApiRef.current?.scrollTo(idx)}
+              className={`indicator-dot ${idx === localSelectedIndex ? "is-active" : ""}`}
+              onClick={() => {
+                setLocalSelectedIndex(idx);
+                api.scrollTo(idx);
+              }}
             />
           ))}
         </div>
-
-        <button
-          type="button"
-          className="control-btn lightbox-trigger"
-          onClick={() => onToggleLightbox(true)}
-        >
-          🔍 Lightbox
-        </button>
+        <div className="carousel-controls-actions-slot">{children}</div>
       </div>
     </div>
   );

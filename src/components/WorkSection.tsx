@@ -4,13 +4,18 @@ import "./WorkSection.css";
 
 export default function WorkSection() {
   return (
-    <section id="portfolio" className="portfolio-section">
-      <h2>This is the Work Section.</h2>
+    <section className="portfolio-work-grid-section" id="work">
+      <h2 className="section-label-heading">Selected Work</h2>
 
-      <div className="portfolio-grid">
-        {Array.from({ length: portfolioData.projects.length }, (_, index) => (
-          <ProjectCard projectIndex={index} key={`project-card-${index}`} />
-        ))}
+      <div className="work-items-masonry-wrapper">
+        {Array.from({ length: portfolioData.projects.length }).map(
+          (_, index) => (
+            <ProjectCard
+              key={`project-node-key-${index}`}
+              projectIndex={index}
+            />
+          ),
+        )}
       </div>
     </section>
   );
