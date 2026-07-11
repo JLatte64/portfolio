@@ -21,7 +21,7 @@ interface CustomPlayerProps {
         style?: React.CSSProperties;
       };
     };
-    [key: string]: any; // Allow other player configs if needed (youtube, vimeo, etc)
+    [key: string]: any;
   };
 }
 
@@ -32,8 +32,7 @@ interface LazyPlayerProps {
   onError?: () => void;
 }
 
-const TypedPlayer =
-  ReactPlayer as unknown as React.ComponentType<CustomPlayerProps>;
+const TypedPlayer = ReactPlayer as React.ComponentType<CustomPlayerProps>;
 
 export default function LazyPlayer({
   url,
@@ -42,28 +41,31 @@ export default function LazyPlayer({
   onError,
 }: LazyPlayerProps) {
   return (
-    <div key={mediaKey} className="project-media-asset player-wrapper">
-      <TypedPlayer
-        url={url}
-        className="react-player"
-        width="100%"
-        height="100%"
-        muted
-        playing
-        loop
-        playsinline
-        controls
-        onReady={onReady}
-        onError={onError}
-        config={{
-          file: {
-            attributes: {
-              controlsList: "nodownload",
-              style: { objectFit: "cover", width: "100%", height: "100%" },
+    <TypedPlayer
+      url={url}
+      className="react-player"
+      width="100%"
+      height="100%"
+      muted
+      playing
+      loop
+      playsinline
+      controls
+      onReady={onReady}
+      onError={onError}
+      key={mediaKey}
+      config={{
+        file: {
+          attributes: {
+            controlsList: "nodownload",
+            style: {
+              objectFit: "contain",
+              width: "100%",
+              height: "100%",
             },
           },
-        }}
-      />
-    </div>
+        },
+      }}
+    />
   );
 }

@@ -1,6 +1,18 @@
-/* ==========================================================================
-   1. GLOBAL SYSTEM ELEMENT RESETS
-   ========================================================================== */
+html {
+  box-sizing: border-box;
+  scrollbar-gutter: stable;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body:has(dialog[open]) {
+  overflow: hidden !important;
+}
+
 html,
 body,
 #root {
@@ -11,17 +23,18 @@ body,
   display: block;
 }
 
-html {
-  scrollbar-gutter: stable;
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-body:has(dialog[open]) {
-  overflow: hidden !important;
-}
-
-/* ==========================================================================
-   2. SYSTEM ROOT DESIGN TOKENS MATRIX
-   ========================================================================== */
 :root {
   --text: #6b6375;
   --text-h: #08060d;
@@ -54,9 +67,6 @@ body:has(dialog[open]) {
   }
 }
 
-/* ==========================================================================
-   3. AUTOMATIC GRAPHICS THEME SWITCHERS
-   ========================================================================== */
 @media (prefers-color-scheme: dark) {
   :root {
     --text: #9ca3af;
@@ -77,9 +87,6 @@ body:has(dialog[open]) {
   }
 }
 
-/* ==========================================================================
-   4. APP SHELL CENTERING INNER BOX GRID
-   ========================================================================== */
 #root {
   width: 1126px;
   max-width: 100%;
@@ -92,19 +99,6 @@ body:has(dialog[open]) {
   box-sizing: border-box;
 }
 
-/* ==========================================================================
-   5. NATIVE SCROLL FREEZE GATES
-   ========================================================================== */
-/* ✅ Lock background document scrolling tracks cleanly. 
-   Height parameters are completely stripped out to protect root boxes from collapsing to 0px! */
-body:has(dialog[open]),
-body.modal-open-lock {
-  overflow: hidden !important;
-}
-
-/* ==========================================================================
-   6. TYPOGRAPHY AND CORE ASSETS RESETS
-   ========================================================================== */
 h1,
 h2 {
   font-family: var(--heading);

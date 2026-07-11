@@ -1,3 +1,4 @@
+// src/components/ProjectCarousel.tsx
 import { useEffect, useImperativeHandle, useRef, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import type { MediaData } from "../types/mediaTypes";
@@ -15,10 +16,7 @@ export default function ProjectCarousel({ mediaList, activeMediaRef }: any) {
     containScroll: false,
   });
 
-  // 💡 Keep index state local to the carousel
   const [selectedIndex, setSelectedIndex] = useState(0);
-
-  // Track all active listeners (e.g., Controls, Lightbox) dynamically
   const listenersRef = useRef<Array<(idx: number) => void>>([]);
   const slideRefs = useRef<any[]>([]);
   const activeElRef = useRef<HTMLDivElement | null>(null);
@@ -29,10 +27,7 @@ export default function ProjectCarousel({ mediaList, activeMediaRef }: any) {
     const sync = () => {
       const currentSnap = emblaApi.selectedScrollSnap() ?? 0;
       const normalizedIndex = currentSnap % rawTotal;
-
       setSelectedIndex(currentSnap);
-
-      // Broadcast changes instantly to all listening components
       listenersRef.current.forEach((callback) => callback(normalizedIndex));
     };
 
@@ -42,7 +37,6 @@ export default function ProjectCarousel({ mediaList, activeMediaRef }: any) {
     };
   }, [emblaApi, rawTotal]);
 
-  // Clean media handling when an item slides out of view
   useEffect(() => {
     const el = activeElRef.current;
     if (!el || !emblaApi) return;
@@ -83,7 +77,6 @@ export default function ProjectCarousel({ mediaList, activeMediaRef }: any) {
     return () => obs.disconnect();
   }, [emblaApi, selectedIndex]);
 
-  // Expose API control structures to sibling references securely
   useImperativeHandle(activeMediaRef, () => {
     return {
       scrollPrev: () => emblaApi?.scrollPrev(),
@@ -95,13 +88,9 @@ export default function ProjectCarousel({ mediaList, activeMediaRef }: any) {
       get activeMedia() {
         return slideRefs.current[emblaApi?.selectedScrollSnap() ?? 0] || null;
       },
-      // Subscribe mechanism allows late-mounting components to register safely
       subscribeToChange: (callback: (idx: number) => void) => {
         listenersRef.current.push(callback);
-        // Instantly provide initial value upon subscription hook layout assembly
         callback((emblaApi?.selectedScrollSnap() ?? 0) % rawTotal);
-
-        // Return unsubscribe cleanup token function cleanly
         return () => {
           listenersRef.current = listenersRef.current.filter(
             (cb) => cb !== callback,
@@ -127,6 +116,7 @@ export default function ProjectCarousel({ mediaList, activeMediaRef }: any) {
               >
                 <MemoMediaWrapper
                   item={item}
+                  shouldLazyLoad={true}
                   exposedRef={{
                     get current() {
                       return slideRefs.current[idx];
@@ -145,7 +135,6 @@ export default function ProjectCarousel({ mediaList, activeMediaRef }: any) {
           type="button"
           className="carousel-arrow-btn arrow-prev"
           onClick={() => emblaApi?.scrollPrev()}
-          aria-label="Previous Slide"
         >
           ⟨
         </button>
@@ -153,7 +142,6 @@ export default function ProjectCarousel({ mediaList, activeMediaRef }: any) {
           type="button"
           className="carousel-arrow-btn arrow-next"
           onClick={() => emblaApi?.scrollNext()}
-          aria-label="Next Slide"
         >
           ⟩
         </button>
