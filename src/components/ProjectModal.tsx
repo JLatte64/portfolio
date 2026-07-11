@@ -2,12 +2,15 @@ import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
 import { portfolioData, projectSlugToIndexLUT } from "../data/portfolioData";
 import ProjectCarousel from "./ProjectCarousel";
+import CarouselControls from "./CarouselControls";
+import LightboxViewer from "./LightboxViewer";
 import "./ProjectModal.css";
 
 export default function ProjectModal() {
   const { slug } = useParams<{ slug?: string }>();
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [copied, setCopied] = useState(false);
+
   const activeMediaRef = useRef<any>(null);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
@@ -24,6 +27,8 @@ export default function ProjectModal() {
   }, [project]);
 
   if (!project) return null;
+
+  const rawTotal = project.carouselMedia?.length || 0;
 
   return (
     <dialog
@@ -53,6 +58,7 @@ export default function ProjectModal() {
             <span className="modal-year-tag">{project.year}</span>
           </div>
           <button
+            type="button"
             className="global-close-button"
             onClick={() => window.history.back()}
           >
@@ -64,17 +70,26 @@ export default function ProjectModal() {
           className={`modal-panes-body ${isLightboxOpen ? "is-lightbox-active" : ""}`}
         >
           <section className="pane-left-carousel">
-            {/* 
-              💡 STRIPPED DOWN INJECTION:
-              The child elements automatically share properties and synchronizations 
-              natively across the activeMediaRef channel pipeline wrapper.
-            */}
             <ProjectCarousel
               activeMediaRef={activeMediaRef}
               mediaList={project.carouselMedia}
-              isLightboxOpen={isLightboxOpen}
-              setIsLightboxOpen={setIsLightboxOpen}
             />
+
+            <LightboxViewer
+              mediaItem={project.carouselMedia}
+              carouselRef={activeMediaRef}
+              isOpen={isLightboxOpen}
+            />
+
+            <CarouselControls length={rawTotal} carouselRef={activeMediaRef}>
+              <button
+                type="button"
+                className="control-btn"
+                onClick={() => setIsLightboxOpen((prev) => !prev)}
+              >
+                {isLightboxOpen ? "✕ Close View" : "🔍 Lightbox"}
+              </button>
+            </CarouselControls>
           </section>
 
           <aside className="pane-right-details">

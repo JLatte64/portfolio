@@ -2,16 +2,9 @@ import { useEffect, useImperativeHandle, useRef, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import type { MediaData } from "../types/mediaTypes";
 import { MemoMediaWrapper } from "./RenderMedia";
-import LightboxViewer from "./LightboxViewer";
-import CarouselControls from "./CarouselControls";
 import "./ProjectCarousel.css";
 
-export default function ProjectCarousel({
-  mediaList,
-  activeMediaRef,
-  isLightboxOpen,
-  setIsLightboxOpen,
-}: any) {
+export default function ProjectCarousel({ mediaList, activeMediaRef }: any) {
   const rawTotal = mediaList?.length || 0;
   const clonedList = rawTotal === 2 ? [...mediaList, ...mediaList] : mediaList;
   const renderTotal = clonedList?.length || 0;
@@ -21,68 +14,76 @@ export default function ProjectCarousel({
     align: "center",
     containScroll: false,
   });
-  const slideRefs = useRef<any[]>([]),
-    activeElRef = useRef<HTMLDivElement>(null);
-  const [, setTick] = useState(0);
 
-  // 💡 THE CALLBACK POINTER: Caches the controls callback across layout repaints
-  const slideChangeCallbackRef = useRef<((idx: number) => void) | null>(null);
+  // 💡 Keep index state local to the carousel
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  // Track all active listeners (e.g., Controls, Lightbox) dynamically
+  const listenersRef = useRef<Array<(idx: number) => void>>([]);
+  const slideRefs = useRef<any[]>([]);
+  const activeElRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (!emblaApi) return;
-    const sync = () => {
-      setTick((t) => t + 1);
 
-      // 💡 THE REACTION BROADCASTER:
-      // Executes the registered handler callback the exact millisecond
-      // a user swiping gestures or clicks a navigation arrow completes!
-      if (slideChangeCallbackRef.current) {
-        slideChangeCallbackRef.current(
-          (emblaApi.selectedScrollSnap() ?? 0) % rawTotal,
-        );
-      }
+    const sync = () => {
+      const currentSnap = emblaApi.selectedScrollSnap() ?? 0;
+      const normalizedIndex = currentSnap % rawTotal;
+
+      setSelectedIndex(currentSnap);
+
+      // Broadcast changes instantly to all listening components
+      listenersRef.current.forEach((callback) => callback(normalizedIndex));
     };
+
     emblaApi.on("select", sync).on("reInit", sync);
     return () => {
       emblaApi.off("select", sync).off("reInit", sync);
     };
   }, [emblaApi, rawTotal]);
 
+  // Clean media handling when an item slides out of view
   useEffect(() => {
     const el = activeElRef.current;
-    if (!el) return;
+    if (!el || !emblaApi) return;
+
     const obs = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) return;
-        const currentSnap = emblaApi?.selectedScrollSnap() ?? 0;
+      ([entry]) => {
+        if (entry.isIntersecting) return;
+
+        const currentSnap = emblaApi.selectedScrollSnap() ?? 0;
         const node = slideRefs.current[currentSnap]?.mediaElement;
+
         const v =
           node?.querySelector("video") ||
           (node instanceof HTMLVideoElement ? node : null);
         if (v?.src) {
           v.pause();
-          const s = v.src;
+          const source = v.src;
           v.src = "";
           v.load();
-          v.src = s;
+          v.src = source;
         }
+
         const f =
           node?.querySelector("iframe") ||
           (node instanceof HTMLIFrameElement ? node : null);
         if (f?.src) {
-          const s = f.src;
+          const source = f.src;
           f.src = "about:blank";
           setTimeout(() => {
-            if (f) f.src = s;
+            if (f) f.src = source;
           }, 0);
         }
       },
       { threshold: 0.2 },
     );
+
     obs.observe(el);
     return () => obs.disconnect();
-  }, [emblaApi]);
+  }, [emblaApi, selectedIndex]);
 
+  // Expose API control structures to sibling references securely
   useImperativeHandle(activeMediaRef, () => {
     return {
       scrollPrev: () => emblaApi?.scrollPrev(),
@@ -94,16 +95,23 @@ export default function ProjectCarousel({
       get activeMedia() {
         return slideRefs.current[emblaApi?.selectedScrollSnap() ?? 0] || null;
       },
-      // 💡 THE CONTRACT REGISTRATION METHOD
-      onSlideChange: (callback: (idx: number) => void) => {
-        slideChangeCallbackRef.current = callback;
+      // Subscribe mechanism allows late-mounting components to register safely
+      subscribeToChange: (callback: (idx: number) => void) => {
+        listenersRef.current.push(callback);
+        // Instantly provide initial value upon subscription hook layout assembly
+        callback((emblaApi?.selectedScrollSnap() ?? 0) % rawTotal);
+
+        // Return unsubscribe cleanup token function cleanly
+        return () => {
+          listenersRef.current = listenersRef.current.filter(
+            (cb) => cb !== callback,
+          );
+        };
       },
     };
   }, [emblaApi, rawTotal]);
 
   if (!renderTotal) return null;
-  const currentSnapIndex = emblaApi?.selectedScrollSnap() ?? 0;
-  const activeIndex = currentSnapIndex % rawTotal;
 
   return (
     <div className="carousel-section-group">
@@ -113,7 +121,7 @@ export default function ProjectCarousel({
             {clonedList.map((item: MediaData, idx: number) => (
               <div
                 key={`${item.src}-slide-${idx}`}
-                ref={idx === currentSnapIndex ? activeElRef : null}
+                ref={idx === selectedIndex ? activeElRef : null}
                 className="modal-carousel-item embla__slide"
                 style={{ flex: "0 0 100%" }}
               >
@@ -123,8 +131,8 @@ export default function ProjectCarousel({
                     get current() {
                       return slideRefs.current[idx];
                     },
-                    set current(v) {
-                      slideRefs.current[idx] = v;
+                    set current(value) {
+                      slideRefs.current[idx] = value;
                     },
                   }}
                 />
@@ -133,16 +141,11 @@ export default function ProjectCarousel({
           </div>
         </div>
 
-        <LightboxViewer
-          mediaItem={mediaList[activeIndex]}
-          emblaApiRef={activeMediaRef}
-          isOpen={isLightboxOpen}
-        />
-
         <button
           type="button"
           className="carousel-arrow-btn arrow-prev"
           onClick={() => emblaApi?.scrollPrev()}
+          aria-label="Previous Slide"
         >
           ⟨
         </button>
@@ -150,20 +153,11 @@ export default function ProjectCarousel({
           type="button"
           className="carousel-arrow-btn arrow-next"
           onClick={() => emblaApi?.scrollNext()}
+          aria-label="Next Slide"
         >
           ⟩
         </button>
       </div>
-
-      <CarouselControls length={rawTotal} carouselRef={activeMediaRef}>
-        <button
-          type="button"
-          className="control-btn"
-          onClick={() => setIsLightboxOpen(!isLightboxOpen)}
-        >
-          {isLightboxOpen ? "✕ Close View" : "🔍 Lightbox"}
-        </button>
-      </CarouselControls>
     </div>
   );
 }

@@ -13,29 +13,48 @@ export default function CarouselControls({
   children,
 }: CarouselControlsProps) {
   const [localSelectedIndex, setLocalSelectedIndex] = useState<number>(0);
+  const [isApiReady, setIsApiReady] = useState(false);
 
+  // 💡 Polling check to handle when the ref changes from null to ready
   useEffect(() => {
-    const api = carouselRef.current;
-    if (!api || !api.onSlideChange) return;
+    let unsubscribe: (() => void) | null = null;
 
-    // 💡 DIRECT ASSIGNMENT LINK:
-    // This connects our local state modifier directly to the ref's exposed method.
-    // It captures index shifts from manual swipes and arrow clicks instantly.
-    api.onSlideChange((index: number) => {
-      setLocalSelectedIndex(index);
-    });
+    const checkAndBind = () => {
+      const api = carouselRef.current;
+      if (api && api.subscribeToChange) {
+        unsubscribe = api.subscribeToChange((index: number) => {
+          setLocalSelectedIndex(index);
+        });
+        setIsApiReady(true);
+        return true;
+      }
+      return false;
+    };
 
-    // Capture the initial state configuration index upon assembly mount
-    if (typeof api.selectedIndex === "number") {
-      setLocalSelectedIndex(api.selectedIndex);
+    // Try to bind instantly
+    if (!checkAndBind()) {
+      // If ref is not assigned yet, poll until it hooks up cleanly
+      const interval = setInterval(() => {
+        if (checkAndBind()) clearInterval(interval);
+      }, 50);
+      return () => {
+        clearInterval(interval);
+        if (unsubscribe) unsubscribe();
+      };
     }
-  }, [carouselRef, carouselRef.current]);
 
+    return () => {
+      if (unsubscribe) unsubscribe();
+    };
+  }, [carouselRef]);
+
+  // Keyboard shortcut layout tracking setup
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       const activeEl = document.activeElement;
       if (activeEl?.tagName === "INPUT" || activeEl?.tagName === "TEXTAREA")
         return;
+
       const api = carouselRef.current;
       if (!api) return;
 
@@ -52,7 +71,7 @@ export default function CarouselControls({
   }, [carouselRef]);
 
   const api = carouselRef.current;
-  if (!api || length <= 0) return null;
+  if (!isApiReady || !api || length <= 0) return null;
 
   const isCaptionDisabled = !api.activeMedia?.captionElement;
 
@@ -76,6 +95,7 @@ export default function CarouselControls({
                 setLocalSelectedIndex(idx);
                 api.scrollTo(idx);
               }}
+              aria-label={`Go to slide ${idx + 1}`}
             />
           ))}
         </div>
