@@ -1,20 +1,29 @@
 // src/components/RenderMedia.tsx
 import React, {
-  lazy,
-  Suspense,
   useState,
+  useEffect,
   useCallback,
   useImperativeHandle,
   useRef,
 } from "react";
 import type { MediaData } from "../types/mediaTypes";
-import "./RenderMedia.css";
 import { generateSlug } from "../data/portfolioData";
-
-const LazyPlayer = lazy(() => import("./LazyPlayer"));
+import {
+  MediaPlayer,
+  MediaProvider,
+  type MediaPlayerInstance,
+} from "@vidstack/react";
+import {
+  DefaultVideoLayout,
+  defaultLayoutIcons,
+} from "@vidstack/react/player/layouts/default";
+import "./RenderMedia.css";
+import "@vidstack/react/player/styles/default/theme.css";
+import "@vidstack/react/player/styles/default/layouts/video.css";
 
 export interface AssetHandles {
-  mediaElement: HTMLElement | null;
+  mediaElement:
+    HTMLImageElement | HTMLIFrameElement | MediaPlayerInstance | null;
   captionElement: HTMLElement | null;
 }
 
@@ -25,131 +34,28 @@ export function AssetStatusCard({
   status: "loading" | "error";
   description?: string;
 }) {
-  const isLoad = status === "loading";
   return (
     <div
       className={`asset-status-card is-${status}`}
       role="status"
-      aria-live={isLoad ? "polite" : "assertive"}
-      aria-busy={isLoad}
+      aria-live={status === "loading" ? "polite" : "assertive"}
     >
-      {isLoad ? (
-        <React.Fragment>
+      {status === "loading" ? (
+        <>
           <div className="asset-spinner-ring" />
-          <span className="sr-only">
-            Loading project media element: {description || "Asset payload"}...
-          </span>
-        </React.Fragment>
+          <span className="sr-only">Loading: {description}...</span>
+        </>
       ) : (
-        <span aria-label="Warning: media element is unavailable">
-          Media Unavailable
-        </span>
+        <span>Media Unavailable</span>
       )}
     </div>
   );
 }
 
-type LoadingStatus = "loading" | "loaded" | "error";
-
-const MemoMedia = React.memo(
-  ({
-    item,
-    assetKey,
-    onLoad,
-    onError,
-    mediaRef,
-    shouldLazyLoad,
-  }: {
-    item: MediaData;
-    assetKey: string;
-    onLoad: () => void;
-    onError: () => void;
-    mediaRef: React.RefObject<any>;
-    shouldLazyLoad?: boolean;
-  }) => {
-    const isFallbackTriggered = !item || !item.src || item.type === "error";
-    const [loadingState, setLoadingState] = useState<LoadingStatus>(
-      isFallbackTriggered ? "error" : "loading",
-    );
-
-    const handleMediaEvent = useCallback(
-      (success: boolean) => {
-        setLoadingState(success ? "loaded" : "error");
-        success ? onLoad() : onError();
-      },
-      [onLoad, onError],
-    );
-
-    const generalLabel = item.caption || "Portfolio presentation asset";
-    if (loadingState === "error")
-      return <AssetStatusCard status="error" description={generalLabel} />;
-
-    let elementContent = null;
-    if (item.src) {
-      switch (item.type) {
-        case "video":
-          elementContent = (
-            <Suspense fallback={null}>
-              <div
-                ref={mediaRef}
-                className="universal-media-asset"
-                role="region"
-                aria-label={`Interactive video presentation element: ${generalLabel}`}
-              >
-                <LazyPlayer
-                  url={item.src}
-                  mediaKey={assetKey}
-                  onReady={() => handleMediaEvent(true)}
-                  onError={() => handleMediaEvent(false)}
-                />
-              </div>
-            </Suspense>
-          );
-          break;
-        case "image":
-          elementContent = (
-            <img
-              ref={mediaRef}
-              src={item.src}
-              className="universal-media-asset"
-              alt={
-                item.alt ||
-                item.caption ||
-                "Portfolio collection dynamic display screenshot"
-              }
-              loading={shouldLazyLoad ? "lazy" : "eager"}
-              decoding="async"
-              onLoad={() => handleMediaEvent(true)}
-              onError={() => handleMediaEvent(false)}
-            />
-          );
-          break;
-        default:
-          elementContent = (
-            <iframe
-              ref={mediaRef}
-              src={item.src}
-              className="universal-media-asset"
-              title={`Embedded third party platform presentation node player: ${item.caption || "Asset showcase"}`}
-              allowFullScreen
-              loading={shouldLazyLoad ? "lazy" : "eager"}
-              onLoad={() => handleMediaEvent(true)}
-              onError={() => handleMediaEvent(false)}
-            />
-          );
-      }
-    }
-
-    return (
-      <React.Fragment>
-        {elementContent}
-        {loadingState === "loading" && (
-          <AssetStatusCard status="loading" description={generalLabel} />
-        )}
-      </React.Fragment>
-    );
-  },
-);
+const registry: Record<
+  string,
+  { status: "loading" | "loaded" | "error"; subs: Set<(s: any) => void> }
+> = {};
 
 export const MemoMediaWrapper = React.memo(
   ({
@@ -161,71 +67,128 @@ export const MemoMediaWrapper = React.memo(
     exposedRef?: React.RefObject<AssetHandles | null>;
     shouldLazyLoad?: boolean;
   }) => {
-    const [isParentLoading, setIsParentLoading] = useState(true);
-    const mediaRef = useRef<HTMLElement>(null);
-    const captionRef = useRef<HTMLElement>(null);
+    const isErr = !item?.src || item.type === "error",
+      assetKey = item?.src
+        ? btoa(generateSlug(item.src)).slice(0, 16)
+        : "empty";
+    const [loadingState, setLoadingState] = useState<
+      "loading" | "loaded" | "error"
+    >(isErr ? "error" : registry[assetKey]?.status || "loading");
+    const mediaRef = useRef<any>(null),
+      captionRef = useRef<HTMLElement>(null);
 
     useImperativeHandle(exposedRef, () => ({
       mediaElement: mediaRef.current,
       captionElement: captionRef.current,
     }));
 
-    const clearParentLoading = useCallback(() => setIsParentLoading(false), []);
-    const captionText = item && item.type !== "video" ? item.caption || "" : "";
-    const hasValidCaption = captionText !== "" && !isParentLoading;
-    const assetKey = item?.src
-      ? btoa(generateSlug(item.src)).slice(0, 16)
-      : "empty";
+    useEffect(() => {
+      if (isErr) return setLoadingState("error");
+      if (!registry[assetKey])
+        registry[assetKey] = { status: "loading", subs: new Set() };
+      const reg = registry[assetKey];
+      reg.subs.add(setLoadingState);
+      if (reg.status !== loadingState) setLoadingState(reg.status);
 
-    const Component = hasValidCaption ? "figure" : React.Fragment;
-    const componentProps = hasValidCaption
-      ? {
-          className: "universal-asset-figure-wrapper",
-          "aria-describedby": `asset-caption-id-${assetKey}`,
-        }
-      : {};
+      const n = mediaRef.current;
+      if (
+        n &&
+        ((n instanceof HTMLImageElement && n.complete) || n.state?.canPlay)
+      ) {
+        reg.status = "loaded";
+        reg.subs.forEach((s) => s("loaded"));
+      }
+      return () => {
+        reg.subs.delete(setLoadingState);
+        if (!reg.subs.size) delete registry[assetKey];
+      };
+    }, [assetKey, isErr]);
+
+    const setGlobalStatus = useCallback(
+      (status: "loaded" | "error") => {
+        if (!registry[assetKey]) return;
+        registry[assetKey].status = status;
+        registry[assetKey].subs.forEach((s) => s(status));
+      },
+      [assetKey],
+    );
+
+    if (loadingState === "error")
+      return <AssetStatusCard status="error" description={item.caption} />;
+
+    const hasCaption =
+      item.type !== "video" && !!item.caption && loadingState === "loaded";
+    const Comp = hasCaption ? "figure" : React.Fragment;
+    const ev = {
+      onCanPlay: () => setGlobalStatus("loaded"),
+      onLoad: () => setGlobalStatus("loaded"),
+      onError: () => setGlobalStatus("error"),
+    };
 
     return (
-      <Component {...componentProps}>
-        <MemoMedia
-          item={item}
-          assetKey={assetKey}
-          onLoad={clearParentLoading}
-          onError={clearParentLoading}
-          mediaRef={mediaRef}
-          shouldLazyLoad={shouldLazyLoad}
-        />
-        {hasValidCaption && (
+      <Comp
+        {...(hasCaption
+          ? {
+              className: "media-caption",
+              "aria-describedby": `asset-caption-id-${assetKey}`,
+            }
+          : {})}
+      >
+        {item.type === "video" ? (
+          <MediaPlayer
+            ref={mediaRef}
+            src={item.src}
+            key={assetKey}
+            className="universal-media-asset project-media-asset player-wrapper w-full h-full aspect-video"
+            muted
+            autoplay
+            loop
+            playsInline
+            controls
+            load="visible"
+            {...ev}
+          >
+            <MediaProvider />
+            <DefaultVideoLayout icons={defaultLayoutIcons} />
+          </MediaPlayer>
+        ) : item.type === "image" ? (
+          <img
+            ref={mediaRef}
+            key={assetKey}
+            src={item.src}
+            className="universal-media-asset"
+            alt={item.alt || item.caption}
+            loading={shouldLazyLoad ? "lazy" : "eager"}
+            decoding="async"
+            {...ev}
+          />
+        ) : (
+          <iframe
+            ref={mediaRef}
+            key={assetKey}
+            src={item.src}
+            className="universal-media-asset"
+            title={item.caption}
+            allowFullScreen
+            loading={shouldLazyLoad ? "lazy" : "eager"}
+            {...ev}
+          />
+        )}
+        {loadingState === "loading" && (
+          <AssetStatusCard status="loading" description={item.caption} />
+        )}
+        {hasCaption && (
           <figcaption
             id={`asset-caption-id-${assetKey}`}
             ref={captionRef}
             className="universal-asset-caption"
           >
-            {captionText}
+            {item.caption}
           </figcaption>
         )}
-      </Component>
+      </Comp>
     );
   },
 );
 
-// export default function RenderAsset({
-//   media,
-//   shouldLazyLoad = false,
-// }: {
-//   media: readonly MediaData[];
-//   shouldLazyLoad?: boolean;
-// }) {
-//   if (!media?.length) return null;
-//   return (
-//     <div className="universal-asset-group">
-//       {media.map((item, index) => (
-//         <MemoMediaWrapper
-//           key={`${item.type}-${index}`}
-//           item={item}
-//           shouldLazyLoad={shouldLazyLoad}
-//         />
-//       ))}
-//     </div>
-//   );
-// }
+MemoMediaWrapper.displayName = "MemoMediaWrapper";

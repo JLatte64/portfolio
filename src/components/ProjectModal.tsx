@@ -1,33 +1,37 @@
+// src/components/ProjectModal.tsx
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
 import { portfolioData, projectSlugToIndexLUT } from "../data/portfolioData";
-import ProjectCarousel from "./ProjectCarousel";
-import CarouselControls from "./CarouselControls";
+import MediaCarousel from "./MediaCarousel";
+import CarouselDashboard from "./CarouselDashboard";
 import LightboxViewer from "./LightboxViewer";
 import "./ProjectModal.css";
 
 export default function ProjectModal() {
-  const { slug } = useParams<{ slug?: string }>();
-  const dialogRef = useRef<HTMLDialogElement>(null);
-  const [copied, setCopied] = useState(false);
+  const { slug } = useParams<{ slug?: string }>(),
+    dialogRef = useRef<HTMLDialogElement>(null),
+    carouselRef = useRef<any>(null);
+  const [copied, setCopied] = useState(false),
+    [isCaptionActive, setIsCaptionActive] = useState(false),
+    [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [, setIdx] = useState(0);
 
-  const activeMediaRef = useRef<any>(null);
-  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
-
-  const projectIndex =
-    slug !== undefined ? projectSlugToIndexLUT[slug] : undefined;
-  const project =
-    projectIndex !== undefined ? portfolioData.projects[projectIndex] : null;
+  const pIdx = slug !== undefined ? projectSlugToIndexLUT[slug] : undefined,
+    project = pIdx !== undefined ? portfolioData.projects[pIdx] : null;
+  const hasCaption = !!carouselRef.current?.activeMedia?.captionElement;
 
   useEffect(() => {
-    const dialog = dialogRef.current;
-    if (!dialog || !project) return;
-    dialog.showModal();
-    return () => dialog.close();
+    const d = dialogRef.current;
+    if (!d || !project) return;
+    d.showModal();
+    return () => d.close();
   }, [project]);
 
-  if (!project) return null;
+  useEffect(() => {
+    return carouselRef.current?.onSlideChange?.((i: number) => setIdx(i));
+  }, [project, carouselRef.current]);
 
+  if (!project) return null;
   const rawTotal = project.carouselMedia?.length || 0;
 
   return (
@@ -70,28 +74,35 @@ export default function ProjectModal() {
           className={`modal-panes-body ${isLightboxOpen ? "is-lightbox-active" : ""}`}
         >
           <section className="pane-left-carousel">
-            <ProjectCarousel
-              activeMediaRef={activeMediaRef}
+            <MediaCarousel
+              activeMediaRef={carouselRef}
               mediaList={project.carouselMedia}
             />
-
             <LightboxViewer
               mediaItem={project.carouselMedia}
-              carouselRef={activeMediaRef}
+              carouselRef={carouselRef}
               isOpen={isLightboxOpen}
             />
 
-            <CarouselControls length={rawTotal} carouselRef={activeMediaRef}>
+            <CarouselDashboard length={rawTotal} carouselRef={carouselRef}>
               <button
                 type="button"
                 className="control-btn"
-                onClick={() => setIsLightboxOpen((prev) => !prev)}
+                disabled={!hasCaption}
+                aria-pressed={isCaptionActive}
+                onClick={() => setIsCaptionActive(!isCaptionActive)}
               >
-                {isLightboxOpen ? "✕ Close View" : "🔍 Lightbox"}
+                {isCaptionActive && hasCaption ? "CC" : "CC/"}
               </button>
-            </CarouselControls>
+              <button
+                type="button"
+                className="control-btn"
+                onClick={() => setIsLightboxOpen(!isLightboxOpen)}
+              >
+                {isLightboxOpen ? "✕" : "🔍"}
+              </button>
+            </CarouselDashboard>
           </section>
-
           <aside className="pane-right-details">
             <p className="modal-main-description-text">{project.description}</p>
           </aside>

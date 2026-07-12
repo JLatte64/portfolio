@@ -37,20 +37,6 @@ export default function LightboxViewer({
   return (
     <div className={`lightbox-overlay-fullscreen ${isOpen ? "is-open" : ""}`}>
       <div className="lightbox-viewport-window">
-        <button
-          type="button"
-          className="lightbox-arrow-btn arrow-prev"
-          onClick={() => emblaApiRef.current?.scrollPrev()}
-        >
-          ⟨
-        </button>
-        <button
-          type="button"
-          className="lightbox-arrow-btn arrow-next"
-          onClick={() => emblaApiRef.current?.scrollNext()}
-        >
-          ⟩
-        </button>
         {mediaItem.type === "image" ? (
           <TransformWrapper initialScale={1} minScale={1} maxScale={2}>
             <TransformComponent

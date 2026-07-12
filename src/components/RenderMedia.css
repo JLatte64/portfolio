@@ -6,6 +6,13 @@
   height: 100%;
 } */
 
+.vds-buffering-indicator {
+  display: none !important;
+}
+
+.media-caption {
+}
+
 .universal-media-asset {
   width: 100%;
   height: 100%;
