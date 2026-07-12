@@ -79,9 +79,9 @@ export default function ProjectModal() {
               mediaList={project.carouselMedia}
             />
             <LightboxViewer
-              mediaItem={project.carouselMedia}
               carouselRef={carouselRef}
               isOpen={isLightboxOpen}
+              onClose={() => setIsLightboxOpen(false)}
             />
 
             <CarouselDashboard length={rawTotal} carouselRef={carouselRef}>

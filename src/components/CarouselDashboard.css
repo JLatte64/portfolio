@@ -1,9 +1,13 @@
+:root {
+  --carousel-dashboard-height: 110px;
+}
+
 .carousel-dashboard-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  bottom: 110px;
+  bottom: var(--carousel-dashboard-height);
   pointer-events: none;
 
   transform: translateZ(10px);
