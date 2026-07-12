@@ -52,20 +52,19 @@ export function AssetStatusCard({
   );
 }
 
-const registry: Record<
-  string,
-  { status: "loading" | "loaded" | "error"; subs: Set<(s: any) => void> }
-> = {};
+const registry: Record<string, "loading" | "loaded" | "error"> = {};
 
 export const MemoMediaWrapper = React.memo(
   ({
     item,
     exposedRef,
     shouldLazyLoad = false,
+    anchorCaptions = false,
   }: {
     item: MediaData;
     exposedRef?: React.RefObject<AssetHandles | null>;
     shouldLazyLoad?: boolean;
+    anchorCaptions?: boolean;
   }) => {
     const isErr = !item?.src || item.type === "error",
       assetKey = item?.src
@@ -73,7 +72,7 @@ export const MemoMediaWrapper = React.memo(
         : "empty";
     const [loadingState, setLoadingState] = useState<
       "loading" | "loaded" | "error"
-    >(isErr ? "error" : registry[assetKey]?.status || "loading");
+    >(isErr ? "error" : registry[assetKey] || "loading");
     const mediaRef = useRef<any>(null),
       captionRef = useRef<HTMLElement>(null);
 
@@ -82,36 +81,39 @@ export const MemoMediaWrapper = React.memo(
       captionElement: captionRef.current,
     }));
 
+    const setGlobalStatus = useCallback(
+      (status: "loaded" | "error") => {
+        if (isErr) return;
+        registry[assetKey] = status;
+        setLoadingState(status);
+        document
+          .querySelectorAll(`[data-asset-key="${assetKey}"]`)
+          .forEach((el) => el.setAttribute("data-media-status", status));
+      },
+      [assetKey, isErr],
+    );
+
     useEffect(() => {
       if (isErr) return setLoadingState("error");
-      if (!registry[assetKey])
-        registry[assetKey] = { status: "loading", subs: new Set() };
-      const reg = registry[assetKey];
-      reg.subs.add(setLoadingState);
-      if (reg.status !== loadingState) setLoadingState(reg.status);
+      if (!registry[assetKey]) registry[assetKey] = "loading";
+      if (registry[assetKey] !== "loading") {
+        setGlobalStatus(registry[assetKey]);
+        return;
+      }
 
       const n = mediaRef.current;
       if (
         n &&
         ((n instanceof HTMLImageElement && n.complete) || n.state?.canPlay)
-      ) {
-        reg.status = "loaded";
-        reg.subs.forEach((s) => s("loaded"));
-      }
-      return () => {
-        reg.subs.delete(setLoadingState);
-        if (!reg.subs.size) delete registry[assetKey];
-      };
-    }, [assetKey, isErr]);
+      )
+        setGlobalStatus("loaded");
 
-    const setGlobalStatus = useCallback(
-      (status: "loaded" | "error") => {
-        if (!registry[assetKey]) return;
-        registry[assetKey].status = status;
-        registry[assetKey].subs.forEach((s) => s(status));
-      },
-      [assetKey],
-    );
+      return () => {
+        if (registry[assetKey] === "loading") {
+          delete registry[assetKey];
+        }
+      };
+    }, [assetKey, isErr, setGlobalStatus]);
 
     if (loadingState === "error")
       return <AssetStatusCard status="error" description={item.caption} />;
@@ -129,7 +131,8 @@ export const MemoMediaWrapper = React.memo(
       <Comp
         {...(hasCaption
           ? {
-              className: "media-caption",
+              className: "universal-asset-figure-wrapper",
+              "data-anchor-captions": anchorCaptions || undefined,
               "aria-describedby": `asset-caption-id-${assetKey}`,
             }
           : {})}
@@ -146,6 +149,9 @@ export const MemoMediaWrapper = React.memo(
             playsInline
             controls
             load="visible"
+            data-asset-key={assetKey}
+            data-media-status={loadingState}
+            logLevel="warn"
             {...ev}
           >
             <MediaProvider />
@@ -160,6 +166,8 @@ export const MemoMediaWrapper = React.memo(
             alt={item.alt || item.caption}
             loading={shouldLazyLoad ? "lazy" : "eager"}
             decoding="async"
+            data-asset-key={assetKey}
+            data-media-status={loadingState}
             {...ev}
           />
         ) : (
@@ -171,21 +179,24 @@ export const MemoMediaWrapper = React.memo(
             title={item.caption}
             allowFullScreen
             loading={shouldLazyLoad ? "lazy" : "eager"}
+            data-asset-key={assetKey}
+            data-media-status={loadingState}
             {...ev}
           />
         )}
-        {loadingState === "loading" && (
-          <AssetStatusCard status="loading" description={item.caption} />
-        )}
-        {hasCaption && (
-          <figcaption
-            id={`asset-caption-id-${assetKey}`}
-            ref={captionRef}
-            className="universal-asset-caption"
-          >
-            {item.caption}
-          </figcaption>
-        )}
+        <div data-status-overlay={assetKey} className="asset-status-wrapper">
+          {loadingState === "loading" && (
+            <AssetStatusCard status="loading" description={item.caption} />
+          )}
+        </div>
+        {/* Hidden fallback reference keeps your carousel metrics functioning cleanly */}
+        <span
+          ref={captionRef}
+          className="sr-only"
+          id={`asset-caption-id-${assetKey}`}
+        >
+          {item.caption}
+        </span>
       </Comp>
     );
   },

@@ -1,11 +1,19 @@
-import { useEffect, useRef } from "react";
+// src/components/LightboxViewer.tsx
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { MemoMediaWrapper } from "./RenderMedia";
 import "./Lightbox.css";
 
-export default function LightboxViewer({ carouselRef, isOpen, onClose }: any) {
+export default function LightboxViewer({
+  carouselRef,
+  isOpen,
+  onClose,
+  isCaptionActive,
+}: any) {
   const overlayRef = useRef<HTMLDivElement>(null),
     transformRef = useRef<any>(null);
+  const [portalDock, setPortalDock] = useState<HTMLElement | null>(null);
 
   const embla = carouselRef.current?.emblaApi,
     activeMedia = carouselRef.current?.activeMedia;
@@ -13,11 +21,26 @@ export default function LightboxViewer({ carouselRef, isOpen, onClose }: any) {
     src = activeMedia?.mediaElement?.src;
 
   useEffect(() => {
-    if (!isOpen || !carouselRef.current?.onSlideChange) return;
-    return carouselRef.current.onSlideChange(() =>
-      transformRef.current?.resetTransform?.(0),
+    if (isOpen)
+      setPortalDock(document.getElementById("lightbox-caption-portal-dock"));
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen || !isCaptionActive || !portalDock) return;
+    const mediaContainer = overlayRef.current?.querySelector(
+      ".universal-media-asset",
     );
-  }, [isOpen, carouselRef, carouselRef.current]);
+    if (mediaContainer)
+      mediaContainer.setAttribute("aria-describedby", "lightbox-live-caption");
+    return () => mediaContainer?.removeAttribute("aria-describedby");
+  }, [isOpen, isCaptionActive, portalDock, src]);
+
+  useEffect(() => {
+    if (!isOpen || !carouselRef.current?.onSlideChange) return;
+    return carouselRef.current.onSlideChange(() => {
+      transformRef.current?.resetTransform?.(0);
+    });
+  }, [isOpen, carouselRef]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -35,9 +58,12 @@ export default function LightboxViewer({ carouselRef, isOpen, onClose }: any) {
 
   if (!isOpen || !src) return null;
 
-  const lightboxContent = (
+  const textPayload = isCaptionActive
+    ? activeMedia?.captionElement?.textContent || ""
+    : "";
+  const baseAssetContent = (
     <MemoMediaWrapper
-      item={{ src, type: isImage ? "image" : "video" }}
+      item={{ src, type: isImage ? "image" : "video", caption: "" }}
       shouldLazyLoad={false}
     />
   );
@@ -54,24 +80,38 @@ export default function LightboxViewer({ carouselRef, isOpen, onClose }: any) {
     >
       <div className="lightbox-viewport-window" role="document">
         {isImage ? (
-          <TransformWrapper
-            ref={transformRef}
-            initialScale={1}
-            minScale={1}
-            maxScale={3}
-          >
-            <TransformComponent
-              wrapperStyle={{ width: "100%", height: "100%" }}
+          <>
+            <TransformWrapper
+              ref={transformRef}
+              initialScale={1}
+              minScale={1}
+              maxScale={3}
             >
-              {lightboxContent}
-            </TransformComponent>
-          </TransformWrapper>
+              <TransformComponent
+                wrapperStyle={{ width: "100%", height: "100%" }}
+              >
+                {baseAssetContent}
+              </TransformComponent>
+            </TransformWrapper>
+            {portalDock &&
+              textPayload &&
+              createPortal(
+                <div
+                  id="lightbox-live-caption"
+                  className="lightbox-custom-floating-bubble"
+                >
+                  {textPayload}
+                </div>,
+                portalDock,
+              )}
+          </>
         ) : (
-          lightboxContent
+          <MemoMediaWrapper
+            item={{ src, type: "video", caption: textPayload }}
+            shouldLazyLoad={false}
+          />
         )}
       </div>
     </div>
   );
 }
-
-// knowing what you know now about my carousel and this whole workflow, is there anything we can optimize about the controls, the lightbox, or the RenderMedia function?

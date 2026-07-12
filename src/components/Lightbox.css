@@ -4,17 +4,14 @@
   left: 0;
   right: 0;
   bottom: var(--carousel-dashboard-height);
-
   width: 100%;
   background-color: #000000;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   overflow: hidden;
-
   transform: scale(1) translateZ(10px);
   transform-style: preserve-3d;
-
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -41,4 +38,20 @@
   justify-content: center;
   overflow: hidden;
   position: relative;
+}
+
+.lightbox-custom-floating-bubble {
+  display: block;
+  width: auto;
+  max-width: 80%;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.85);
+  color: #ffffff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+  white-space: nowrap;
+  font-weight: 500;
+  pointer-events: none; /* Clicks and gestures pass right through safely */
 }

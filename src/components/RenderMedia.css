@@ -1,16 +1,21 @@
-/* .universal-asset-group {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  width: 100%;
-  height: 100%;
-} */
-
-.vds-buffering-indicator {
+/* src/components/RenderMedia.css */
+.universal-media-asset[data-media-status="loaded"] ~ [data-status-overlay] {
   display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
-.media-caption {
+.universal-asset-figure-wrapper {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box;
+  position: relative !important;
 }
 
 .universal-media-asset {
@@ -20,9 +25,10 @@
   max-height: 100%;
   border: none;
   object-fit: contain;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+}
+
+.vds-buffering-indicator {
+  display: none !important;
 }
 
 .asset-status-card {
@@ -49,7 +55,6 @@
   background-color: #121212;
   border-radius: 8px;
 }
-
 .asset-spinner-ring {
   width: 40px;
   height: 40px;
@@ -58,18 +63,6 @@
   border-top-color: #ffffff;
   animation: assetSpinCircle 0.8s infinite linear;
 }
-
-.universal-asset-caption {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 0.75rem 1rem;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-  color: #ffffff;
-  font-size: 0.875rem;
-}
-
 @keyframes assetShimmerPulse {
   0% {
     background-position: 200% 0;
@@ -78,7 +71,6 @@
     background-position: -200% 0;
   }
 }
-
 @keyframes assetSpinCircle {
   to {
     transform: rotate(360deg);

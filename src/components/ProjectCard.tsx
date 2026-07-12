@@ -19,7 +19,7 @@ export default function ProjectCard({
 
   return (
     <Link
-      to={`${slug}`}
+      to={`/${slug}`}
       className="project-card-link"
       onClick={onClick}
       key={`${project.title}-${projectIndex}`}

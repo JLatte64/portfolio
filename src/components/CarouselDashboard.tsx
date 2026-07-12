@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from "react";
 import "./CarouselDashboard.css";
 
+interface CarouselDashboardProps {
+  length: number;
+  carouselRef: React.RefObject<any>;
+  children?: React.ReactNode;
+}
+
 export default function CarouselDashboard({
   length,
   carouselRef,
   children,
-}: {
-  length: number;
-  carouselRef: React.RefObject<any>;
-  children?: React.ReactNode;
-}) {
-  const [selectedIndex, setSelectedIndex] = useState(0);
+}: CarouselDashboardProps) {
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const [api, setApi] = useState<any>(null);
+  const [isMounted, setIsMounted] = useState<boolean>(false);
 
   useEffect(() => {
+    setIsMounted(true);
+
     const activeRef = carouselRef.current;
     if (!activeRef) return;
 
@@ -45,13 +50,15 @@ export default function CarouselDashboard({
 
   if (length <= 0) return null;
 
+  const isControlDisabled: boolean = !isMounted || !api;
+
   return (
     <React.Fragment>
       <div className="carousel-dashboard-overlay">
         <button
           type="button"
           className="carousel-arrow-btn arrow-prev"
-          disabled={!api}
+          disabled={isControlDisabled}
           onClick={() => api?.scrollPrev()}
         >
           ⟨
@@ -59,12 +66,13 @@ export default function CarouselDashboard({
         <button
           type="button"
           className="carousel-arrow-btn arrow-next"
-          disabled={!api}
+          disabled={isControlDisabled}
           onClick={() => api?.scrollNext()}
         >
           ⟩
         </button>
       </div>
+
       <div className="carousel-dashboard-bar">
         <div className="dashboard-row-layout">
           <div className="carousel-dots-wrapper">
@@ -73,7 +81,7 @@ export default function CarouselDashboard({
                 key={`dot-${idx}`}
                 type="button"
                 className={`indicator-dot ${idx === selectedIndex ? "is-active" : ""}`}
-                disabled={!api}
+                disabled={isControlDisabled}
                 onClick={() => api?.scrollTo(idx)}
                 aria-label={`Go to slide ${idx + 1}`}
               />

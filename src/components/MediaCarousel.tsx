@@ -1,5 +1,4 @@
-// src/components/MediaCarousel.tsx
-import { useEffect, useImperativeHandle, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import type { MediaData } from "../types/mediaTypes";
 import { MemoMediaWrapper } from "./RenderMedia";
@@ -22,33 +21,72 @@ export default function MediaCarousel({ mediaList, activeMediaRef }: any) {
 
   const stopActiveMediaPlayback = () => {
     const prev = prevIndexRef.current,
-      slide = slideRefs.current[prev],
-      src = clonedList[prev]?.src || "unknown";
+      slide = slideRefs.current[prev];
     if (!slide?.mediaElement) return;
-    if (typeof slide.mediaElement.pause === "function") {
+
+    const player = slide.mediaElement;
+    const isPlayerDestroyed =
+      player && ("destroyed" in player ? player.destroyed : false);
+
+    if (typeof player.pause === "function" && !isPlayerDestroyed) {
       try {
-        const p = slide.mediaElement.pause();
-        if (p instanceof Promise) p.catch(() => {});
+        const pausePromise = player.pause();
+        if (pausePromise instanceof Promise) {
+          pausePromise.catch(() => {});
+        }
       } catch {}
-    } else if (
-      slide.mediaElement instanceof HTMLIFrameElement &&
-      slide.mediaElement.src
-    ) {
-      const orig = slide.mediaElement.src;
-      slide.mediaElement.src = "about:blank";
+    } else if (player instanceof HTMLIFrameElement && player.src) {
+      const orig = player.src;
+      player.src = "about:blank";
       setTimeout(() => {
-        if (slide.mediaElement) slide.mediaElement.src = orig;
+        if (player) player.src = orig;
       }, 0);
     }
   };
 
   useEffect(() => {
     if (!emblaApi) return;
-    prevIndexRef.current = emblaApi.selectedScrollSnap() ?? 0;
 
-    // 🚀 Notify dashboard elements that the api instance is live and ready
-    initListeners.current.forEach((cb) => cb(emblaApi));
+    const syncClones = () => {
+      if (rawTotal > 2) return;
+      const currentSnap = emblaApi.selectedScrollSnap(),
+        activeSlide = slideRefs.current[currentSnap],
+        activePlayer = activeSlide?.mediaElement;
+      if (
+        !activePlayer ||
+        typeof activePlayer.subscribe !== "function" ||
+        activePlayer.state?.destroyed
+      )
+        return;
 
+      return activePlayer.subscribe(({ currentTime, paused }: any) => {
+        const activeSrc = clonedList[currentSnap]?.src;
+        slideRefs.current.forEach((targetSlide, targetIdx) => {
+          if (targetIdx === currentSnap) return;
+          const clonePlayer = targetSlide?.mediaElement;
+          if (
+            clonePlayer &&
+            clonedList[targetIdx]?.src === activeSrc &&
+            typeof clonePlayer.pause === "function" &&
+            !clonePlayer.state?.destroyed
+          ) {
+            if (Math.abs(clonePlayer.currentTime - currentTime) > 0.3)
+              clonePlayer.currentTime = currentTime;
+            if (paused && !clonePlayer.paused) {
+              try {
+                clonePlayer.pause();
+              } catch {}
+            } else if (!paused && clonePlayer.paused) {
+              try {
+                clonePlayer.play();
+              } catch {}
+            }
+          }
+        });
+      });
+    };
+
+    let unsubscribeTelemetry = syncClones();
     const handleTransition = () => {
       const current = emblaApi.selectedScrollSnap() ?? 0;
       setSelectedIndex(current);
@@ -57,19 +95,23 @@ export default function MediaCarousel({ mediaList, activeMediaRef }: any) {
         stopActiveMediaPlayback();
         prevIndexRef.current = current;
       }
+      if (unsubscribeTelemetry) unsubscribeTelemetry();
+      unsubscribeTelemetry = syncClones();
     };
 
+    initListeners.current.forEach((cb) => cb(emblaApi));
     ["select", "reInit"].forEach((ev) =>
       emblaApi.on(ev as any, handleTransition),
     );
-    return () =>
+    return () => {
+      if (unsubscribeTelemetry) unsubscribeTelemetry();
       ["select", "reInit"].forEach((ev) =>
         emblaApi.off(ev as any, handleTransition),
       );
-  }, [emblaApi, rawTotal]);
+    };
+  }, [emblaApi, rawTotal, clonedList]);
 
-  // 🚀 SINGLE REF INTERFACE: Exposes raw hooks, dynamic getters, and timing-safe registries
-  useImperativeHandle(
+  React.useImperativeHandle(
     activeMediaRef,
     () => ({
       get emblaApi() {
@@ -112,33 +154,30 @@ export default function MediaCarousel({ mediaList, activeMediaRef }: any) {
         aria-live="polite"
       >
         <div className="embla__container">
-          {clonedList.map((item: MediaData, idx: number) => {
-            const isActive = idx === selectedIndex;
-            return (
-              <div
-                key={`${item.src}-slide-${idx}`}
-                className="embla__slide"
-                role="group"
-                aria-roledescription="slide"
-                aria-label={`${(idx % rawTotal) + 1} of ${rawTotal}`}
-                inert={!isActive ? true : undefined}
-                tabIndex={isActive ? 0 : -1}
-              >
-                <MemoMediaWrapper
-                  item={item}
-                  shouldLazyLoad={true}
-                  exposedRef={{
-                    get current() {
-                      return slideRefs.current[idx];
-                    },
-                    set current(val) {
-                      slideRefs.current[idx] = val;
-                    },
-                  }}
-                />
-              </div>
-            );
-          })}
+          {clonedList.map((item: MediaData, idx: number) => (
+            <div
+              key={`${item.src}-slide-${idx}`}
+              className="embla__slide"
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${(idx % rawTotal) + 1} of ${rawTotal}`}
+              inert={idx !== selectedIndex ? true : undefined}
+              tabIndex={idx === selectedIndex ? 0 : -1}
+            >
+              <MemoMediaWrapper
+                item={item}
+                shouldLazyLoad={true}
+                exposedRef={{
+                  get current() {
+                    return slideRefs.current[idx];
+                  },
+                  set current(val) {
+                    slideRefs.current[idx] = val;
+                  },
+                }}
+              />
+            </div>
+          ))}
         </div>
       </div>
     </div>
