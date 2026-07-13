@@ -4,7 +4,7 @@
     "target": "es2023",
     "lib": ["ES2023"],
     "module": "esnext",
-    "types": ["node"],
+    "types": ["vite/client", "node"],
     "skipLibCheck": true,
 
     /* Bundler mode */
@@ -22,14 +22,13 @@
 
     "strict": true,
     "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
-
-    "composite": true
+    "allowSyntheticDefaultImports": true
   },
   "include": [
     "vite.config.ts",
     "react-router.config.ts",
-    "src/data/portfolioData.ts",
-    "src/types/**/*"
+    "get-base-url.ts",
+    "src/config/routes.config.ts",
+    "src/data/portfolioData.ts"
   ]
 }

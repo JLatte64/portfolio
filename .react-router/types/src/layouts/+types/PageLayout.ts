@@ -13,13 +13,43 @@ type Matches = [{
   id: "root";
   module: typeof import("../../root.js");
 }, {
-  id: "home-index";
+  id: "layouts/PageLayout";
   module: typeof import("../PageLayout.js");
 }] | [{
   id: "root";
   module: typeof import("../../root.js");
 }, {
-  id: "project-slug";
+  id: "layouts/PageLayout";
+  module: typeof import("../PageLayout.js");
+}, {
+  id: "home-view";
+  module: typeof import("../PageLayout.js");
+}] | [{
+  id: "root";
+  module: typeof import("../../root.js");
+}, {
+  id: "layouts/PageLayout";
+  module: typeof import("../PageLayout.js");
+}, {
+  id: "about-view";
+  module: typeof import("../PageLayout.js");
+}] | [{
+  id: "root";
+  module: typeof import("../../root.js");
+}, {
+  id: "layouts/PageLayout";
+  module: typeof import("../PageLayout.js");
+}, {
+  id: "contact-view";
+  module: typeof import("../PageLayout.js");
+}] | [{
+  id: "root";
+  module: typeof import("../../root.js");
+}, {
+  id: "layouts/PageLayout";
+  module: typeof import("../PageLayout.js");
+}, {
+  id: "project-view";
   module: typeof import("../PageLayout.js");
 }];
 

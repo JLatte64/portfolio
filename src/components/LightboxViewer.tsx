@@ -1,39 +1,17 @@
 // src/components/LightboxViewer.tsx
-import { useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
+import { useEffect, useRef } from "react";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { MemoMediaWrapper } from "./RenderMedia";
 import "./Lightbox.css";
 
-export default function LightboxViewer({
-  carouselRef,
-  isOpen,
-  onClose,
-  isCaptionActive,
-}: any) {
+export default function LightboxViewer({ carouselRef, isOpen, onClose }: any) {
   const overlayRef = useRef<HTMLDivElement>(null),
     transformRef = useRef<any>(null);
-  const [portalDock, setPortalDock] = useState<HTMLElement | null>(null);
 
   const embla = carouselRef.current?.emblaApi,
     activeMedia = carouselRef.current?.activeMedia;
   const isImage = activeMedia?.mediaElement?.tagName?.toLowerCase() === "img",
     src = activeMedia?.mediaElement?.src;
-
-  useEffect(() => {
-    if (isOpen)
-      setPortalDock(document.getElementById("lightbox-caption-portal-dock"));
-  }, [isOpen]);
-
-  useEffect(() => {
-    if (!isOpen || !isCaptionActive || !portalDock) return;
-    const mediaContainer = overlayRef.current?.querySelector(
-      ".universal-media-asset",
-    );
-    if (mediaContainer)
-      mediaContainer.setAttribute("aria-describedby", "lightbox-live-caption");
-    return () => mediaContainer?.removeAttribute("aria-describedby");
-  }, [isOpen, isCaptionActive, portalDock, src]);
 
   useEffect(() => {
     if (!isOpen || !carouselRef.current?.onSlideChange) return;
@@ -57,10 +35,6 @@ export default function LightboxViewer({
   }, [isOpen, onClose]);
 
   if (!isOpen || !src) return null;
-
-  const textPayload = isCaptionActive
-    ? activeMedia?.captionElement?.textContent || ""
-    : "";
   const baseAssetContent = (
     <MemoMediaWrapper
       item={{ src, type: isImage ? "image" : "video", caption: "" }}
@@ -93,23 +67,9 @@ export default function LightboxViewer({
                 {baseAssetContent}
               </TransformComponent>
             </TransformWrapper>
-            {portalDock &&
-              textPayload &&
-              createPortal(
-                <div
-                  id="lightbox-live-caption"
-                  className="lightbox-custom-floating-bubble"
-                >
-                  {textPayload}
-                </div>,
-                portalDock,
-              )}
           </>
         ) : (
-          <MemoMediaWrapper
-            item={{ src, type: "video", caption: textPayload }}
-            shouldLazyLoad={false}
-          />
+          baseAssetContent
         )}
       </div>
     </div>

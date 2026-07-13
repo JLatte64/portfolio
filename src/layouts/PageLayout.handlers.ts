@@ -1,6 +1,7 @@
 // src/layouts/PageLayout.handlers.ts
 import type { LoaderFunctionArgs, MetaFunction } from "react-router";
 import { projectSlugToIndexLUT, portfolioData } from "../data/portfolioData";
+import { ABSOLUTE_ROUTES } from "../config/routes.config";
 
 export interface LoaderData {
   title: string;
@@ -18,44 +19,54 @@ export interface LoaderData {
 
 const fixPath = (path: string) => (path.startsWith("/") ? path : `/${path}`);
 
-export function loader({ params, request }: LoaderFunctionArgs): LoaderData {
+export function loader({ params }: LoaderFunctionArgs): LoaderData {
   const { slug } = params as { slug?: string };
   const activeIndex = projectSlugToIndexLUT[slug ?? ""] ?? undefined;
   const isHome = slug === undefined || activeIndex === undefined;
-  const urlInstance = new URL(request.url);
-  const siteOrigin = urlInstance.origin;
+  const siteUrl = ABSOLUTE_ROUTES.home.replace(/\/$/, "");
+
   const background = portfolioData.backgroundInfo;
   const name = background.name;
   const github =
-    background.socials.find((s) => "GitHub" in s)?.["GitHub"] || "";
+    background.socials.find((s: any) => "GitHub" in s)?.["GitHub"] || "";
   const linkedin =
-    background.socials.find((s) => "LinkedIn" in s)?.["LinkedIn"] || "";
-  const email = background.contacts.find((c) => "Email" in c)?.["Email"] || "";
-  const phone = background.contacts.find((c) => "Phone" in c)?.["Phone"] || "";
+    background.socials.find((s: any) => "LinkedIn" in s)?.["LinkedIn"] || "";
+  const email =
+    background.contacts.find((c: any) => "Email" in c)?.["Email"] || "";
+  const phone =
+    background.contacts.find((c: any) => "Phone" in c)?.["Phone"] || "";
   const profileSocials = { github, linkedin, email, phone, name };
+
   const project = !isHome ? portfolioData.projects[activeIndex!] : null;
+
   const targetTitle = isHome
     ? portfolioData.siteTitle
     : `${project!.title} | ${name}`;
+
   const targetDesc = isHome
     ? portfolioData.siteDescription
     : project!.description ||
       `Explore project details about ${project!.title}.`;
+
   const relativeAssetPath = isHome
     ? portfolioData.bannerImage.src
     : project!.thumbnailImage.src;
 
+  const computedPageUrl = isHome
+    ? ABSOLUTE_ROUTES.home
+    : ABSOLUTE_ROUTES.toProject(slug!);
+
   return {
     title: targetTitle,
     description: targetDesc,
-    image: `${siteOrigin}${fixPath(relativeAssetPath)}`,
-    url: `${siteOrigin}${urlInstance.pathname}`,
+    image: `${siteUrl}${fixPath(relativeAssetPath)}`,
+    url: computedPageUrl,
     profileSocials,
   };
 }
 
 export const meta: MetaFunction<typeof loader> = ({ loaderData }) => {
-  if (!loaderData) return [{ title: "Portfolio" }];
+  if (!loaderData) return [{ title: "Portfolio //" }];
 
   const { github, linkedin, name } = loaderData.profileSocials;
   const { title, description, image, url } = loaderData;

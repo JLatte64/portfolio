@@ -1,6 +1,6 @@
 // src/layouts/PageLayout.tsx
 
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { projectSlugToIndexLUT } from "../data/portfolioData";
 import "./PageLayout.css";
 
@@ -15,9 +15,13 @@ export { loader, meta } from "./PageLayout.handlers";
 
 export default function PageLayout() {
   const { slug } = useParams<{ slug?: string }>();
-
+  const navigate = useNavigate();
   const activeIndex =
     slug !== undefined ? projectSlugToIndexLUT[slug] : undefined;
+
+  const handleCloseRoute = () => {
+    navigate("/", { replace: true });
+  };
 
   return (
     <div className="portfolio-app-root" style={{ position: "relative" }}>
@@ -28,9 +32,12 @@ export default function PageLayout() {
         <ContactFooter />
       </main>
       <Navbar />
-      {activeIndex !== undefined && activeIndex !== null && (
-        <ProjectModal key={`active-modal-node-${activeIndex}`} />
-      )}
+
+      <ProjectModal
+        key={`active-modal-node-${activeIndex}`}
+        projIndex={activeIndex}
+        onShouldClose={handleCloseRoute}
+      />
     </div>
   );
 }

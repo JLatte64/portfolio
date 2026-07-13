@@ -4,12 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "react-router dev",
     "clean": "rimraf build dist .react-router node_modules/.vite node_modules/.tmp",
-    "prebuild": "npm run clean",
-    "build": "tsc -b && react-router build && node copy-fallback.js",
+    "typecheck": "tsc --noEmit -p tsconfig.app.json && tsc --noEmit -p tsconfig.node.json",
     "lint": "eslint .",
-    "preview": "react-router preview"
+    "predev": "npm run clean && npm run typecheck",
+    "dev": "react-router dev",
+    "prebuild": "npm run clean",
+    "build": "npm run typecheck && react-router build && node copy-fallback.js",
+    "prepreview": "npm run build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@vidstack/react": "^1.12.12",

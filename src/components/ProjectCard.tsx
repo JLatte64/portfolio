@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import "./ProjectCard.css";
 import { portfolioData, projectIndexToSlugLUT } from "../data/portfolioData";
 import type { ProjectData } from "../types/portfolioTypes";
+import { ABSOLUTE_ROUTES } from "../config/routes.config";
 
 interface ProjectCardProps {
   projectIndex: number;
@@ -19,7 +20,7 @@ export default function ProjectCard({
 
   return (
     <Link
-      to={`/${slug}`}
+      to={ABSOLUTE_ROUTES.toProject(slug)}
       className="project-card-link"
       onClick={onClick}
       key={`${project.title}-${projectIndex}`}

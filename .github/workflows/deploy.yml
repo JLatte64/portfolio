@@ -33,8 +33,13 @@ jobs:
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
 
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
       - name: Build
-        # Triggers "tsc -b && react-router build && node copy-fallback.js"
+        env:
+          VITE_APP_BASE: ${{ steps.pages.outputs.base_path }}/
         run: npm run build
 
       # - name: Create Custom Domain Connector (CNAME)
@@ -42,13 +47,9 @@ jobs:
       #   # It writes your clean root domain directly into your build folder.
       #   run: echo "yourdomain.com" > build/client/CNAME
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # CRITICAL: Target React Router v7's build path instead of Vite's old dist/ folder
           path: "./build/client"
 
       - name: Deploy to GitHub Pages

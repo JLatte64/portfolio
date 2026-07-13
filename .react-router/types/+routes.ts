@@ -14,9 +14,15 @@ type Pages = {
   "/": {
     params: {};
   };
-  "/:slug?": {
+  "/about": {
+    params: {};
+  };
+  "/contact": {
+    params: {};
+  };
+  "/work/:slug": {
     params: {
-      "slug"?: string;
+      "slug": string;
     };
   };
 };
@@ -24,19 +30,31 @@ type Pages = {
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/" | "/:slug?";
+    page: "/" | "/about" | "/contact" | "/work/:slug";
   };
   "./layouts/PageLayout.tsx": {
-    id: "home-index";
+    id: "layouts/PageLayout";
+    page: "/" | "/about" | "/contact" | "/work/:slug";
+  } | {
+    id: "home-view";
     page: "/";
   } | {
-    id: "project-slug";
-    page: "/:slug?";
+    id: "about-view";
+    page: "/about";
+  } | {
+    id: "contact-view";
+    page: "/contact";
+  } | {
+    id: "project-view";
+    page: "/work/:slug";
   };
 };
 
 type RouteModules = {
   "root": typeof import("./src/root.tsx");
-  "home-index": typeof import("./src/./layouts/PageLayout.tsx");
-  "project-slug": typeof import("./src/./layouts/PageLayout.tsx");
+  "layouts/PageLayout": typeof import("./src/./layouts/PageLayout.tsx");
+  "home-view": typeof import("./src/./layouts/PageLayout.tsx");
+  "about-view": typeof import("./src/./layouts/PageLayout.tsx");
+  "contact-view": typeof import("./src/./layouts/PageLayout.tsx");
+  "project-view": typeof import("./src/./layouts/PageLayout.tsx");
 };
