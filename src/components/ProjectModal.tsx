@@ -1,4 +1,3 @@
-// src/components/ProjectModal.tsx
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import MediaCarousel from "./MediaCarousel";
@@ -9,35 +8,36 @@ import { useNavigate } from "react-router";
 import { ABSOLUTE_ROUTES } from "../config/routes.config";
 import { useProject } from "../hooks/useProject";
 import CopyLinkButton from "./CopyLinkbutton";
+import { useLayoutState } from "../hooks/useLayoutState";
+
+type ModalLifecycle = "opening" | "open" | "closing";
 
 export default function ProjectModal() {
   const navigate = useNavigate();
   const dialogRef = useRef<HTMLDialogElement>(null),
     carouselRef = useRef<any>(null),
     captionDockRef = useRef<HTMLDivElement>(null);
-
-  const [isAnimateMounted, setIsAnimateMounted] = useState(false);
+  const [lifecycle, setLifecycle] = useState<ModalLifecycle>("opening");
 
   const [isCaptionActive, setIsCaptionActive] = useState(false),
     [activeCaption, setActiveCaption] = useState(""),
     [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   const modalFadeTimer = 100;
+  const { setMountPageLayout, rememberScroll } = useLayoutState();
   const { projectData } = useProject();
-  const scrollContainerRef = useRef<HTMLElement | null>(null);
 
   const handleSafeModalClose = (e?: React.SyntheticEvent | Event) => {
     if (!dialogRef?.current) return;
     e?.preventDefault?.();
-
-    if (dialogRef.current.open && isAnimateMounted) {
-      setIsAnimateMounted(false);
+    if (lifecycle === "open") {
+      setMountPageLayout(true);
+      setLifecycle("closing");
 
       setTimeout(() => {
         if (dialogRef.current) {
           dialogRef.current.close();
         }
-
         navigate(ABSOLUTE_ROUTES.home);
       }, modalFadeTimer);
     }
@@ -47,25 +47,23 @@ export default function ProjectModal() {
     if (!dialogRef.current || !projectData) return;
 
     if (!dialogRef.current.open) {
+      rememberScroll();
       dialogRef.current.showModal();
+      setLifecycle("opening");
     }
 
-    const liveContainer = document.querySelector(".portfolio-scroll-container");
-    if (liveContainer) {
-      scrollContainerRef.current = liveContainer as HTMLElement;
-
-      // 📸 Execute your high-performance hook capture routine instantly
-      //handleCapture();
-    }
-
-    // Trigger your scale-pop entry curve smoothly on the very next browser paint pass
     const frameId = requestAnimationFrame(() => {
-      setIsAnimateMounted(true);
+      setTimeout(() => {
+        setLifecycle("open");
+        setMountPageLayout(false);
+      }, modalFadeTimer);
     });
-    return () => cancelAnimationFrame(frameId);
-  }, [projectData]);
+    return () => {
+      cancelAnimationFrame(frameId);
+      setMountPageLayout(true);
+    };
+  }, [projectData, setMountPageLayout, modalFadeTimer]);
 
-  // Track global hardware shortcuts to bypass focused button keyboard traps completely
   useEffect(() => {
     const handleGlobalKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape" && !isLightboxOpen) {
@@ -78,7 +76,7 @@ export default function ProjectModal() {
       window.removeEventListener("keydown", handleGlobalKeyDown, {
         capture: true,
       });
-  }, [isAnimateMounted]);
+  }, [dialogRef?.current?.open]);
 
   // Monitor carousel track slide caption updates
   useEffect(() => {
@@ -104,10 +102,9 @@ export default function ProjectModal() {
     <dialog
       ref={dialogRef}
       style={{
-        "--modal-fade-timer": modalFadeTimer,
-        "--modal-backdrop-image": "none",
+        "--modal-fade-timer": `${modalFadeTimer}ms`,
       }}
-      className={`project-modal-dialog ${isAnimateMounted ? "mounted" : "unmounted"}`}
+      className={`project-modal-dialog ${lifecycle}`}
       onCancel={(e) => handleSafeModalClose(e)}
       onClose={undefined}
       aria-label={`Project Profile Viewport: ${projectData.title}`}

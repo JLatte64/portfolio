@@ -1,4 +1,4 @@
-import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
+import { Links, Meta, Outlet, Scripts } from "react-router";
 import "./index.css";
 
 export default function Root() {
@@ -12,8 +12,6 @@ export default function Root() {
       </head>
       <body>
         <Outlet />
-
-        <ScrollRestoration />
         <Scripts />
       </body>
     </html>
