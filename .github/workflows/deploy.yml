@@ -2,7 +2,7 @@ name: Deploy static content to Pages
 
 on:
   push:
-    branches: ["feature/rework-with-seo"]
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
