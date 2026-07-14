@@ -44,7 +44,8 @@ type RouteFiles = {
   } | {
     id: "contact-view";
     page: "/contact";
-  } | {
+  };
+  "./components/ProjectModal.tsx": {
     id: "project-view";
     page: "/work/:slug";
   };
@@ -56,5 +57,5 @@ type RouteModules = {
   "home-view": typeof import("./src/./layouts/PageLayout.tsx");
   "about-view": typeof import("./src/./layouts/PageLayout.tsx");
   "contact-view": typeof import("./src/./layouts/PageLayout.tsx");
-  "project-view": typeof import("./src/./layouts/PageLayout.tsx");
+  "project-view": typeof import("./src/./components/ProjectModal.tsx");
 };

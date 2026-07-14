@@ -1,10 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, type RefObject } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import type { MediaData } from "../types/mediaTypes";
 import { MemoMediaWrapper } from "./RenderMedia";
 import "./MediaCarousel.css";
 
-export default function MediaCarousel({ mediaList, activeMediaRef }: any) {
+interface MediaCarouselProps {
+  mediaList: MediaData[];
+  carouselRef?: RefObject<any> | null;
+}
+
+export default function MediaCarousel({
+  mediaList,
+  carouselRef,
+}: MediaCarouselProps) {
   const rawTotal = mediaList?.length || 0,
     clonedList = rawTotal === 2 ? [...mediaList, ...mediaList] : mediaList,
     renderTotal = clonedList?.length || 0;
@@ -112,7 +120,7 @@ export default function MediaCarousel({ mediaList, activeMediaRef }: any) {
   }, [emblaApi, rawTotal, clonedList]);
 
   React.useImperativeHandle(
-    activeMediaRef,
+    carouselRef,
     () => ({
       get emblaApi() {
         return emblaApi;

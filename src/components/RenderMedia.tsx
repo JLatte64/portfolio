@@ -84,8 +84,6 @@ export const MemoMediaWrapper = React.memo(
       }
     }, [resolvedSrc, item?.type]);
 
-    console.log("Loading resolved media from source: " + resolvedSrc);
-
     const hasCaption =
       item.type !== "video" && !!item.caption && loadingState === "loaded";
     const captionId = `caption-${item.type}-${item.src ? encodeURIComponent(item.src).slice(0, 10) : "empty"}`;

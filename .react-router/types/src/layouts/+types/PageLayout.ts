@@ -42,15 +42,6 @@ type Matches = [{
 }, {
   id: "contact-view";
   module: typeof import("../PageLayout.js");
-}] | [{
-  id: "root";
-  module: typeof import("../../root.js");
-}, {
-  id: "layouts/PageLayout";
-  module: typeof import("../PageLayout.js");
-}, {
-  id: "project-view";
-  module: typeof import("../PageLayout.js");
 }];
 
 type Annotations = GetAnnotations<Info & { module: Module, matches: Matches }>;

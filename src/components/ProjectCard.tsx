@@ -3,6 +3,7 @@ import "./ProjectCard.css";
 import { portfolioData, projectIndexToSlugLUT } from "../data/portfolioData";
 import type { ProjectData } from "../types/portfolioTypes";
 import { ABSOLUTE_ROUTES } from "../config/routes.config";
+import { MemoMediaWrapper } from "./RenderMedia";
 
 interface ProjectCardProps {
   projectIndex: number;
@@ -14,31 +15,18 @@ export default function ProjectCard({
   onClick,
 }: ProjectCardProps) {
   const project: ProjectData = portfolioData.projects[projectIndex];
-
   const slug = projectIndexToSlugLUT[projectIndex];
-  const thumbnailUrl = project.thumbnailImage.src;
 
   return (
     <Link
       to={ABSOLUTE_ROUTES.toProject(slug)}
       className="project-card-link"
-      onClick={onClick}
       key={`${project.title}-${projectIndex}`}
+      onClick={onClick}
     >
       <article className="project-card">
         <div className="thumbnail-wrapper">
-          {project.thumbnailImage.type === "video" ? (
-            <video
-              src={thumbnailUrl}
-              muted
-              autoPlay
-              loop
-              playsInline
-              className="thumbnail-asset"
-            />
-          ) : (
-            <img src={thumbnailUrl} alt={`${project.title} Preview`} />
-          )}
+          <MemoMediaWrapper item={project.thumbnailImage} />
         </div>
 
         <div className="card-details">

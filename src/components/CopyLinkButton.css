@@ -1,0 +1,42 @@
+.copy-link-title-btn:focus-visible,
+.global-close-button:focus-visible {
+  outline: 2px solid #3b82f6 !important;
+  outline-offset: 4px !important;
+  border-radius: 4px;
+}
+
+.copy-link-title-btn:focus,
+.global-close-button:focus {
+  outline: none;
+}
+
+.copy-link-title-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+}
+
+.copy-link-title-btn h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.copy-icon-indicator {
+  font-size: 0.9rem;
+  color: #6b7280;
+  transition: color 0.2s;
+}
+
+.copy-link-title-btn:hover .copy-icon-indicator {
+  color: #3b82f6;
+}
+
+.copy-link-title-btn.copied .copy-icon-indicator {
+  color: #10b981;
+}

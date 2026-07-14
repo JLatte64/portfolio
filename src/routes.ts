@@ -1,3 +1,4 @@
+// src/routes.ts
 import {
   type RouteConfig,
   index,
@@ -8,13 +9,18 @@ import { ROUTE_KEYS } from "./config/routes.config";
 
 export default [
   layout("./layouts/PageLayout.tsx", [
+    // ("/")
     index("./layouts/PageLayout.tsx", { id: "home-view" }),
-    route(ROUTE_KEYS.about, "./layouts/PageLayout.tsx", { id: "about-view" }), //"about"
+
+    // ("about/"), ("contact/")
+    route(ROUTE_KEYS.about, "./layouts/PageLayout.tsx", { id: "about-view" }),
     route(ROUTE_KEYS.contact, "./layouts/PageLayout.tsx", {
       id: "contact-view",
-    }), //"contact"
-    route(ROUTE_KEYS.project, "./layouts/PageLayout.tsx", {
+    }),
+
+    // ("work/:slug")
+    route(ROUTE_KEYS.project, "./components/ProjectModal.tsx", {
       id: "project-view",
-    }), //"work/:slug"
+    }),
   ]),
 ] satisfies RouteConfig;

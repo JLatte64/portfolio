@@ -1,10 +1,18 @@
+import type { ComponentPropsWithoutRef } from "react";
 import { portfolioData } from "../data/portfolioData";
 import ProjectCard from "./ProjectCard";
 import "./WorkSection.css";
 
-export default function WorkSection() {
+interface WorkSectionProps extends ComponentPropsWithoutRef<"div"> {
+  onProjectClick?: () => void;
+}
+
+export default function WorkSection({
+  onProjectClick,
+  ...props
+}: WorkSectionProps) {
   return (
-    <section className="portfolio-work-grid-section" id="work">
+    <section className="portfolio-work-grid-section" id="work" {...props}>
       <h2 className="section-label-heading">Selected Work</h2>
 
       <div className="work-items-masonry-wrapper">
@@ -13,6 +21,7 @@ export default function WorkSection() {
             <ProjectCard
               key={`project-node-key-${index}`}
               projectIndex={index}
+              onClick={onProjectClick}
             />
           ),
         )}

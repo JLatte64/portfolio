@@ -1,70 +1,86 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+// src/components/ProjectModal.tsx
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { portfolioData } from "../data/portfolioData";
 import MediaCarousel from "./MediaCarousel";
 import CarouselDashboard from "./CarouselDashboard";
 import LightboxViewer from "./LightboxViewer";
 import "./ProjectModal.css";
-import { MemoMediaWrapper } from "./RenderMedia";
 import { useNavigate } from "react-router";
 import { ABSOLUTE_ROUTES } from "../config/routes.config";
+import { useProject } from "../hooks/useProject";
+import CopyLinkButton from "./CopyLinkbutton";
 
-// Inside your main Modal/Dialog component component body:
-
-interface ProjectModalProps {
-  projIndex: number | undefined;
-  onShouldClose: () => void;
-}
-
-export default function ProjectModal({
-  projIndex,
-  onShouldClose,
-}: ProjectModalProps) {
+export default function ProjectModal() {
   const navigate = useNavigate();
   const dialogRef = useRef<HTMLDialogElement>(null),
     carouselRef = useRef<any>(null),
-    captionDockRef = useRef<HTMLDivElement>(null),
-    [lastValidIndex, setLastValidIndex] = useState<number>(0);
+    captionDockRef = useRef<HTMLDivElement>(null);
 
-  const [copied, setCopied] = useState(false),
-    [isCaptionActive, setIsCaptionActive] = useState(false),
+  const [isAnimateMounted, setIsAnimateMounted] = useState(false);
+
+  const [isCaptionActive, setIsCaptionActive] = useState(false),
     [activeCaption, setActiveCaption] = useState(""),
     [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
-  const project =
-    projIndex !== undefined
-      ? portfolioData.projects[projIndex]
-      : portfolioData.projects[lastValidIndex];
+  const modalFadeTimer = 100;
+  const { projectData } = useProject();
+  const scrollContainerRef = useRef<HTMLElement | null>(null);
 
-  const handleModalClose = (e?: React.SyntheticEvent | Event) => {
+  const handleSafeModalClose = (e?: React.SyntheticEvent | Event) => {
     if (!dialogRef?.current) return;
-
     e?.preventDefault?.();
 
-    if (dialogRef.current.open) {
-      dialogRef.current.close();
+    if (dialogRef.current.open && isAnimateMounted) {
+      setIsAnimateMounted(false);
 
       setTimeout(() => {
-        onShouldClose();
+        if (dialogRef.current) {
+          dialogRef.current.close();
+        }
+
         navigate(ABSOLUTE_ROUTES.home);
-      }, 0);
+      }, modalFadeTimer);
     }
   };
 
   useEffect(() => {
-    if (!dialogRef?.current) return;
+    if (!dialogRef.current || !projectData) return;
 
-    if (projIndex !== undefined) {
-      setLastValidIndex(projIndex);
-
-      if (!dialogRef.current.open) {
-        dialogRef.current.showModal();
-      }
-    } else {
-      handleModalClose();
+    if (!dialogRef.current.open) {
+      dialogRef.current.showModal();
     }
-  }, [projIndex]);
 
+    const liveContainer = document.querySelector(".portfolio-scroll-container");
+    if (liveContainer) {
+      scrollContainerRef.current = liveContainer as HTMLElement;
+
+      // 📸 Execute your high-performance hook capture routine instantly
+      //handleCapture();
+    }
+
+    // Trigger your scale-pop entry curve smoothly on the very next browser paint pass
+    const frameId = requestAnimationFrame(() => {
+      setIsAnimateMounted(true);
+    });
+    return () => cancelAnimationFrame(frameId);
+  }, [projectData]);
+
+  // Track global hardware shortcuts to bypass focused button keyboard traps completely
+  useEffect(() => {
+    const handleGlobalKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && !isLightboxOpen) {
+        event.preventDefault();
+        handleSafeModalClose(event);
+      }
+    };
+    window.addEventListener("keydown", handleGlobalKeyDown, { capture: true });
+    return () =>
+      window.removeEventListener("keydown", handleGlobalKeyDown, {
+        capture: true,
+      });
+  }, [isAnimateMounted]);
+
+  // Monitor carousel track slide caption updates
   useEffect(() => {
     if (!carouselRef?.current?.onSlideChange) return;
 
@@ -81,40 +97,35 @@ export default function ProjectModal({
     setIsLightboxOpen(false);
   };
 
-  if (!project) return null;
-  const rawTotal = project.carouselMedia?.length || 0;
+  if (!projectData) return null;
+  const rawTotal = projectData.carouselMedia?.length || 0;
 
   return (
     <dialog
       ref={dialogRef}
-      className="project-modal-dialog"
-      onCancel={(e) => handleModalClose(e)}
-      aria-label={`Project Profile Viewport: ${project.title}`}
+      style={{
+        "--modal-fade-timer": modalFadeTimer,
+        "--modal-backdrop-image": "none",
+      }}
+      className={`project-modal-dialog ${isAnimateMounted ? "mounted" : "unmounted"}`}
+      onCancel={(e) => handleSafeModalClose(e)}
+      onClose={undefined}
+      aria-label={`Project Profile Viewport: ${projectData.title}`}
     >
       <div className="modal-inner-layout">
         <header className="modal-header-bar">
           <div className="header-left-meta">
-            <h2>{project.title}</h2>
-            <button
-              type="button"
-              className={`copy-link-title-btn ${copied ? "copied" : ""}`}
-              onClick={async () => {
-                await navigator.clipboard.writeText(window.location.href);
-                setCopied(true);
-                setTimeout(() => setCopied(false), 2000);
-              }}
+            <h2>{projectData.title}</h2>
+            <CopyLinkButton
+              className="copy-link-title-btn"
               aria-label="Copy project link to clipboard"
-            >
-              <span className="copy-icon-indicator">
-                {copied ? "✓ Copied" : "🔗"}
-              </span>
-            </button>
-            <span className="modal-year-tag">{project.year}</span>
+            />
+            <span className="modal-year-tag">{projectData.year}</span>
           </div>
           <button
             type="button"
             className="global-close-button"
-            onClick={(e) => handleModalClose(e)}
+            onClick={(e) => handleSafeModalClose(e)}
             aria-label="Close project details window"
           >
             ✕
@@ -130,8 +141,8 @@ export default function ProjectModal({
             aria-label="Project media showcase"
           >
             <MediaCarousel
-              activeMediaRef={carouselRef}
-              mediaList={project.carouselMedia}
+              carouselRef={carouselRef}
+              mediaList={projectData.carouselMedia}
             />
             <LightboxViewer
               carouselRef={carouselRef}
@@ -188,7 +199,9 @@ export default function ProjectModal({
               )}
           </section>
           <aside className="pane-right-details">
-            <p className="modal-main-description-text">{project.description}</p>
+            <p className="modal-main-description-text">
+              {projectData.description}
+            </p>
           </aside>
         </div>
       </div>
