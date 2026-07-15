@@ -1,7 +1,7 @@
 // src/components/RenderMedia.tsx
 import React, { useState, useEffect, useImperativeHandle, useRef } from "react";
-import type { MediaData } from "../types/mediaTypes";
-import { resolveMediaPath } from "../utils/pathUtils";
+import type { MediaData } from "../../types/mediaTypes";
+import { resolveMediaPath } from "../../utils/pathUtils";
 import {
   MediaPlayer,
   MediaProvider,

@@ -1,7 +1,7 @@
 // src/components/LightboxViewer.tsx
 import { useEffect, useRef } from "react";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
-import { MemoMediaWrapper } from "./RenderMedia";
+import { MemoMediaWrapper } from "../ui/RenderMedia";
 import "./Lightbox.css";
 
 export default function LightboxViewer({ carouselRef, isOpen, onClose }: any) {

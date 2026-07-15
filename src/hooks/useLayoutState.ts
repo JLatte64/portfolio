@@ -12,6 +12,7 @@ export function useLayoutState() {
   return {
     mountPageLayout: context.mountPageLayout,
     setMountPageLayout: context.setMountPageLayout,
-    rememberScroll: context.rememberScroll,
+    setLastScrollPos: context.setLastScrollPos,
+    restoreLastScrollPos: context.restoreLastScrollPos,
   };
 }

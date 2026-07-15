@@ -13,14 +13,8 @@ type Matches = [{
   id: "root";
   module: typeof import("../../root.js");
 }, {
-  id: "layouts/PageLayout";
-  module: typeof import("../PageLayout.js");
-}] | [{
-  id: "root";
-  module: typeof import("../../root.js");
-}, {
-  id: "layouts/PageLayout";
-  module: typeof import("../PageLayout.js");
+  id: "components/core/AppShell";
+  module: typeof import("../../components/core/AppShell.js");
 }, {
   id: "home-view";
   module: typeof import("../PageLayout.js");
@@ -28,8 +22,8 @@ type Matches = [{
   id: "root";
   module: typeof import("../../root.js");
 }, {
-  id: "layouts/PageLayout";
-  module: typeof import("../PageLayout.js");
+  id: "components/core/AppShell";
+  module: typeof import("../../components/core/AppShell.js");
 }, {
   id: "about-view";
   module: typeof import("../PageLayout.js");
@@ -37,8 +31,8 @@ type Matches = [{
   id: "root";
   module: typeof import("../../root.js");
 }, {
-  id: "layouts/PageLayout";
-  module: typeof import("../PageLayout.js");
+  id: "components/core/AppShell";
+  module: typeof import("../../components/core/AppShell.js");
 }, {
   id: "contact-view";
   module: typeof import("../PageLayout.js");

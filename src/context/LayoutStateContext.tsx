@@ -1,4 +1,3 @@
-// LayoutStateContext.tsx
 import React, {
   createContext,
   useContext,
@@ -10,7 +9,8 @@ import React, {
 interface LayoutStateContextType {
   mountPageLayout: boolean;
   setMountPageLayout: (mount: boolean) => void;
-  rememberScroll: () => void;
+  setLastScrollPos: () => void;
+  restoreLastScrollPos: () => void;
 }
 
 export const LayoutStateContext = createContext<
@@ -22,48 +22,55 @@ export const LayoutStateProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [mountPageLayout, setMountPageLayoutState] = useState(true);
 
-  // High-speed memory ref to preserve coordinate values across layout unmounts
-  const savedScrollY = useRef(0);
-  const shouldRestore = useRef(false);
+  // Use a ref to store coordinates to prevent state-induced re-render loops
+  const scrollPositionRef = useRef(0);
 
-  const rememberScroll = () => {
-    if (typeof window !== "undefined") {
-      savedScrollY.current = window.scrollY;
-      console.log(
-        "[LayoutState] 📥 Prior-to-Modal Capture logged position:",
-        savedScrollY.current,
-      );
-    }
+  const setLastScrollPos = () => {
+    if (typeof window === "undefined") return;
+    console.log("Storing last scroll position: " + window.scrollY);
+    scrollPositionRef.current = window.scrollY;
   };
 
-  const setMountPageLayout = (mount: boolean) => {
+  const restoreLastScrollPos = () => {
     if (typeof window === "undefined") return;
 
-    if (!mount) {
-      setMountPageLayoutState(false);
-    } else {
-      shouldRestore.current = true;
-      setMountPageLayoutState(true);
+    // Check condition matching your layout mounting toggle logic
+    if (!mountPageLayout && scrollPositionRef.current > 0) {
+      let frameId: number;
+
+      const performScroll = () => {
+        window.scrollTo({
+          top: scrollPositionRef.current,
+          behavior: "auto",
+        });
+      };
+
+      // requestAnimationFrame ensures DOM has painted before applying scroll
+      frameId = requestAnimationFrame(performScroll);
+      return () => cancelAnimationFrame(frameId);
     }
   };
 
-  // Synchronous layout phase restoration handles the snap BEFORE the user sees a single frame flash
+  // Run the scroll adjustment instantly before the next browser paint
   useLayoutEffect(() => {
-    if (mountPageLayout && shouldRestore.current && savedScrollY.current > 0) {
-      window.scrollTo({ top: savedScrollY.current, behavior: "instant" });
-      console.log(
-        "[LayoutState] 🚀 Success! Restored scroll position to:",
-        savedScrollY.current,
-      );
-
-      shouldRestore.current = false;
-      savedScrollY.current = 0;
-    }
+    const cleanup = restoreLastScrollPos();
+    return () => {
+      if (cleanup) cleanup();
+    };
   }, [mountPageLayout]);
+
+  const setMountPageLayout = (mount: boolean) => {
+    setMountPageLayoutState(mount);
+  };
 
   return (
     <LayoutStateContext.Provider
-      value={{ mountPageLayout, setMountPageLayout, rememberScroll }}
+      value={{
+        mountPageLayout,
+        setMountPageLayout,
+        setLastScrollPos,
+        restoreLastScrollPos,
+      }}
     >
       {children}
     </LayoutStateContext.Provider>

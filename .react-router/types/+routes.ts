@@ -32,10 +32,11 @@ type RouteFiles = {
     id: "root";
     page: "/" | "/about" | "/contact" | "/work/:slug";
   };
-  "./layouts/PageLayout.tsx": {
-    id: "layouts/PageLayout";
+  "./components/core/AppShell.tsx": {
+    id: "components/core/AppShell";
     page: "/" | "/about" | "/contact" | "/work/:slug";
-  } | {
+  };
+  "./layouts/PageLayout.tsx": {
     id: "home-view";
     page: "/";
   } | {
@@ -45,7 +46,7 @@ type RouteFiles = {
     id: "contact-view";
     page: "/contact";
   };
-  "./components/ProjectModal.tsx": {
+  "./components/ui/project-showcase/ProjectModal.tsx": {
     id: "project-view";
     page: "/work/:slug";
   };
@@ -53,9 +54,9 @@ type RouteFiles = {
 
 type RouteModules = {
   "root": typeof import("./src/root.tsx");
-  "layouts/PageLayout": typeof import("./src/./layouts/PageLayout.tsx");
+  "components/core/AppShell": typeof import("./src/./components/core/AppShell.tsx");
   "home-view": typeof import("./src/./layouts/PageLayout.tsx");
   "about-view": typeof import("./src/./layouts/PageLayout.tsx");
   "contact-view": typeof import("./src/./layouts/PageLayout.tsx");
-  "project-view": typeof import("./src/./components/ProjectModal.tsx");
+  "project-view": typeof import("./src/./components/ui/project-showcase/ProjectModal.tsx");
 };

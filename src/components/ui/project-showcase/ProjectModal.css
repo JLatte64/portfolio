@@ -16,18 +16,13 @@
 }
 
 /* State 1: Opening (Initial un-painted frame state) */
-.project-modal-dialog.opening {
+.project-modal-dialog.fade-out {
   opacity: 0;
 }
 
 /* State 2: Open (Fully visible, active state) */
-.project-modal-dialog.open {
+.project-modal-dialog.fade-in {
   opacity: 1;
-}
-
-/* State 3: Closing (Fade-out transition state) */
-.project-modal-dialog.closing {
-  opacity: 0;
 }
 
 /* Keep the native browser background layer mask completely hidden */

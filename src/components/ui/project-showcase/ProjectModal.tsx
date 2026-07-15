@@ -1,95 +1,69 @@
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import MediaCarousel from "./MediaCarousel";
-import CarouselDashboard from "./CarouselDashboard";
-import LightboxViewer from "./LightboxViewer";
+import MediaCarousel from "../carousel/MediaCarousel";
+import CarouselDashboard from "../carousel/CarouselDashboard";
+import LightboxViewer from "../LightboxViewer";
 import "./ProjectModal.css";
 import { useNavigate } from "react-router";
-import { ABSOLUTE_ROUTES } from "../config/routes.config";
-import { useProject } from "../hooks/useProject";
-import CopyLinkButton from "./CopyLinkbutton";
-import { useLayoutState } from "../hooks/useLayoutState";
-
-type ModalLifecycle = "opening" | "open" | "closing";
+import { RELATIVE_ROUTES } from "../../../config/routes.config";
+import { useProject } from "../../../hooks/useProject";
+import CopyLinkButton from "../CopyLinkbutton";
+import { useLayoutState } from "../../../hooks/useLayoutState";
 
 export default function ProjectModal() {
   const navigate = useNavigate();
   const dialogRef = useRef<HTMLDialogElement>(null),
     carouselRef = useRef<any>(null),
     captionDockRef = useRef<HTMLDivElement>(null);
-  const [lifecycle, setLifecycle] = useState<ModalLifecycle>("opening");
 
   const [isCaptionActive, setIsCaptionActive] = useState(false),
-    [activeCaption, setActiveCaption] = useState(""),
+    [activeCaption] = useState(""),
     [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
-  const modalFadeTimer = 100;
-  const { setMountPageLayout, rememberScroll } = useLayoutState();
+  const modalFadeTimer = 1000;
+  const { setMountPageLayout } = useLayoutState();
   const { projectData } = useProject();
 
-  const handleSafeModalClose = (e?: React.SyntheticEvent | Event) => {
-    if (!dialogRef?.current) return;
-    e?.preventDefault?.();
-    if (lifecycle === "open") {
-      setMountPageLayout(true);
-      setLifecycle("closing");
+  const [fadeState, setFadeState] = useState<"fade-in" | "fade-out" | "">("");
 
-      setTimeout(() => {
-        if (dialogRef.current) {
-          dialogRef.current.close();
-        }
-        navigate(ABSOLUTE_ROUTES.home);
-      }, modalFadeTimer);
-    }
-  };
+  if (!projectData) return null;
 
-  useEffect(() => {
-    if (!dialogRef.current || !projectData) return;
+  // ENTRANCE TIMELINE: Open dialog frame and lift page grid after fade-in
+  useLayoutEffect(() => {
+    if (!dialogRef.current) return;
 
     if (!dialogRef.current.open) {
-      rememberScroll();
       dialogRef.current.showModal();
-      setLifecycle("opening");
-    }
+      setFadeState("fade-in");
 
-    const frameId = requestAnimationFrame(() => {
-      setTimeout(() => {
-        setLifecycle("open");
+      const timer = setTimeout(() => {
+        console.log("page un-mounted.");
         setMountPageLayout(false);
+        setFadeState("");
       }, modalFadeTimer);
-    });
-    return () => {
-      cancelAnimationFrame(frameId);
-      setMountPageLayout(true);
-    };
-  }, [projectData, setMountPageLayout, modalFadeTimer]);
 
-  useEffect(() => {
-    const handleGlobalKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape" && !isLightboxOpen) {
-        event.preventDefault();
-        handleSafeModalClose(event);
-      }
-    };
-    window.addEventListener("keydown", handleGlobalKeyDown, { capture: true });
-    return () =>
-      window.removeEventListener("keydown", handleGlobalKeyDown, {
-        capture: true,
-      });
-  }, [dialogRef?.current?.open]);
+      return () => clearTimeout(timer);
+    }
+  }, [setMountPageLayout]);
 
-  // Monitor carousel track slide caption updates
-  useEffect(() => {
-    if (!carouselRef?.current?.onSlideChange) return;
+  // UNIFIED EXIT PIPELINE: Handles Close Buttons, Backdrop Clicks, and Escape Keys
+  const handleClose = (e?: React.SyntheticEvent | Event) => {
+    if (!dialogRef.current) return;
 
-    const updateCaption = carouselRef.current.onSlideChange(() => {
-      const caption =
-        carouselRef.current?.activeMedia?.captionElement?.textContent || null;
-      setActiveCaption(caption);
-    });
+    e?.preventDefault(); // Block native instant closure
 
-    return () => updateCaption();
-  }, []);
+    if (fadeState === "fade-out" || !dialogRef.current.open) return; // Guard against rapid multi-clicks
+
+    console.log("page mounted.");
+    setMountPageLayout(true); // Synchronously restore background page layout frame
+    setFadeState("fade-out"); // Switch state to match your exit CSS class rules
+
+    setTimeout(() => {
+      setFadeState("");
+      dialogRef.current?.close();
+      navigate(RELATIVE_ROUTES.home);
+    }, modalFadeTimer);
+  };
 
   const handleCloseLightbox = () => {
     setIsLightboxOpen(false);
@@ -104,8 +78,8 @@ export default function ProjectModal() {
       style={{
         "--modal-fade-timer": `${modalFadeTimer}ms`,
       }}
-      className={`project-modal-dialog ${lifecycle}`}
-      onCancel={(e) => handleSafeModalClose(e)}
+      className={`project-modal-dialog ${fadeState}`}
+      onCancel={handleClose}
       onClose={undefined}
       aria-label={`Project Profile Viewport: ${projectData.title}`}
     >
@@ -122,7 +96,7 @@ export default function ProjectModal() {
           <button
             type="button"
             className="global-close-button"
-            onClick={(e) => handleSafeModalClose(e)}
+            onClick={handleClose}
             aria-label="Close project details window"
           >
             ✕

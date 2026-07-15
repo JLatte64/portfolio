@@ -1,7 +1,7 @@
 // src/layouts/PageLayout.handlers.ts
 import type { LoaderFunctionArgs, MetaFunction } from "react-router";
-import { projectSlugToIndexLUT, portfolioData } from "../data/portfolioData";
-import { ABSOLUTE_ROUTES } from "../config/routes.config";
+import { projectSlugToIndexLUT, portfolioData } from "../../data/portfolioData";
+import { ABSOLUTE_ROUTES } from "../../config/routes.config";
 
 export interface LoaderData {
   title: string;

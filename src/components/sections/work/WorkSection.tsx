@@ -1,5 +1,5 @@
 import type { ComponentPropsWithoutRef } from "react";
-import { portfolioData } from "../data/portfolioData";
+import { portfolioData } from "../../../data/portfolioData";
 import ProjectCard from "./ProjectCard";
 import "./WorkSection.css";
 

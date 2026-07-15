@@ -8,19 +8,19 @@ import {
 import { ROUTE_KEYS } from "./config/routes.config";
 
 export default [
-  layout("./layouts/PageLayout.tsx", [
-    // ("/")
+  layout("./components/core/AppShell.tsx", [
     index("./layouts/PageLayout.tsx", { id: "home-view" }),
-
-    // ("about/"), ("contact/")
     route(ROUTE_KEYS.about, "./layouts/PageLayout.tsx", { id: "about-view" }),
     route(ROUTE_KEYS.contact, "./layouts/PageLayout.tsx", {
       id: "contact-view",
     }),
 
-    // ("work/:slug")
-    route(ROUTE_KEYS.project, "./components/ProjectModal.tsx", {
-      id: "project-view",
-    }),
+    route(
+      ROUTE_KEYS.project,
+      "./components/ui/project-showcase/ProjectModal.tsx",
+      {
+        id: "project-view",
+      },
+    ),
   ]),
 ] satisfies RouteConfig;

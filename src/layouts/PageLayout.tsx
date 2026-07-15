@@ -1,43 +1,26 @@
-import "./PageLayout.css";
-import Navbar from "../components/Navbar";
-import HeroHeader from "../components/HeroHeader";
-import WorkSection from "../components/WorkSection";
-import AboutSection from "../components/AboutSection";
-import ContactFooter from "../components/ContactFooter";
-import { Outlet } from "react-router";
-import { LayoutStateProvider } from "../context/LayoutStateContext";
-import { useLayoutState } from "../hooks/useLayoutState";
-
-export { loader, meta } from "./PageLayout.handlers";
-
-function PageLayoutContent() {
-  const { mountPageLayout } = useLayoutState();
-
-  return (
-    <div className="portfolio-app-root" style={{ position: "relative" }}>
-      {mountPageLayout ? (
-        <>
-          <div className="portfolio-scroll-container">
-            <HeroHeader />
-            <main>
-              <WorkSection />
-              <AboutSection />
-              <ContactFooter />
-            </main>
-          </div>
-          <Navbar />
-        </>
-      ) : null}
-
-      <Outlet />
-    </div>
-  );
-}
+// src/layouts/PageLayout.tsx
+import HeroHeader from "../components/sections/HeroHeader";
+import WorkSection from "../components/sections/work/WorkSection";
+import AboutSection from "../components/sections/AboutSection";
+import ContactFooter from "../components/sections/ContactFooter";
+import { useLayoutState } from "../context/LayoutStateContext";
+import Navbar from "../components/core/Navbar";
 
 export default function PageLayout() {
+  const { mountPageLayout, setLastScrollPos } = useLayoutState();
+  if (!mountPageLayout) return null;
+
   return (
-    <LayoutStateProvider>
-      <PageLayoutContent />
-    </LayoutStateProvider>
+    <>
+      <div className="portfolio-scroll-container">
+        <HeroHeader />
+        <main>
+          <WorkSection onProjectClick={setLastScrollPos} />
+          <AboutSection />
+          <ContactFooter />
+        </main>
+      </div>
+      <Navbar />
+    </>
   );
 }

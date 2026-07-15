@@ -1,9 +1,12 @@
 import { Link } from "react-router";
 import "./ProjectCard.css";
-import { portfolioData, projectIndexToSlugLUT } from "../data/portfolioData";
-import type { ProjectData } from "../types/portfolioTypes";
-import { ABSOLUTE_ROUTES } from "../config/routes.config";
-import { MemoMediaWrapper } from "./RenderMedia";
+import {
+  portfolioData,
+  projectIndexToSlugLUT,
+} from "../../../data/portfolioData";
+import type { ProjectData } from "../../../types/portfolioTypes";
+import { RELATIVE_ROUTES } from "../../../config/routes.config";
+import { MemoMediaWrapper } from "../../ui/RenderMedia";
 
 interface ProjectCardProps {
   projectIndex: number;
@@ -19,7 +22,7 @@ export default function ProjectCard({
 
   return (
     <Link
-      to={ABSOLUTE_ROUTES.toProject(slug)}
+      to={RELATIVE_ROUTES.toProject(slug)}
       className="project-card-link"
       key={`${project.title}-${projectIndex}`}
       onClick={onClick}

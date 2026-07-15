@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, type RefObject } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import type { MediaData } from "../types/mediaTypes";
-import { MemoMediaWrapper } from "./RenderMedia";
+import type { MediaData } from "../../../types/mediaTypes";
+import { MemoMediaWrapper } from "../RenderMedia";
 import "./MediaCarousel.css";
 
 interface MediaCarouselProps {
