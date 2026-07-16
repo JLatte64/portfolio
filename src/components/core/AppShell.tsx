@@ -1,3 +1,4 @@
+// src/components/core/AppShell.tsx
 import "./AppShell.css";
 import { Outlet } from "react-router";
 import { LayoutStateProvider } from "../../context/LayoutStateContext";

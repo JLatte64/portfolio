@@ -37,6 +37,9 @@ type RouteFiles = {
     page: "/" | "/about" | "/contact" | "/work/:slug";
   };
   "./layouts/PageLayout.tsx": {
+    id: "layouts/PageLayout";
+    page: "/" | "/about" | "/contact" | "/work/:slug";
+  } | {
     id: "home-view";
     page: "/";
   } | {
@@ -55,6 +58,7 @@ type RouteFiles = {
 type RouteModules = {
   "root": typeof import("./src/root.tsx");
   "components/core/AppShell": typeof import("./src/./components/core/AppShell.tsx");
+  "layouts/PageLayout": typeof import("./src/./layouts/PageLayout.tsx");
   "home-view": typeof import("./src/./layouts/PageLayout.tsx");
   "about-view": typeof import("./src/./layouts/PageLayout.tsx");
   "contact-view": typeof import("./src/./layouts/PageLayout.tsx");

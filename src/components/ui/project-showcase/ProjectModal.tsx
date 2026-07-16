@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import MediaCarousel from "../carousel/MediaCarousel";
 import CarouselDashboard from "../carousel/CarouselDashboard";
@@ -20,49 +20,53 @@ export default function ProjectModal() {
     [activeCaption] = useState(""),
     [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
-  const modalFadeTimer = 1000;
-  const { setMountPageLayout } = useLayoutState();
+  const modalFadeTimer = 100;
+  const { setMountPageLayout, setLastScrollPos, restoreLastScrollPos } =
+    useLayoutState();
   const { projectData } = useProject();
 
-  const [fadeState, setFadeState] = useState<"fade-in" | "fade-out" | "">("");
+  const [fadeState, setFadeState] = useState<
+    "fade-in" | "fade-out" | "open" | "closed"
+  >("closed");
 
   if (!projectData) return null;
 
-  // ENTRANCE TIMELINE: Open dialog frame and lift page grid after fade-in
-  useLayoutEffect(() => {
-    if (!dialogRef.current) return;
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog || !projectData) return;
 
-    if (!dialogRef.current.open) {
-      dialogRef.current.showModal();
+    if (!dialog.open) {
+      dialog.showModal();
       setFadeState("fade-in");
-
-      const timer = setTimeout(() => {
-        console.log("page un-mounted.");
-        setMountPageLayout(false);
-        setFadeState("");
-      }, modalFadeTimer);
-
-      return () => clearTimeout(timer);
+      setLastScrollPos();
     }
-  }, [setMountPageLayout]);
 
-  // UNIFIED EXIT PIPELINE: Handles Close Buttons, Backdrop Clicks, and Escape Keys
+    const fadeInTimer = setTimeout(() => {
+      setMountPageLayout(false);
+      setFadeState("open");
+    }, modalFadeTimer);
+
+    return () => clearTimeout(fadeInTimer);
+  }, []);
+
   const handleClose = (e?: React.SyntheticEvent | Event) => {
-    if (!dialogRef.current) return;
+    e?.preventDefault();
 
-    e?.preventDefault(); // Block native instant closure
+    const dialog = dialogRef.current;
+    if (!dialog || !dialog.open) return;
 
-    if (fadeState === "fade-out" || !dialogRef.current.open) return; // Guard against rapid multi-clicks
+    restoreLastScrollPos();
+    setMountPageLayout(true);
+    setFadeState("fade-out");
 
-    console.log("page mounted.");
-    setMountPageLayout(true); // Synchronously restore background page layout frame
-    setFadeState("fade-out"); // Switch state to match your exit CSS class rules
+    const fadeOutTimer = setTimeout(() => {
+      setFadeState("closed");
 
-    setTimeout(() => {
-      setFadeState("");
-      dialogRef.current?.close();
+      console.log("Dialog faded out.");
       navigate(RELATIVE_ROUTES.home);
     }, modalFadeTimer);
+
+    return () => clearTimeout(fadeOutTimer);
   };
 
   const handleCloseLightbox = () => {
