@@ -91,5 +91,6 @@ nav {
   &:hover,
   *:hover {
     color: var(--accent);
+    background-color: transparent;
   }
 }

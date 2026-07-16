@@ -3,10 +3,9 @@
   font-family: "IBM Plex Mono";
   position: relative;
   font-weight: 500;
-  font-size: 1.5cqh;
-  white-space: nowrap;
+  font-size: clmap(1.5cqh, 1rem, 1rem);
   letter-spacing: -0.05em;
-  padding: 0.5rem 0;
+  padding: 0.5rem;
   flex: 1;
   max-width: 100%;
   display: flex;
@@ -20,8 +19,6 @@
   max-width: 100%;
   margin-bottom: 1rem;
   overflow: hidden;
-  outline: 2px solid white;
-  outline-offset: 2px;
 }
 
 .project-card-container {
@@ -32,9 +29,11 @@
   background-color: rgba(255, 255, 255, 0.1);
   align-items: center;
   list-style: none;
-  aspect-ratio: 1/1;
 
   cursor: pointer;
+
+  outline: 2px solid white;
+  outline-offset: 2px;
 }
 
 .project-card-container:hover {

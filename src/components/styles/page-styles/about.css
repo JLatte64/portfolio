@@ -49,6 +49,20 @@
   width: 50%;
   overflow: hidden;
   flex: 1 1 20rem;
+
+  a,
+  button {
+    background-color: black;
+    font-family: "IBM Plex Mono";
+    font-weight: bold;
+    color: white;
+  }
+
+  a:hover,
+  button:hover {
+    background-color: var(--accent);
+    color: black;
+  }
 }
 
 .about-photo-link {

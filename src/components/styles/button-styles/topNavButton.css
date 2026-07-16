@@ -11,10 +11,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: black;
-  border: 3px solid black;
+  background-color: black;
+  font-weight: bold;
+  color: white;
+  border: 3px solid var(--accent);
 
   transition: opacity 0.2s ease;
+}
+
+.top-nav-button:hover {
+  background-color: var(--accent);
+  color: black;
 }
 
 .top-nav-button.is-hidden {

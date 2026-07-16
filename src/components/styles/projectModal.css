@@ -47,13 +47,14 @@
 }
 
 .proj-header > h1 {
-  font-family: "IBMPlexMono-Bold" !important;
+  font-family: "IBM Plex Mono" !important;
+  font-weight: bold;
   position: relative;
 
   display: inline-block;
   width: fit-content;
   padding-right: 2.3rem;
-  font-size: 5cqw;
+  font-size: 3cqw;
   line-height: 5cqh;
 }
 
@@ -74,9 +75,20 @@
 .proj-back-btn {
   padding: 0;
   margin: 0;
+  background-color: black;
+  color: white;
+  border: none;
 
   span {
     font-size: 2rem;
+  }
+}
+
+.proj-back-btn:hover {
+  background-color: var(--accent);
+
+  * {
+    color: black !important;
   }
 }
 
@@ -118,8 +130,9 @@
   font-size: 1.2rem;
 }
 
-.proj-pane.details * {
-  font-family: "IBMPlexMono-Regular";
+.proj-pane.details *:not(h2) {
+  font-family: "IBM Plex Mono";
+  font-size: 1rem;
   letter-spacing: -0.02em;
   overflow-wrap: break-word;
   word-break: break-word;

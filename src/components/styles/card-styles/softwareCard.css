@@ -14,6 +14,7 @@
 
 .software-card-container * {
   font-size: 0.75rem;
+  font-family: "IBM Plex Mono";
 }
 
 .software-card-container:hover {

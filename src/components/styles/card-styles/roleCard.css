@@ -8,6 +8,10 @@
   filter: brightness(1);
   transition: filter 0.05s ease;
   box-sizing: border-box;
+
+  * {
+    font-family: "IBM Plex Mono";
+  }
 }
 
 .role-card-container:hover {
@@ -25,7 +29,6 @@
   padding-bottom: 1rem;
   color: var(--text-h);
   text-align: start;
-  font-family: "IBM Plex Mono";
 }
 
 .role-card-header h3 {
