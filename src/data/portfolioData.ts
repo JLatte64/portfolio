@@ -1,3 +1,4 @@
+import type { ProjectData } from "../types/portfolioTypes";
 import portfolioJson from "./portfolioData.json" with { type: "json" };
 
 export const portfolioData = JSON.parse(JSON.stringify(portfolioJson));
@@ -17,7 +18,7 @@ export const generateSlug = (title: string): string => {
     .replace(/^-+|-+$/g, "");
 };
 
-portfolioData.projects.forEach((project: any, index: number) => {
+portfolioData.projects.forEach((project: ProjectData, index: number) => {
   const customSlug = generateSlug(project.title);
   projectIndexToSlugLUT[index] = customSlug;
   projectSlugToIndexLUT[customSlug] = index;

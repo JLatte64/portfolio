@@ -21,7 +21,7 @@ export function LazySection({
 
   return (
     <ComponentTag
-      ref={sectionRef as any}
+      ref={sectionRef as React.Ref<any>}
       id={id}
       className={className}
       style={{ minHeight: currentHeight }}

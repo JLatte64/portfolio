@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./ProjectModal.css";
 import { useNavigate } from "react-router";
-import { RELATIVE_ROUTES } from "../../config/routes.config";
+import { ABSOLUTE_ROUTES } from "../../config/routes.config";
 import { useProject } from "../../hooks/useProject";
 import CopyLinkButton from "./CopyLinkbutton";
 import { useLayoutState } from "../../hooks/useLayoutState";
@@ -54,7 +54,7 @@ export default function ProjectModal() {
     const fadeOutTimer = setTimeout(() => {
       setFadeState("closed");
 
-      navigate(RELATIVE_ROUTES.home);
+      navigate(ABSOLUTE_ROUTES.home);
     }, modalFadeTimer);
 
     return () => clearTimeout(fadeOutTimer);

@@ -5,7 +5,7 @@ import {
   projectIndexToSlugLUT,
 } from "../../../data/portfolioData";
 import type { ProjectData } from "../../../types/portfolioTypes";
-import { RELATIVE_ROUTES } from "../../../config/routes.config";
+import { ABSOLUTE_ROUTES } from "../../../config/routes.config";
 import { MemoMediaWrapper } from "../../ui/RenderMedia";
 
 interface ProjectCardProps {
@@ -22,7 +22,7 @@ export default function ProjectCard({
 
   return (
     <Link
-      to={RELATIVE_ROUTES.toProject(slug)}
+      to={ABSOLUTE_ROUTES.toProject(slug)}
       className="project-card-link"
       key={`${project.title}-${projectIndex}`}
       onClick={onClick}

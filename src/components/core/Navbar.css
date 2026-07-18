@@ -1,0 +1,38 @@
+:root {
+  --navbar-height: 2rem;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.6);
+
+  .proj-links-btn {
+    anchor-name: --proj-links-btn-anchor;
+  }
+
+  .proj-links-wrapper {
+    position: fixed;
+    position-anchor: --proj-links-btn-anchor;
+    justify-self: anchor-center;
+    top: var(--navbar-height);
+    background: inherit;
+
+    /* Center it horizontally */
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .proj-links-wrapper.is-closed {
+    display: none;
+  }
+}

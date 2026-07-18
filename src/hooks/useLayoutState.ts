@@ -8,23 +8,25 @@ export function useLayoutState() {
       "useLayoutState must be wrapped inside a LayoutStateProvider.",
     );
 
-  // This sub-hook is now completely self-contained and handles its own local section refs
   const useSectionVisibility = (id: string) => {
     const sectionRef = useRef<HTMLElement | null>(null);
+    const isVisible = context.activeSectionIds.includes(id);
 
-    // Pure O(1) direct values look up from global context maps
-    const sectionState = context.sectionsLUT[id];
-    const isVisible = sectionState ? sectionState.isVisible : true;
-    const currentHeight = sectionState ? sectionState.height : "auto";
+    // Read the height globally so it's present on the literal FIRST frame execution
+    const currentHeight = isVisible ? "auto" : context.getCachedHeight(id);
 
-    // Triggers strictly ONCE on mount for each section to handle registration natively
     useEffect(() => {
-      const node = sectionRef.current;
-      if (!node) return;
+      const currentRef = sectionRef;
+      const unregister = context.register(id, currentRef);
 
-      const unregister = context.register(id, node);
-      return () => unregister?.();
-    }, [id]); // Only re-binds if the ID parameters change
+      return () => {
+        if (currentRef.current) {
+          const height = currentRef.current.getBoundingClientRect().height;
+          if (height > 0) context.cacheHeight(id, `${height}px`);
+        }
+        unregister();
+      };
+    }, [id, context]);
 
     return [sectionRef, isVisible, currentHeight] as const;
   };
@@ -34,6 +36,6 @@ export function useLayoutState() {
     setMountPageLayout: context.setMountPageLayout,
     setLastScrollPos: context.setLastScrollPos,
     restoreLastScrollPos: context.restoreLastScrollPos,
-    useSectionVisibility, // Exposed seamlessly inside your existing hook architecture
+    useSectionVisibility,
   };
 }
