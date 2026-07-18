@@ -49,7 +49,7 @@ type RouteFiles = {
     id: "contact-view";
     page: "/contact";
   };
-  "./components/ui/project-showcase/ProjectModal.tsx": {
+  "./components/ui/ProjectModal.tsx": {
     id: "project-view";
     page: "/work/:slug";
   };
@@ -62,5 +62,5 @@ type RouteModules = {
   "home-view": typeof import("./src/./layouts/PageLayout.tsx");
   "about-view": typeof import("./src/./layouts/PageLayout.tsx");
   "contact-view": typeof import("./src/./layouts/PageLayout.tsx");
-  "project-view": typeof import("./src/./components/ui/project-showcase/ProjectModal.tsx");
+  "project-view": typeof import("./src/./components/ui/ProjectModal.tsx");
 };

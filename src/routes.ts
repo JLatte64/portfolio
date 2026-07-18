@@ -14,11 +14,9 @@ export default [
       route(ROUTE_KEYS.contact, "./layouts/PageLayout.tsx", {
         id: "contact-view",
       }),
-      route(
-        ROUTE_KEYS.project,
-        "./components/ui/project-showcase/ProjectModal.tsx",
-        { id: "project-view" },
-      ),
+      route(ROUTE_KEYS.project, "./components/ui/ProjectModal.tsx", {
+        id: "project-view",
+      }),
     ]),
   ]),
 ] satisfies RouteConfig;

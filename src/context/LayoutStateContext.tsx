@@ -27,7 +27,6 @@ export const LayoutStateProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const setLastScrollPos = () => {
     if (typeof window === "undefined") return;
-    console.log("Storing last scroll position: " + window.scrollY);
     scrollPositionRef.current = window.scrollY;
   };
 

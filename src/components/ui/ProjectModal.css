@@ -10,9 +10,7 @@
   border-radius: 12px;
   overflow: hidden;
   will-change: opacity;
-
   transition: opacity var(--modal-fade-timer) ease-in-out;
-  /* Shared hardware transition timing settings */
 }
 
 /* State 1: Opening (Initial un-painted frame state) */
@@ -55,11 +53,13 @@
   height: 65px;
   box-sizing: border-box;
 }
+
 .header-left-meta {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
+
 .modal-year-tag {
   font-size: 0.875rem;
   background: #f3f4f6;
@@ -68,6 +68,7 @@
   color: #4b5563;
   font-weight: 500;
 }
+
 .global-close-button {
   background: none;
   border: none;
@@ -76,6 +77,7 @@
   color: #6b7280;
   padding: 0.5rem;
 }
+
 .modal-panes-body {
   display: flex;
   flex-direction: column;
@@ -85,6 +87,7 @@
   position: relative;
   box-sizing: border-box;
 }
+
 .pane-left-carousel {
   width: 100%;
   flex: 0 0 45vh;
@@ -99,6 +102,7 @@
     flex 0.4s cubic-bezier(0.4, 0, 0.2, 1),
     width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .pane-right-details {
   width: 100%;
   flex: 1;
@@ -110,17 +114,22 @@
     opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     visibility 0.3s;
 }
+
 .modal-main-description-text {
   font-size: 1rem;
   line-height: 1.6;
   color: #374151;
   margin-bottom: 2rem;
 }
-.modal-panes-body.is-lightbox-active .pane-left-carousel {
+
+/* 💡 CHNG: Targets the carousel child directly when it possesses the active data attribute */
+.pane-left-carousel[data-lightbox-active] {
   flex: 1 0 100% !important;
   height: 100% !important;
 }
-.modal-panes-body.is-lightbox-active .pane-right-details {
+
+/* 💡 CHNG: Compresses and hides the details pane when the adjacent carousel element transitions to active */
+.modal-panes-body:has([data-lightbox-active]) .pane-right-details {
   opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;
@@ -142,21 +151,27 @@
     border-left: 1px solid #e5e7eb;
     padding: 2rem;
   }
-  .modal-panes-body.is-lightbox-active .pane-left-carousel {
+
+  /* 💡 CHNG: Expand layout dynamically across larger tablet breakpoint viewports */
+  .modal-panes-body:has([data-lightbox-active]) .pane-left-carousel {
     flex: 0 0 100% !important;
     width: 100% !important;
   }
 }
+
 @media screen and (min-width: 1440px) {
-  .modal-panes-body:not(.is-lightbox-active) .pane-left-carousel {
+  /* 💡 CHNG: Explicitly matches standard default grid tracking ratios using :not() exclusion targets */
+  .modal-panes-body:not(:has([data-lightbox-active])) .pane-left-carousel {
     flex: 0 0 60% !important;
     width: 60%;
   }
-  .modal-panes-body:not(.is-lightbox-active) .pane-right-details {
+  /* 💡 CHNG: Explicitly matches standard default detail tracking ratios using :not() exclusion targets */
+  .modal-panes-body:not(:has([data-lightbox-active])) .pane-right-details {
     width: 40%;
     padding: 3rem;
   }
 }
+
 @media screen and (min-width: 2560px) {
   .project-modal-dialog {
     background: transparent;
@@ -169,6 +184,7 @@
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   }
 }
+
 .global-caption-portal-dock-frame {
   position: absolute !important;
   bottom: 3.5rem !important;
