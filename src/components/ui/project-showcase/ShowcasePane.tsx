@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { ShowcaseSlider } from "./ShowcaseSlider";
 import { ShowcaseControls } from "./ShowcaseControls";
 import { ShowcaseLightbox } from "./ShowcaseLightbox";
@@ -10,69 +10,37 @@ interface ShowcasePaneProps {
 }
 
 export const ShowcasePane = ({ projectData }: ShowcasePaneProps) => {
-  const sliderEmblaApiRef = useRef<any>(null);
-
-  // 1. Maintain a single source of truth for the active slide index
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isCaptionActive, setIsCaptionActive] = useState(false);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   if (!projectData) return null;
 
-  return (
-    <ShowcasePaneLayout
-      activeIndex={activeIndex}
-      mediaList={projectData.carouselMedia}
-      sliderEmblaApiRef={sliderEmblaApiRef}
-    >
-      {/* 
-        🚀 SLIDER: Receives the state setter directly. It just calls 
-        onIndexChange(newIndex) whenever a slide transition completes.
-      */}
-      <ShowcaseSlider
-        sliderEmblaApiRef={sliderEmblaApiRef}
-        onIndexChange={setActiveIndex}
-        mediaList={projectData.carouselMedia}
-      />
-    </ShowcasePaneLayout>
-  );
-};
-
-// 2. The Presentation Shell
-interface LayoutProps {
-  children: React.ReactNode;
-  activeIndex: number;
-  mediaList: any[];
-  sliderEmblaApiRef: React.RefObject<any>;
-}
-
-const ShowcasePaneLayout = ({
-  children,
-  activeIndex,
-  mediaList,
-  sliderEmblaApiRef,
-}: LayoutProps) => {
-  const [isCaptionActive, setIsCaptionActive] = useState(false);
-  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const totalSlides = projectData.carouselMedia?.length || 0;
 
   return (
     <section
       className="pane-left-carousel"
       data-lightbox-active={isLightboxOpen || undefined}
     >
-      {/* Keeps your slider isolated via composition */}
-      {children}
+      <ShowcaseSlider
+        activeIndex={activeIndex}
+        onSlideChange={setActiveIndex}
+        mediaList={projectData.carouselMedia}
+      />
 
-      {/* 🎯 PASSED AS STANDARD PROPS: No more useEffect/useRef listeners needed inside these! */}
       <ShowcaseLightbox
         activeIndex={activeIndex}
-        mediaList={mediaList}
+        mediaList={projectData.carouselMedia}
         isOpen={isLightboxOpen}
         onClose={() => setIsLightboxOpen(false)}
       />
 
+      {/* 🎯 UNIFIED CALLBACKS: Single streamlined property pipeline */}
       <ShowcaseControls
-        sliderEmblaApiRef={sliderEmblaApiRef}
         activeIndex={activeIndex}
-        totalSlides={mediaList.length}
+        totalSlides={totalSlides}
+        onSlideChange={setActiveIndex}
       >
         <button
           type="button"
@@ -82,14 +50,17 @@ const ShowcasePaneLayout = ({
         </button>
         <button
           type="button"
-          onClick={() => setIsLightboxOpen(!isLightboxOpen)}
+          onClick={() => setIsLightboxOpen((prev) => !prev)}
         >
           {isLightboxOpen ? "✕" : "🔍"}
         </button>
       </ShowcaseControls>
 
       {isCaptionActive && (
-        <MediaCaption activeIndex={activeIndex} mediaList={mediaList} />
+        <MediaCaption
+          activeIndex={activeIndex}
+          mediaList={projectData.carouselMedia}
+        />
       )}
     </section>
   );

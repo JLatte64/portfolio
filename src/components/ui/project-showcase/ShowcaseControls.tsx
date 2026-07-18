@@ -2,59 +2,38 @@ import React from "react";
 import "./ShowcaseControls.css";
 
 interface ShowcaseControlsProps {
-  sliderEmblaApiRef: React.RefObject<any>;
   activeIndex: number;
   totalSlides: number;
+  onSlideChange: (idx: number) => void;
   children?: React.ReactNode;
 }
 
 export const ShowcaseControls = ({
-  sliderEmblaApiRef,
   activeIndex,
   totalSlides,
+  onSlideChange,
   children,
 }: ShowcaseControlsProps) => {
-  const handlePrev = () => {
-    if (sliderEmblaApiRef.current) sliderEmblaApiRef.current.scrollPrev();
-  };
-
-  const handleNext = () => {
-    if (sliderEmblaApiRef.current) sliderEmblaApiRef.current.scrollNext();
-  };
-
-  const handleScrollTo = (idx: number) => {
-    if (sliderEmblaApiRef.current) {
-      const embla = sliderEmblaApiRef.current;
-
-      // Calculate nearest loop sector for the 2-slide infinite loop scenario
-      if (embla.slideNodes().length === 4) {
-        const currentSnap = embla.selectedScrollSnap();
-        const currentCycle = currentSnap >= 2 ? 2 : 0;
-        embla.scrollTo(currentCycle + idx);
-      } else {
-        embla.scrollTo(idx);
-      }
-    }
-  };
-
-  const isControlDisabled = !sliderEmblaApiRef.current;
-
   return (
     <React.Fragment>
       <div className="carousel-dashboard-overlay">
+        {/* Previous Button: Calculates index wrap-around inline */}
         <button
           type="button"
           className="carousel-arrow-btn arrow-prev"
-          disabled={isControlDisabled}
-          onClick={handlePrev}
+          onClick={() =>
+            onSlideChange(activeIndex === 0 ? totalSlides - 1 : activeIndex - 1)
+          }
         >
           ⟨
         </button>
+        {/* Next Button: Calculates index wrap-around inline */}
         <button
           type="button"
           className="carousel-arrow-btn arrow-next"
-          disabled={isControlDisabled}
-          onClick={handleNext}
+          onClick={() =>
+            onSlideChange(activeIndex === totalSlides - 1 ? 0 : activeIndex + 1)
+          }
         >
           ⟩
         </button>
@@ -68,8 +47,7 @@ export const ShowcaseControls = ({
                 key={`dot-${idx}`}
                 type="button"
                 className={`indicator-dot ${idx === activeIndex ? "is-active" : ""}`}
-                disabled={isControlDisabled}
-                onClick={() => handleScrollTo(idx)}
+                onClick={() => onSlideChange(idx)}
                 aria-label={`Go to slide ${idx + 1}`}
               />
             ))}
@@ -80,5 +58,4 @@ export const ShowcaseControls = ({
     </React.Fragment>
   );
 };
-
 export default ShowcaseControls;
