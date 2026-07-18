@@ -2,6 +2,7 @@ import type { ComponentPropsWithoutRef } from "react";
 import { portfolioData } from "../../../data/portfolioData";
 import ProjectCard from "./ProjectCard";
 import "./WorkSection.css";
+import { LazySection } from "../LazySection";
 
 interface WorkSectionProps extends ComponentPropsWithoutRef<"div"> {
   onProjectClick?: () => void;
@@ -12,7 +13,7 @@ export default function WorkSection({
   ...props
 }: WorkSectionProps) {
   return (
-    <section className="portfolio-work-grid-section" id="work" {...props}>
+    <LazySection className="portfolio-work-grid-section" id="work" {...props}>
       <h2 className="section-label-heading">Selected Work</h2>
 
       <div className="work-items-masonry-wrapper">
@@ -26,6 +27,6 @@ export default function WorkSection({
           ),
         )}
       </div>
-    </section>
+    </LazySection>
   );
 }

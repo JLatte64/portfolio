@@ -1,5 +1,10 @@
 import "./ContactFooter.css";
+import { LazySection } from "./LazySection";
 
 export default function ContactFooter() {
-  return <footer>This is the Contact Footer.</footer>;
+  return (
+    <LazySection id="contact" as="footer">
+      This is the Contact Footer.
+    </LazySection>
+  );
 }

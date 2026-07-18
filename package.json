@@ -15,7 +15,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@vidstack/react": "^1.12.12",
+    "@vidstack/react": "^1.15.6",
     "dompurify": "^3.4.11",
     "embla-carousel-class-names": "^8.6.0",
     "embla-carousel-react": "^8.6.0",

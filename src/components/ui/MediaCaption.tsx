@@ -1,9 +1,10 @@
 import { createPortal } from "react-dom";
 import { useState } from "react";
+import type { MediaData } from "../../types/mediaTypes";
 
 interface MediaCaptionProps {
   activeIndex: number;
-  mediaList: any[];
+  mediaList: MediaData[];
 }
 
 export const MediaCaption = ({ activeIndex, mediaList }: MediaCaptionProps) => {

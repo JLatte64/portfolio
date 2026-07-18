@@ -1,7 +1,7 @@
 {
   "siteTitle": "Portfolio // Jordan Latta",
-  "siteDescription": "Portfolio of Jordan Latta, a Technical Artist specializing in high-performance rendering, shader engineering, and technical pipelines.",
-  "tagline": "I make things happen.",
+  "siteDescription": "Portfolio of Jordan Latta, a Technical Artist specializing in Specializes in real-time rendering, shader development, and optimization in Unity.",
+  "tagline": "Specializes in real-time rendering, shader development, and optimization with over a decade of self-directed experience in Unity. Check out my work here!",
   "bannerImage": {
     "type": "image",
     "src": "/files/bannerPhoto.webp",
@@ -10,7 +10,7 @@
   "backgroundInfo": {
     "name": "Jordan Latta",
     "occupation": "Technical Artist",
-    "aboutBlurb": "I am a Technical Artist working at the intersection of complex systems engineering and visual artistry. I specialize in designing toolsets, optimizing runtime performance, and building decoupled execution pipelines. From global network architectures to high-fidelity visual rendering, I bridge design intention with production-grade engineering reliability.",
+    "aboutBlurb": "My life is built from an unshakable obsession with how digital worlds are made. At six, Super Mario 64 was the spark. I grew up with its modding scene, teaching myself Game Maker in 2007, spending late nights modeling levels in SketchUp and resolving emulation bugs. In 2015 came Unity3D and finally shaders, which I've spent a decade mastering. Today, my lifelong devotion translates into building ultra-performant rendering systems and effects — all to give players the same spark I first felt.",
     "heroImage": {
       "type": "image",
       "src": "/img.jpg",
@@ -22,41 +22,64 @@
     ],
     "socials": [
       { "GitHub": "jlatte64.github.io" },
-      { "LinkedIn": "://linkedin.com" }
+      { "LinkedIn": "://linkedin.com/in/jordan-latta" }
     ],
     "skills": [
-      "Shader Development (HLSL/GLSL)",
+      "Shader Development",
       "Pipeline Automation & Tooling",
-      "Runtime Optimization",
-      "Systems Architecture",
+      "VFX & GPU Particle Systems",
+      "PBR & Material Workflows",
+      "Performance Optimization",
+      "Real-time Lighting",
       "Procedural Content Generation"
     ],
-    "software": ["Unreal Engine", "Houdini", "Maya", "Blender", "Git", "Vite"],
+    "software": [
+      "Unreal Engine",
+      "Blueprints",
+      "Unity",
+      "Shader Graph",
+      "C#",
+      "HLSL",
+      "Blender",
+      "Maya (Learning)",
+      "NVIDIA Nsight Graphics",
+      "RenderDoc",
+      "Git",
+      "Perforce"
+    ],
+    "resume": {
+      "type": "pdf",
+      "src": "https://i.scdn.co/image/ab67656300005f1fb14d53db09ad4d8fff9cd3d0",
+      "alt": "aaaaaaaaaaaaaaa"
+    },
     "experience": [
       {
-        "title": "Lead Technical Artist",
-        "company": "Nexus Game Studios",
-        "timeframe": "2024 - Present",
-        "details": [
-          "Engineered modular procedural toolsets reducing landscape creation timelines by 35%.",
-          "Profiled and optimized memory usage, clearing runtime bottlenecks for target hardware platforms.",
-          "Designed automated asset validation scripts running via CI/CD pipelines."
-        ]
-      },
-      {
         "title": "Technical Artist",
-        "company": "Voxel FX Interactive",
-        "timeframe": "2022 - 2024",
+        "company": "Mega Cat Studios",
+        "timeframe": "2024 - 2026",
         "details": [
-          "Authored custom post-processing graphics shaders and screen-space asset behaviors.",
-          "Maintained core DCC-to-engine asset ingestion pipeline scripts across multi-disciplinary teams."
+          "Owned the design and development of custom GPU-driven rendering systems in C# on Unity's SRP, extending visuals and performance beyond default engine capabilities.",
+          "Partnered closely with clients, engineers, artists, and designers to build tools — including a grass creation system and a 2D lighting editor — that streamlined both art and engineering workflows.",
+          "Authored and maintained tools, shaders, models, materials, and textures across evolving art styles and shifting platform targets.",
+          "Built and documented asset pipelines end-to-end, training peers along the way."
         ]
       }
-    ]
+    ],
+    "education": [
+      {
+        "school": "Michigan State University",
+        "timeframe": "2019 - 2023",
+        "degree": [
+          { "Major": "B.A. in Games & Interactive Media" },
+          { "Minor": "Minor in Game Design & Development" }
+        ]
+      }
+    ],
+    "languages": ["English (Native)", "German (Working Proficiency)"]
   },
   "projects": [
     {
-      "title": "E-Commerce Mesh Platform",
+      "title": "God of War: Sons of Sparta",
       "description": "A high-performance, distributed e-commerce architecture designed to eliminate transactional checkout latency during peak traffic spikes. Built by decoupling legacy checkout micro-states and shifting execution pipelines to edge-cached gateway workers, the platform leverages a custom global WebSocket mesh for real-time data sync. This engineering overhaul compressed global analytical payloads by 42% and introduced strict multi-region fault isolation, ensuring sub-second execution latencies and zero-downtime reliability under heavy concurrent loads.",
       "year": 2026,
       "thumbnailImage": {
@@ -96,12 +119,13 @@
       ],
       "sections": [
         {
-          "heading": "Section Heading Title",
-          "subheading": "Section Subheading Line",
-          "paragraph": "Detailed project description text paragraphs go right inside this layout string position block.",
+          "heading": "Custom 2D Lighting System",
+          "subheading": "",
+          "paragraph": "Built a custom 2D lighting pipeline to fix a CPU bottleneck in Unity's default system, which choked under hundreds of lights. Gives artists 256 individually-lit sprite layers with negligible CPU cost on PS5 — even with hundreds of lights in a scene.",
           "list": [
-            "First project metric list bullet item",
-            "Second project metric list bullet item"
+            "<b>Lighting:</b> Stencil-buffer bit encoding isolates each light to its sprite layer",
+            "<b>Tooling:</b> Built an in-editor tool to serve a team of 20+ lighting artists; enables authoring/placing lights with no code",
+            "<b>Optimization:</b> All lights/shadows instanced to one draw call per blend mode; GPU & CPU cost effectively flat regardless of light count"
           ],
           "media": [
             {
@@ -114,6 +138,72 @@
               "src": "https://vimeo.com"
             }
           ]
+        },
+        {
+          "heading": "Environment & Character Sprite Shaders",
+          "subheading": "",
+          "paragraph": "Authored 13+ production-ready sprite shaders underpinning character/environment interaction with the lighting system, as well as procedural surface effects across both.",
+          "list": [
+            "<b>Shaders:</b> Pixel-perfect running water, foliage, screen-space reflections, directional lights",
+            "<b>Optimization:</b> All sprite shaders use instancing or SRP Batcher to minimize batch & draw call count on <i>PS5</i>"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Backyard Baseball",
+      "description": "A high-performance, distributed e-commerce architecture designed to eliminate transactional checkout latency during peak traffic spikes. Built by decoupling legacy checkout micro-states and shifting execution pipelines to edge-cached gateway workers, the platform leverages a custom global WebSocket mesh for real-time data sync. This engineering overhaul compressed global analytical payloads by 42% and introduced strict multi-region fault isolation, ensuring sub-second execution latencies and zero-downtime reliability under heavy concurrent loads.",
+      "year": 2026,
+      "thumbnailImage": {
+        "type": "image",
+        "src": "https://i.scdn.co/image/ab67656300005f1fb14d53db09ad4d8fff9cd3d0",
+        "alt": "E-Commerce Mesh Platform Project Capture Preview"
+      },
+      "carouselMedia": [
+        {
+          "type": "image",
+          "src": "https://i.scdn.co/image/ab67656300005f1fb14d53db09ad4d8fff9cd3d0",
+          "alt": "aaaaaaaaaaaaaaa",
+          "caption": "Primary layout performance graph showcase frame"
+        },
+        {
+          "type": "image",
+          "src": "https://amanexplains.com/static/c03d5c85167bc1eb9618108b2333e2fc/b8a94/profile-pic.webp",
+          "alt": "aaaaaaaaaaaaaaa",
+          "caption": "ASDFDDDDDDDDDDF"
+        },
+        {
+          "type": "image",
+          "src": "https://i.scdn.co/image/ab67656300005f1fb14d53db09ad4d8fff9cd3d0",
+          "alt": "aaaaaaaaaaaaaaa",
+          "caption": "Primary layout performance graph showcase frame"
+        },
+        {
+          "type": "image",
+          "src": "https://i.scdn.co/image/ab67656300005f1fb14d53db09ad4d8fff9cd3d0",
+          "alt": "aaaaaaaaaaaaaaa",
+          "caption": "Primary layout performance graph showcase frame"
+        },
+        {
+          "type": "video",
+          "src": "https://www.youtube.com/watch?v=aqz-KE-bpKQ"
+        }
+      ],
+      "sections": [
+        {
+          "heading": "GPU-Driven Grass Renderer",
+          "subheading": "",
+          "paragraph": "Led R&D on a scalable GPU-driven grass system for close-up-quality stadium turf with a nostalgic look. Renders 1M+ triangles in a single draw call at ~5ms render cost on <i>Nintendo Switch</i>.",
+          "list": [
+            "<b>Culling:</b> A <code>ComputeShader</code> generates and culls instances using a Morton-ordered, groupshared-cached grid; async, double-buffered CPU <-> GPU transfer avoids pipeline stalls, profiled with <i>Nvidia Nsight Graphics</i>",
+            "<b>Rendering:</b> Custom low-overhead hook into <code>Camera.Render</code> drives per-camera culling; <i>Shader Graph</i> shader derives color/height from a world-space LUT instead of per-blade textures (3 lookups, ~128 tris per blade)",
+            "<b>Tooling:</b> Modeled/UV'd all grass in <i>Blender</i>; built an in-editor tool for artists to hand-paint per-stadium color/height LUTs"
+          ]
+        },
+        {
+          "heading": "Memory & Draw Call Optimizations",
+          "subheading": "",
+          "paragraph": "Worked cross-department with Level Design to combine environment meshes, Materials, and textures across the project to fit within <i>Nintendo Switch</i> memory budgets — cutting batch count by 50% and memory usage by 75%."
         }
       ]
     }

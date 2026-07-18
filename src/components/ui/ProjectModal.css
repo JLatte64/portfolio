@@ -88,21 +88,6 @@
   box-sizing: border-box;
 }
 
-.pane-left-carousel {
-  width: 100%;
-  flex: 0 0 45vh;
-  background: #000;
-  position: relative;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: stretch !important;
-  justify-content: space-between !important;
-  box-sizing: border-box;
-  transition:
-    flex 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-    width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
 .pane-right-details {
   width: 100%;
   flex: 1;
@@ -120,6 +105,21 @@
   line-height: 1.6;
   color: #374151;
   margin-bottom: 2rem;
+}
+
+.pane-left-carousel {
+  width: 100%;
+  flex: 0 0 45vh;
+  background: #000;
+  position: relative;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  justify-content: space-between !important;
+  box-sizing: border-box;
+  transition:
+    flex 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* 💡 CHNG: Targets the carousel child directly when it possesses the active data attribute */
