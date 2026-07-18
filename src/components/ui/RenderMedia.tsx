@@ -15,6 +15,19 @@ import "./RenderMedia.css";
 import "@vidstack/react/player/styles/default/theme.css";
 import "@vidstack/react/player/styles/default/layouts/video.css";
 
+// 🚀 GLOBAL ARCHITECTURAL WIN:
+// Register this handler EXACTLY ONCE at the file module execution layer.
+// This completely stops memory footprint leaks across multiple slider nodes!
+if (typeof window !== "undefined") {
+  window.addEventListener("unhandledrejection", (e: PromiseRejectionEvent) => {
+    const errorString =
+      typeof e.reason === "string" ? e.reason : e.reason?.message || "";
+    if (errorString.includes("provider destroyed")) {
+      e.preventDefault(); // Swallows the console noise globally
+    }
+  });
+}
+
 export interface AssetHandles {
   mediaElement:
     HTMLImageElement | HTMLIFrameElement | MediaPlayerInstance | null;
@@ -59,7 +72,6 @@ export const MemoMediaWrapper = React.memo(
     anchorCaptions?: boolean;
   }) => {
     const resolvedSrc = resolveMediaPath(item?.src || "");
-
     const [loadingState, setLoadingState] = useState<
       "loading" | "loaded" | "error"
     >("loading");
@@ -72,17 +84,26 @@ export const MemoMediaWrapper = React.memo(
       captionElement: captionRef.current,
     }));
 
+    // 💡 EFFECT 1: Handles asset mounting state calculations
     useEffect(() => {
-      if (!resolvedSrc || item?.type === "error") {
+      if (!resolvedSrc || item.type === "error") {
         setLoadingState("error");
         return;
       }
-
       const element = mediaRef.current;
       if (element && element instanceof HTMLImageElement && element.complete) {
         setLoadingState("loaded");
       }
-    }, [resolvedSrc, item?.type]);
+    }, [resolvedSrc, item.type]);
+
+    // 💡 EFFECT 2: Lightweight local unmount track audio freeze
+    useEffect(() => {
+      return () => {
+        try {
+          mediaRef.current?.remote?.pause();
+        } catch {}
+      };
+    }, []);
 
     const hasCaption =
       item.type !== "video" && !!item.caption && loadingState === "loaded";
@@ -92,8 +113,6 @@ export const MemoMediaWrapper = React.memo(
     const handleLoadSuccess = () => setLoadingState("loaded");
     const handleLoadError = () => setLoadingState("error");
 
-    // 1. SPLIT PATH STRINGS FOR STRICT TYPESAFETY
-    // Vidstack requires undefined instead of null to clear its source parameters
     const vidstackSrc = resolvedSrc || undefined;
     const nativeSrc = resolvedSrc || undefined;
 
@@ -116,7 +135,7 @@ export const MemoMediaWrapper = React.memo(
               {item.type === "video" ? (
                 <MediaPlayer
                   ref={mediaRef}
-                  src={vidstackSrc} // FIX: Now safely passes a strict 'string | undefined' signature
+                  src={vidstackSrc}
                   className="universal-media-asset player-wrapper w-full h-full aspect-video"
                   muted
                   autoplay
@@ -136,7 +155,7 @@ export const MemoMediaWrapper = React.memo(
               ) : item.type === "image" ? (
                 <img
                   ref={mediaRef}
-                  src={nativeSrc} // Safely skips mounting frame downloads
+                  src={nativeSrc}
                   className="universal-media-asset"
                   alt={item.alt || ""}
                   aria-describedby={hasCaption ? captionId : undefined}
@@ -148,7 +167,7 @@ export const MemoMediaWrapper = React.memo(
               ) : (
                 <iframe
                   ref={mediaRef}
-                  src={nativeSrc} // Safely skips mounting frame downloads
+                  src={nativeSrc}
                   className="universal-media-asset"
                   title={item.caption || "Embedded content"}
                   aria-describedby={hasCaption ? captionId : undefined}
@@ -186,3 +205,4 @@ export const MemoMediaWrapper = React.memo(
 );
 
 MemoMediaWrapper.displayName = "MemoMediaWrapper";
+export default MemoMediaWrapper;
