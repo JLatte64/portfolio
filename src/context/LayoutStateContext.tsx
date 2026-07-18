@@ -105,8 +105,8 @@ export function LayoutStateProvider({
 
   const restoreLastScrollPos = () => {
     if (typeof window === "undefined") return;
-    if (!mountPageLayout && scrollPositionRef.current > 0) {
-      window.scrollTo({ top: scrollPositionRef.current, behavior: "auto" });
+    if (scrollPositionRef.current > 0) {
+      window.scrollTo({ top: scrollPositionRef.current, behavior: "instant" });
     }
   };
 

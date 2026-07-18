@@ -25,11 +25,11 @@ export default function ProjectModal() {
   useEffect(() => {
     const dialog = dialogRef.current;
     if (!dialog || !projectData) return;
+    setLastScrollPos();
 
     if (!dialog.open) {
       dialog.showModal();
       setFadeState("fade-in");
-      setLastScrollPos();
     }
 
     const fadeInTimer = setTimeout(() => {
@@ -47,6 +47,7 @@ export default function ProjectModal() {
     if (!dialog || !dialog.open) return;
 
     restoreLastScrollPos();
+
     setMountPageLayout(true);
     setFadeState("fade-out");
 

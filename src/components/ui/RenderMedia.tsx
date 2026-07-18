@@ -143,7 +143,7 @@ export const MemoMediaWrapper = React.memo(
                   playsInline
                   controls
                   load="visible"
-                  logLevel="warn"
+                  logLevel="silent"
                   aria-label={item.caption || "Video player"}
                   aria-describedby={hasCaption ? captionId : undefined}
                   onCanPlay={handleLoadSuccess}
