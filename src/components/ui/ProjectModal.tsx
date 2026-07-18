@@ -59,6 +59,26 @@ export default function ProjectModal() {
     return () => clearTimeout(fadeOutTimer);
   };
 
+  useEffect(() => {
+    if (fadeState !== "open") return;
+
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        handleClose();
+      }
+    };
+
+    const previouslyFocusedElement = document.activeElement as HTMLElement;
+    dialogRef.current?.focus();
+
+    window.addEventListener("keydown", handleGlobalKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleGlobalKeyDown);
+      previouslyFocusedElement?.focus();
+    };
+  }, [fadeState, handleClose]);
+
   if (!projectData) return null;
 
   return (

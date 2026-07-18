@@ -41,6 +41,29 @@ export const ShowcaseSlider = ({
     };
   }, [emblaApi, sliderEmblaApiRef]);
 
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Only intercept events if the user is actively focusing somewhere inside the slider frame
+      const emblaNode = emblaApi.rootNode();
+      if (!emblaNode?.contains(document.activeElement)) return;
+
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        emblaApi.scrollPrev();
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        emblaApi.scrollNext();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [emblaApi]);
+
   // 💡 EFFECT 2: Synchronizes Slide Indices and Moves Raw Video DOM Elements
   useEffect(() => {
     if (!emblaApi) return;

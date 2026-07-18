@@ -1,3 +1,4 @@
+// src/components/LightboxViewer.tsx
 import { useEffect, useRef } from "react";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { MemoMediaWrapper } from "../RenderMedia";
@@ -18,26 +19,42 @@ export const ShowcaseLightbox = ({
 }: ShowcaseLightboxProps) => {
   const overlayRef = useRef<HTMLDivElement>(null);
 
+  // 💡 EFFECT: Manages programmatic focus shifts and prioritized key intercepting
   useEffect(() => {
     if (!isOpen) return;
 
-    const handleKeyDown = (e: KeyboardEvent) => {
+    const handleKeyDownCapture = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         e.preventDefault();
-        onClose?.();
+
+        /* 
+          🔥 CRITICAL CAPTURE INTERCEPT:
+          Because this event runs during the browser's prioritized capture phase,
+          stopImmediatePropagation() safely intercepts and kills the Escape keypress 
+          at the root window layer before the generic ProjectModal listener ever hears it.
+        */
+        e.stopImmediatePropagation();
+        onClose();
       }
     };
 
     const prevActive = document.activeElement as HTMLElement;
+
+    // Accessibility shift: Programmatically guide reader focus into the modal frame
     overlayRef.current?.focus();
 
-    window.addEventListener("keydown", handleKeyDown);
+    // Register with capture: true to jump to the front of the browser's event execution queue
+    window.addEventListener("keydown", handleKeyDownCapture, { capture: true });
+
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keydown", handleKeyDownCapture, {
+        capture: true,
+      });
       prevActive?.focus();
     };
   }, [isOpen, onClose]);
 
+  // Safely extract metadata straight from incoming presentation props
   const activeMedia = mediaList?.[activeIndex];
   if (!isOpen || !activeMedia?.src) return null;
 
@@ -62,13 +79,15 @@ export const ShowcaseLightbox = ({
       aria-modal="true"
       aria-label={`Expanded Lightbox Viewport Display: Slide item number ${activeIndex + 1}`}
       tabIndex={-1}
-      onClick={(e) => e.target === overlayRef.current && onClose?.()}
+      onClick={(e) => e.target === overlayRef.current && onClose()}
     >
       <div className="lightbox-viewport-window" role="document">
         {isImage ? (
           /* 
-            💡 KEY OPTIMIZATION: Changing the 'key' attribute here forces the layout wrapper 
-            to naturally reset back to scale 1:1 instantly on slide change with zero ref code needed!
+            💡 DECLARATIVE ZOOM RESET: 
+            By tying the reactive 'key' attribute directly to the media source string, 
+            switching slides naturally destroys and remounts the pinch-to-zoom engine. 
+            This forces it back to scale 1:1 automatically without needing imperative ref targets!
           */
           <TransformWrapper
             key={activeMedia.src}
