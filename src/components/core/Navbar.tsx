@@ -3,14 +3,13 @@ import { portfolioData, projectIndexToSlugLUT } from "../../data/portfolioData";
 import type { ProjectData } from "../../types/portfolioTypes";
 import "./Navbar.css";
 import { ABSOLUTE_ROUTES } from "../../config/routes.config";
-import { useState } from "react";
+import { useState, useRef, type FocusEvent, type KeyboardEvent } from "react";
 
 export interface ProjectNavButton {
   label: string;
   link: string;
 }
 
-// ✅ PERFECT: Stays outside the component so it doesn't recalculate on re-renders
 const projectButtons: ProjectNavButton[] = portfolioData?.projects
   ? portfolioData.projects.map(
       (project: ProjectData, index: number): ProjectNavButton => ({
@@ -23,29 +22,41 @@ const projectButtons: ProjectNavButton[] = portfolioData?.projects
 const title = portfolioData.siteTitle;
 
 export default function Navbar() {
-  // ✅ OPTIMIZED: Switch to a clean boolean state to prevent string-parsing overhead
-  const [isProjListOpen, setIsProjListOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const toggleList = () => setIsOpen((prev) => !prev);
 
-  const toggleList = () => setIsProjListOpen((prev) => !prev);
-  const closeList = () => setIsProjListOpen(false);
+  const closeList = () => {
+    if (isOpen) setIsOpen(false);
+  };
+
+  const handleBlur = (e: FocusEvent<HTMLElement>) => {
+    if (!e.currentTarget.contains(e.relatedTarget)) {
+      setIsOpen(false);
+    }
+  };
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === "Escape" && isOpen) {
+      setIsOpen(false);
+      buttonRef.current?.focus();
+    }
+  };
 
   return (
-    <nav>
-      {/* ✅ OPTIMIZED: Matches your layout context path checking cleanly */}
-      <NavLink to={ABSOLUTE_ROUTES.home}>
-        <span className="material-icons" aria-hidden="true">
-          home
-        </span>
-        <span className="sr-only">Home</span>
-      </NavLink>
+    <nav
+      aria-label="Main Navigation"
+      onBlur={handleBlur}
+      onKeyDown={handleKeyDown}
+    >
+      <NavLink to={`${ABSOLUTE_ROUTES.home}#top`}>{title}</NavLink>
 
-      <h2>{title}</h2>
-
-      {/* ✅ ACCESSIBILITY: Adds standard aria properties for menu states */}
       <button
+        ref={buttonRef}
         className="proj-links-btn"
         onClick={toggleList}
-        aria-expanded={isProjListOpen}
+        aria-haspopup="menu"
+        aria-expanded={isOpen}
         aria-controls="project-nav-menu"
       >
         Projects
@@ -54,17 +65,19 @@ export default function Navbar() {
       <NavLink to={ABSOLUTE_ROUTES.about}>About / Resume</NavLink>
       <NavLink to={ABSOLUTE_ROUTES.contact}>Contact</NavLink>
 
-      {/* ✅ OPTIMIZED: Dynamic string interpolation replaces nested conditional sets */}
       <div
         id="project-nav-menu"
-        className={`proj-links-wrapper ${isProjListOpen ? "is-open" : "is-closed"}`}
+        role="menu"
+        aria-label="Projects Submenu"
+        className={`proj-links-wrapper ${isOpen ? "is-open" : "is-closed"}`}
+        hidden={!isOpen}
       >
         {projectButtons.map((node) => (
           <NavLink
-            // ✅ CRITICAL: Replaced fluid index counters with specific unique URLs
             key={node.link}
             to={node.link}
-            onClick={closeList} // ✅ UX: Auto-collapses dropdown when a project view loads
+            role="menuitem"
+            onClick={closeList}
           >
             {node.label}
           </NavLink>

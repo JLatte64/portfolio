@@ -1,27 +1,48 @@
 import type { ComponentPropsWithoutRef } from "react";
-import { portfolioData } from "../../../data/portfolioData";
+import {
+  portfolioData,
+  projectIndexToSlugLUT,
+} from "../../../data/portfolioData";
 import ProjectCard from "./ProjectCard";
 import "./WorkSection.css";
 import { LazySection } from "../LazySection";
+import type { ProjectData } from "../../../types/portfolioTypes";
 
-interface WorkSectionProps extends ComponentPropsWithoutRef<"div"> {}
+interface WorkSectionProps extends ComponentPropsWithoutRef<"section"> {}
 
 export default function WorkSection({ ...props }: WorkSectionProps) {
-  return (
-    <LazySection className="portfolio-work-grid-section" id="work" {...props}>
-      <h2 className="section-label-heading">Selected Work</h2>
+  const hasProjects =
+    portfolioData?.projects && portfolioData.projects.length > 0;
 
-      <div className="work-items-masonry-wrapper">
-        {portfolioData?.projects &&
-          Array.from({ length: portfolioData.projects.length }).map(
-            (_, index) => (
-              <ProjectCard
-                key={`project-node-key-${index}`}
-                projectIndex={index}
-              />
-            ),
-          )}
-      </div>
+  return (
+    <LazySection
+      className="portfolio-work-grid-section"
+      id="work"
+      aria-labelledby="work-section-heading"
+      {...props}
+    >
+      <h2 id="work-section-heading" className="section-label-heading">
+        Selected Work
+      </h2>
+
+      {hasProjects ? (
+        <ul className="work-items-masonry-wrapper" role="list">
+          {portfolioData.projects.map((_: ProjectData, index: number) => {
+            const projectSlug =
+              projectIndexToSlugLUT[index] || `project-${index}`;
+
+            return (
+              <li key={projectSlug}>
+                <ProjectCard projectIndex={index} />
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <p className="no-projects-fallback">
+          No projects available at this time.
+        </p>
+      )}
     </LazySection>
   );
 }
