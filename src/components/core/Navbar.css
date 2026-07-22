@@ -1,38 +1,130 @@
 :root {
-  --navbar-height: 2rem;
+  --navbar-height: 3rem;
 }
 
-nav {
+.navbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
+  height: var(--navbar-height);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.8);
+  padding: 0 1rem;
+  z-index: 1000;
+  box-sizing: border-box;
+  font-family: sans-serif;
+
+  a,
+  .proj-links-btn {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s ease;
+    &:hover {
+      color: #4caf50;
+    }
+  }
 
   .proj-links-btn {
-    anchor-name: --proj-links-btn-anchor;
+    anchor-name: --proj-btn;
   }
 
+  /* Desktop Dropdown Using Native CSS Anchor Rules */
   .proj-links-wrapper {
+    list-style: none;
+    margin: 0;
+    padding: 1rem;
+    background: #111;
+    border-radius: 4px;
     position: fixed;
-    position-anchor: --proj-links-btn-anchor;
-    justify-self: anchor-center;
+    position-anchor: --proj-btn;
     top: var(--navbar-height);
-    background: inherit;
-
-    /* Center it horizontally */
-
+    justify-self: anchor-center;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    justify-content: center;
-    align-items: center;
+    gap: 0.75rem;
+
+    &.is-closed {
+      display: none;
+    }
+    &.is-open {
+      display: flex;
+    }
   }
 
-  .proj-links-wrapper.is-closed {
+  .nav-hamburger {
     display: none;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+  .nav-menu-desktop .nav-links-list {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+}
+
+/* Mobile Screens Styling Breakpoint Rules */
+@media (max-width: 768px) {
+  .navbar .nav-hamburger {
+    display: block;
+  }
+
+  /* Native Dialog Slide Drawer Layout Wrapper */
+  .nav-menu-mobile-dialog {
+    border: none;
+    margin: 0 0 0 auto;
+    width: 70vw;
+    height: 100vh;
+    max-height: 100vh;
+    background: #111;
+    color: white;
+    padding: 2rem;
+    box-sizing: border-box;
+
+    &::backdrop {
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+    }
+    .close-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 2rem;
+      float: right;
+      cursor: pointer;
+    }
+
+    .nav-links-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      list-style: none;
+      margin-top: 3rem;
+      padding: 0;
+    }
+
+    /* Disables anchor tracking calculations natively inside the mobile drawer */
+    .proj-links-wrapper {
+      position: static;
+      background: transparent;
+      padding: 0.5rem 0 0 1rem;
+
+      &.is-closed {
+        display: none;
+      }
+      &.is-open {
+        display: flex;
+      }
+    }
   }
 }

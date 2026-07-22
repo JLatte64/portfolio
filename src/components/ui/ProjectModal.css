@@ -135,7 +135,7 @@
   pointer-events: none !important;
 }
 
-@media screen and (min-width: 768px), screen and (orientation: landscape) {
+@media screen and (min-width: 600px), screen and (orientation: landscape) {
   .modal-panes-body {
     flex-direction: row;
     height: calc(100vh - 65px) !important;
