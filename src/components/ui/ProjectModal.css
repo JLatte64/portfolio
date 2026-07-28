@@ -1,3 +1,7 @@
+:root {
+  --modal-header-height: 65px;
+}
+
 .project-modal-dialog {
   position: fixed;
   inset: 0;
@@ -50,7 +54,7 @@
   padding: 1rem 1.5rem;
   border-bottom: 1px solid #e5e7eb;
   background: #fff;
-  height: 65px;
+  height: var(--modal-header-height);
   box-sizing: border-box;
 }
 
@@ -83,7 +87,7 @@
   flex-direction: column;
   flex: 1;
   overflow: hidden;
-  height: calc(100vh - 65px);
+  height: calc(100vh - var(--modal-header-height));
   position: relative;
   box-sizing: border-box;
 }
@@ -109,7 +113,7 @@
 
 .pane-left-carousel {
   width: 100%;
-  flex: 0 0 45vh;
+  flex: 0 0 30dvh;
   background: #000;
   position: relative;
   display: flex !important;

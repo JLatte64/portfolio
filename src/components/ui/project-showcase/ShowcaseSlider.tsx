@@ -8,12 +8,14 @@ interface ShowcaseSliderProps {
   mediaList: MediaData[];
   activeIndex: number;
   onSlideChange: (index: number) => void;
+  children?: React.ReactNode;
 }
 
 export const ShowcaseSlider = ({
   mediaList = [],
   activeIndex,
   onSlideChange,
+  children,
 }: ShowcaseSliderProps) => {
   const [engaged, setEngaged] = useState(false);
   const rawTotal = mediaList.length;
@@ -100,6 +102,7 @@ export const ShowcaseSlider = ({
       ref={emblaRef}
       onScroll={(e) => (e.currentTarget.scrollLeft = 0)}
     >
+      {children}
       <div className="embla__container">
         {clonedList.map((media, idx) => (
           <div key={idx} className="embla__slide">
@@ -115,7 +118,6 @@ export const ShowcaseSlider = ({
           {mediaList.map((media, i) => (
             <div
               key={i}
-              /* 🔥 FIXED: Wrap assignment in curly braces to prevent implicit return value */
               ref={(el) => {
                 playerNodesRef.current[i] = el;
               }}
