@@ -106,7 +106,7 @@ export default function ProjectModal() {
             onClick={handleClose}
             aria-label="Close project details window"
           >
-            ✕
+            <span className="material-symbols-outlined">close</span>
           </button>
         </header>
 

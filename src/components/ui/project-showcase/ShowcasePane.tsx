@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./ShowcaseLightbox.css";
-import "./ShowcaseControls.css";
-import MediaCaption from "../MediaCaption";
 import type { ProjectData } from "../../../types/portfolioTypes";
 import MemoMediaWrapper from "../RenderMedia";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 import ShowcaseSlider from "./ShowcaseSlider";
+import "../floatingBubble.css";
+import "./showcasePane.css";
 
 interface ShowcasePaneProps {
   projectData: ProjectData;
@@ -107,10 +107,10 @@ export const ShowcasePane = ({ projectData }: ShowcasePaneProps) => {
         />
       )}
       <React.Fragment>
-        <div className="carousel-dashboard-overlay">
+        <div className="slider-overlay">
           <button
             type="button"
-            className="carousel-arrow-btn arrow-prev"
+            className="slider-arrow-btn arrow-prev"
             onClick={() =>
               onSlideChange(
                 activeIndex === 0 ? totalSlides - 1 : activeIndex - 1,
@@ -121,7 +121,7 @@ export const ShowcasePane = ({ projectData }: ShowcasePaneProps) => {
           </button>
           <button
             type="button"
-            className="carousel-arrow-btn arrow-next"
+            className="slider-arrow-btn arrow-next"
             onClick={() =>
               onSlideChange(
                 activeIndex === totalSlides - 1 ? 0 : activeIndex + 1,
@@ -130,45 +130,47 @@ export const ShowcasePane = ({ projectData }: ShowcasePaneProps) => {
           >
             ⟩
           </button>
+          {isCaptionActive &&
+            projectData.carouselMedia[activeIndex].caption && (
+              <div
+                id="carousel-live-caption"
+                className="caption-bubble floating-bubble"
+              >
+                {projectData.carouselMedia[activeIndex].caption}
+              </div>
+            )}
         </div>
 
-        <div className="carousel-dashboard-bar">
-          <div className="dashboard-row-layout">
-            <div className="carousel-dots-wrapper">
-              {Array.from({ length: totalSlides }).map((_, idx) => (
-                <button
-                  key={`dot-${idx}`}
-                  type="button"
-                  className={`indicator-dot ${idx === activeIndex ? "is-active" : ""}`}
-                  onClick={() => onSlideChange(idx)}
-                  aria-label={`Go to slide ${idx + 1}`}
-                />
-              ))}
-            </div>
-            <div className="carousel-dashboard-extras-slot">
+        <div className="showcase-control-bar">
+          <button
+            type="button"
+            onClick={() => setIsCaptionActive(!isCaptionActive)}
+          >
+            <span className="material-symbols-outlined">
+              {isCaptionActive ? "subtitles_off" : "subtitles"}
+            </span>
+          </button>
+          <div className="slider-dots-wrapper">
+            {Array.from({ length: totalSlides }).map((_, idx) => (
               <button
+                key={`dot-${idx}`}
                 type="button"
-                onClick={() => setIsCaptionActive(!isCaptionActive)}
-              >
-                {isCaptionActive ? "CC // Off" : "CC // On"}
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setIsLightboxOpen((prev) => !prev)}
-              >
-                {isLightboxOpen ? "✕" : "🔍"}
-              </button>
-            </div>
+                className={`slider-indicator-dot ${idx === activeIndex ? "is-active" : ""}`}
+                onClick={() => onSlideChange(idx)}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            ))}
           </div>
+          <button
+            type="button"
+            onClick={() => setIsLightboxOpen((prev) => !prev)}
+          >
+            <span className="material-symbols-outlined">
+              {isLightboxOpen ? "fullscreen_exit" : "fullscreen"}
+            </span>
+          </button>
         </div>
       </React.Fragment>
-      {isCaptionActive && (
-        <MediaCaption
-          activeIndex={activeIndex}
-          mediaList={projectData.carouselMedia}
-        />
-      )}
     </section>
   );
 };

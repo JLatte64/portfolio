@@ -1,0 +1,115 @@
+:root {
+  --showcase-control-bar-height: 4rem;
+}
+
+.slider-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  bottom: var(--showcase-control-bar-height);
+  height: calc(100% - var(--showcase-control-bar-height));
+  padding: 0;
+  margin: 0;
+  pointer-events: none;
+
+  transform: translateZ(10px);
+  transform-style: preserve-3d;
+}
+
+.showcase-control-bar {
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  anchor-name: --showcase-control-bar;
+  height: var(--showcase-control-bar-height);
+  background-color: #141414;
+  border-top: 1px solid #262626;
+  pointer-events: auto;
+
+  transform: translateZ(20px);
+  transform-style: preserve-3d;
+}
+
+.control-btn,
+.slider-arrow-btn {
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s,
+    color 0.15s,
+    transform 0.2s;
+}
+
+.slider-arrow-btn {
+  position: absolute;
+  top: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 1.25rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  pointer-events: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+
+  transform: translateY(-50%) translateZ(15px);
+}
+
+.slider-arrow-btn:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.arrow-prev {
+  left: 1.5rem;
+}
+
+.arrow-next {
+  right: 1.5rem;
+}
+
+.slider-dots-wrapper {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.5rem;
+  pointer-events: auto;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.slider-indicator-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #4b5563;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transform: translateZ(21px);
+}
+
+.slider-indicator-dot:hover:not(.is-active) {
+  background-color: #71717a;
+  transform: scale(1.1) translateZ(21px);
+}
+
+.slider-indicator-dot.is-active {
+  background-color: #3b82f6;
+  transform: scale(1.2) translateZ(22px);
+}
+
+.caption-bubble {
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

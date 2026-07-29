@@ -10,7 +10,6 @@ interface MediaCaptionProps {
 export const MediaCaption = ({ activeIndex, mediaList }: MediaCaptionProps) => {
   const [dockElement, setDockElement] = useState<HTMLDivElement | null>(null);
 
-  // Read item straight out of incoming props safely
   const caption = mediaList[activeIndex]?.caption || "";
   if (!caption) return null;
 
@@ -22,16 +21,7 @@ export const MediaCaption = ({ activeIndex, mediaList }: MediaCaptionProps) => {
       aria-atomic="true"
       ref={(element) => setDockElement(element)}
     >
-      {dockElement &&
-        createPortal(
-          <div
-            id="carousel-live-caption"
-            className="lightbox-custom-floating-bubble"
-          >
-            {caption}
-          </div>,
-          dockElement,
-        )}
+      {dockElement && createPortal(<></>, dockElement)}
     </div>
   );
 };

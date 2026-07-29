@@ -27,7 +27,9 @@ export default function CopyLinkButton({
       {...props}
       onClick={handleCopy}
     >
-      <span className="copy-icon-indicator">{copied ? "✓ Copied" : "🔗"}</span>
+      <span className="copy-icon-indicator material-symbols-outlined">
+        {copied ? "check" : "link"}
+      </span>
     </button>
   );
 }
