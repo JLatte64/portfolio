@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import "./ProjectModal.css";
 import { useNavigate } from "react-router";
 import { ABSOLUTE_ROUTES } from "../../config/routes.config";
@@ -17,12 +17,16 @@ interface ProjectSectionProps {
 
 const ProjectSection = ({ title, sec, index }: ProjectSectionProps) => {
   return (
-    <section key={`${title}-sec-node-${index}`}>
+    // CLS FIX: Contain layouts explicitly to stop structural reflows
+    <section
+      className="cls-contained-section"
+      key={`${title}-sec-node-${index}`}
+    >
       <h3>{sec.heading}</h3>
       <h4>{sec.subheading}</h4>
-      <p>{parse(sec.paragraph)}</p>
+      <p className="cls-text-block">{parse(sec.paragraph)}</p>
       {sec.list && (
-        <ul>
+        <ul className="cls-list-block">
           {sec.list.map((listEl: string, listIndex: number) => (
             <li key={`${title}-list-node-${listIndex}`}>{parse(listEl)}</li>
           ))}
@@ -45,7 +49,33 @@ export default function ProjectModal() {
     "fade-in" | "fade-out" | "open" | "closed"
   >("closed");
 
-  if (!projectData) return null;
+  // CLS FIX: Calculate window scrollbar padding width before rendering to lock layout
+  const scrollbarGutterCompensation = useMemo(() => {
+    if (typeof window === "undefined") return "0px";
+    return `${window.innerWidth - document.documentElement.clientWidth}px`;
+  }, [fadeState]);
+
+  const handleClose = useCallback(
+    (e?: React.SyntheticEvent | Event) => {
+      e?.preventDefault();
+
+      const dialog = dialogRef.current;
+      if (!dialog || !dialog.open) return;
+
+      restoreLastScrollPos();
+      setMountPageLayout(true);
+      setFadeState("fade-out");
+
+      const fadeOutTimer = setTimeout(() => {
+        setFadeState("closed");
+        document.body.style.removeProperty("padding-right"); // CLS FIX: Safely release layout
+        navigate(ABSOLUTE_ROUTES.home);
+      }, modalFadeTimer);
+
+      return () => clearTimeout(fadeOutTimer);
+    },
+    [navigate, restoreLastScrollPos, setMountPageLayout],
+  );
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -53,6 +83,8 @@ export default function ProjectModal() {
     setLastScrollPos();
 
     if (!dialog.open) {
+      // CLS FIX: Pad the body matching scrollbar width before dialog opening layout shifts occur
+      document.body.style.paddingRight = scrollbarGutterCompensation;
       dialog.showModal();
       setFadeState("fade-in");
     }
@@ -63,27 +95,12 @@ export default function ProjectModal() {
     }, modalFadeTimer);
 
     return () => clearTimeout(fadeInTimer);
-  }, []);
-
-  const handleClose = (e?: React.SyntheticEvent | Event) => {
-    e?.preventDefault();
-
-    const dialog = dialogRef.current;
-    if (!dialog || !dialog.open) return;
-
-    restoreLastScrollPos();
-
-    setMountPageLayout(true);
-    setFadeState("fade-out");
-
-    const fadeOutTimer = setTimeout(() => {
-      setFadeState("closed");
-
-      navigate(ABSOLUTE_ROUTES.home);
-    }, modalFadeTimer);
-
-    return () => clearTimeout(fadeOutTimer);
-  };
+  }, [
+    projectData,
+    setLastScrollPos,
+    setMountPageLayout,
+    scrollbarGutterCompensation,
+  ]);
 
   useEffect(() => {
     if (fadeState !== "open") return;
@@ -95,14 +112,9 @@ export default function ProjectModal() {
       }
     };
 
-    const previouslyFocusedElement = document.activeElement as HTMLElement;
     dialogRef.current?.focus();
-
     window.addEventListener("keydown", handleGlobalKeyDown);
-    return () => {
-      window.removeEventListener("keydown", handleGlobalKeyDown);
-      previouslyFocusedElement?.focus();
-    };
+    return () => window.removeEventListener("keydown", handleGlobalKeyDown);
   }, [fadeState, handleClose]);
 
   if (!projectData) return null;
@@ -110,7 +122,12 @@ export default function ProjectModal() {
   return (
     <dialog
       ref={dialogRef}
-      style={{ "--modal-fade-timer": `${modalFadeTimer}ms` }}
+      style={
+        {
+          "--modal-fade-timer": `${modalFadeTimer}ms`,
+          containIntrinsicSize: "0 100vh", // CLS FIX: Give engine rendering dimensional hint bounds
+        } as React.CSSProperties
+      }
       className={`project-modal-dialog ${fadeState}`}
       onCancel={handleClose}
       aria-label={`Project Profile Viewport: ${projectData.title}`}
@@ -136,22 +153,22 @@ export default function ProjectModal() {
         </header>
 
         <div className="modal-panes-body">
+          {/* CLS WARNING: Ensure ShowcasePane internally contains explicit aspect-ratios for its media elements */}
           <ShowcasePane projectData={projectData} />
           <aside className="pane-right-details">
-            <p className="modal-main-description-text">
+            <p className="modal-main-description-text cls-text-block">
               {projectData.description}
             </p>
-            {projectData.sections &&
-              projectData.sections.map(
-                (sec: ProjectSectionData, index: number) => (
-                  <ProjectSection
-                    key={`${projectData.title}-sec-node-${index}`}
-                    title={projectData.title}
-                    sec={sec}
-                    index={index}
-                  />
-                ),
-              )}
+            {projectData.sections?.map(
+              (sec: ProjectSectionData, index: number) => (
+                <ProjectSection
+                  key={`${projectData.title}-sec-node-${index}`}
+                  title={projectData.title}
+                  sec={sec}
+                  index={index}
+                />
+              ),
+            )}
           </aside>
         </div>
       </div>

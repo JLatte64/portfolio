@@ -2,6 +2,16 @@
   --modal-header-height: 65px;
 }
 
+.cls-contained-section {
+  contain: layout style;
+}
+
+.cls-text-block,
+.cls-list-block {
+  min-height: 1.5em; /* Guarantees box layout allocation before text streaming */
+  text-rendering: optimizeLegibility;
+}
+
 .project-modal-dialog {
   position: fixed;
   inset: 0;
@@ -99,14 +109,32 @@
 
 .pane-right-details {
   width: 100%;
+  contain: layout style;
   flex: 1;
   overflow-y: auto;
   padding: 1.5rem;
+  line-height: 1.6;
+  content-visibility: auto; /* Skip layout heavy lifting if components render out-of-view */
+  contain-intrinsic-size: auto 1.5rem;
   background: var(--accent-bg);
   box-sizing: border-box;
   transition:
     opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     visibility 0.3s;
+
+  li::marker {
+    font-family:
+      system-ui,
+      -apple-system,
+      sans-serif; /* Prevents Flash of Unstyled Text layout shifting */
+    font-variant-numeric: tabular-nums; /* Mathematically locks bullet spacing alignment */
+  }
+
+  ul {
+    margin: 0 0 1.5rem 0;
+    padding-left: 1.5rem;
+    min-height: 1.5rem; /* Allocates placeholder area while html-react-parser executes */
+  }
 }
 
 .modal-main-description-text {
