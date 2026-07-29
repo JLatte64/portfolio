@@ -168,7 +168,7 @@
 
 @media screen and (min-width: 1440px) {
   /* 💡 CHNG: Explicitly matches standard default grid tracking ratios using :not() exclusion targets */
-  .pane-left-carousel:not(:has([data-lightbox-active])) {
+  .pane-left-carousel:not(:has([data-lightbox-active])) .pane-left-carousel {
     flex: 0 0 60% !important;
     width: 60%;
   }

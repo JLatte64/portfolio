@@ -13,7 +13,7 @@
     "aboutBlurb": "My life is built from an unshakable obsession with how digital worlds are made. At six, Super Mario 64 was the spark. I grew up with its modding scene, teaching myself Game Maker in 2007, spending late nights modeling levels in SketchUp and resolving emulation bugs. In 2015 came Unity3D and finally shaders, which I've spent a decade mastering. Today, my lifelong devotion translates into building ultra-performant rendering systems and effects — all to give players the same spark I first felt.",
     "heroImage": {
       "type": "image",
-      "src": "/img.jpg",
+      "src": "/heroPhoto.png",
       "alt": "Jordan Latta Profile Avatar Shot"
     },
     "contacts": [
@@ -80,41 +80,54 @@
   "projects": [
     {
       "title": "God of War: Sons of Sparta",
-      "description": "A high-performance, distributed e-commerce architecture designed to eliminate transactional checkout latency during peak traffic spikes. Built by decoupling legacy checkout micro-states and shifting execution pipelines to edge-cached gateway workers, the platform leverages a custom global WebSocket mesh for real-time data sync. This engineering overhaul compressed global analytical payloads by 42% and introduced strict multi-region fault isolation, ensuring sub-second execution latencies and zero-downtime reliability under heavy concurrent loads.",
+      "description": "A custom 2D lighting pipeline built to fix a CPU bottleneck in Unity's default system, which choked under hundreds of lights. Gives artists 256 individually-lit sprite layers with negligible CPU cost on PS5 — even with hundreds of lights in a scene.",
       "year": 2026,
       "thumbnailImage": {
         "type": "image",
-        "src": "https://i.scdn.co/image/ab67656300005f1fb14d53db09ad4d8fff9cd3d0",
+        "src": "files/god-of-war-sons-of-sparta/thumbnail.png",
         "alt": "E-Commerce Mesh Platform Project Capture Preview"
       },
       "carouselMedia": [
         {
-          "type": "image",
-          "src": "https://i.scdn.co/image/ab67656300005f1fb14d53db09ad4d8fff9cd3d0",
-          "alt": "aaaaaaaaaaaaaaa",
-          "caption": "Primary layout performance graph showcase frame"
+          "type": "video",
+          "src": "https://www.youtube.com/embed/eFhOo6NTt70?si=5Rk5sKEtqwXRIC4B&amp;controls=0",
+          "alt": "God of War Sons of Sparta Trailer"
         },
         {
           "type": "image",
-          "src": "https://amanexplains.com/static/c03d5c85167bc1eb9618108b2333e2fc/b8a94/profile-pic.webp",
-          "alt": "aaaaaaaaaaaaaaa",
+          "src": "files/god-of-war-sons-of-sparta/showcaseMedia/screenshot0.png",
+          "alt": "God of War Screenshot 1",
           "caption": "ASDFDDDDDDDDDDF"
         },
         {
           "type": "image",
-          "src": "https://i.scdn.co/image/ab67656300005f1fb14d53db09ad4d8fff9cd3d0",
+          "src": "files/god-of-war-sons-of-sparta/showcaseMedia/screenshot1.png",
           "alt": "aaaaaaaaaaaaaaa",
           "caption": "Primary layout performance graph showcase frame"
         },
         {
           "type": "image",
-          "src": "https://i.scdn.co/image/ab67656300005f1fb14d53db09ad4d8fff9cd3d0",
+          "src": "files/god-of-war-sons-of-sparta/showcaseMedia/screenshot2.png",
           "alt": "aaaaaaaaaaaaaaa",
           "caption": "Primary layout performance graph showcase frame"
         },
         {
-          "type": "video",
-          "src": "https://www.youtube.com/watch?v=aqz-KE-bpKQ"
+          "type": "image",
+          "src": "files/god-of-war-sons-of-sparta/showcaseMedia/screenshot3.png",
+          "alt": "aaaaaaaaaaaaaaa",
+          "caption": "Primary layout performance graph showcase frame"
+        },
+        {
+          "type": "image",
+          "src": "files/god-of-war-sons-of-sparta/showcaseMedia/screenshot4.png",
+          "alt": "aaaaaaaaaaaaaaa",
+          "caption": "Primary layout performance graph showcase frame"
+        },
+        {
+          "type": "image",
+          "src": "files/god-of-war-sons-of-sparta/showcaseMedia/screenshot5.png",
+          "alt": "aaaaaaaaaaaaaaa",
+          "caption": "Primary layout performance graph showcase frame"
         }
       ],
       "sections": [
@@ -126,17 +139,6 @@
             "<b>Lighting:</b> Stencil-buffer bit encoding isolates each light to its sprite layer",
             "<b>Tooling:</b> Built an in-editor tool to serve a team of 20+ lighting artists; enables authoring/placing lights with no code",
             "<b>Optimization:</b> All lights/shadows instanced to one draw call per blend mode; GPU & CPU cost effectively flat regardless of light count"
-          ],
-          "media": [
-            {
-              "type": "image",
-              "src": "/another-image.png",
-              "alt": "Section grid asset display image"
-            },
-            {
-              "type": "embed",
-              "src": "https://vimeo.com"
-            }
           ]
         },
         {
@@ -152,41 +154,30 @@
     },
     {
       "title": "Backyard Baseball",
-      "description": "A high-performance, distributed e-commerce architecture designed to eliminate transactional checkout latency during peak traffic spikes. Built by decoupling legacy checkout micro-states and shifting execution pipelines to edge-cached gateway workers, the platform leverages a custom global WebSocket mesh for real-time data sync. This engineering overhaul compressed global analytical payloads by 42% and introduced strict multi-region fault isolation, ensuring sub-second execution latencies and zero-downtime reliability under heavy concurrent loads.",
+      "description": "A scalable GPU-driven grass system built for close-up-quality stadium turf with a nostalgic look. Renders 1M+ triangles in a single draw call at ~5ms render cost on Nintendo Switch.",
       "year": 2026,
       "thumbnailImage": {
         "type": "image",
-        "src": "https://i.scdn.co/image/ab67656300005f1fb14d53db09ad4d8fff9cd3d0",
-        "alt": "E-Commerce Mesh Platform Project Capture Preview"
+        "src": "files/backyard-baseball/thumbnail.png",
+        "alt": "Backyard Baseball Project Thumbnail"
       },
       "carouselMedia": [
         {
-          "type": "image",
-          "src": "https://i.scdn.co/image/ab67656300005f1fb14d53db09ad4d8fff9cd3d0",
-          "alt": "aaaaaaaaaaaaaaa",
-          "caption": "Primary layout performance graph showcase frame"
+          "type": "video",
+          "src": "https://www.youtube.com/embed/gXTeQ3a6BHs?si=_9kjQv-iD6IYS44W",
+          "alt": "Backyard Baseball Trailer"
         },
         {
           "type": "image",
-          "src": "https://amanexplains.com/static/c03d5c85167bc1eb9618108b2333e2fc/b8a94/profile-pic.webp",
+          "src": "files/backyard-baseball/showcaseMedia/screenshot0.png",
           "alt": "aaaaaaaaaaaaaaa",
           "caption": "ASDFDDDDDDDDDDF"
         },
         {
           "type": "image",
-          "src": "https://i.scdn.co/image/ab67656300005f1fb14d53db09ad4d8fff9cd3d0",
+          "src": "files/backyard-baseball/showcaseMedia/screenshot1.png",
           "alt": "aaaaaaaaaaaaaaa",
           "caption": "Primary layout performance graph showcase frame"
-        },
-        {
-          "type": "image",
-          "src": "https://i.scdn.co/image/ab67656300005f1fb14d53db09ad4d8fff9cd3d0",
-          "alt": "aaaaaaaaaaaaaaa",
-          "caption": "Primary layout performance graph showcase frame"
-        },
-        {
-          "type": "video",
-          "src": "https://www.youtube.com/watch?v=aqz-KE-bpKQ"
         }
       ],
       "sections": [

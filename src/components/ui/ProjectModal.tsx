@@ -6,6 +6,31 @@ import { useProject } from "../../hooks/useProject";
 import CopyLinkButton from "./CopyLinkbutton";
 import { useLayoutState } from "../../hooks/useLayoutState";
 import ShowcasePane from "./project-showcase/ShowcasePane";
+import type { ProjectSectionData } from "../../types/portfolioTypes";
+import parse from "html-react-parser";
+
+interface ProjectSectionProps {
+  title: string;
+  sec: ProjectSectionData;
+  index: number;
+}
+
+const ProjectSection = ({ title, sec, index }: ProjectSectionProps) => {
+  return (
+    <section key={`${title}-sec-node-${index}`}>
+      <h3>{sec.heading}</h3>
+      <h4>{sec.subheading}</h4>
+      <p>{parse(sec.paragraph)}</p>
+      {sec.list && (
+        <ul>
+          {sec.list.map((listEl: string, listIndex: number) => (
+            <li key={`${title}-list-node-${listIndex}`}>{parse(listEl)}</li>
+          ))}
+        </ul>
+      )}
+    </section>
+  );
+};
 
 export default function ProjectModal() {
   const navigate = useNavigate();
@@ -110,13 +135,23 @@ export default function ProjectModal() {
           </button>
         </header>
 
-        {/* 💡 Note: "is-lightbox-active" will now be added here imperatively by the child layout */}
         <div className="modal-panes-body">
           <ShowcasePane projectData={projectData} />
           <aside className="pane-right-details">
             <p className="modal-main-description-text">
               {projectData.description}
             </p>
+            {projectData.sections &&
+              projectData.sections.map(
+                (sec: ProjectSectionData, index: number) => (
+                  <ProjectSection
+                    key={`${projectData.title}-sec-node-${index}`}
+                    title={projectData.title}
+                    sec={sec}
+                    index={index}
+                  />
+                ),
+              )}
           </aside>
         </div>
       </div>
